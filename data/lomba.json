@@ -1,0 +1,124 @@
+[
+  {
+    "id": 1,
+    "nama": "Lomba Karya Tulis Ilmiah Nasional (LKTIN) 2026",
+    "status": "Buka",
+    "kategori": "Akademik",
+    "deadline": "2026-10-20",
+    "persyaratan": [
+      "Mahasiswa aktif S1/D3/D4 dari seluruh perguruan tinggi di Indonesia",
+      "Tim terdiri dari 3 orang (1 ketua + 2 anggota) dari perguruan tinggi yang sama",
+      "Setiap tim memiliki 1 dosen pembimbing",
+      "Karya tulis belum pernah dipublikasikan atau dilombakan",
+      "Tema: Inovasi Teknologi Kesehatan untuk Indonesia Emas 2045"
+    ],
+    "benefit": [
+      "Juara 1: Rp7.500.000 + Piala + Sertifikat",
+      "Juara 2: Rp5.000.000 + Piala + Sertifikat",
+      "Juara 3: Rp3.000.000 + Piala + Sertifikat",
+      "Best Paper: Rp1.500.000 + Sertifikat",
+      "E-sertifikat untuk semua peserta",
+      "Kesempatan publikasi di jurnal nasional terakreditasi"
+    ],
+    "linkDaftar": "",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran: 1 Sep – 20 Okt 2026 | Pengumpulan Naskah: 25 Okt 2026 | Seleksi Abstrak: Nov 2026 | Presentasi Final: Des 2026"
+  },
+  {
+    "id": 2,
+    "nama": "UI/UX Design Competition – DigiHealth 2026",
+    "status": "Buka",
+    "kategori": "Teknologi",
+    "deadline": "2026-11-05",
+    "persyaratan": [
+      "Mahasiswa aktif S1/D3/D4",
+      "Tim terdiri dari 2–3 orang",
+      "Desain aplikasi/website bertema kesehatan digital",
+      "Menggunakan tools desain (Figma/Adobe XD/Sketch)",
+      "Menyertakan prototype interaktif"
+    ],
+    "benefit": [
+      "Juara 1: Rp5.000.000 + Voucher kursus desain senilai Rp2.000.000",
+      "Juara 2: Rp3.500.000 + Voucher kursus desain senilai Rp1.000.000",
+      "Juara 3: Rp2.000.000 + Voucher kursus desain senilai Rp500.000",
+      "Sertifikat untuk semua peserta",
+      "Mentoring dari praktisi UI/UX profesional"
+    ],
+    "linkDaftar": "",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran: 15 Sep – 5 Nov 2026 | Submission Desain: 10 Nov 2026 | Penjurian: 20 Nov 2026 | Grand Final: 30 Nov 2026"
+  },
+  {
+    "id": 3,
+    "nama": "Hackathon MedTech Innovation 2026",
+    "status": "Buka",
+    "kategori": "Teknologi",
+    "deadline": "2026-10-30",
+    "persyaratan": [
+      "Mahasiswa aktif dari seluruh jurusan",
+      "Tim terdiri dari 3–5 orang (boleh lintas jurusan)",
+      "Memiliki ide inovasi di bidang teknologi kedokteran",
+      "Wajib menghadiri workshop pra-hackathon (online)",
+      "Menyiapkan pitch deck dan demo prototype"
+    ],
+    "benefit": [
+      "Juara 1: Rp10.000.000 + Inkubasi startup 3 bulan",
+      "Juara 2: Rp7.000.000 + Mentoring bisnis",
+      "Juara 3: Rp4.000.000",
+      "Best Innovation: Rp2.500.000",
+      "Sertifikat & networking session dengan investor",
+      "Akses platform pengembangan gratis selama 6 bulan"
+    ],
+    "linkDaftar": "",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran: 1 Sep – 30 Okt 2026 | Workshop: 5 Nov 2026 | Hackathon Day: 15–16 Nov 2026 | Awarding: 20 Nov 2026"
+  },
+  {
+    "id": 4,
+    "nama": "Olimpiade Kesehatan Nasional (OKN) 2026",
+    "status": "Tutup",
+    "kategori": "Akademik",
+    "deadline": "2026-08-15",
+    "persyaratan": [
+      "Mahasiswa aktif program studi rumpun kesehatan",
+      "Peserta individu (bukan tim)",
+      "Melampirkan surat rekomendasi dari prodi",
+      "Mengikuti babak penyisihan online",
+      "IPK minimal 3.00"
+    ],
+    "benefit": [
+      "Juara 1: Rp6.000.000 + Medali Emas + Sertifikat",
+      "Juara 2: Rp4.000.000 + Medali Perak + Sertifikat",
+      "Juara 3: Rp2.500.000 + Medali Perunggu + Sertifikat",
+      "E-sertifikat untuk semua peserta",
+      "Poin SKPI kemahasiswaan"
+    ],
+    "linkDaftar": "",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran: 1 Jun – 15 Ags 2026 | Penyisihan Online: 1 Sep 2026 | Semifinal: 15 Sep 2026 | Final: 30 Sep 2026"
+  },
+  {
+    "id": 5,
+    "nama": "Poster Ilmiah Competition – Health Innovation Week",
+    "status": "Buka",
+    "kategori": "Akademik",
+    "deadline": "2026-12-01",
+    "persyaratan": [
+      "Mahasiswa aktif S1/D3/D4 semua jurusan",
+      "Peserta individu atau tim (maks. 2 orang)",
+      "Poster ukuran A1 dalam format digital (PDF)",
+      "Tema: Inovasi Kesehatan Berbasis Teknologi",
+      "Menyertakan abstrak 250 kata"
+    ],
+    "benefit": [
+      "Juara 1: Rp3.000.000 + Sertifikat",
+      "Juara 2: Rp2.000.000 + Sertifikat",
+      "Juara 3: Rp1.000.000 + Sertifikat",
+      "Best Poster Design: Rp750.000",
+      "E-sertifikat untuk seluruh peserta"
+    ],
+    "linkDaftar": "",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran: 1 Okt – 1 Des 2026 | Pengumpulan Poster: 5 Des 2026 | Penjurian: 10 Des 2026 | Pengumuman: 15 Des 2026"
+  }
+]

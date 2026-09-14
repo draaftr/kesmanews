@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "nama": "Beasiswa BESTRO 2026 dari PT Petrokimia Gresik",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-07-08",
+    "persyaratan": [
+      "Warga Kabupaten Gresik",
+      "Dari keluarga dengan keterbatasan ekonomi",
+      "Memiliki prestasi akademik / non-akademik",
+      "Lulus SMA/SMK/MA tahun 2026",
+      "Diterima di PTN (terakreditasi A/Unggul) via SNBP/SNBT",
+      "Bukan penerima KIP Kuliah / Bidikmisi lain"
+    ],
+    "benefit": [
+      "UKT ditanggung sampai lulus (maks. 8 semester)",
+      "Uang saku bulanan",
+      "Pelatihan softskill & kesempatan magang",
+      "Non ikatan dinas"
+    ],
+    "linkDaftar": "https://tis.id/PendyaftPestro2026",
+    "linkGuidebook": "",
+    "timelinePenting": "Seleksi administrasi: 18 Mei – 8 Juli 2026 | Pengumuman cut off: 10 Juli 2026 | Wawancara: 13–15 Juli 2026 | Pengumuman penerima: 5 Agustus 2026"
+  },
+  {
+    "id": 2,
+    "nama": "Beasiswa BTN Pre-Graduate 2026",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-05-15",
+    "persyaratan": [
+      "Mahasiswa S1 minimal semester 4",
+      "IPK ≥ 3.50",
+      "Diutamakan memiliki prestasi akademik atau non-akademik",
+      "Tidak menerima beasiswa lain",
+      "Bersedia berkomitmen dan menjadi pegawai BTN"
+    ],
+    "benefit": [
+      "Bantuan beasiswa pendidikan",
+      "Jalur pengembangan karier ke BTN",
+      "Kesempatan mengikuti Officer Development Program (ODP)",
+      "Pilihan scouting",
+      "Penempatan setelah lulus",
+      "Pendampingan sebagai talenta muda BTN"
+    ],
+    "linkDaftar": "https://www.btn.co.id/id",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran dibuka hingga: 15 Mei 2026"
+  },
+  {
+    "id": 3,
+    "nama": "Beasiswa Yayasan Pelayanan Kasih A & A Rachmat (ADARO-YPKAAR) 2026",
+    "status": "Tutup",
+    "kategori": "Kurang Mampu",
+    "deadline": "2026-06-09",
+    "persyaratan": [
+      "Mahasiswa minimal semester 3 (tahun ke-2)",
+      "IPK ≥ 3.00",
+      "Melampirkan transkrip akademik terbaru (legalisir)",
+      "Melampirkan memiliki SKTM / surat keterangan penghasilan orang tua",
+      "Tidak sedang menerima beasiswa lain"
+    ],
+    "benefit": [
+      "Bantuan Dana Pendidikan: Rp850.000 per bulan selama 1 tahun (Agustus 2026 – Juli 2027) pada rekening kampus",
+      "Dana dicairkan per triwulan (3 kali pencairan setiap 4 bulan)",
+      "Dukungan Kelangsungan Studi: Membantu biaya pendidikan mahasiswa selama masa perkuliahan",
+      "Pengembangan Mahasiswa: Mendukung prestasi akademik, Mendukung pengembangan kepemimpinan dan kegiatan sosial kemahasiswaan"
+    ],
+    "linkDaftar": "https://tis.id/selainBeasiswa/adaro2026",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran paling lambat: 9 Juni 2026"
+  },
+  {
+    "id": 4,
+    "nama": "Program Beasiswa GLOW & LOVELY Batch 10",
+    "status": "Buka",
+    "kategori": "Berprestasi",
+    "deadline": "2026-10-15",
+    "persyaratan": [
+      "Perempuan (mahasiswi / calon mahasiswi)",
+      "Tidak sedang menerima beasiswa lain",
+      "Memiliki prestasi akademik & non-akademik",
+      "Memiliki motivasi tinggi untuk berkontribusi",
+      "Berkomitmen menyelesaikan studi & tidak menolak selama program",
+      "Mahasiswi semester 4 atau 6"
+    ],
+    "benefit": [
+      "Reguler: Uang beasiswa Rp7.500.000, Laptop, Capacity building selama 4 tahun",
+      "Parsial: Uang beasiswa Rp10.000.000, Capacity building selama 1 tahun"
+    ],
+    "linkDaftar": "mailto:beasiswaglowandlovely@unilever.com",
+    "linkGuidebook": "",
+    "timelinePenting": "Pendaftaran: 9 Feb – 10 Mei 2026 | Seleksi & esai: Mei – Juni 2026 | Interview: Juli 2026 | Pengumuman: September 2026"
+  },
+  {
+    "id": 5,
+    "nama": "Beasiswa Bank Indonesia 2026",
+    "status": "Buka",
+    "kategori": "Berprestasi",
+    "deadline": "2026-11-30",
+    "persyaratan": [
+      "Mahasiswa aktif S1/D4 minimal semester 3",
+      "IPK minimal 3.00",
+      "Tidak sedang menerima beasiswa dari sumber lain",
+      "Aktif dalam kegiatan organisasi/kemahasiswaan",
+      "Membuat esai bertema ekonomi atau keuangan"
+    ],
+    "benefit": [
+      "Biaya pendidikan per semester",
+      "Tunjangan buku dan peralatan kuliah",
+      "Pelatihan soft skills & leadership",
+      "Networking dengan penerima beasiswa BI lainnya",
+      "Sertifikat penghargaan"
+    ],
+    "linkDaftar": "https://www.bi.go.id/beasiswa",
+    "linkGuidebook": "https://www.bi.go.id/beasiswa/guidebook",
+    "timelinePenting": "Pendaftaran: September – November 2026 | Seleksi Administrasi: Desember 2026 | Pengumuman: Januari 2027"
+  },
+  {
+    "id": 6,
+    "nama": "Beasiswa Djarum Foundation 2026/2027",
+    "status": "Buka",
+    "kategori": "Berprestasi",
+    "deadline": "2026-10-31",
+    "persyaratan": [
+      "Mahasiswa aktif S1 semester 4 (pada saat mendaftar)",
+      "IPK minimal 3.20",
+      "Aktif berorganisasi dan memiliki jiwa kepemimpinan",
+      "Tidak sedang menerima beasiswa dari pihak lain",
+      "Sehat jasmani dan rohani"
+    ],
+    "benefit": [
+      "Dana beasiswa Rp1.000.000/bulan selama 1 tahun",
+      "Pelatihan Nation Building (softskill & leadership)",
+      "Beswan Connect networking",
+      "Sertifikat dan pengembangan diri"
+    ],
+    "linkDaftar": "https://djarumfoundation.org/beasiswa",
+    "linkGuidebook": "https://djarumfoundation.org/beasiswa/guidebook",
+    "timelinePenting": "Pendaftaran online: Agustus – Oktober 2026 | Seleksi: November 2026 | Pengumuman: Desember 2026"
+  }
+]

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KESMA NEWS — Info Beasiswa & Lomba | HMTK</title>
+    <meta name="description" content="Pusat informasi beasiswa dan lomba terkini untuk mahasiswa. Dikelola oleh Departemen Adkesma, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).">
+    <meta name="keywords" content="beasiswa, lomba, mahasiswa, HMTK, teknologi kedokteran, adkesma, kesma news">
+    <meta name="author" content="Departemen Adkesma HMTK">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KESMA NEWS — Info Beasiswa & Lomba | HMTK">
+    <meta property="og:description" content="Pusat informasi beasiswa dan lomba terkini untuk mahasiswa Teknologi Kedokteran.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NAVBAR                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#beranda" class="nav-brand">
+                <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
+                <span class="nav-title">KESMA<span class="nav-title-accent">NEWS</span></span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#beranda" class="nav-link active" data-section="beranda">Beranda</a>
+                <a href="#beasiswa" class="nav-link" data-section="beasiswa">Beasiswa</a>
+                <a href="#lomba" class="nav-link" data-section="lomba">Lomba</a>
+                <a href="#pantauan" class="nav-link" data-section="pantauan">Pantauan Saya</a>
+                <a href="#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
+            </div>
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i data-lucide="sun" class="icon-sun"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO SECTION                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="hero" id="beranda">
+        <div class="hero-bg-shapes">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i data-lucide="sparkles"></i>
+                <span>Departemen Adkesma HMTK</span>
+            </div>
+            <h1 class="hero-title">
+                KESMA<span class="hero-title-accent">NEWS</span>
+            </h1>
+            <p class="hero-subtitle">
+                Pusat Informasi <span class="hero-highlight">Beasiswa</span> & <span class="hero-highlight">Lomba</span> untuk Mahasiswa
+            </p>
+            <p class="hero-desc">
+                Temukan peluang beasiswa dan kompetisi terbaru yang telah dikurasi khusus untuk mahasiswa. Diperbarui secara berkala oleh Departemen Advokasi & Kesejahteraan Mahasiswa HMTK.
+            </p>
+            <div class="hero-cta">
+                <a href="#beasiswa" class="btn btn-primary">
+                    <i data-lucide="graduation-cap"></i>
+                    Lihat Beasiswa
+                </a>
+                <a href="#lomba" class="btn btn-secondary">
+                    <i data-lucide="trophy"></i>
+                    Lihat Lomba
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number" id="statBeasiswa">0</span>
+                    <span class="hero-stat-label">Beasiswa</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" id="statLomba">0</span>
+                    <span class="hero-stat-label">Lomba</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" id="statBuka">0</span>
+                    <span class="hero-stat-label">Masih Buka</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <i data-lucide="chevrons-down"></i>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- BEASISWA SECTION                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section" id="beasiswa">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper beasiswa-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <h2 class="section-title">Info Beasiswa</h2>
+                <p class="section-desc">Kumpulan informasi beasiswa terbaru yang telah dikurasi untuk mahasiswa</p>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="filter-bar reveal">
+                <div class="search-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" class="search-input" id="searchBeasiswa" placeholder="Cari beasiswa...">
+                </div>
+                <div class="filter-group">
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="filter" class="filter-icon"></i>
+                        <select class="filter-select" id="filterKategoriBeasiswa">
+                            <option value="semua">Semua Kategori</option>
+                            <option value="Berprestasi">Berprestasi</option>
+                            <option value="Kurang Mampu">Kurang Mampu</option>
+                        </select>
+                    </div>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="circle-dot" class="filter-icon"></i>
+                        <select class="filter-select" id="filterStatusBeasiswa">
+                            <option value="semua">Semua Status</option>
+                            <option value="Buka">Buka</option>
+                            <option value="Tutup">Tutup</option>
+                        </select>
+                    </div>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="arrow-up-down" class="filter-icon"></i>
+                        <select class="filter-select" id="sortBeasiswa">
+                            <option value="default">Urutkan</option>
+                            <option value="deadline">Deadline Terdekat</option>
+                            <option value="status">Status Buka Dulu</option>
+                            <option value="nama">A–Z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="cards-grid" id="beasiswaGrid">
+                <!-- Cards rendered by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyBeasiswa">
+                <i data-lucide="search-x"></i>
+                <h3>Tidak ada hasil</h3>
+                <p>Coba ubah kata kunci atau filter pencarian kamu</p>
+            </div>
+
+            <!-- Loading Skeleton -->
+            <div class="skeleton-grid" id="skeletonBeasiswa">
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- LOMBA SECTION                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section section-alt" id="lomba">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper lomba-icon">
+                    <i data-lucide="trophy"></i>
+                </div>
+                <h2 class="section-title">Info Lomba</h2>
+                <p class="section-desc">Kumpulan informasi kompetisi dan lomba terbaru untuk mengasah kemampuanmu</p>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="filter-bar reveal">
+                <div class="search-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" class="search-input" id="searchLomba" placeholder="Cari lomba...">
+                </div>
+                <div class="filter-group">
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="filter" class="filter-icon"></i>
+                        <select class="filter-select" id="filterKategoriLomba">
+                            <option value="semua">Semua Kategori</option>
+                            <option value="Akademik">Akademik</option>
+                            <option value="Teknologi">Teknologi</option>
+                            <option value="Seni">Seni & Kreativitas</option>
+                        </select>
+                    </div>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="circle-dot" class="filter-icon"></i>
+                        <select class="filter-select" id="filterStatusLomba">
+                            <option value="semua">Semua Status</option>
+                            <option value="Buka">Buka</option>
+                            <option value="Tutup">Tutup</option>
+                        </select>
+                    </div>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="arrow-up-down" class="filter-icon"></i>
+                        <select class="filter-select" id="sortLomba">
+                            <option value="default">Urutkan</option>
+                            <option value="deadline">Deadline Terdekat</option>
+                            <option value="status">Status Buka Dulu</option>
+                            <option value="nama">A–Z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="cards-grid" id="lombaGrid">
+                <!-- Cards rendered by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyLomba">
+                <i data-lucide="search-x"></i>
+                <h3>Tidak ada hasil</h3>
+                <p>Coba ubah kata kunci atau filter pencarian kamu</p>
+            </div>
+
+            <!-- Loading Skeleton -->
+            <div class="skeleton-grid" id="skeletonLomba">
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- WATCHLIST SECTION                           -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section" id="pantauan">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                    <i data-lucide="bookmark"></i>
+                </div>
+                <h2 class="section-title">Pantauan Saya</h2>
+                <p class="section-desc">Beasiswa &amp; lomba yang kamu simpan, dipantau deadline-nya di sini</p>
+            </div>
+
+            <!-- Watchlist grid -->
+            <div class="watchlist-grid" id="watchlistGrid"></div>
+
+            <!-- Empty state -->
+            <div class="watchlist-empty" id="watchlistEmpty">
+                <i data-lucide="bookmark"></i>
+                <h3>Belum ada pantauan</h3>
+                <p>Klik ikon <strong>🔖</strong> di kartu beasiswa atau lomba untuk menyimpannya di sini</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TENTANG KAMI SECTION                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section" id="tentang">
+        <div class="section-container">
+            <div class="about-wrapper reveal">
+                <div class="about-image">
+                    <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="about-logo">
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">Tentang Kami</h2>
+                    <p class="about-text">
+                        <strong>KESMA NEWS</strong> adalah program kerja dari <strong>Departemen Advokasi dan Kesejahteraan Mahasiswa (Adkesma)</strong>, 
+                        Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
+                    </p>
+                    <p class="about-text">
+                        Kami berkomitmen untuk menjadi jembatan informasi antara peluang-peluang beasiswa dan lomba dengan seluruh mahasiswa. 
+                        Setiap informasi yang kami sajikan telah dikurasi dan diverifikasi untuk memastikan keakuratan dan relevansinya.
+                    </p>
+                    <p class="about-text">
+                        Informasi di platform ini diperbarui secara berkala setiap <strong>2 minggu sekali</strong> oleh tim Adkesma HMTK.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i data-lucide="shield-check"></i>
+                            <span>Info Terverifikasi</span>
+                        </div>
+                        <div class="about-feature">
+                            <i data-lucide="refresh-cw"></i>
+                            <span>Update Berkala</span>
+                        </div>
+                        <div class="about-feature">
+                            <i data-lucide="heart"></i>
+                            <span>Gratis untuk Semua</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
+                    <div>
+                        <h3 class="footer-title">KESMA<span class="footer-title-accent">NEWS</span></h3>
+                        <p class="footer-tagline">Pusat Informasi Beasiswa & Lomba</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#beranda">Beranda</a>
+                    <a href="#beasiswa">Beasiswa</a>
+                    <a href="#lomba">Lomba</a>
+                    <a href="#tentang">Tentang Kami</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Kontak</h4>
+                    <a href="#" class="footer-social">
+                        <i data-lucide="instagram"></i>
+                        <span>Instagram HMTK</span>
+                    </a>
+                    <a href="#" class="footer-social">
+                        <i data-lucide="mail"></i>
+                        <span>Email Adkesma</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 KESMA NEWS — Departemen Adkesma HMTK. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DETAIL MODAL                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="detailModal">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-status" id="modalStatus"></div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-meta">
+                    <span class="modal-kategori" id="modalKategori"></span>
+                    <span class="modal-deadline" id="modalDeadline"></span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3><i data-lucide="clock"></i> Countdown</h3>
+                    <div class="modal-countdown" id="modalCountdown"></div>
+                </div>
+                <div class="modal-section">
+                    <h3><i data-lucide="clipboard-list"></i> Persyaratan</h3>
+                    <ul class="modal-list" id="modalPersyaratan"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3><i data-lucide="gift"></i> Benefit / Hadiah</h3>
+                    <ul class="modal-list modal-list-benefit" id="modalBenefit"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3><i data-lucide="calendar-days"></i> Timeline Penting</h3>
+                    <p class="modal-timeline" id="modalTimeline"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-lg" id="modalDaftar" target="_blank" rel="noopener noreferrer">
+                    <i data-lucide="external-link"></i>
+                    Daftar Sekarang
+                </a>
+                <a href="#" class="btn btn-outline btn-lg" id="modalGuidebook" target="_blank" rel="noopener noreferrer">
+                    <i data-lucide="book-open"></i>
+                    Lihat Guidebook
+                </a>
+                <div class="modal-footer-secondary">
+                    <button class="btn btn-outline btn-lg btn-bookmark-modal" id="modalBookmarkBtn">
+                        <i data-lucide="bookmark"></i> Simpan
+                    </button>
+                    <button class="btn btn-wa btn-lg" id="modalShareWA">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Share WA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- BACK TO TOP                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
