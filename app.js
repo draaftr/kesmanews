@@ -3,6 +3,11 @@
    Departemen Adkesma HMTK
    ═══════════════════════════════════════════════════════════════ */
 
+// ─── Google Sheets Config ──────────────────────────────────────
+const SHEET_ID = '1PnW8SKd8X0cdC8oK2DRMkU7gNA4nEX7aG--7fmYZ0uo';
+const SHEET_BEASISWA_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+const SHEET_LOMBA_URL    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=157846337`;
+
 // ─── State ─────────────────────────────────────────────────────
 let beasiswaData = [];
 let lombaData = [];
@@ -168,48 +173,399 @@ function initBackToTop() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// DATA LOADING
+// CSV PARSER
+// Robust parser yang handle: quoted fields, newlines dalam sel,
+// koma dalam quotes, dan escape characters
+// ═══════════════════════════════════════════════════════════════
+function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let inQuotes = false;
+    
+    // Normalize line endings
+    const str = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    
+    for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        const next = str[i + 1];
+        
+        if (inQuotes) {
+            if (ch === '"' && next === '"') {
+                // Escaped quote
+                field += '"';
+                i++;
+            } else if (ch === '"') {
+                // End of quoted field
+                inQuotes = false;
+            } else {
+                field += ch;
+            }
+        } else {
+            if (ch === '"') {
+                inQuotes = true;
+            } else if (ch === ',') {
+                row.push(field.trim());
+                field = '';
+            } else if (ch === '\n') {
+                row.push(field.trim());
+                field = '';
+                if (row.some(f => f !== '')) {
+                    rows.push(row);
+                }
+                row = [];
+            } else {
+                field += ch;
+            }
+        }
+    }
+    
+    // Last field & row
+    if (field.trim() || row.length > 0) {
+        row.push(field.trim());
+        if (row.some(f => f !== '')) {
+            rows.push(row);
+        }
+    }
+    
+    return rows;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXTRACT LINKS dari kolom "Informasi Selengkapnya"
+// ═══════════════════════════════════════════════════════════════
+function extractLinks(infoText) {
+    if (!infoText) return { linkDaftar: '', linkGuidebook: '' };
+    
+    // Regex untuk menangkap URL (dengan atau tanpa http/https)
+    const urlRegex = /(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)/gi;
+    
+    const urls = infoText.match(urlRegex) || [];
+    
+    // Normalisasi: tambahkan https:// jika belum ada
+    const normalizeUrl = (url) => {
+        url = url.trim().replace(/[()]/g, ''); // buang kurung di beberapa format
+        if (!url) return '';
+        if (url.startsWith('http://') || url.startsWith('https://')) return url;
+        if (url.includes('@')) return ''; // email, skip
+        return 'https://' + url;
+    };
+    
+    // Cek apakah teks mengandung kata kunci guidebook
+    const lowerInfo = infoText.toLowerCase();
+    const hasGuidebookKeyword = /guidebook|panduan|guide book|bukpan|buku panduan/i.test(infoText);
+    const hasDaftarKeyword = /registr|pendaftaran|daftar|form|registration/i.test(infoText);
+    
+    let linkDaftar = '';
+    let linkGuidebook = '';
+    
+    if (urls.length === 0) {
+        // Tidak ada URL
+        return { linkDaftar: '', linkGuidebook: '' };
+    }
+    
+    if (urls.length === 1) {
+        // Hanya 1 URL
+        const singleUrl = normalizeUrl(urls[0]);
+        if (hasGuidebookKeyword) {
+            linkGuidebook = singleUrl;
+        } else {
+            linkDaftar = singleUrl;
+        }
+        return { linkDaftar, linkGuidebook };
+    }
+    
+    // Lebih dari 1 URL — coba parse berdasarkan konteks
+    // Split teks menjadi baris-baris untuk analisis
+    const lines = infoText.split('\n');
+    
+    for (const line of lines) {
+        const lineUrls = line.match(urlRegex) || [];
+        if (lineUrls.length === 0) continue;
+        
+        const lineUrl = normalizeUrl(lineUrls[0]);
+        if (!lineUrl) continue;
+        
+        const lineLower = line.toLowerCase();
+        
+        if (/guidebook|panduan|guide book|bukpan|buku panduan/i.test(line)) {
+            if (!linkGuidebook) linkGuidebook = lineUrl;
+        } else if (/registr|pendaftar|daftar|form/i.test(line)) {
+            if (!linkDaftar) linkDaftar = lineUrl;
+        } else if (/info|selengkapnya|lengkap|detail/i.test(line)) {
+            if (!linkDaftar) linkDaftar = lineUrl;
+        } else {
+            // Default: URL pertama jadi daftar, kedua jadi guidebook
+            if (!linkDaftar) linkDaftar = lineUrl;
+            else if (!linkGuidebook) linkGuidebook = lineUrl;
+        }
+    }
+    
+    // Fallback jika parsing per baris gagal
+    if (!linkDaftar && !linkGuidebook) {
+        linkDaftar = normalizeUrl(urls[0]);
+        if (urls[1]) linkGuidebook = normalizeUrl(urls[1]);
+    }
+    
+    return { linkDaftar, linkGuidebook };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PARSE DEADLINE
+// Format bervariasi: "24 Juli 2026", "2026-07-24", "24/07/2026",
+// "hingga: 24 Juli 2026", timeline panjang, dll.
+// Kembalikan string YYYY-MM-DD
+// ═══════════════════════════════════════════════════════════════
+const BULAN_MAP = {
+    'januari': '01', 'februari': '02', 'maret': '03', 'april': '04',
+    'mei': '05', 'juni': '06', 'juli': '07', 'agustus': '08',
+    'september': '09', 'oktober': '10', 'november': '11', 'desember': '12',
+    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04',
+    'may': '05', 'jun': '06', 'jul': '07', 'aug': '08',
+    'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',
+};
+
+function parseDeadline(teks) {
+    if (!teks) return '';
+    
+    const dates = [];
+    
+    // Format 1: DD/MM/YYYY atau DD-MM-YYYY (format lomba)
+    const dmy1 = [...teks.matchAll(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/g)];
+    for (const m of dmy1) {
+        const d = m[1].padStart(2, '0');
+        const mo = m[2].padStart(2, '0');
+        const y = m[3];
+        dates.push(`${y}-${mo}-${d}`);
+    }
+    
+    // Format 2: YYYY-MM-DD
+    const ymd = [...teks.matchAll(/(\d{4})-(\d{2})-(\d{2})/g)];
+    for (const m of ymd) {
+        dates.push(`${m[1]}-${m[2]}-${m[3]}`);
+    }
+    
+    // Format 3: "DD Bulan YYYY" atau "D Bulan YYYY"
+    const dmy2 = [...teks.matchAll(/(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/g)];
+    for (const m of dmy2) {
+        const bulan = BULAN_MAP[m[2].toLowerCase()];
+        if (bulan) {
+            const d = m[1].padStart(2, '0');
+            dates.push(`${m[3]}-${bulan}-${d}`);
+        }
+    }
+    
+    // Format 4: "Bulan YYYY" (tanpa hari — ambil akhir bulan)
+    const my = [...teks.matchAll(/([A-Za-z]+)\s+(\d{4})/g)];
+    for (const m of my) {
+        const bulan = BULAN_MAP[m[1].toLowerCase()];
+        if (bulan) {
+            const lastDay = new Date(parseInt(m[2]), parseInt(bulan), 0).getDate();
+            dates.push(`${m[2]}-${bulan}-${lastDay.toString().padStart(2, '0')}`);
+        }
+    }
+    
+    if (dates.length === 0) return '';
+    
+    // Ambil deadline paling akhir
+    dates.sort();
+    return dates[dates.length - 1];
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PARSE TEXT menjadi array bullet points
+// ═══════════════════════════════════════════════════════════════
+function parseToArray(teks) {
+    if (!teks) return [];
+    
+    // Split berdasarkan newline, lalu bersihkan bullet/numbering
+    const lines = teks.split('\n')
+        .map(line => line
+            .replace(/^[\s\*\-•·▪◦‣→⁃]+/, '') // hapus bullet di awal
+            .replace(/^\d+[\.\)]\s*/, '')        // hapus nomor di awal
+            .replace(/^[A-Z][\.\)]\s*/, '')      // hapus huruf di awal (A. B. C.)
+            .trim()
+        )
+        .filter(line => line.length > 2); // filter baris kosong/terlalu pendek
+    
+    return lines;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PARSE SHEET BEASISWA → Array of objects
+// Kolom: Nama Beasiswa, Status Pendaftaran, Kategori, Deadline,
+//        Persyaratan, Cakupan Benefit, Informasi Selengkapnya
+// ═══════════════════════════════════════════════════════════════
+function parseBeasiswaSheet(rows) {
+    // rows[0] adalah header, mulai dari rows[1]
+    return rows.slice(1)
+        .filter(row => row[0] && row[0].trim()) // skip baris kosong
+        .map((row, idx) => {
+            const nama        = (row[0] || '').trim();
+            const status      = (row[1] || '').trim();
+            const kategori    = (row[2] || '').trim().split(',')[0].trim(); // ambil kategori pertama
+            const deadlineRaw = (row[3] || '').trim();
+            const persyaratan = parseToArray(row[4] || '');
+            const benefit     = parseToArray(row[5] || '');
+            const infoText    = (row[6] || '').trim();
+            
+            const deadline = parseDeadline(deadlineRaw) || parseDeadline(nama);
+            const { linkDaftar, linkGuidebook } = extractLinks(infoText);
+            
+            // Timeline: pakai kolom deadline yang asli kalau ada kata "Timeline"
+            let timelinePenting = '';
+            if (/timeline|timeline penting|seleksi|pengumuman|wawancara/i.test(deadlineRaw)) {
+                timelinePenting = deadlineRaw.replace(/\n/g, ' | ').trim();
+            } else if (deadline) {
+                timelinePenting = `Deadline: ${deadlineRaw}`;
+            }
+            
+            return {
+                id: idx + 1,
+                nama,
+                status: status || 'Tutup',
+                kategori: kategori || 'Umum',
+                deadline: deadline || '2099-12-31', // fallback jika tidak bisa diparse
+                persyaratan,
+                benefit,
+                linkDaftar,
+                linkGuidebook,
+                timelinePenting,
+            };
+        });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PARSE SHEET LOMBA → Array of objects
+// Kolom: Nama Lomba, Penyelenggara, Status Lomba, Skala, Deadline,
+//        Cabang Lomba, Partisipasi, Biaya, Informasi Selengkapnya
+// ═══════════════════════════════════════════════════════════════
+function parseLombaSheet(rows) {
+    return rows.slice(1)
+        .filter(row => row[0] && row[0].trim())
+        .map((row, idx) => {
+            const nama          = (row[0] || '').trim();
+            const penyelenggara = (row[1] || '').trim();
+            const status        = (row[2] || '').trim();
+            const skala         = (row[3] || '').trim();
+            const deadlineRaw   = (row[4] || '').trim();
+            const cabangLomba   = (row[5] || '').trim();
+            const partisipasi   = (row[6] || '').trim();
+            const biaya         = (row[7] || '').trim();
+            const infoText      = (row[8] || '').trim();
+            
+            const deadline = parseDeadline(deadlineRaw) || '';
+            const { linkDaftar, linkGuidebook } = extractLinks(infoText);
+            
+            // Kategori untuk lomba: pakai skala (Nasional/Internasional)
+            // atau cabang lomba sebagai kategori
+            const kategori = skala || 'Nasional';
+            
+            // Buat benefit dari info yang ada (karena sheet lomba tidak punya kolom benefit)
+            const benefit = [];
+            if (biaya === 'Gratis') benefit.push('Pendaftaran Gratis');
+            if (partisipasi) benefit.push(`Kategori: ${partisipasi}`);
+            if (penyelenggara) benefit.push(`Penyelenggara: ${penyelenggara}`);
+            
+            // Persyaratan: tidak ada di sheet lomba, biarkan kosong
+            const persyaratan = [];
+            
+            // Timeline
+            let timelinePenting = deadlineRaw ? `Deadline: ${deadlineRaw}` : '';
+            if (cabangLomba) timelinePenting += timelinePenting ? ` | Cabang: ${cabangLomba}` : `Cabang: ${cabangLomba}`;
+            
+            return {
+                id: idx + 1,
+                nama,
+                penyelenggara,
+                status: status || 'Tutup',
+                kategori,
+                skala,
+                cabangLomba,
+                partisipasi,
+                biaya,
+                deadline: deadline || '2099-12-31',
+                persyaratan,
+                benefit,
+                linkDaftar,
+                linkGuidebook,
+                timelinePenting,
+            };
+        });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DATA LOADING — Sheets dulu, fallback ke JSON lokal
 // ═══════════════════════════════════════════════════════════════
 async function loadData() {
     try {
+        // Coba fetch dari Google Sheets
         const [beasiswaRes, lombaRes] = await Promise.all([
-            fetch('data/beasiswa.json'),
-            fetch('data/lomba.json')
+            fetch(SHEET_BEASISWA_URL),
+            fetch(SHEET_LOMBA_URL)
         ]);
 
-        beasiswaData = await beasiswaRes.json();
-        lombaData = await lombaRes.json();
+        if (!beasiswaRes.ok || !lombaRes.ok) throw new Error('Sheets fetch failed');
 
-        // Hide skeletons
-        document.getElementById('skeletonBeasiswa').classList.add('hidden');
-        document.getElementById('skeletonLomba').classList.add('hidden');
+        const [beasiswaCsv, lombaCsv] = await Promise.all([
+            beasiswaRes.text(),
+            lombaRes.text()
+        ]);
 
-        // Render cards
-        renderCards('beasiswa', beasiswaData);
-        renderCards('lomba', lombaData);
+        const beasiswaRows = parseCSV(beasiswaCsv);
+        const lombaRows    = parseCSV(lombaCsv);
 
-        // Update hero stats
-        updateHeroStats();
+        beasiswaData = parseBeasiswaSheet(beasiswaRows);
+        lombaData    = parseLombaSheet(lombaRows);
 
-        // Init filters
-        initFilters();
+        console.log(`✅ Data dari Google Sheets: ${beasiswaData.length} beasiswa, ${lombaData.length} lomba`);
 
-        // Observe card animations
-        observeCards();
-
-        // Reinit icons
-        lucide.createIcons();
-
-        // Render watchlist section
-        renderWatchlist();
-
-    } catch (error) {
-        console.error('Error loading data:', error);
-        document.getElementById('skeletonBeasiswa').classList.add('hidden');
-        document.getElementById('skeletonLomba').classList.add('hidden');
-        document.getElementById('emptyBeasiswa').classList.remove('hidden');
-        document.getElementById('emptyLomba').classList.remove('hidden');
+    } catch (err) {
+        console.warn('⚠️ Gagal fetch Google Sheets, fallback ke JSON lokal:', err.message);
+        try {
+            const [beasiswaRes, lombaRes] = await Promise.all([
+                fetch('data/beasiswa.json'),
+                fetch('data/lomba.json')
+            ]);
+            beasiswaData = await beasiswaRes.json();
+            lombaData    = await lombaRes.json();
+            console.log('✅ Data dari JSON lokal (fallback)');
+        } catch (fallbackErr) {
+            console.error('❌ Gagal memuat data:', fallbackErr);
+            showDataError();
+            return;
+        }
     }
+
+    // Hide skeletons
+    document.getElementById('skeletonBeasiswa').classList.add('hidden');
+    document.getElementById('skeletonLomba').classList.add('hidden');
+
+    // Render cards
+    renderCards('beasiswa', beasiswaData);
+    renderCards('lomba', lombaData);
+
+    // Update hero stats
+    updateHeroStats();
+
+    // Init filters
+    initFilters();
+
+    // Observe card animations
+    observeCards();
+
+    // Reinit icons
+    lucide.createIcons();
+
+    // Render watchlist section
+    renderWatchlist();
+}
+
+function showDataError() {
+    document.getElementById('skeletonBeasiswa').classList.add('hidden');
+    document.getElementById('skeletonLomba').classList.add('hidden');
+    document.getElementById('emptyBeasiswa').classList.remove('hidden');
+    document.getElementById('emptyLomba').classList.remove('hidden');
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -263,7 +619,6 @@ function renderCards(type, data) {
     const currentSort = type === 'beasiswa' ? sortBeasiswa : sortLomba;
     const sorted = [...data].sort((a, b) => {
         if (currentSort === 'deadline') {
-            // Nearest deadline first, regardless of status
             return new Date(a.deadline) - new Date(b.deadline);
         } else if (currentSort === 'nama') {
             return a.nama.localeCompare(b.nama, 'id');
@@ -284,7 +639,6 @@ function renderCards(type, data) {
     // Attach click handlers
     grid.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', (e) => {
-            // Don't open modal if clicking on action buttons
             if (e.target.closest('.card-actions')) return;
             const id = parseInt(card.dataset.id);
             const itemData = type === 'beasiswa' ? beasiswaData : lombaData;
@@ -300,7 +654,6 @@ function renderCards(type, data) {
             const id = parseInt(btn.dataset.id);
             const itemType = btn.dataset.type;
             toggleWatchlist(id, itemType);
-            // Re-render to update button state
             const sourceData = itemType === 'beasiswa' ? beasiswaData : lombaData;
             const searchValue = document.getElementById(`search${capitalize(itemType)}`).value.toLowerCase().trim();
             const kategoriValue = document.getElementById(`filterKategori${capitalize(itemType)}`).value;
@@ -334,7 +687,7 @@ function renderCards(type, data) {
         const deadline = el.dataset.deadline;
         if (deadline) {
             updateCardCountdown(el, deadline);
-            const intervalId = setInterval(() => updateCardCountdown(el, deadline), 60000); // Update every minute
+            const intervalId = setInterval(() => updateCardCountdown(el, deadline), 60000);
             countdownIntervals.push(intervalId);
         }
     });
@@ -350,7 +703,15 @@ function createCardHTML(item, type) {
     const isExpired = daysLeft < 0;
     const isBookmarked = isInWatchlist(item.id, type);
 
-    const benefitPreview = item.benefit ? item.benefit[0] : '';
+    // Untuk lomba: tampilkan penyelenggara sebagai subtitle, untuk beasiswa: benefit pertama
+    const subtitleText = type === 'lomba' && item.penyelenggara
+        ? item.penyelenggara
+        : (item.benefit && item.benefit[0] ? item.benefit[0] : '');
+
+    // Badge tambahan untuk lomba
+    const extraBadge = type === 'lomba'
+        ? `<span class="badge badge-kategori">${item.skala || item.kategori}</span>`
+        : `<span class="badge badge-kategori">${item.kategori}</span>`;
 
     return `
         <div class="card" data-id="${item.id}">
@@ -359,7 +720,7 @@ function createCardHTML(item, type) {
                     <span class="badge ${isOpen ? 'badge-open' : 'badge-closed'}">
                         ${item.status}
                     </span>
-                    <span class="badge badge-kategori">${item.kategori}</span>
+                    ${extraBadge}
                 </div>
                 <div class="card-top-actions">
                     <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" 
@@ -378,18 +739,23 @@ function createCardHTML(item, type) {
             <div class="card-info">
                 <div class="card-info-item ${isUrgent ? 'deadline-urgent' : ''}">
                     <i data-lucide="calendar"></i>
-                    <span>Deadline: ${formatDate(item.deadline)}</span>
+                    <span>Deadline: ${item.deadline !== '2099-12-31' ? formatDate(item.deadline) : 'Lihat info'}</span>
                 </div>
+                ${type === 'lomba' && item.cabangLomba ? `
+                <div class="card-info-item">
+                    <i data-lucide="layers"></i>
+                    <span>${item.cabangLomba}</span>
+                </div>` : ''}
             </div>
             <div class="card-countdown ${isExpired ? 'expired' : ''}">
                 <i data-lucide="timer"></i>
                 <span class="card-countdown-text" data-deadline="${item.deadline}">
-                    ${getCountdownText(item.deadline)}
+                    ${item.deadline !== '2099-12-31' ? getCountdownText(item.deadline) : '–'}
                 </span>
             </div>
-            ${benefitPreview ? `
+            ${subtitleText ? `
                 <div class="card-benefit-preview">
-                    <strong>${type === 'beasiswa' ? '💰' : '🏆'}</strong> ${benefitPreview}
+                    <strong>${type === 'beasiswa' ? '💰' : '🏆'}</strong> ${subtitleText}
                 </div>
             ` : ''}
             <div class="card-actions">
@@ -445,8 +811,10 @@ function filterData(type) {
     const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
 
     const filtered = sourceData.filter(item => {
-        const matchSearch = !searchValue || item.nama.toLowerCase().includes(searchValue);
-        const matchKategori = kategoriValue === 'semua' || item.kategori === kategoriValue;
+        const matchSearch = !searchValue || item.nama.toLowerCase().includes(searchValue)
+            || (item.penyelenggara && item.penyelenggara.toLowerCase().includes(searchValue));
+        const matchKategori = kategoriValue === 'semua' || item.kategori === kategoriValue
+            || (item.skala && item.skala === kategoriValue);
         const matchStatus = statusValue === 'semua' || item.status === statusValue;
         return matchSearch && matchKategori && matchStatus;
     });
@@ -460,7 +828,6 @@ function filterData(type) {
 // ═══════════════════════════════════════════════════════════════
 function openModal(item, type) {
     currentModalData = item;
-    // Simpan type secara eksplisit — jangan tebak dari ID karena beasiswa & lomba punya ID yang overlap
     currentModalType = type || (beasiswaData.some(d => d.id === item.id && d.nama === item.nama) ? 'beasiswa' : 'lomba');
     const overlay = document.getElementById('modalOverlay');
     
@@ -470,23 +837,63 @@ function openModal(item, type) {
     const statusEl = document.getElementById('modalStatus');
     statusEl.innerHTML = `<span class="badge ${item.status === 'Buka' ? 'badge-open' : 'badge-closed'}">${item.status}</span>`;
     
-    document.getElementById('modalKategori').textContent = `📂 ${item.kategori}`;
-    document.getElementById('modalDeadline').textContent = `📅 ${formatDate(item.deadline)}`;
+    // Kategori & deadline
+    const kategoriLabel = type === 'lomba' ? `🌐 ${item.skala || item.kategori}` : `📂 ${item.kategori}`;
+    document.getElementById('modalKategori').textContent = kategoriLabel;
+    document.getElementById('modalDeadline').textContent = item.deadline !== '2099-12-31'
+        ? `📅 ${formatDate(item.deadline)}`
+        : '📅 Lihat info selengkapnya';
 
     // Countdown
     renderModalCountdown(item.deadline);
 
-    // Persyaratan
+    // ── Persyaratan ──
+    const persyaratanSection = document.getElementById('modalPersyaratan').closest('.modal-section');
     const persyaratanList = document.getElementById('modalPersyaratan');
-    persyaratanList.innerHTML = item.persyaratan
-        .map(p => `<li>${p}</li>`)
-        .join('');
+    if (item.persyaratan && item.persyaratan.length > 0) {
+        persyaratanSection.style.display = '';
+        persyaratanList.innerHTML = item.persyaratan.map(p => `<li>${p}</li>`).join('');
+    } else {
+        persyaratanSection.style.display = 'none';
+    }
 
-    // Benefit
+    // ── Benefit ──
+    const benefitSection = document.getElementById('modalBenefit').closest('.modal-section');
     const benefitList = document.getElementById('modalBenefit');
-    benefitList.innerHTML = item.benefit
-        .map(b => `<li>${b}</li>`)
-        .join('');
+    if (item.benefit && item.benefit.length > 0) {
+        benefitSection.style.display = '';
+        benefitList.innerHTML = item.benefit.map(b => `<li>${b}</li>`).join('');
+    } else {
+        benefitSection.style.display = 'none';
+    }
+
+    // ── Info tambahan untuk Lomba ──
+    // Tambahkan atau tampilkan detail lomba (penyelenggara, cabang, partisipasi, biaya)
+    let lombaDetailSection = document.getElementById('modalLombaDetail');
+    if (type === 'lomba') {
+        const details = [];
+        if (item.penyelenggara) details.push(`🏫 <strong>Penyelenggara:</strong> ${item.penyelenggara}`);
+        if (item.cabangLomba)   details.push(`🎯 <strong>Cabang Lomba:</strong> ${item.cabangLomba}`);
+        if (item.partisipasi)   details.push(`👥 <strong>Partisipasi:</strong> ${item.partisipasi}`);
+        if (item.biaya)         details.push(`💳 <strong>Biaya:</strong> ${item.biaya}`);
+        
+        if (details.length > 0) {
+            if (!lombaDetailSection) {
+                // Buat section baru kalau belum ada
+                lombaDetailSection = document.createElement('div');
+                lombaDetailSection.className = 'modal-section';
+                lombaDetailSection.id = 'modalLombaDetail';
+                lombaDetailSection.innerHTML = `<h3><i data-lucide="info"></i> Detail Lomba</h3><div id="modalLombaDetailContent"></div>`;
+                document.getElementById('modalPersyaratan').closest('.modal-section').before(lombaDetailSection);
+            }
+            lombaDetailSection.style.display = '';
+            document.getElementById('modalLombaDetailContent').innerHTML = details.map(d => `<p style="margin:6px 0;font-size:0.9rem;">${d}</p>`).join('');
+        } else if (lombaDetailSection) {
+            lombaDetailSection.style.display = 'none';
+        }
+    } else {
+        if (lombaDetailSection) lombaDetailSection.style.display = 'none';
+    }
 
     // Timeline
     document.getElementById('modalTimeline').textContent = item.timelinePenting || 'Belum tersedia';
@@ -555,6 +962,18 @@ document.getElementById('modalShareWA').addEventListener('click', () => {
 
 function renderModalCountdown(deadline) {
     const container = document.getElementById('modalCountdown');
+    
+    if (!deadline || deadline === '2099-12-31') {
+        container.innerHTML = `
+            <div class="countdown-unit" style="min-width: auto; padding: 12px 20px;">
+                <span class="countdown-number" style="font-size: 0.9rem; color: var(--color-text-secondary);">
+                    Cek link untuk deadline
+                </span>
+            </div>
+        `;
+        return;
+    }
+    
     const now = new Date();
     const target = new Date(deadline + 'T23:59:59');
     const diff = target - now;
@@ -623,14 +1042,12 @@ function toggleWatchlist(id, type) {
         }
     }
     localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
-    // Update modal bookmark btn if open
     if (currentModalData) updateModalBookmarkBtn(currentModalData);
 }
 
 function updateModalBookmarkBtn(item) {
     const btn = document.getElementById('modalBookmarkBtn');
     if (!btn) return;
-    // Gunakan currentModalType — JANGAN tebak dari ID karena beasiswa & lomba punya ID overlap (keduanya mulai dari 1)
     const type = currentModalType;
     const isBookmarked = type ? isInWatchlist(item.id, type) : false;
     btn.classList.toggle('bookmarked', isBookmarked);
@@ -659,7 +1076,7 @@ function renderWatchlist() {
                         <span class="watchlist-type-badge">${w.type === 'beasiswa' ? '🎓 Beasiswa' : '🏆 Lomba'}</span>
                         <p class="watchlist-nama">${w.nama}</p>
                         <span class="watchlist-deadline ${isExpired ? 'expired-text' : ''}">
-                            📅 ${formatDate(w.deadline)} — ${getCountdownText(w.deadline)}
+                            📅 ${w.deadline !== '2099-12-31' ? formatDate(w.deadline) : 'Lihat info'} — ${w.deadline !== '2099-12-31' ? getCountdownText(w.deadline) : '–'}
                         </span>
                     </div>
                     <div class="watchlist-actions">
@@ -675,7 +1092,6 @@ function renderWatchlist() {
         // Click on item → open modal
         grid.querySelectorAll('.watchlist-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                // Don't open modal if clicking the remove button
                 if (e.target.closest('.btn-watchlist-remove')) return;
                 const id = parseInt(item.dataset.id);
                 const type = item.dataset.type;
@@ -691,7 +1107,6 @@ function renderWatchlist() {
                 e.stopPropagation();
                 toggleWatchlist(parseInt(btn.dataset.id), btn.dataset.type);
                 renderWatchlist();
-                // Also re-render cards to update bookmark state
                 renderCards('beasiswa', beasiswaData);
                 renderCards('lomba', lombaData);
                 lucide.createIcons();
@@ -705,14 +1120,14 @@ function renderWatchlist() {
 // SHARE TO WHATSAPP
 // ═══════════════════════════════════════════════════════════════
 function shareToWhatsApp(item) {
-    const daysLeft = getDaysLeft(item.deadline);
-    const countdownStr = getCountdownText(item.deadline);
+    const countdownStr = item.deadline !== '2099-12-31' ? getCountdownText(item.deadline) : 'Cek link';
+    const deadlineStr  = item.deadline !== '2099-12-31' ? formatDate(item.deadline) : 'Lihat info selengkapnya';
     const linkPart = item.linkDaftar ? `\n🔗 *Link Daftar:* ${item.linkDaftar}` : '';
 
     const text =
         `📢 *INFO ${item.kategori?.toUpperCase() || 'BEASISWA/LOMBA'}*\n` +
         `\n📌 *${item.nama}*` +
-        `\n\n📅 *Deadline:* ${formatDate(item.deadline)}` +
+        `\n\n📅 *Deadline:* ${deadlineStr}` +
         `\n⏳ *Sisa waktu:* ${countdownStr}` +
         `\n🟢 *Status:* ${item.status}` +
         `${linkPart}` +
@@ -749,11 +1164,13 @@ function capitalize(str) {
 }
 
 function formatDate(dateStr) {
+    if (!dateStr || dateStr === '2099-12-31') return '–';
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return new Date(dateStr).toLocaleDateString('id-ID', options);
 }
 
 function getDaysLeft(deadline) {
+    if (!deadline || deadline === '2099-12-31') return 9999;
     const now = new Date();
     const target = new Date(deadline + 'T23:59:59');
     const diff = target - now;
@@ -761,6 +1178,7 @@ function getDaysLeft(deadline) {
 }
 
 function getCountdownText(deadline) {
+    if (!deadline || deadline === '2099-12-31') return '–';
     const days = getDaysLeft(deadline);
     if (days < 0) return 'Sudah lewat';
     if (days === 0) return 'Hari terakhir!';
@@ -773,6 +1191,10 @@ function getCountdownText(deadline) {
 }
 
 function updateCardCountdown(el, deadline) {
+    if (!deadline || deadline === '2099-12-31') {
+        el.textContent = '–';
+        return;
+    }
     el.textContent = getCountdownText(deadline);
     const parent = el.closest('.card-countdown');
     if (getDaysLeft(deadline) < 0) {
