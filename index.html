@@ -277,37 +277,240 @@
     <!-- ═══════════════════════════════════════════ -->
     <!-- TENTANG KAMI SECTION                        -->
     <!-- ═══════════════════════════════════════════ -->
-    <section class="section" id="tentang">
+    <section class="section about-section" id="tentang">
         <div class="section-container">
             <div class="about-wrapper reveal">
-                <div class="about-image">
-                    <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="about-logo">
+                <!-- Left: Interactive Visual Hub Card with 3D Tilt Effect -->
+                <div class="about-visual">
+                    <div class="about-card-glow"></div>
+                    <div class="about-card" id="aboutCardTilt">
+                        <div class="about-card-top-tag">
+                            <span class="pulse-dot"></span>
+                            <span>Official Hub Adkesma</span>
+                        </div>
+                        <div class="about-logo-frame">
+                            <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="about-logo">
+                            <div class="about-logo-shine"></div>
+                        </div>
+                        <div class="about-card-footer">
+                            <span class="about-card-name">HMTK</span>
+                            <span class="about-card-sub">Teknologi Kedokteran</span>
+                        </div>
+
+                        <!-- Micro Stat Strip -->
+                        <div class="about-quick-stats">
+                            <div class="about-quick-stat" title="Informasi diverifikasi langsung dari penyelenggara">
+                                <span class="quick-stat-val"><i data-lucide="shield-check"></i> 100%</span>
+                                <span class="quick-stat-lbl">Terkurasi</span>
+                            </div>
+                            <div class="quick-stat-sep"></div>
+                            <div class="about-quick-stat" title="Database diperbarui rutin setiap 2 minggu">
+                                <span class="quick-stat-val"><i data-lucide="clock"></i> 2 Mgg</span>
+                                <span class="quick-stat-lbl">Rutin Update</span>
+                            </div>
+                            <div class="quick-stat-sep"></div>
+                            <div class="about-quick-stat" title="Bebas diakses oleh seluruh mahasiswa">
+                                <span class="quick-stat-val"><i data-lucide="sparkles"></i> Gratis</span>
+                                <span class="quick-stat-lbl">Terbuka</span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Share Button -->
+                        <button type="button" class="btn-about-share" id="btnAboutShare" title="Salin link portal KESMA NEWS">
+                            <i data-lucide="share-2"></i>
+                            <span>Bagikan Portal</span>
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Right: Content with Interactive Tabs -->
                 <div class="about-content">
-                    <h2 class="section-title">Tentang Kami</h2>
-                    <p class="about-text">
-                        <strong>KESMA NEWS</strong> adalah program kerja dari <strong>Departemen Advokasi dan Kesejahteraan Mahasiswa (Adkesma)</strong>, 
-                        Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
+                    <div class="about-eyebrow">
+                        <i data-lucide="sparkles"></i>
+                        <span>Dedikasi &amp; Komitmen Mahasiswa</span>
+                    </div>
+
+                    <h2 class="about-heading">
+                        Jembatan Peluang &amp; Prestasi <span class="about-accent">Mahasiswa HMTK</span>
+                    </h2>
+
+                    <p class="about-lead">
+                        <strong>KESMA NEWS</strong> adalah platform resmi persembahan <strong>Departemen Advokasi dan Kesejahteraan Mahasiswa (Adkesma)</strong>, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
                     </p>
-                    <p class="about-text">
-                        Kami berkomitmen untuk menjadi jembatan informasi antara peluang-peluang beasiswa dan lomba dengan seluruh mahasiswa. 
-                        Setiap informasi yang kami sajikan telah dikurasi dan diverifikasi untuk memastikan keakuratan dan relevansinya.
-                    </p>
-                    <p class="about-text">
-                        Informasi di platform ini diperbarui secara berkala setiap <strong>2 minggu sekali</strong> oleh tim Adkesma HMTK.
-                    </p>
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <i data-lucide="shield-check"></i>
-                            <span>Info Terverifikasi</span>
+
+                    <!-- Interactive Tab Navigation Buttons -->
+                    <div class="about-tabs-nav" role="tablist" aria-label="Informasi Tentang Kami">
+                        <button type="button" class="about-tab-btn active" data-tab="tab-misi" role="tab" aria-selected="true" id="tabBtnMisi">
+                            <i data-lucide="target"></i>
+                            <span>Misi &amp; Nilai</span>
+                        </button>
+                        <button type="button" class="about-tab-btn" data-tab="tab-alur" role="tab" aria-selected="false" id="tabBtnAlur">
+                            <i data-lucide="git-branch"></i>
+                            <span>Alur Kurasi 3-Langkah</span>
+                        </button>
+                        <button type="button" class="about-tab-btn" data-tab="tab-faq" role="tab" aria-selected="false" id="tabBtnFaq">
+                            <i data-lucide="help-circle"></i>
+                            <span>FAQ Mahasiswa</span>
+                        </button>
+                    </div>
+
+                    <!-- Tab Panels Container -->
+                    <div class="about-tabs-content">
+                        <!-- Panel 1: Misi & 3 Pilar Nilai (Default Active) -->
+                        <div class="about-tab-panel active" id="tab-misi" role="tabpanel" aria-labelledby="tabBtnMisi">
+                            <div class="about-pillars">
+                                <div class="about-pillar-card" tabindex="0">
+                                    <div class="pillar-icon pillar-icon-verify">
+                                        <i data-lucide="shield-check"></i>
+                                    </div>
+                                    <div class="pillar-body">
+                                        <h4>Info Terverifikasi &amp; Valid</h4>
+                                        <p>Setiap beasiswa dan kompetisi disaring langsung dari sumber resmi (kementerian, universitas, lembaga mitra) untuk menjamin akurasi syarat dan link pendaftaran.</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-pillar-card" tabindex="0">
+                                    <div class="pillar-icon pillar-icon-update">
+                                        <i data-lucide="refresh-cw"></i>
+                                    </div>
+                                    <div class="pillar-body">
+                                        <h4>Pembaruan Tiap 2 Minggu</h4>
+                                        <p>Database diperbarui secara berkala dan terjadwal agar mahasiswa senantiasa mendapatkan peluang terhangat tanpa khawatir ketinggalan batas akhir (deadline).</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-pillar-card" tabindex="0">
+                                    <div class="pillar-icon pillar-icon-open">
+                                        <i data-lucide="heart-handshake"></i>
+                                    </div>
+                                    <div class="pillar-body">
+                                        <h4>Inklusif, Terbuka &amp; Gratis</h4>
+                                        <p>Dipersembahkan tanpa biaya bagi seluruh mahasiswa untuk memajukan potensi akademik dan non-akademik tanpa hambatan birokrasi.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="about-feature">
-                            <i data-lucide="refresh-cw"></i>
-                            <span>Update Berkala</span>
+
+                        <!-- Panel 2: Alur Kurasi 3-Langkah -->
+                        <div class="about-tab-panel" id="tab-alur" role="tabpanel" aria-labelledby="tabBtnAlur">
+                            <div class="about-workflow">
+                                <div class="workflow-step" tabindex="0">
+                                    <div class="step-badge">
+                                        <span class="step-num">01</span>
+                                    </div>
+                                    <div class="step-content">
+                                        <div class="step-header">
+                                            <i data-lucide="search"></i>
+                                            <h4>Penjaringan Informasi</h4>
+                                        </div>
+                                        <p>Tim Adkesma memantau rilis resmi peluang beasiswa nasional/daerah, pertukaran pelajar, serta kompetisi medis, teknologi, dan umum.</p>
+                                    </div>
+                                </div>
+
+                                <div class="workflow-divider">
+                                    <div class="workflow-line"></div>
+                                </div>
+
+                                <div class="workflow-step" tabindex="0">
+                                    <div class="step-badge">
+                                        <span class="step-num">02</span>
+                                    </div>
+                                    <div class="step-content">
+                                        <div class="step-header">
+                                            <i data-lucide="file-check"></i>
+                                            <h4>Validasi &amp; Pengecekan Syarat</h4>
+                                        </div>
+                                        <p>Memastikan legalitas penyelenggara, memeriksa kelengkapan tautan formulir, buku panduan (guidebook), dan tenggat waktu pendaftaran.</p>
+                                    </div>
+                                </div>
+
+                                <div class="workflow-divider">
+                                    <div class="workflow-line"></div>
+                                </div>
+
+                                <div class="workflow-step" tabindex="0">
+                                    <div class="step-badge">
+                                        <span class="step-num">03</span>
+                                    </div>
+                                    <div class="step-content">
+                                        <div class="step-header">
+                                            <i data-lucide="send"></i>
+                                            <h4>Publikasi &amp; Pendampingan</h4>
+                                        </div>
+                                        <p>Informasi dirilis rapi di portal KESMA NEWS dan media Adkesma. Mahasiswa yang butuh asistensi atau konsultasi advokasi siap didampingi.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="about-feature">
-                            <i data-lucide="heart"></i>
-                            <span>Gratis untuk Semua</span>
+
+                        <!-- Panel 3: FAQ Interaktif (Accordion) -->
+                        <div class="about-tab-panel" id="tab-faq" role="tabpanel" aria-labelledby="tabBtnFaq">
+                            <div class="about-faq-list">
+                                <div class="about-faq-item" tabindex="0">
+                                    <button type="button" class="faq-question" aria-expanded="false">
+                                        <span class="faq-title">Siapa saja yang boleh mengakses dan mendaftar informasi di sini?</span>
+                                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Seluruh mahasiswa Teknologi Kedokteran dan mahasiswa umum dapat mengakses KESMA NEWS secara gratis. Pastikan memeriksa syarat spesifik di setiap kartu beasiswa/lomba sebelum mendaftar.</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-faq-item" tabindex="0">
+                                    <button type="button" class="faq-question" aria-expanded="false">
+                                        <span class="faq-title">Seberapa sering database KESMA NEWS diperbarui?</span>
+                                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Database kami diperbarui secara rutin setiap <strong>2 minggu sekali</strong> oleh Departemen Adkesma HMTK agar status pendaftaran dan batas akhir selalu akurat.</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-faq-item" tabindex="0">
+                                    <button type="button" class="faq-question" aria-expanded="false">
+                                        <span class="faq-title">Bagaimana jika link pendaftaran atau guidebook bermasalah?</span>
+                                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Anda dapat segera melaporkannya ke kami via Direct Message Instagram <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer">@adkezzmoy</a> atau email advokasi agar segera kami perbaiki.</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-faq-item" tabindex="0">
+                                    <button type="button" class="faq-question" aria-expanded="false">
+                                        <span class="faq-title">Apakah panitia lomba luar dapat mengajukan publikasi di KESMA NEWS?</span>
+                                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Sangat bisa! Kami menyambut kolaborasi publikasi peluang lomba dan beasiswa. Silakan hubungi kami via DM Instagram Adkesma dengan melampirkan proposal atau poster resmi.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Action Callout -->
+                    <div class="about-action-bar">
+                        <div class="about-action-info">
+                            <span class="action-emoji">💬</span>
+                            <div class="action-text">
+                                <strong>Punya pertanyaan atau butuh pendampingan advokasi?</strong>
+                                <span>Tim Adkesma HMTK selalu siap mendengarkan dan membantu rekan-rekan mahasiswa.</span>
+                            </div>
+                        </div>
+                        <div class="about-action-links">
+                            <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="btn-about-action btn-about-ig" title="Hubungi kami via Instagram DM">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                                </svg>
+                                <span>DM Adkesma</span>
+                            </a>
+                            <button type="button" class="btn-about-action btn-about-email" id="btnAboutCopyEmail" title="Salin email Adkesma HMTK">
+                                <i data-lucide="mail"></i>
+                                <span>Salin Email</span>
+                            </button>
                         </div>
                     </div>
                 </div>

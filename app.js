@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initBackToTop();
     initEmailCopy();
+    initAboutSection();
     loadData();
 });
 
@@ -1185,6 +1186,159 @@ function initEmailCopy() {
             }
         });
     });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ABOUT SECTION (INTERACTIVE TABS, ACCORDION, 3D TILT & ACTIONS)
+// ═══════════════════════════════════════════════════════════════
+function initAboutSection() {
+    // 1. Tab Switching Logic
+    const tabButtons = document.querySelectorAll('.about-tab-btn');
+    const tabPanels = document.querySelectorAll('.about-tab-panel');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-tab');
+            if (!targetId) return;
+
+            tabButtons.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            tabPanels.forEach(p => p.classList.remove('active'));
+
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+
+            const targetPanel = document.getElementById(targetId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    });
+
+    // 2. FAQ Accordion Logic
+    const faqItems = document.querySelectorAll('.about-faq-item');
+    faqItems.forEach(item => {
+        const questionBtn = item.querySelector('.faq-question');
+        if (!questionBtn) return;
+
+        questionBtn.addEventListener('click', () => {
+            const isCurrentlyActive = item.classList.contains('active');
+
+            // Close other accordion items for clean presentation
+            faqItems.forEach(other => {
+                if (other !== item) {
+                    other.classList.remove('active');
+                    const otherBtn = other.querySelector('.faq-question');
+                    if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Toggle current item
+            if (isCurrentlyActive) {
+                item.classList.remove('active');
+                questionBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                item.classList.add('active');
+                questionBtn.setAttribute('aria-expanded', 'true');
+            }
+
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    });
+
+    // 3. Interactive 3D Tilt Effect on Visual Logo Card
+    const tiltCard = document.getElementById('aboutCardTilt');
+    if (tiltCard && window.matchMedia('(hover: hover)').matches) {
+        let isHovered = false;
+
+        tiltCard.addEventListener('mouseenter', () => {
+            isHovered = true;
+        });
+
+        tiltCard.addEventListener('mousemove', (e) => {
+            if (!isHovered) return;
+            const rect = tiltCard.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+
+            tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+        });
+
+        tiltCard.addEventListener('mouseleave', () => {
+            isHovered = false;
+            tiltCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+    }
+
+    // 4. Quick Share Button (Copy Portal URL)
+    const shareBtn = document.getElementById('btnAboutShare');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+            const shareUrl = window.location.href.split('#')[0];
+            const copySuccess = () => {
+                showToast('🔗 Tautan KESMA NEWS berhasil disalin!');
+                const icon = shareBtn.querySelector('i');
+                if (icon) {
+                    shareBtn.innerHTML = '<i data-lucide="check"></i><span>Tautan Tersalin!</span>';
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                    setTimeout(() => {
+                        shareBtn.innerHTML = '<i data-lucide="share-2"></i><span>Bagikan Portal</span>';
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                    }, 2000);
+                }
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(shareUrl).then(copySuccess).catch(() => {
+                    fallbackCopy(shareUrl);
+                    copySuccess();
+                });
+            } else {
+                fallbackCopy(shareUrl);
+                copySuccess();
+            }
+        });
+    }
+
+    // 5. About Email Copy Button
+    const emailBtn = document.getElementById('btnAboutCopyEmail');
+    if (emailBtn) {
+        emailBtn.addEventListener('click', () => {
+            const email = 'adkesmahmtk@gmail.com';
+            const copySuccess = () => {
+                showToast('📋 Email adkesmahmtk@gmail.com berhasil disalin!');
+                emailBtn.innerHTML = '<i data-lucide="check"></i><span>Tersalin!</span>';
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+                setTimeout(() => {
+                    emailBtn.innerHTML = '<i data-lucide="mail"></i><span>Salin Email</span>';
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }, 2000);
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(copySuccess).catch(() => {
+                    fallbackCopy(email);
+                    copySuccess();
+                });
+            } else {
+                fallbackCopy(email);
+                copySuccess();
+            }
+        });
+    }
 }
 
 function fallbackCopy(text) {
