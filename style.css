@@ -54,6 +54,7 @@
     /* Typography — Unified Modern Plus Jakarta Sans */
     --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Plus Jakarta Sans', ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
 
     /* Spacing */
     --space-xs: 4px;
@@ -110,11 +111,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--font-body);
 }
 
 html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--navbar-height);
+    font-family: var(--font-body);
 }
 
 body {
@@ -124,18 +127,28 @@ body {
     line-height: 1.6;
     transition: background-color var(--transition-base), color var(--transition-base);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+    font-family: inherit;
 }
 
 button {
     border: none;
     background: none;
     cursor: pointer;
-    font-family: inherit;
+    font-family: var(--font-body);
+}
+
+input,
+select,
+textarea {
+    font-family: var(--font-body);
 }
 
 ul {
@@ -811,6 +824,7 @@ img {
     flex-direction: column;
     height: 100%;
     box-sizing: border-box;
+    box-shadow: var(--shadow-sm);
 }
 
 .card::before {
@@ -819,16 +833,17 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--gradient-primary);
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
     opacity: 0;
     transition: opacity var(--transition-base);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--color-accent);
+    border-color: rgba(46, 196, 182, 0.4);
 }
 
 .card:hover::before {
@@ -855,8 +870,9 @@ img {
     align-items: center;
     gap: 4px;
     padding: 4px 10px;
+    font-family: var(--font-body);
     font-size: 0.72rem;
-    font-weight: 600;
+    font-weight: 700;
     border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -908,7 +924,8 @@ img {
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 2.95rem; /* Menjaga 2 baris agar tinggi judul seragam & tidak menggeser layout */
+    /* Tetap 2 baris agar tinggi judul seragam antar kartu */
+    min-height: calc(1.05rem * 1.4 * 2);
 }
 
 .card-info {
@@ -916,13 +933,18 @@ img {
     flex-direction: column;
     gap: var(--space-sm);
     margin-bottom: var(--space-md);
-    min-height: 46px; /* Tinggi seragam baik ada 1 info (beasiswa) maupun 2 info (lomba) */
+    /* Fixed height = 2 info-item rows: setiap item ~20px + gap 8px = 48px */
+    min-height: 52px;
+    /* Pastikan tidak lebih dari 2 baris agar semua kartu sejajar */
+    max-height: 52px;
+    overflow: hidden;
 }
 
 .card-info-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: var(--space-sm);
+    font-family: var(--font-body);
     font-size: 0.85rem;
     color: var(--color-text-secondary);
 }
@@ -931,7 +953,6 @@ img {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    margin-top: 2px;
     color: var(--color-accent);
 }
 
@@ -952,6 +973,8 @@ img {
     background: linear-gradient(135deg, rgba(46, 196, 182, 0.08), rgba(27, 58, 92, 0.04));
     border-radius: var(--radius-sm);
     margin-bottom: var(--space-md);
+    /* Fixed height: semua kartu punya countdown yang sama tingginya */
+    height: 38px;
     min-height: 38px;
     box-sizing: border-box;
 }
@@ -964,9 +987,13 @@ img {
 }
 
 .card-countdown-text {
+    font-family: var(--font-body);
     font-size: 0.82rem;
     font-weight: 600;
     color: var(--color-accent-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 [data-theme="dark"] .card-countdown-text {
@@ -989,6 +1016,7 @@ img {
     border: 1px solid var(--color-border-light);
     border-radius: var(--radius-sm);
     margin-bottom: var(--space-md);
+    font-family: var(--font-body);
     font-size: 0.82rem;
     color: var(--color-text-secondary);
     line-height: 1.45;
@@ -997,7 +1025,9 @@ img {
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 42px;
+    /* Fixed height agar semua preview benefit sejajar */
+    height: 52px;
+    min-height: 52px;
     box-sizing: border-box;
 }
 
@@ -1006,12 +1036,14 @@ img {
     border-color: rgba(255, 255, 255, 0.06);
 }
 
+/* Divider tipis sebelum tombol untuk pemisah visual yang rapi */
 .card-actions {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
     margin-top: auto; /* KUNCI KESETARAAN: Tombol selalu terdorong tepat di batas bawah kartu */
-    padding-top: var(--space-xs);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border-light);
 }
 
 /* ═══════════════════════════════════════════════════════════════
