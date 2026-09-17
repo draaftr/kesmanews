@@ -1464,11 +1464,27 @@ img {
     border: 1px solid transparent;
     transition: all var(--transition-base) !important;
     font-size: 0.82rem !important;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+button.footer-contact-link {
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+button.footer-social-btn {
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .footer-contact-link:hover {
     background: rgba(16, 185, 129, 0.1) !important;
-    border-color: rgba(16, 185, 129, 0.2) !important;
+    border-color: rgba(16, 185, 129, 0.25) !important;
     color: var(--color-accent-light) !important;
     padding-left: var(--space-sm) !important;
 }
@@ -1491,6 +1507,79 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* Email Row & Copy Button */
+.footer-contact-email-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.footer-contact-email-wrapper .footer-contact-link {
+    flex: 1;
+    min-width: 0;
+}
+
+.email-copy-badge {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    transition: all var(--transition-fast);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+}
+
+.footer-contact-link:hover .email-copy-badge {
+    background: rgba(16, 185, 129, 0.22);
+    color: var(--color-accent-light);
+}
+
+.email-copy-badge.copied {
+    background: #10b981 !important;
+    color: #0b1e32 !important;
+    font-weight: 700 !important;
+    transform: scale(1.05);
+}
+
+/* Direct Gmail Web Link Button */
+.footer-email-direct-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-base);
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.footer-email-direct-btn:hover {
+    background: rgba(16, 185, 129, 0.18);
+    border-color: var(--color-accent);
+    color: var(--color-accent-light);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+
+.footer-email-direct-btn svg {
+    transition: transform var(--transition-fast);
+}
+
+.footer-email-direct-btn:hover svg {
+    transform: translate(1px, -1px);
 }
 
 /* Footer Bottom */

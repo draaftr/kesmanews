@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initScrollReveal();
     initBackToTop();
+    initEmailCopy();
     loadData();
 });
 
@@ -1143,6 +1144,62 @@ function showToast(message) {
         toast.classList.remove('toast-show');
         setTimeout(() => toast.remove(), 300);
     }, 2500);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COPY EMAIL TO CLIPBOARD
+// ═══════════════════════════════════════════════════════════════
+function initEmailCopy() {
+    const copyBtns = document.querySelectorAll('.footer-copy-email-btn');
+    const email = 'adkesmahmtk@gmail.com';
+
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const onSuccess = () => {
+                showToast('📋 Email adkesmahmtk@gmail.com berhasil disalin!');
+
+                const badge = btn.querySelector('.email-copy-badge');
+                if (badge) {
+                    const textEl = badge.querySelector('.badge-text');
+                    const originalText = textEl ? textEl.textContent : 'Salin';
+                    badge.classList.add('copied');
+                    if (textEl) textEl.textContent = 'Tersalin! ✓';
+
+                    setTimeout(() => {
+                        badge.classList.remove('copied');
+                        if (textEl) textEl.textContent = originalText;
+                    }, 2200);
+                }
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(onSuccess).catch(() => {
+                    fallbackCopy(email);
+                    onSuccess();
+                });
+            } else {
+                fallbackCopy(email);
+                onSuccess();
+            }
+        });
+    });
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+    } catch (err) {
+        console.error('Fallback copy failed', err);
+    }
+    document.body.removeChild(textarea);
 }
 
 // ═══════════════════════════════════════════════════════════════
