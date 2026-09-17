@@ -239,6 +239,21 @@ function parseCSV(text) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// UNICODE NORMALIZER
+// Menormalkan karakter mathematical Unicode bold / italic / sans
+// (seperti 𝐁𝐔𝐋𝐈𝐒 𝐊𝐄𝐒𝐌𝐀𝐒 atau 𝑀𝐸𝐷𝐷𝐼𝑃𝑆) menjadi alfabet latin standar
+// agar font Plus Jakarta Sans tetap konsisten & tidak fallback ke serif
+// ═══════════════════════════════════════════════════════════════
+function cleanUnicodeText(str) {
+    if (!str) return '';
+    return String(str)
+        .normalize('NFKC')
+        .replace(/[\r\n\t]+/g, ' ')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+}
+
+// ═══════════════════════════════════════════════════════════════
 // EXTRACT LINKS dari kolom "Informasi Selengkapnya"
 // ═══════════════════════════════════════════════════════════════
 function extractLinks(infoText, nama = '') {
@@ -420,13 +435,13 @@ function parseBeasiswaSheet(rows) {
     return rows.slice(1)
         .filter(row => row[0] && row[0].trim()) // skip baris kosong
         .map((row, idx) => {
-            const nama        = (row[0] || '').trim();
-            const status      = (row[1] || '').trim();
-            const kategori    = (row[2] || '').trim().split(',')[0].trim(); // ambil kategori pertama
-            const deadlineRaw = (row[3] || '').trim();
-            const persyaratan = parseToArray(row[4] || '');
-            const benefit     = parseToArray(row[5] || '');
-            const infoText    = (row[6] || '').trim();
+            const nama        = cleanUnicodeText(row[0] || '');
+            const status      = cleanUnicodeText(row[1] || '');
+            const kategori    = cleanUnicodeText(row[2] || '').split(',')[0].trim(); // ambil kategori pertama
+            const deadlineRaw = cleanUnicodeText(row[3] || '');
+            const persyaratan = parseToArray(row[4] || '').map(cleanUnicodeText);
+            const benefit     = parseToArray(row[5] || '').map(cleanUnicodeText);
+            const infoText    = cleanUnicodeText(row[6] || '');
             
             const deadline = parseDeadline(deadlineRaw) || parseDeadline(nama);
             const { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
@@ -466,15 +481,15 @@ function parseLombaSheet(rows) {
     rows.slice(1)
         .filter(row => row[0] && row[0].trim())
         .forEach((row, idx) => {
-            const nama          = (row[0] || '').trim();
-            const penyelenggara = (row[1] || '').trim();
-            const status        = (row[2] || '').trim() || 'Tutup';
-            const skala         = (row[3] || '').trim();
-            const deadlineRaw   = (row[4] || '').trim();
-            const cabangLomba   = (row[5] || '').trim();
-            const partisipasi   = (row[6] || '').trim();
-            const biaya         = (row[7] || '').trim();
-            const infoText      = (row[8] || '').trim();
+            const nama          = cleanUnicodeText(row[0] || '');
+            const penyelenggara = cleanUnicodeText(row[1] || '');
+            const status        = cleanUnicodeText(row[2] || '') || 'Tutup';
+            const skala         = cleanUnicodeText(row[3] || '');
+            const deadlineRaw   = cleanUnicodeText(row[4] || '');
+            const cabangLomba   = cleanUnicodeText(row[5] || '');
+            const partisipasi   = cleanUnicodeText(row[6] || '');
+            const biaya         = cleanUnicodeText(row[7] || '');
+            const infoText      = cleanUnicodeText(row[8] || '');
             
             const deadline = parseDeadline(deadlineRaw) || '';
             let { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
@@ -774,9 +789,15 @@ function createCardHTML(item, type) {
     const isBookmarked = isInWatchlist(item.id, type);
 
     // Untuk lomba: tampilkan penyelenggara sebagai subtitle, untuk beasiswa: benefit pertama
-    const subtitleText = type === 'lomba' && item.penyelenggara
+    const rawSubtitle = type === 'lomba' && item.penyelenggara
         ? item.penyelenggara
         : (item.benefit && item.benefit[0] ? item.benefit[0] : '');
+
+    const subtitleContent = rawSubtitle
+        ? `<strong>${type === 'beasiswa' ? '💰' : '🏆'}</strong> <span>${rawSubtitle}</span>`
+        : (type === 'beasiswa'
+            ? `<strong>💰</strong> <span>Informasi benefit tersedia di detail beasiswa</span>`
+            : `<strong>🏆</strong> <span>Penyelenggara resmi dapat dicek di detail</span>`);
 
     // Badge tambahan untuk lomba
     const extraBadge = type === 'lomba'
@@ -858,11 +879,9 @@ function createCardHTML(item, type) {
                     ${item.deadline !== '2099-12-31' ? getCountdownText(item.deadline) : '–'}
                 </span>
             </div>
-            ${subtitleText ? `
-                <div class="card-benefit-preview">
-                    <strong>${type === 'beasiswa' ? '💰' : '🏆'}</strong> ${subtitleText}
-                </div>
-            ` : ''}
+            <div class="card-benefit-preview">
+                ${subtitleContent}
+            </div>
             <div class="card-actions">
                 ${actionBtnHTML}
                 <button class="btn btn-outline btn-card btn-detail-card"

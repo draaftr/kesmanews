@@ -270,7 +270,7 @@
   },
   {
     "id": 13,
-    "nama": "𝐁𝐔𝐋𝐈𝐒 𝐊𝐄𝐒𝐌𝐀𝐒 𝐅𝐊𝐌 𝐔𝐍𝐀𝐈𝐑 𝟐𝟎𝟐𝟔: 𝐈𝐍𝐓𝐄𝐑𝐍𝐀𝐓𝐈𝐎𝐍𝐀𝐋 𝐂𝐎𝐌𝐏𝐄𝐓𝐈𝐓𝐈𝐎𝐍",
+    "nama": "BULIS KESMAS FKM UNAIR 2026: INTERNATIONAL COMPETITION",
     "penyelenggara": "FKM Universitas Airlangga",
     "status": "Tutup",
     "kategori": "Internasional",
@@ -402,7 +402,7 @@
   },
   {
     "id": 19,
-    "nama": "𝑀𝐸𝐷𝐷𝐼𝑃𝑆 𝑥 𝐴𝑅𝑃𝑂 2026",
+    "nama": "MEDDIPS x ARPO 2026",
     "penyelenggara": "FK Universitas Diponegoro dan AMSA Undip",
     "status": "Tutup",
     "kategori": "Nasional",
@@ -523,7 +523,7 @@
     "partisipasi": "Kelompok",
     "biaya": "Berbayar",
     "deadline": "2026-08-09",
-    "deadlineRaw": "Open Abstrak dan Essay Batch 1: 01/06/2026\nClose Abstrak: 01/07/2026\n\nOpen Full Paper 2 dan Essay Batch 2: 12/07/2026\nClose Full Paper 1: 26/07/2026\n\nOpen Full Paper 2 dan Essay Batch 3: 27/07/2026\nClose Full Paper 2: 09/08/2026",
+    "deadlineRaw": "Open Abstrak dan Essay Batch 1: 01/06/2026 Close Abstrak: 01/07/2026 Open Full Paper 2 dan Essay Batch 2: 12/07/2026 Close Full Paper 1: 26/07/2026 Open Full Paper 2 dan Essay Batch 3: 27/07/2026 Close Full Paper 2: 09/08/2026",
     "persyaratan": [],
     "benefit": [
       "Kategori: Kelompok",
@@ -532,7 +532,7 @@
     "linkDaftar": "https://www.instagram.com/dscric/",
     "linkGuidebook": "",
     "linkDaftarLabel": "Daftar",
-    "timelinePenting": "Deadline: Open Abstrak dan Essay Batch 1: 01/06/2026\nClose Abstrak: 01/07/2026\n\nOpen Full Paper 2 dan Essay Batch 2: 12/07/2026\nClose Full Paper 1: 26/07/2026\n\nOpen Full Paper 2 dan Essay Batch 3: 27/07/2026\nClose Full Paper 2: 09/08/2026 | Cabang: LKTI, Essay"
+    "timelinePenting": "Deadline: Open Abstrak dan Essay Batch 1: 01/06/2026 Close Abstrak: 01/07/2026 Open Full Paper 2 dan Essay Batch 2: 12/07/2026 Close Full Paper 1: 26/07/2026 Open Full Paper 2 dan Essay Batch 3: 27/07/2026 Close Full Paper 2: 09/08/2026 | Cabang: LKTI, Essay"
   },
   {
     "id": 25,
@@ -545,7 +545,7 @@
     "partisipasi": "Kelompok",
     "biaya": "Berbayar",
     "deadline": "2026-06-30",
-    "deadlineRaw": "Close Regist: 23/06/2026\nClose Payment: 30/06/2026\nClose Submission: 30/06/2026",
+    "deadlineRaw": "Close Regist: 23/06/2026 Close Payment: 30/06/2026 Close Submission: 30/06/2026",
     "persyaratan": [],
     "benefit": [
       "Kategori: Kelompok",
@@ -554,7 +554,7 @@
     "linkDaftar": "https://www.tisiif.or.id/",
     "linkGuidebook": "",
     "linkDaftarLabel": "Daftar",
-    "timelinePenting": "Deadline: Close Regist: 23/06/2026\nClose Payment: 30/06/2026\nClose Submission: 30/06/2026 | Cabang: Kompetisi Riset, Inovasi, dan Inventasi"
+    "timelinePenting": "Deadline: Close Regist: 23/06/2026 Close Payment: 30/06/2026 Close Submission: 30/06/2026 | Cabang: Kompetisi Riset, Inovasi, dan Inventasi"
   },
   {
     "id": 26,
@@ -567,7 +567,7 @@
     "partisipasi": "Kelompok",
     "biaya": "Berbayar",
     "deadline": "2026-06-25",
-    "deadlineRaw": "LKTI : 14/06/2026\nPoster : 25/06/2026",
+    "deadlineRaw": "LKTI : 14/06/2026 Poster : 25/06/2026",
     "persyaratan": [],
     "benefit": [
       "Kategori: Kelompok",
@@ -576,7 +576,7 @@
     "linkDaftar": "https://linktr.ee/Methanol_2026?utm_source=linktree_profile_share&ltsid=2b128b42-f72c-48ae-8ca0-9c67570c2fda",
     "linkGuidebook": "",
     "linkDaftarLabel": "Daftar",
-    "timelinePenting": "Deadline: LKTI : 14/06/2026\nPoster : 25/06/2026 | Cabang: Karya Tulis Ilmiah (KTI), Poster"
+    "timelinePenting": "Deadline: LKTI : 14/06/2026 Poster : 25/06/2026 | Cabang: Karya Tulis Ilmiah (KTI), Poster"
   },
   {
     "id": 27,
@@ -603,7 +603,7 @@
   {
     "id": 28,
     "nama": "Champions of Safety",
-    "penyelenggara": "Garuda  Syastrain ID",
+    "penyelenggara": "Garuda Syastrain ID",
     "status": "Buka",
     "kategori": "Nasional",
     "skala": "Nasional",
@@ -615,7 +615,7 @@
     "persyaratan": [],
     "benefit": [
       "Kategori: Individu",
-      "Penyelenggara: Garuda  Syastrain ID"
+      "Penyelenggara: Garuda Syastrain ID"
     ],
     "linkDaftar": "https://champion-of-safety.vercel.app/",
     "linkGuidebook": "",
