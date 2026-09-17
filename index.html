@@ -38,7 +38,10 @@
                 <a href="#beranda" class="nav-link active" data-section="beranda">Beranda</a>
                 <a href="#beasiswa" class="nav-link" data-section="beasiswa">Beasiswa</a>
                 <a href="#lomba" class="nav-link" data-section="lomba">Lomba</a>
-                <a href="#pantauan" class="nav-link" data-section="pantauan">Pantauan Saya</a>
+                <a href="#bookmark" class="nav-link" data-section="bookmark">
+                    Bookmark
+                    <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
+                </a>
                 <a href="#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
             </div>
             <div class="nav-actions">
@@ -250,26 +253,59 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
-    <!-- WATCHLIST SECTION                           -->
+    <!-- BOOKMARK SECTION                            -->
     <!-- ═══════════════════════════════════════════ -->
-    <section class="section" id="pantauan">
+    <section class="section" id="bookmark">
         <div class="section-container">
             <div class="section-header reveal">
                 <div class="section-icon-wrapper" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
                     <i data-lucide="bookmark"></i>
                 </div>
-                <h2 class="section-title">Pantauan Saya</h2>
-                <p class="section-desc">Beasiswa &amp; lomba yang kamu simpan, dipantau deadline-nya di sini</p>
+                <h2 class="section-title">Bookmark Saya</h2>
+                <p class="section-desc">Simpan beasiswa &amp; lomba incaranmu untuk memantau deadline dengan mudah</p>
+            </div>
+
+            <!-- Bookmark Toolbar (Filter Tabs + Clear All) -->
+            <div class="watchlist-toolbar hidden" id="watchlistToolbar">
+                <div class="watchlist-filter-tabs">
+                    <button type="button" class="watchlist-filter-btn active" data-filter="all" id="filterBtnAll">
+                        Semua <span class="filter-count" id="countAll">0</span>
+                    </button>
+                    <button type="button" class="watchlist-filter-btn" data-filter="beasiswa" id="filterBtnBeasiswa">
+                        🎓 Beasiswa <span class="filter-count" id="countBeasiswa">0</span>
+                    </button>
+                    <button type="button" class="watchlist-filter-btn" data-filter="lomba" id="filterBtnLomba">
+                        🏆 Lomba <span class="filter-count" id="countLomba">0</span>
+                    </button>
+                </div>
+                <button type="button" class="btn-clear-watchlist" id="btnClearWatchlist" title="Hapus semua bookmark tersimpan">
+                    <i data-lucide="trash-2"></i>
+                    <span>Hapus Semua</span>
+                </button>
             </div>
 
             <!-- Watchlist grid -->
             <div class="watchlist-grid" id="watchlistGrid"></div>
 
-            <!-- Empty state -->
+            <!-- Enhanced Empty state -->
             <div class="watchlist-empty" id="watchlistEmpty">
-                <i data-lucide="bookmark"></i>
-                <h3>Belum ada pantauan</h3>
-                <p>Klik ikon <strong>🔖</strong> di kartu beasiswa atau lomba untuk menyimpannya di sini</p>
+                <div class="watchlist-empty-card">
+                    <div class="watchlist-empty-icon-wrap">
+                        <i data-lucide="bookmark-plus"></i>
+                    </div>
+                    <h3>Belum Ada Bookmark Tersimpan</h3>
+                    <p>Tandai peluang beasiswa atau kompetisi yang ingin kamu ikuti dengan menekan ikon <strong>🔖 Simpan</strong> pada setiap kartu.</p>
+                    <div class="watchlist-empty-actions">
+                        <a href="#beasiswa" class="btn-empty-explore btn-explore-beasiswa">
+                            <i data-lucide="graduation-cap"></i>
+                            <span>Jelajahi Beasiswa</span>
+                        </a>
+                        <a href="#lomba" class="btn-empty-explore btn-explore-lomba">
+                            <i data-lucide="trophy"></i>
+                            <span>Jelajahi Lomba</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -581,7 +617,7 @@
                     <a href="#beranda">Beranda</a>
                     <a href="#beasiswa">Beasiswa</a>
                     <a href="#lomba">Lomba</a>
-                    <a href="#pantauan">Pantauan Saya</a>
+                    <a href="#bookmark">Bookmark Saya</a>
                     <a href="#tentang">Tentang Kami</a>
                 </div>
 

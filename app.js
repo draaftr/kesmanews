@@ -22,6 +22,9 @@ let watchlist = JSON.parse(localStorage.getItem('kesmanews-watchlist') || '[]');
 let sortBeasiswa = 'default';
 let sortLomba = 'default';
 
+// Bookmark Filter state ('all', 'beasiswa', 'lomba')
+let currentBookmarkFilter = 'all';
+
 // ─── DOM Ready ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     initLucide();
@@ -31,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initEmailCopy();
     initAboutSection();
+    initBookmarkToolbar();
+    updateBookmarkBadge();
     loadData();
 });
 
@@ -727,7 +732,7 @@ function createCardHTML(item, type) {
                 <div class="card-top-actions">
                     <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" 
                             data-id="${item.id}" data-type="${type}"
-                            title="${isBookmarked ? 'Hapus dari pantauan' : 'Simpan ke pantauan'}">
+                            title="${isBookmarked ? 'Hapus dari bookmark' : 'Simpan ke bookmark'}">
                         <i data-lucide="${isBookmarked ? 'bookmark-check' : 'bookmark'}"></i>
                     </button>
                     <button class="btn-share-wa" data-id="${item.id}" data-type="${type}" title="Bagikan ke WhatsApp">
@@ -1023,17 +1028,19 @@ function toggleWatchlist(id, type) {
     const existing = watchlist.findIndex(w => w.id === id && w.type === type);
     if (existing >= 0) {
         watchlist.splice(existing, 1);
-        showToast('Dihapus dari daftar pantauan');
+        showToast('Dihapus dari bookmark');
     } else {
         const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
         const item = sourceData.find(d => d.id === id);
         if (item) {
             watchlist.push({ id, type, nama: item.nama, deadline: item.deadline, status: item.status });
-            showToast('✅ Disimpan ke daftar pantauan!');
+            showToast('✅ Disimpan ke bookmark!');
         }
     }
     localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
+    updateBookmarkBadge();
     if (currentModalData) updateModalBookmarkBtn(currentModalData);
+    renderWatchlist();
 }
 
 function updateModalBookmarkBtn(item) {
@@ -1042,43 +1049,116 @@ function updateModalBookmarkBtn(item) {
     const type = currentModalType;
     const isBookmarked = type ? isInWatchlist(item.id, type) : false;
     btn.classList.toggle('bookmarked', isBookmarked);
-    btn.title = isBookmarked ? 'Hapus dari pantauan' : 'Simpan ke pantauan';
-    btn.innerHTML = `<i data-lucide="${isBookmarked ? 'bookmark-check' : 'bookmark'}"></i> ${isBookmarked ? 'Tersimpan' : 'Simpan'}`;
+    btn.title = isBookmarked ? 'Hapus dari bookmark' : 'Simpan ke bookmark';
+    btn.innerHTML = `<i data-lucide="${isBookmarked ? 'bookmark-check' : 'bookmark'}"></i> ${isBookmarked ? 'Tersimpan' : 'Bookmark'}`;
     lucide.createIcons();
+}
+
+function updateBookmarkBadge() {
+    const badge = document.getElementById('navBookmarkBadge');
+    if (!badge) return;
+    const count = watchlist.length;
+    badge.textContent = count;
+    if (count > 0) {
+        badge.classList.remove('zero');
+        badge.classList.add('has-items');
+    } else {
+        badge.classList.add('zero');
+        badge.classList.remove('has-items');
+    }
+}
+
+function initBookmarkToolbar() {
+    const filterBtns = document.querySelectorAll('.watchlist-filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentBookmarkFilter = btn.dataset.filter || 'all';
+            renderWatchlist();
+        });
+    });
+
+    const clearBtn = document.getElementById('btnClearWatchlist');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            if (watchlist.length === 0) return;
+            if (confirm('Apakah kamu yakin ingin menghapus semua bookmark tersimpan?')) {
+                watchlist = [];
+                localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
+                updateBookmarkBadge();
+                renderWatchlist();
+                renderCards('beasiswa', beasiswaData);
+                renderCards('lomba', lombaData);
+                showToast('Semua bookmark telah dihapus');
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+        });
+    }
 }
 
 function renderWatchlist() {
     const grid = document.getElementById('watchlistGrid');
     const empty = document.getElementById('watchlistEmpty');
+    const toolbar = document.getElementById('watchlistToolbar');
     if (!grid || !empty) return;
 
+    // Update counts
+    const countAll = document.getElementById('countAll');
+    const countBeasiswa = document.getElementById('countBeasiswa');
+    const countLomba = document.getElementById('countLomba');
+
+    const beasiswaCount = watchlist.filter(w => w.type === 'beasiswa').length;
+    const lombaCount = watchlist.filter(w => w.type === 'lomba').length;
+
+    if (countAll) countAll.textContent = watchlist.length;
+    if (countBeasiswa) countBeasiswa.textContent = beasiswaCount;
+    if (countLomba) countLomba.textContent = lombaCount;
+
     if (watchlist.length === 0) {
+        if (toolbar) toolbar.classList.add('hidden');
         grid.classList.add('hidden');
         empty.classList.remove('hidden');
     } else {
+        if (toolbar) toolbar.classList.remove('hidden');
         grid.classList.remove('hidden');
         empty.classList.add('hidden');
-        grid.innerHTML = watchlist.map(w => {
-            const daysLeft = getDaysLeft(w.deadline);
-            const isExpired = daysLeft < 0;
-            return `
-                <div class="watchlist-item ${isExpired ? 'expired' : ''}" data-id="${w.id}" data-type="${w.type}" style="cursor:pointer;">
-                    <div class="watchlist-info">
-                        <span class="watchlist-type-badge">${w.type === 'beasiswa' ? '🎓 Beasiswa' : '🏆 Lomba'}</span>
-                        <p class="watchlist-nama">${w.nama}</p>
-                        <span class="watchlist-deadline ${isExpired ? 'expired-text' : ''}">
-                            📅 ${w.deadline !== '2099-12-31' ? formatDate(w.deadline) : 'Lihat info'} — ${w.deadline !== '2099-12-31' ? getCountdownText(w.deadline) : '–'}
-                        </span>
-                    </div>
-                    <div class="watchlist-actions">
-                        <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--color-text-secondary);flex-shrink:0;margin-right:4px;"></i>
-                        <button class="btn-watchlist-remove" data-id="${w.id}" data-type="${w.type}" title="Hapus dari pantauan">
-                            <i data-lucide="x"></i>
-                        </button>
-                    </div>
+
+        const filtered = watchlist.filter(w => {
+            if (currentBookmarkFilter === 'beasiswa') return w.type === 'beasiswa';
+            if (currentBookmarkFilter === 'lomba') return w.type === 'lomba';
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div style="text-align:center; padding: 32px 20px; color: var(--color-text-secondary); background: var(--color-surface); border-radius: var(--radius-md); border: 1px dashed var(--color-border);">
+                    <p style="margin:0; font-size:0.9rem;">Tidak ada bookmark tersimpan untuk kategori <strong>${currentBookmarkFilter === 'beasiswa' ? 'Beasiswa' : 'Lomba'}</strong>.</p>
                 </div>
             `;
-        }).join('');
+        } else {
+            grid.innerHTML = filtered.map(w => {
+                const daysLeft = getDaysLeft(w.deadline);
+                const isExpired = daysLeft < 0;
+                return `
+                    <div class="watchlist-item ${isExpired ? 'expired' : ''}" data-id="${w.id}" data-type="${w.type}" style="cursor:pointer;">
+                        <div class="watchlist-info">
+                            <span class="watchlist-type-badge">${w.type === 'beasiswa' ? '🎓 Beasiswa' : '🏆 Lomba'}</span>
+                            <p class="watchlist-nama">${w.nama}</p>
+                            <span class="watchlist-deadline ${isExpired ? 'expired-text' : ''}">
+                                📅 ${w.deadline !== '2099-12-31' ? formatDate(w.deadline) : 'Lihat info'} — ${w.deadline !== '2099-12-31' ? getCountdownText(w.deadline) : '–'}
+                            </span>
+                        </div>
+                        <div class="watchlist-actions">
+                            <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--color-text-secondary);flex-shrink:0;"></i>
+                            <button class="btn-watchlist-remove" data-id="${w.id}" data-type="${w.type}" title="Hapus dari bookmark">
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
 
         // Click on item → open modal
         grid.querySelectorAll('.watchlist-item').forEach(item => {
