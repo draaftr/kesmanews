@@ -767,14 +767,12 @@ function createCardHTML(item, type) {
                     <i data-lucide="external-link"></i>
                     Daftar
                 </a>
-                <a href="${item.linkGuidebook || '#'}" 
-                   class="btn btn-outline btn-card ${!item.linkGuidebook ? 'btn-disabled' : ''}" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   onclick="event.stopPropagation()">
-                    <i data-lucide="book-open"></i>
-                    Guidebook
-                </a>
+                <button class="btn btn-outline btn-card btn-detail-card"
+                        data-id="${item.id}" data-type="${type}"
+                        onclick="event.stopPropagation(); (function(){ const d = '${type}' === 'beasiswa' ? beasiswaData : lombaData; const it = d.find(x => x.id === ${item.id}); if(it) openModal(it, '${type}'); })();">
+                    <i data-lucide="info"></i>
+                    Lihat Detail
+                </button>
             </div>
         </div>
     `;
@@ -900,7 +898,6 @@ function openModal(item, type) {
 
     // Action buttons
     const daftarBtn = document.getElementById('modalDaftar');
-    const guidebookBtn = document.getElementById('modalGuidebook');
 
     if (item.linkDaftar) {
         daftarBtn.href = item.linkDaftar;
@@ -908,14 +905,6 @@ function openModal(item, type) {
     } else {
         daftarBtn.href = '#';
         daftarBtn.classList.add('btn-disabled');
-    }
-
-    if (item.linkGuidebook) {
-        guidebookBtn.href = item.linkGuidebook;
-        guidebookBtn.classList.remove('btn-disabled');
-    } else {
-        guidebookBtn.href = '#';
-        guidebookBtn.classList.add('btn-disabled');
     }
 
     // Update modal bookmark button
