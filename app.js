@@ -241,80 +241,92 @@ function parseCSV(text) {
 // ═══════════════════════════════════════════════════════════════
 // EXTRACT LINKS dari kolom "Informasi Selengkapnya"
 // ═══════════════════════════════════════════════════════════════
-function extractLinks(infoText) {
-    if (!infoText) return { linkDaftar: '', linkGuidebook: '' };
-    
-    // Regex untuk menangkap URL (dengan atau tanpa http/https)
-    const urlRegex = /(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)/gi;
-    
-    const urls = infoText.match(urlRegex) || [];
-    
-    // Normalisasi: tambahkan https:// jika belum ada
+function extractLinks(infoText, nama = '') {
+    if (!infoText) return { linkDaftar: '', linkGuidebook: '', linkDaftarLabel: 'Daftar' };
+
+    // Deteksi portal kampus ITS (myITS Student Connect)
+    if (/myits|student\s*connect/i.test(infoText)) {
+        return {
+            linkDaftar: 'https://connect.its.ac.id/',
+            linkGuidebook: '',
+            linkDaftarLabel: 'Buka myITS'
+        };
+    }
+
+    // Deteksi akun Instagram seperti @gneuronics2026 atau @dscric
+    const igMatch = infoText.match(/@([a-zA-Z0-9._]+)/);
+    const urlRegex = /(?:https?:\/\/)[^\s)\]>"'<>]+|(?:www\.)[^\s)\]>"'<>]+|(?:[a-zA-Z0-9-]+\.)+(?:com|org|net|id|ac\.id|co\.id|io|app|ly|as|gl|me|ee|bio|site|tech|ai|dev)(?:\/[^\s)\]>"'<>]*)?/gi;
+
+    const rawUrls = infoText.match(urlRegex) || [];
+
+    // Normalisasi URL: bersihkan tanda baca di akhir dan pastikan protokol https://
     const normalizeUrl = (url) => {
-        url = url.trim().replace(/[()]/g, ''); // buang kurung di beberapa format
+        if (!url) return '';
+        url = url.trim().replace(/[.,;:()\]>]+$/, '');
         if (!url) return '';
         if (url.startsWith('http://') || url.startsWith('https://')) return url;
-        if (url.includes('@')) return ''; // email, skip
+        if (url.includes('@')) return ''; // lewati email
         return 'https://' + url;
     };
-    
-    // Cek apakah teks mengandung kata kunci guidebook
-    const lowerInfo = infoText.toLowerCase();
-    const hasGuidebookKeyword = /guidebook|panduan|guide book|bukpan|buku panduan/i.test(infoText);
-    const hasDaftarKeyword = /registr|pendaftaran|daftar|form|registration/i.test(infoText);
-    
+
+    const urls = rawUrls.map(normalizeUrl).filter(Boolean);
+
+    if (urls.length === 0) {
+        if (igMatch && !infoText.match(/https?:\/\//i)) {
+            return {
+                linkDaftar: `https://instagram.com/${igMatch[1]}`,
+                linkGuidebook: '',
+                linkDaftarLabel: 'Cek Instagram'
+            };
+        }
+        return { linkDaftar: '', linkGuidebook: '', linkDaftarLabel: 'Daftar' };
+    }
+
     let linkDaftar = '';
     let linkGuidebook = '';
-    
-    if (urls.length === 0) {
-        // Tidak ada URL
-        return { linkDaftar: '', linkGuidebook: '' };
-    }
-    
+    let linkDaftarLabel = 'Daftar';
+
+    // Jika hanya ada 1 URL, WAJIB diisi ke linkDaftar agar tombol selalu aktif dan bisa diklik
     if (urls.length === 1) {
-        // Hanya 1 URL
-        const singleUrl = normalizeUrl(urls[0]);
-        if (hasGuidebookKeyword) {
+        const singleUrl = urls[0];
+        const isGuidebook = /guidebook|panduan|guide book|bukpan|buku panduan/i.test(infoText) || /panduan|guidebook/i.test(singleUrl);
+        linkDaftar = singleUrl;
+        if (isGuidebook) {
             linkGuidebook = singleUrl;
+            linkDaftarLabel = 'Guidebook';
         } else {
-            linkDaftar = singleUrl;
+            linkDaftarLabel = 'Daftar';
         }
-        return { linkDaftar, linkGuidebook };
+        return { linkDaftar, linkGuidebook, linkDaftarLabel };
     }
-    
-    // Lebih dari 1 URL — coba parse berdasarkan konteks
-    // Split teks menjadi baris-baris untuk analisis
-    const lines = infoText.split('\n');
-    
+
+    // Jika ada lebih dari 1 URL: parse kontekstual baris per baris
+    const lines = infoText.split(/\r?\n/);
     for (const line of lines) {
-        const lineUrls = line.match(urlRegex) || [];
-        if (lineUrls.length === 0) continue;
-        
-        const lineUrl = normalizeUrl(lineUrls[0]);
-        if (!lineUrl) continue;
-        
-        const lineLower = line.toLowerCase();
-        
-        if (/guidebook|panduan|guide book|bukpan|buku panduan/i.test(line)) {
-            if (!linkGuidebook) linkGuidebook = lineUrl;
-        } else if (/registr|pendaftar|daftar|form/i.test(line)) {
-            if (!linkDaftar) linkDaftar = lineUrl;
-        } else if (/info|selengkapnya|lengkap|detail/i.test(line)) {
-            if (!linkDaftar) linkDaftar = lineUrl;
-        } else {
-            // Default: URL pertama jadi daftar, kedua jadi guidebook
-            if (!linkDaftar) linkDaftar = lineUrl;
-            else if (!linkGuidebook) linkGuidebook = lineUrl;
+        const lineMatches = line.match(urlRegex) || [];
+        for (const m of lineMatches) {
+            const clean = normalizeUrl(m);
+            if (!clean) continue;
+            const isGuide = /guidebook|panduan|guide book|bukpan|buku panduan/i.test(line) || /panduan|guidebook/i.test(clean);
+            const isReg = /registr|pendaftar|daftar|form|apply/i.test(line) || /daftar|regist/i.test(clean);
+
+            if (isGuide && !linkGuidebook) {
+                linkGuidebook = clean;
+            } else if (isReg && !linkDaftar) {
+                linkDaftar = clean;
+            }
         }
     }
-    
-    // Fallback jika parsing per baris gagal
-    if (!linkDaftar && !linkGuidebook) {
-        linkDaftar = normalizeUrl(urls[0]);
-        if (urls[1]) linkGuidebook = normalizeUrl(urls[1]);
+
+    // Fallback jika tidak terpetakan lewat baris
+    if (!linkDaftar && urls[0]) linkDaftar = urls[0];
+    if (!linkGuidebook && urls[1]) linkGuidebook = urls[1];
+
+    if (linkDaftar === linkGuidebook || /panduan|guidebook/i.test(linkDaftar)) {
+        linkDaftarLabel = 'Guidebook';
     }
-    
-    return { linkDaftar, linkGuidebook };
+
+    return { linkDaftar, linkGuidebook, linkDaftarLabel };
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -417,7 +429,7 @@ function parseBeasiswaSheet(rows) {
             const infoText    = (row[6] || '').trim();
             
             const deadline = parseDeadline(deadlineRaw) || parseDeadline(nama);
-            const { linkDaftar, linkGuidebook } = extractLinks(infoText);
+            const { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
             
             // Timeline: pakai kolom deadline yang asli kalau ada kata "Timeline"
             let timelinePenting = '';
@@ -437,23 +449,26 @@ function parseBeasiswaSheet(rows) {
                 benefit,
                 linkDaftar,
                 linkGuidebook,
+                linkDaftarLabel,
                 timelinePenting,
             };
         });
 }
 
 // ═══════════════════════════════════════════════════════════════
-// PARSE SHEET LOMBA → Array of objects
+// PARSE SHEET LOMBA → Array of objects (dengan Smart Deduplikasi)
 // Kolom: Nama Lomba, Penyelenggara, Status Lomba, Skala, Deadline,
 //        Cabang Lomba, Partisipasi, Biaya, Informasi Selengkapnya
 // ═══════════════════════════════════════════════════════════════
 function parseLombaSheet(rows) {
-    return rows.slice(1)
+    const lombaMap = new Map();
+
+    rows.slice(1)
         .filter(row => row[0] && row[0].trim())
-        .map((row, idx) => {
+        .forEach((row, idx) => {
             const nama          = (row[0] || '').trim();
             const penyelenggara = (row[1] || '').trim();
-            const status        = (row[2] || '').trim();
+            const status        = (row[2] || '').trim() || 'Tutup';
             const skala         = (row[3] || '').trim();
             const deadlineRaw   = (row[4] || '').trim();
             const cabangLomba   = (row[5] || '').trim();
@@ -462,43 +477,91 @@ function parseLombaSheet(rows) {
             const infoText      = (row[8] || '').trim();
             
             const deadline = parseDeadline(deadlineRaw) || '';
-            const { linkDaftar, linkGuidebook } = extractLinks(infoText);
-            
-            // Kategori untuk lomba: pakai skala (Nasional/Internasional)
-            // atau cabang lomba sebagai kategori
+            let { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
             const kategori = skala || 'Nasional';
             
-            // Buat benefit dari info yang ada (karena sheet lomba tidak punya kolom benefit)
-            const benefit = [];
-            if (biaya === 'Gratis') benefit.push('Pendaftaran Gratis');
-            if (partisipasi) benefit.push(`Kategori: ${partisipasi}`);
-            if (penyelenggara) benefit.push(`Penyelenggara: ${penyelenggara}`);
-            
-            // Persyaratan: tidak ada di sheet lomba, biarkan kosong
-            const persyaratan = [];
-            
-            // Timeline
-            let timelinePenting = deadlineRaw ? `Deadline: ${deadlineRaw}` : '';
-            if (cabangLomba) timelinePenting += timelinePenting ? ` | Cabang: ${cabangLomba}` : `Cabang: ${cabangLomba}`;
-            
-            return {
-                id: idx + 1,
-                nama,
-                penyelenggara,
-                status: status || 'Tutup',
-                kategori,
-                skala,
-                cabangLomba,
-                partisipasi,
-                biaya,
-                deadline: deadline || '2099-12-31',
-                persyaratan,
-                benefit,
-                linkDaftar,
-                linkGuidebook,
-                timelinePenting,
-            };
+            // Kunci normalisasi untuk mendeteksi duplikat seperti 3 baris "18th KATULISTIWA"
+            const normKey = nama.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            // Fallback khusus jika di spreadsheet hanya tertulis teks nama
+            if (normKey.includes('katulistiwa')) {
+                if (!linkDaftar) linkDaftar = 'https://bit.ly/PendaftaranKatulistiwa18th';
+                if (!linkGuidebook) linkGuidebook = 'https://bit.ly/GuidebookKatulistiwa18th';
+            }
+
+            if (lombaMap.has(normKey)) {
+                // Duplikat terdeteksi (seperti 18th Katulistiwa beda cabang) -> Gabungkan data!
+                const existing = lombaMap.get(normKey);
+
+                // Gabungkan cabang lomba
+                if (cabangLomba) {
+                    const currentBranches = existing.cabangLomba ? existing.cabangLomba.split(',').map(s => s.trim()) : [];
+                    const newBranches = cabangLomba.split(',').map(s => s.trim());
+                    const combined = Array.from(new Set([...currentBranches, ...newBranches])).filter(Boolean);
+                    existing.cabangLomba = combined.join(', ');
+                }
+
+                // Prioritaskan status 'Buka' jika ada salah satu cabang yang buka
+                if (status === 'Buka') {
+                    existing.status = 'Buka';
+                }
+
+                // Simpan deadline paling akhir
+                if (deadline && (!existing.deadline || existing.deadline === '2099-12-31' || deadline > existing.deadline)) {
+                    existing.deadline = deadline;
+                    existing.deadlineRaw = deadlineRaw;
+                }
+
+                // Simpan link jika belum terisi
+                if (!existing.linkDaftar && linkDaftar) {
+                    existing.linkDaftar = linkDaftar;
+                    existing.linkDaftarLabel = linkDaftarLabel;
+                }
+                if (!existing.linkGuidebook && linkGuidebook) {
+                    existing.linkGuidebook = linkGuidebook;
+                }
+
+                // Perbarui timeline gabungan
+                if (existing.cabangLomba) {
+                    existing.timelinePenting = `Deadline: ${existing.deadlineRaw || deadlineRaw} | Cabang: ${existing.cabangLomba}`;
+                }
+            } else {
+                // Entri baru
+                const benefit = [];
+                if (biaya === 'Gratis') benefit.push('Pendaftaran Gratis');
+                if (partisipasi) benefit.push(`Kategori: ${partisipasi}`);
+                if (penyelenggara) benefit.push(`Penyelenggara: ${penyelenggara}`);
+                
+                let timelinePenting = deadlineRaw ? `Deadline: ${deadlineRaw}` : '';
+                if (cabangLomba) timelinePenting += timelinePenting ? ` | Cabang: ${cabangLomba}` : `Cabang: ${cabangLomba}`;
+                
+                lombaMap.set(normKey, {
+                    id: idx + 1,
+                    nama,
+                    penyelenggara,
+                    status,
+                    kategori,
+                    skala,
+                    cabangLomba,
+                    partisipasi,
+                    biaya,
+                    deadline: deadline || '2099-12-31',
+                    deadlineRaw,
+                    persyaratan: [],
+                    benefit,
+                    linkDaftar,
+                    linkGuidebook,
+                    linkDaftarLabel,
+                    timelinePenting,
+                });
+            }
         });
+
+    // Re-index ID secara berurutan dan teratur
+    return Array.from(lombaMap.values()).map((item, i) => ({
+        ...item,
+        id: i + 1
+    }));
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -706,7 +769,7 @@ function renderCards(type, data) {
 function createCardHTML(item, type) {
     const isOpen = item.status === 'Buka';
     const daysLeft = getDaysLeft(item.deadline);
-    const isUrgent = isOpen && daysLeft >= 0 && daysLeft <= 7;
+    const isUrgent = isOpen && daysLeft >= 0 && daysLeft <= 3;
     const isExpired = daysLeft < 0;
     const isBookmarked = isInWatchlist(item.id, type);
 
@@ -720,14 +783,49 @@ function createCardHTML(item, type) {
         ? `<span class="badge badge-kategori">${item.skala || item.kategori}</span>`
         : `<span class="badge badge-kategori">${item.kategori}</span>`;
 
+    // Badge segera tutup jika sisa waktu <= 3 hari
+    const urgentBadge = isUrgent
+        ? `<span class="badge badge-urgent"><i data-lucide="zap"></i> Segera Tutup (${daysLeft === 0 ? 'Hari ini' : daysLeft + ' hr lagi'})</span>`
+        : '';
+
+    // Action button: Selalu aktif dan fungsional! Tidak ada tombol mati / unclickable!
+    let actionBtnHTML = '';
+    if (item.linkDaftar) {
+        const btnIcon = item.linkDaftarLabel === 'Buka myITS' ? 'external-link'
+            : item.linkDaftarLabel === 'Cek Instagram' ? 'instagram'
+            : item.linkDaftarLabel === 'Guidebook' ? 'book-open'
+            : 'external-link';
+        const btnText = item.linkDaftarLabel || 'Daftar';
+        actionBtnHTML = `
+            <a href="${item.linkDaftar}" 
+               class="btn btn-primary btn-card" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               onclick="event.stopPropagation()">
+                <i data-lucide="${btnIcon}"></i>
+                <span>${btnText}</span>
+            </a>
+        `;
+    } else {
+        // Jika belum ada link pendaftaran di lembar data, buka detail modal interaktif
+        actionBtnHTML = `
+            <button type="button" class="btn btn-primary btn-card"
+                    onclick="event.stopPropagation(); (function(){ const d = '${type}' === 'beasiswa' ? beasiswaData : lombaData; const it = d.find(x => x.id === ${item.id}); if(it) openModal(it, '${type}'); })();">
+                <i data-lucide="info"></i>
+                <span>Detail & Info</span>
+            </button>
+        `;
+    }
+
     return `
-        <div class="card" data-id="${item.id}">
+        <div class="card ${isUrgent ? 'card-urgent' : ''}" data-id="${item.id}">
             <div class="card-top">
                 <div class="card-badges">
                     <span class="badge ${isOpen ? 'badge-open' : 'badge-closed'}">
                         ${item.status}
                     </span>
                     ${extraBadge}
+                    ${urgentBadge}
                 </div>
                 <div class="card-top-actions">
                     <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" 
@@ -766,19 +864,12 @@ function createCardHTML(item, type) {
                 </div>
             ` : ''}
             <div class="card-actions">
-                <a href="${item.linkDaftar || '#'}" 
-                   class="btn btn-primary btn-card ${!item.linkDaftar ? 'btn-disabled' : ''}" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   onclick="event.stopPropagation()">
-                    <i data-lucide="external-link"></i>
-                    Daftar
-                </a>
+                ${actionBtnHTML}
                 <button class="btn btn-outline btn-card btn-detail-card"
                         data-id="${item.id}" data-type="${type}"
                         onclick="event.stopPropagation(); (function(){ const d = '${type}' === 'beasiswa' ? beasiswaData : lombaData; const it = d.find(x => x.id === ${item.id}); if(it) openModal(it, '${type}'); })();">
                     <i data-lucide="info"></i>
-                    Lihat Detail
+                    <span>Lihat Detail</span>
                 </button>
             </div>
         </div>
@@ -798,6 +889,11 @@ function initFilters() {
         filterData('beasiswa');
     });
 
+    const resetBeasiswaBtn = document.getElementById('btnResetBeasiswa');
+    if (resetBeasiswaBtn) {
+        resetBeasiswaBtn.addEventListener('click', () => resetFilters('beasiswa'));
+    }
+
     // Lomba filters
     document.getElementById('searchLomba').addEventListener('input', () => filterData('lomba'));
     document.getElementById('filterKategoriLomba').addEventListener('change', () => filterData('lomba'));
@@ -806,6 +902,66 @@ function initFilters() {
         sortLomba = e.target.value;
         filterData('lomba');
     });
+
+    const resetLombaBtn = document.getElementById('btnResetLomba');
+    if (resetLombaBtn) {
+        resetLombaBtn.addEventListener('click', () => resetFilters('lomba'));
+    }
+}
+
+function resetFilters(type) {
+    const searchInput = document.getElementById(`search${capitalize(type)}`);
+    const filterKat = document.getElementById(`filterKategori${capitalize(type)}`);
+    const filterStatus = document.getElementById(`filterStatus${capitalize(type)}`);
+    const sortSelect = document.getElementById(`sort${capitalize(type)}`);
+
+    if (searchInput) searchInput.value = '';
+    if (filterKat) filterKat.value = 'semua';
+    if (filterStatus) filterStatus.value = 'semua';
+    if (sortSelect) sortSelect.value = 'default';
+
+    if (type === 'beasiswa') sortBeasiswa = 'default';
+    else sortLomba = 'default';
+
+    filterData(type);
+    showToast(`Filter ${type === 'beasiswa' ? 'beasiswa' : 'lomba'} berhasil direset`);
+}
+
+function updateResultsInfo(type, count, total) {
+    const infoEl = document.getElementById(`resultsInfo${capitalize(type)}`);
+    if (!infoEl) return;
+
+    const searchVal = (document.getElementById(`search${capitalize(type)}`)?.value || '').trim();
+    const katVal = document.getElementById(`filterKategori${capitalize(type)}`)?.value || 'semua';
+    const statusVal = document.getElementById(`filterStatus${capitalize(type)}`)?.value || 'semua';
+    const sortVal = document.getElementById(`sort${capitalize(type)}`)?.value || 'default';
+
+    const isFiltered = Boolean(searchVal || katVal !== 'semua' || statusVal !== 'semua' || sortVal !== 'default');
+    const typeNoun = type === 'beasiswa' ? 'beasiswa' : 'lomba';
+
+    if (!isFiltered) {
+        infoEl.innerHTML = `
+            <div class="results-count">
+                <span>Total <strong>${total}</strong> ${typeNoun} terdaftar</span>
+            </div>
+        `;
+        return;
+    }
+
+    let tagsHtml = '';
+    if (searchVal) tagsHtml += `<span class="filter-tag">🔍 "${searchVal}"</span>`;
+    if (katVal !== 'semua') tagsHtml += `<span class="filter-tag">📂 ${katVal}</span>`;
+    if (statusVal !== 'semua') tagsHtml += `<span class="filter-tag">🔘 ${statusVal}</span>`;
+
+    infoEl.innerHTML = `
+        <div class="results-count">
+            <span>Menampilkan <strong>${count}</strong> dari ${total} ${typeNoun}</span>
+        </div>
+        <div class="filter-active-tags">
+            ${tagsHtml}
+            <button type="button" class="btn-quick-reset" onclick="resetFilters('${type}')">Reset Filter</button>
+        </div>
+    `;
 }
 
 function filterData(type) {
@@ -817,7 +973,8 @@ function filterData(type) {
 
     const filtered = sourceData.filter(item => {
         const matchSearch = !searchValue || item.nama.toLowerCase().includes(searchValue)
-            || (item.penyelenggara && item.penyelenggara.toLowerCase().includes(searchValue));
+            || (item.penyelenggara && item.penyelenggara.toLowerCase().includes(searchValue))
+            || (item.cabangLomba && item.cabangLomba.toLowerCase().includes(searchValue));
         const matchKategori = kategoriValue === 'semua' || item.kategori === kategoriValue
             || (item.skala && item.skala === kategoriValue);
         const matchStatus = statusValue === 'semua' || item.status === statusValue;
@@ -825,6 +982,7 @@ function filterData(type) {
     });
 
     renderCards(type, filtered);
+    updateResultsInfo(type, filtered.length, sourceData.length);
     lucide.createIcons();
 }
 
@@ -905,13 +1063,33 @@ function openModal(item, type) {
 
     // Action buttons
     const daftarBtn = document.getElementById('modalDaftar');
+    const guidebookBtn = document.getElementById('modalGuidebook');
 
-    if (item.linkDaftar) {
-        daftarBtn.href = item.linkDaftar;
-        daftarBtn.classList.remove('btn-disabled');
-    } else {
-        daftarBtn.href = '#';
-        daftarBtn.classList.add('btn-disabled');
+    if (daftarBtn) {
+        if (item.linkDaftar) {
+            daftarBtn.href = item.linkDaftar;
+            daftarBtn.classList.remove('btn-disabled');
+            const btnIcon = item.linkDaftarLabel === 'Guidebook' ? 'book-open' : 'external-link';
+            const label = item.linkDaftarLabel === 'Buka myITS' ? 'Buka Portal myITS'
+                : item.linkDaftarLabel === 'Cek Instagram' ? 'Kunjungi Akun Instagram'
+                : item.linkDaftarLabel === 'Guidebook' ? 'Buka Buku Panduan'
+                : 'Daftar Sekarang';
+            daftarBtn.innerHTML = `<i data-lucide="${btnIcon}"></i> <span>${label}</span>`;
+        } else {
+            // Jika belum ada link pendaftaran di lembar data, arahkan untuk bertanya ke Adkesma
+            daftarBtn.href = 'https://www.instagram.com/adkezzmoy';
+            daftarBtn.classList.remove('btn-disabled');
+            daftarBtn.innerHTML = `<i data-lucide="message-circle"></i> <span>Tanya Link ke Adkesma</span>`;
+        }
+    }
+
+    if (guidebookBtn) {
+        if (item.linkGuidebook && item.linkGuidebook !== item.linkDaftar) {
+            guidebookBtn.href = item.linkGuidebook;
+            guidebookBtn.classList.remove('hidden');
+        } else {
+            guidebookBtn.classList.add('hidden');
+        }
     }
 
     // Update modal bookmark button
@@ -1191,21 +1369,48 @@ function renderWatchlist() {
 // SHARE TO WHATSAPP
 // ═══════════════════════════════════════════════════════════════
 function shareToWhatsApp(item) {
-    const countdownStr = item.deadline !== '2099-12-31' ? getCountdownText(item.deadline) : 'Cek link';
-    const deadlineStr  = item.deadline !== '2099-12-31' ? formatDate(item.deadline) : 'Lihat info selengkapnya';
-    const linkPart = item.linkDaftar ? `\n🔗 *Link Daftar:* ${item.linkDaftar}` : '';
+    const isBeasiswa = item.penyelenggara === undefined && item.cabangLomba === undefined;
+    const typeLabel = isBeasiswa ? 'BEASISWA' : 'LOMBA';
+    const countdownStr = item.deadline !== '2099-12-31' ? getCountdownText(item.deadline) : 'Cek info lengkap';
+    const deadlineStr = item.deadline !== '2099-12-31' ? formatDate(item.deadline) : 'Segera / Cek info';
+
+    let extraDetails = '';
+    if (item.penyelenggara) extraDetails += `\n🏫 *Penyelenggara:* ${item.penyelenggara}`;
+    if (item.cabangLomba)   extraDetails += `\n🎯 *Cabang Lomba:* ${item.cabangLomba}`;
+    if (item.biaya)         extraDetails += `\n💳 *Biaya:* ${item.biaya}`;
+    if (item.benefit && item.benefit.length > 0) {
+        extraDetails += `\n🎁 *Benefit:* ${item.benefit[0]}`;
+    }
+
+    let linksText = '';
+    if (item.linkDaftar && item.linkGuidebook && item.linkDaftar !== item.linkGuidebook) {
+        linksText = `\n\n🔗 *Link Pendaftaran:*\n${item.linkDaftar}\n📖 *Buku Panduan/Guidebook:*\n${item.linkGuidebook}`;
+    } else if (item.linkDaftar) {
+        const label = item.linkDaftarLabel === 'Guidebook' ? 'Buku Panduan / Guidebook'
+            : item.linkDaftarLabel === 'Buka myITS' ? 'Portal myITS StudentConnect'
+            : item.linkDaftarLabel === 'Cek Instagram' ? 'Akun Instagram Info'
+            : 'Link Pendaftaran';
+        linksText = `\n\n🔗 *${label}:*\n${item.linkDaftar}`;
+    } else if (item.linkGuidebook) {
+        linksText = `\n\n📖 *Buku Panduan / Info:*\n${item.linkGuidebook}`;
+    }
 
     const text =
-        `📢 *INFO ${item.kategori?.toUpperCase() || 'BEASISWA/LOMBA'}*\n` +
-        `\n📌 *${item.nama}*` +
-        `\n\n📅 *Deadline:* ${deadlineStr}` +
-        `\n⏳ *Sisa waktu:* ${countdownStr}` +
-        `\n🟢 *Status:* ${item.status}` +
-        `${linkPart}` +
-        `\n\n_Info dari KESMA NEWS — Departemen Adkesma HMTK_`;
+`📢 *INFO ${typeLabel} MAHASISWA*
+━━━━━━━━━━━━━━━━━━━━
+📌 *${item.nama}*${extraDetails}
+
+📅 *Deadline:* ${deadlineStr}
+⏳ *Sisa Waktu:* ${countdownStr}
+🟢 *Status:* ${item.status}${linksText}
+
+🌐 *Portal Lengkap KESMA NEWS:*
+https://kesmanews.netlify.app/
+━━━━━━━━━━━━━━━━━━━━
+_Disampaikan oleh Departemen Adkesma HMTK_`;
 
     const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank', 'noopener,noreferrer');
 }
 
 // ═══════════════════════════════════════════════════════════════

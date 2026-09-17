@@ -161,6 +161,9 @@
                 </div>
             </div>
 
+            <!-- Filter Results Info -->
+            <div class="filter-results-info" id="resultsInfoBeasiswa"></div>
+
             <!-- Cards Grid -->
             <div class="cards-grid" id="beasiswaGrid">
                 <!-- Cards rendered by JS -->
@@ -169,8 +172,12 @@
             <!-- Empty State -->
             <div class="empty-state hidden" id="emptyBeasiswa">
                 <i data-lucide="search-x"></i>
-                <h3>Tidak ada hasil</h3>
-                <p>Coba ubah kata kunci atau filter pencarian kamu</p>
+                <h3>Tidak ada beasiswa yang cocok</h3>
+                <p>Coba sesuaikan kata kunci pencarian atau ubah filter kamu</p>
+                <button type="button" class="btn btn-outline btn-sm btn-reset-filter" id="btnResetBeasiswa">
+                    <i data-lucide="rotate-ccw"></i>
+                    <span>Reset Filter</span>
+                </button>
             </div>
 
             <!-- Loading Skeleton -->
@@ -231,6 +238,9 @@
                 </div>
             </div>
 
+            <!-- Filter Results Info -->
+            <div class="filter-results-info" id="resultsInfoLomba"></div>
+
             <!-- Cards Grid -->
             <div class="cards-grid" id="lombaGrid">
                 <!-- Cards rendered by JS -->
@@ -239,8 +249,12 @@
             <!-- Empty State -->
             <div class="empty-state hidden" id="emptyLomba">
                 <i data-lucide="search-x"></i>
-                <h3>Tidak ada hasil</h3>
-                <p>Coba ubah kata kunci atau filter pencarian kamu</p>
+                <h3>Tidak ada lomba yang cocok</h3>
+                <p>Coba sesuaikan kata kunci pencarian atau ubah filter kamu</p>
+                <button type="button" class="btn btn-outline btn-sm btn-reset-filter" id="btnResetLomba">
+                    <i data-lucide="rotate-ccw"></i>
+                    <span>Reset Filter</span>
+                </button>
             </div>
 
             <!-- Loading Skeleton -->
@@ -697,10 +711,16 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-primary btn-lg" id="modalDaftar" target="_blank" rel="noopener noreferrer">
-                    <i data-lucide="external-link"></i>
-                    Daftar Sekarang
-                </a>
+                <div class="modal-footer-primary">
+                    <a href="#" class="btn btn-primary btn-lg" id="modalDaftar" target="_blank" rel="noopener noreferrer">
+                        <i data-lucide="external-link"></i>
+                        <span>Daftar Sekarang</span>
+                    </a>
+                    <a href="#" class="btn btn-outline btn-lg hidden" id="modalGuidebook" target="_blank" rel="noopener noreferrer">
+                        <i data-lucide="book-open"></i>
+                        <span>Buku Panduan</span>
+                    </a>
+                </div>
                 <div class="modal-footer-secondary">
                     <button class="btn btn-outline btn-lg btn-bookmark-modal" id="modalBookmarkBtn">
                         <i data-lucide="bookmark"></i> Simpan

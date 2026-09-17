@@ -1,143 +1,689 @@
 [
   {
     "id": 1,
-    "nama": "Beasiswa BESTRO 2026 dari PT Petrokimia Gresik",
+    "nama": "Beasiswa BESTRO 2026\ndari PT Petrokimia Gresik",
     "status": "Tutup",
     "kategori": "Berprestasi",
-    "deadline": "2026-07-08",
+    "deadline": "2026-08-31",
     "persyaratan": [
+      "Syarat utama:",
       "Warga Kabupaten Gresik",
       "Dari keluarga dengan keterbatasan ekonomi",
       "Memiliki prestasi akademik / non-akademik",
       "Lulus SMA/SMK/MA tahun 2026",
-      "Diterima di PTN (terakreditasi A/Unggul) via SNBP/SNBT",
-      "Bukan penerima KIP Kuliah / Bidikmisi lain"
+      "Diterima di PTN (akreditasi A/Unggul) via SNBP/SNBT",
+      "Bukan penerima KIP Kuliah / beasiswa lain"
     ],
     "benefit": [
+      "Benefit:",
       "UKT ditanggung sampai lulus (maks. 8 semester)",
       "Uang saku bulanan",
       "Pelatihan softskill & kesempatan magang",
       "Non ikatan dinas"
     ],
-    "linkDaftar": "https://tis.id/PendyaftPestro2026",
-    "linkGuidebook": "",
-    "timelinePenting": "Seleksi administrasi: 18 Mei – 8 Juli 2026 | Pengumuman cut off: 10 Juli 2026 | Wawancara: 13–15 Juli 2026 | Pengumuman penerima: 5 Agustus 2026"
+    "linkDaftar": "https://its.id/PanduanBestro2026",
+    "linkGuidebook": "https://its.id/PanduanBestro2026",
+    "linkDaftarLabel": "Guidebook",
+    "timelinePenting": "Timeline penting: | * Seleksi administrasi: 18 Mei – 8 Juli 2026 | * Pengumuman cut off: 10 Juli 2026 | * Wawancara: 13 – 15 Juli 2026 | * Pengumuman penerima: 5 Agustus 2026"
   },
   {
     "id": 2,
-    "nama": "Beasiswa BTN Pre-Graduate 2026",
+    "nama": "BEASISWA BTN PRE-GRADUATE 2026",
     "status": "Tutup",
     "kategori": "Berprestasi",
-    "deadline": "2026-05-15",
+    "deadline": "2026-05-31",
     "persyaratan": [
       "Mahasiswa S1 minimal semester 4",
       "IPK ≥ 3.50",
-      "Diutamakan memiliki prestasi akademik atau non-akademik",
+      "Diutamakan memiliki prestasi akademik atau non akademik",
       "Tidak menerima beasiswa lain",
-      "Bersedia berkomitmen dan menjadi pegawai BTN"
+      "⁠Bersedia berkomitmen dan menjadi pegawai BTN"
     ],
     "benefit": [
-      "Bantuan beasiswa pendidikan",
-      "Jalur pengembangan karier ke BTN",
-      "Kesempatan mengikuti Officer Development Program (ODP)",
-      "Pilihan scouting",
-      "Penempatan setelah lulus",
-      "Pendampingan sebagai talenta muda BTN"
+      "Bantuan beasiswa pendidikan.",
+      "Jalur pengembangan karier ke BTN.",
+      "Kesempatan mengikuti Officer Development Program (ODP).",
+      "Prioritas rekrutmen setelah lulus.",
+      "Pembinaan sebagai talenta muda BTN."
     ],
     "linkDaftar": "https://www.btn.co.id/id",
     "linkGuidebook": "",
-    "timelinePenting": "Pendaftaran dibuka hingga: 15 Mei 2026"
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: Pendaftaran dibuka hingga: 15 Mei 2026"
   },
   {
     "id": 3,
     "nama": "Beasiswa Yayasan Pelayanan Kasih A & A Rachmat (ADARO-YPKAAR) 2026",
     "status": "Tutup",
-    "kategori": "Kurang Mampu",
-    "deadline": "2026-06-09",
+    "kategori": "Berprestasi",
+    "deadline": "2026-06-30",
     "persyaratan": [
       "Mahasiswa minimal semester 3 (tahun ke-2)",
       "IPK ≥ 3.00",
       "Melampirkan transkrip akademik terbaru (legalisir)",
-      "Melampirkan memiliki SKTM / surat keterangan penghasilan orang tua",
+      "Diutamakan memiliki SKTM / surat keterangan penghasilan orang tua",
       "Tidak sedang menerima beasiswa lain"
     ],
     "benefit": [
-      "Bantuan Dana Pendidikan: Rp850.000 per bulan selama 1 tahun (Agustus 2026 – Juli 2027) pada rekening kampus",
-      "Dana dicairkan per triwulan (3 kali pencairan setiap 4 bulan)",
-      "Dukungan Kelangsungan Studi: Membantu biaya pendidikan mahasiswa selama masa perkuliahan",
-      "Pengembangan Mahasiswa: Mendukung prestasi akademik, Mendukung pengembangan kepemimpinan dan kegiatan sosial kemahasiswaan"
+      "Bantuan Dana Pendidikan:",
+      "Rp850.000 per bulan selama 1 tahun (Agustus 2026 – Juli 2027 pada beberapa kampus).",
+      "Dana dicairkan per triwulan (3 bulan sekali).",
+      "Dukungan Kelangsungan Studi:",
+      "Membantu biaya pendidikan mahasiswa selama masa perkuliahan.",
+      "Pengembangan Mahasiswa:",
+      "Mendorong prestasi akademik.",
+      "Mendukung pengembangan kepemimpinan dan kegiatan sosial kemahasiswaan."
     ],
-    "linkDaftar": "https://tis.id/selainBeasiswa/adaro2026",
+    "linkDaftar": "https://its.id/IsianBeasiswaAdaro2026",
     "linkGuidebook": "",
-    "timelinePenting": "Pendaftaran paling lambat: 9 Juni 2026"
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: Pendaftaran paling lambat: 9 Juni 2026"
   },
   {
     "id": 4,
-    "nama": "Program Beasiswa GLOW & LOVELY Batch 10",
-    "status": "Buka",
+    "nama": "PROGRAM BEASISWA GLOW & LOVELY BATCH 10",
+    "status": "Tutup",
     "kategori": "Berprestasi",
-    "deadline": "2026-10-15",
+    "deadline": "2026-09-30",
     "persyaratan": [
+      "Syarat utama:",
       "Perempuan (mahasiswi / calon mahasiswi)",
       "Tidak sedang menerima beasiswa lain",
       "Memiliki prestasi akademik & non-akademik",
       "Memiliki motivasi tinggi untuk berkontribusi",
-      "Berkomitmen menyelesaikan studi & tidak menolak selama program",
-      "Mahasiswi semester 4 atau 6"
+      "Berkomitmen menyelesaikan studi & tidak menikah selama program",
+      "Khusus Program Parsial:",
+      "Mahasiswi semester 4 atau 6",
+      "Berkuliah di PTN/PTA dengan akreditasi A/B"
     ],
     "benefit": [
-      "Reguler: Uang beasiswa Rp7.500.000, Laptop, Capacity building selama 4 tahun",
-      "Parsial: Uang beasiswa Rp10.000.000, Capacity building selama 1 tahun"
+      "Reguler:",
+      "Uang beasiswa Rp17.500.000",
+      "Laptop",
+      "Capacity building selama 4 tahun",
+      "Parsial:",
+      "Uang beasiswa Rp10.000.000",
+      "Capacity building selama 1 tahun"
     ],
-    "linkDaftar": "mailto:beasiswaglowandlovely@unilever.com",
+    "linkDaftar": "https://kelasberbagicerah.com",
     "linkGuidebook": "",
-    "timelinePenting": "Pendaftaran: 9 Feb – 10 Mei 2026 | Seleksi & esai: Mei – Juni 2026 | Interview: Juli 2026 | Pengumuman: September 2026"
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "* Pendaftaran: 9 Feb – 10 Mei 2026   | * Seleksi & esai: Mei – Juni 2026   | * Interview: Juli 2026   | * Pengumuman: September 2026"
   },
   {
     "id": 5,
-    "nama": "Beasiswa Bank Indonesia 2026",
-    "status": "Buka",
+    "nama": "PROGRAM BEASISWA DJARUM BEASISWA PLUS 2026",
+    "status": "Tutup",
     "kategori": "Berprestasi",
-    "deadline": "2026-11-30",
+    "deadline": "2026-06-30",
     "persyaratan": [
-      "Mahasiswa aktif S1/D4 minimal semester 3",
-      "IPK minimal 3.00",
-      "Tidak sedang menerima beasiswa dari sumber lain",
-      "Aktif dalam kegiatan organisasi/kemahasiswaan",
-      "Membuat esai bertema ekonomi atau keuangan"
+      "Mahasiswa S1/D4 minimal semester 4",
+      "IPK ≥ 3.0",
+      "Aktif mengikuti kegiatan organisasi baik di dalam maupun luar kampus.",
+      "Tidak sedang menerima beasiswa dari pihak lain.",
+      "⁠Kuliah di mitra perguruan tinggi Program Djarum Beasiswa Plus."
     ],
     "benefit": [
-      "Biaya pendidikan per semester",
-      "Tunjangan buku dan peralatan kuliah",
-      "Pelatihan soft skills & leadership",
-      "Networking dengan penerima beasiswa BI lainnya",
-      "Sertifikat penghargaan"
+      "Dana beasiswa Rp1.000.000/bulan selama 1 tahun.",
+      "Character Building.",
+      "Leadership Development.",
+      "Nation Building.",
+      "Competition Challenges.",
+      "International Exposure.",
+      "Community Empowerment.",
+      "Networking mahasiswa berprestasi seluruh Indonesia."
     ],
-    "linkDaftar": "https://www.bi.go.id/beasiswa",
-    "linkGuidebook": "https://www.bi.go.id/beasiswa/guidebook",
-    "timelinePenting": "Pendaftaran: September – November 2026 | Seleksi Administrasi: Desember 2026 | Pengumuman: Januari 2027"
+    "linkDaftar": "https://djarumbeasiswaplus.org",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: Pendaftaran dibuka hingga: 10 Juni 2026"
   },
   {
     "id": 6,
-    "nama": "Beasiswa Djarum Foundation 2026/2027",
+    "nama": "HYUNDAI JUMP SCHOOL INDONESIA BATCH 3 RESMI DIBUKA",
+    "status": "Tutup",
+    "kategori": "Umum",
+    "deadline": "2026-07-31",
+    "persyaratan": [
+      "Terbuka hanya untuk mahasiswa Universitas Indonesia, Institut Teknologi Bandung, dan Institut Teknologi Sepuluh Nopember segala jurusan semester 3, 5, 7",
+      "Tidak ada IPK minimum untuk program ini, semua bisa mendaftar",
+      "Memiliki ketertarikan di isu pendidikan melalui kegiatan mengajar",
+      "Mampu dan suka berinteraksi dengan anak-anak usia 10-18 tahun",
+      "Bersedia berkomitmen selama 10 bulan",
+      "Bersedia berkomitmen 4-6 jam per minggu untuk melakukan",
+      "kegiatan volunteer"
+    ],
+    "benefit": [
+      "Benefit:",
+      "Dana pendidikan selama program",
+      "Kelas pengembangan diri bersama mentor profesional",
+      "Company visit ke Hyundai Motor",
+      "Forum Mahasiswa Relawan",
+      "Kesempatan study visit ke Korea Selatan (bagi peserta berprestasi)",
+      "Kesempatan konversi SKS"
+    ],
+    "linkDaftar": "https://bit.ly/OPRECHJSIBATCH3",
+    "linkGuidebook": "https://bit.ly/GuidebookHJSI3",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: Pendaftaran: 7 – 21 Juli 2026 (ditutup pukul 15.00 WIB)"
+  },
+  {
+    "id": 7,
+    "nama": "BEASISWA AMGALA VISION BATCH 3",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-10-31",
+    "persyaratan": [
+      "Syarat utama:",
+      "Warga Negara Indonesia (WNI)",
+      "Mahasiswa aktif program Sarjana (S1)",
+      "Mahasiswa baru (Semester 1)",
+      "Berasal dari jurusan/bidang STEM (Sains, Teknologi, Teknik, Matematika)",
+      "Tidak sedang menerima beasiswa lain",
+      "Nilai rata-rata rapor kelas XII minimal 90 atau SNBT ≥ 650",
+      "Aktif dalam organisasi, komunitas, atau pengembangan diri",
+      "Diutamakan memiliki kemampuan Bahasa Inggris (TOEFL ITP ≥ 420 atau TOEFL iBT ≥ 50)",
+      "Diutamakan memiliki sertifikat pelatihan (coding, AI, digital marketing, dll.)• Diutamakan memiliki pengalaman kompetisi akademik/non-akademik",
+      "Bersedia mengikuti seluruh rangkaian program beasiswa"
+    ],
+    "benefit": [
+      "Benefit:",
+      "UKT penuh Semester 1–8",
+      "Short course peningkatan logika & critical thinking",
+      "Bootcamp intensif (AI, Digital Marketing, Financial Literacy, Public Speaking, dll.)",
+      "Mentoring oleh profesional",
+      "Seminar inspiratif STEM & workshop",
+      "Pengembangan kepemimpinan dan karakter",
+      "Kesempatan magang & penempatan karier di perusahaan mitra",
+      "Proyek berdampak bagi masyarakat"
+    ],
+    "linkDaftar": "https://bit.ly/BeasiswaAmgalaVisionBatch3",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Timeline penting: | • Pendaftaran online: 2 Juni – 24 Juli 2026 | • Seleksi administrasi: 27 Juli – 6 Agustus 2026 | • Tes Potensi Akademik: 10 – 15 Agustus 2026 | • Final Pitching: 21 – 26 September 2026 | • Pengumuman hasil: 1 Oktober 2026"
+  },
+  {
+    "id": 8,
+    "nama": "Beasiswa Chandra Asri Group Scholarship Program 2026/2027",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Syarat utama:",
+      "Mahasiswa jurusan Chemical Engineering, Mechanical Engineering, Instrumentation & Physics, atau Electrical Engineering",
+      "IPK minimal 3,00",
+      "Telah menyelesaikan minimal 90 SKS"
+    ],
+    "benefit": [
+      "Benefit:",
+      "Pembebasan biaya kuliah (UKT) selama 2 semester",
+      "Uang saku bulanan",
+      "Program On-the-Job Training (OJT) selama 1 bulan di Chandra Asri Group"
+    ],
+    "linkDaftar": "https://bit.ly/CAScholarshipITS2026",
+    "linkGuidebook": "https://bit.ly/CAProgramDetail-ITS2026",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Timeline penting: | • Sosialisasi: 25 Mei 2026 | • Pendaftaran: hingga 12 Juli 2026 (Extended) | • Pengumuman seleksi administrasi: 14 Juli 2026 | • Wawancara: 2–3 September 2026 | • Pengumuman akhir: Minggu ke-3 September 2026"
+  },
+  {
+    "id": 9,
+    "nama": "Beasiswa Rembang Prestasi 2026 – Pemerintah Kabupaten Rembang",
+    "status": "Tutup",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Syarat utama:",
+      "WNI dan berdomisili di Kabupaten Rembang",
+      "Belum menikah, usia maksimal 21 tahun saat pendaftaran",
+      "Mahasiswa baru jenjang D4/S1",
+      "Diterima di PTN di Pulau Jawa atau PTS di Kabupaten Rembang (akreditasi minimal B)",
+      "Memiliki prestasi akademik/nonakademik dan/atau berasal dari keluarga kurang mampu",
+      "Tidak sedang menerima beasiswa lain",
+      "Mengunggah seluruh dokumen persyaratan sesuai ketentuan (KTP, KK, ijazah/transkrip, pas foto, bukti diterima PTN/PTS, surat sehat, surat pernyataan, dll.)"
+    ],
+    "benefit": [
+      "Benefit:",
+      "Bantuan biaya UKT/biaya kuliah",
+      "Bantuan biaya hidup setiap semester",
+      "Pendampingan dan monitoring studi"
+    ],
+    "linkDaftar": "https://dindikpora.rembangkab.go.id",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Timeline penting: | • Pendaftaran online: 8 Juni – 30 Juli 2026 | • Seleksi administrasi: 30 Juli – 4 Agustus 2026 | • Tes tertulis: 7–8 Agustus 2026 | • Wawancara & verifikasi: 11 & 21 Agustus 2026 | • Pengumuman: 2 September 2026 | • Penyaluran beasiswa: September 2026"
+  },
+  {
+    "id": 10,
+    "nama": "PROGRAM BEASISWA STEM LPPD JATIM 2026",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-07-31",
+    "persyaratan": [
+      "Syarat utama:",
+      "Fotokopi KTP dan KK Jawa Timur",
+      "Fotokopi ijazah MA/SMA/SMK",
+      "Ijazah dilampirkan sebanyak 2 lembar dan dilegalisir",
+      "Surat rekomendasi dari pesantren",
+      "Surat pernyataan tidak menerima beasiswa lain bermaterai Rp10.000",
+      "Berusia 18–25 tahun",
+      "Lulus seleksi penerimaan mahasiswa baru, dibuktikan dengan LoA",
+      "Lulus seleksi BTQ dan wawasan keagamaan oleh Tim LPPD Jatim",
+      "Semua berkas menggunakan kertas A4",
+      "📌 Kriteria Prestasi / Ketentuan Tambahan:",
+      "Bagi Hafidz-Hafidzah: minimal 5 juz, dibuktikan dengan syahadah",
+      "Bagi santri berprestasi keagamaan: minimal tingkat Kabupaten/Kota, dibuktikan dengan SK/sertifik"
+    ],
+    "benefit": [
+      "Benefit:",
+      "Bantuan biaya UKT selama 8 semester untuk jenjang S1"
+    ],
+    "linkDaftar": "https://its.id/Beasiswa-STEM-LPPD-2026",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 24 Juli 2026"
+  },
+  {
+    "id": 11,
+    "nama": "Bantuan Institut Teknologi Sepuluh Nopember | Bantuan UKT bagi Mahasiswa BM - KIPK yang lebih semester /Telat Lulus | Tahun 2026 Bantuan UKT bagi Mahasiswa BM - KIPK yang lebih semester /Telat Lulus",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2099-12-31",
+    "persyaratan": [
+      "Khusus Mahasiswa Bidikmisi S1/D4 Angkatan 2022",
+      "Mengajukan Permohonan Kepada Direktur Kemahasiswaan ITS yang Mengetahui Kadep dan berstampel departement dan upload di MyITS Student Connect >> Beasiswa >>Tawaran Beasiswa",
+      "Syarat Dokumen",
+      "Berkas kelengkapan beasiswa, Surat Permohonan kepada Direktur Kemahasiswaan yang ditanda tangani oleh Kepala Departemen dan berstampel"
+    ],
+    "benefit": [
+      "Pembebasan Uang Kuliah Tunggal (UKT) secara penuh (100%) selama 1 semester",
+      "Ditanggung (Gratis): Biaya kuliah/UKT untuk semester Gasal 2026/2027 dibebaskan sehingga Anda bisa mendaftar ulang dan menyelesaikan sisa SKS/sidang tugas akhir tanpa membayar."
+    ],
+    "linkDaftar": "https://connect.its.ac.id/",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Buka myITS",
+    "timelinePenting": ""
+  },
+  {
+    "id": 12,
+    "nama": "Beasiswa Mapan Khusus Kota Kediri",
+    "status": "Tutup",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-07-31",
+    "persyaratan": [
+      "Formulir Permohonan",
+      "KTP & KK Kota Kediri",
+      "Surat kesanggupan tidak menerima beasiswa lain (bermaterai)",
+      "Surat pernyataan kesanggupan mengikuti pendidikan hingga selesai (bermaterai)",
+      "Transkrip nilai IPK terakhir",
+      "IPK min. 3,25 (S1, prioritas DTSEN desil 1–5) / 3,25–3,50 (S2 & S3 tergantung fakultas)"
+    ],
+    "benefit": [
+      "Beasiswa jenjang S1 — mendukung penyelesaian studi maksimal 8 semester (S1)"
+    ],
+    "linkDaftar": "https://beasiswamapan.kedirikota.go.id",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 22 Juli 2026"
+  },
+  {
+    "id": 13,
+    "nama": "Program Pendidikan Kebanksentralan (PPK) Bank Indonesia Semester II 2026",
+    "status": "Tutup",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-08-31",
+    "persyaratan": [
+      "Mahasiswa aktif minimal semester 3 dari program studi yang memenuhi kriteria; IPK minimal 3,00; diutamakan berasal dari keluarga prasejahtera; memiliki komitmen mendukung literasi kebanksentralan; tidak menerima beasiswa lain"
+    ],
+    "benefit": [
+      "Dukungan pendidikan melalui Program Pendidikan Kebanksentralan (PPK) Bank Indonesia serta pengembangan literasi kebanksentralan"
+    ],
+    "linkDaftar": "https://its.id/PendaftaranBeasiswaBI26Tambahan",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 11 Agustus 2026"
+  },
+  {
+    "id": 14,
+    "nama": "Beasiswa JAPFA Untuk Anak Negeri 2026",
+    "status": "Tutup",
+    "kategori": "Umum",
+    "deadline": "2026-08-31",
+    "persyaratan": [
+      "WNI; mahasiswa aktif D3/D4/S1 yang akan memasuki semester 1–5; IPK minimal 3,00; tidak sedang menerima beasiswa lain; memiliki motivasi kuat untuk melanjutkan pendidikan dan mengembangkan diri; bersedia mengikuti seluruh rangkaian program"
+    ],
+    "benefit": [
+      "Dukungan finansial pendidikan, pengembangan diri dan talenta, wawasan industri & eksposur profesional, jejaring & kesempatan karier"
+    ],
+    "linkDaftar": "https://rebrand.ly/bukupanduanbeajapfa26",
+    "linkGuidebook": "https://rebrand.ly/bukupanduanbeajapfa26",
+    "linkDaftarLabel": "Guidebook",
+    "timelinePenting": "Deadline: 16 Agustus 2026"
+  },
+  {
+    "id": 15,
+    "nama": "Beasiswa BSI Scholarship Berdampak (untuk mahasiswa pendaftar KIP jalur SNBP/SNBT yang non eligible)",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2099-12-31",
+    "persyaratan": [
+      "Kriteria Pendaftar",
+      "Mahasiswa baru jenjang S1 dari Perguruan Tinggi Negeri (PTN) mitra program di bawah Kemdiktisaintek.",
+      "Pendaftar KIP Kuliah jalur SNBP maupun SNBT yang non-eligible.",
+      "Bersedia mengikuti seluruh rangkaian program BSI Scholarship Berdampak.",
+      "Dokumen Pendaftaran",
+      "Foto Formal: Menggunakan kemeja lengan panjang. Bagi pendaftar berhijab, wajib menggunakan jilbab warna hitam dengan latar belakang biru (#013DC3).",
+      "Identitas & KIP-K:",
+      "Scan Kartu Tanda Penduduk (KTP).",
+      "Scan bukti pendaftaran KIP-K.",
+      "Scan bukti diterima sebagai mahasiswa baru di PTN.",
+      "Keterangan Ekonomi & Sosial:",
+      "Scan Surat Keterangan Tidak Mampu (SKTM) atau Data Terpadu Kesejahteraan Sosial (DTKS).",
+      "Bukti cek desil dari situs cekbansos.kemensos.go.id.",
+      "Bukti Media Sosial: Screenshot bukti mengikuti (follow) akun TikTok dan Instagram BSI Scholarship.",
+      "Akademik & Prestasi:",
+      "Scan rapor kelas XII Semester 1 dan Semester 2.",
+      "Scan sertifikat prestasi (jika ada).",
+      "Dokumentasi Kondisi Rumah: Foto rumah tampak depan, ruang tamu, dapur, dan kamar mandi."
+    ],
+    "benefit": [
+      "Bantuan Financial (UKT): Bantuan biaya pendidikan/UKT sebesar Rp3.000.000,- per semester yang diberikan hingga 8 semester (selama masa studi).",
+      "Pengembangan Diri & Pembinaan: Program mentoring, pengembangan soft skills, penguatan kepemimpinan (leadership), dan pembinaan karakter.",
+      "Literasi Keuangan Syariah: Pelatihan dan pembinaan khusus mengenai literasi ekonomi serta keuangan syariah.",
+      "Program Social Project: Kesempatan berpartisipasi dan berkontribusi langsung kepada masyarakat melalui proyek sosial."
+    ],
+    "linkDaftar": "https://www.bsischolarship.id",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": ""
+  },
+  {
+    "id": 16,
+    "nama": "PROGRAM PENDIDIKAN KEBANKSENTRALAN BANK INDONESIA PROVINSI JAWA TIMUR TAHUN 2026",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-08-31",
+    "persyaratan": [
+      "Mahasiswa/i aktif minimal semester 3 D4 berasal dari Program Studi yang masuk dalam kriteria",
+      "Memiliki IPK minimal 3.00 (skala 4.00)",
+      "Diutamakan berasal dari keluarga pra sejahtera",
+      "Memiliki komitmen unruk berperan aktif dalam mendukung literasi kebanksentralan",
+      "tidak menerima bantuan beasiswa/pendidikan dari lembaga/instansi lain"
+    ],
+    "benefit": [
+      "mendapatkan dana bantuan tunai bulanan untuk menunjang biaya pendidikan serta berkesempatan bergabung dalam komunitas GenBI (Generasi Baru Indonesia). Di komunitas tersebut, mahasiswa akan mendapatkan berbagai pelatihan kepemimpinan, soft skills, hingga keterlibatan langsung pada kegiatan sosial kemasyarakatan dan edukasi kebanksentralan."
+    ],
+    "linkDaftar": "https://docs.google.com/forms/d/e/1FAIpQLSeq6qb6ivZX-Lruu9EtfuG0_8a6-36jd49EBdStNrgLTdds3g/viewform",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 22 Agustus 2026"
+  },
+  {
+    "id": 17,
+    "nama": "Program Beasiswa PT. Lautan Luas",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-08-31",
+    "persyaratan": [
+      "Berdomisili di ring 1 operasional grup lautan Luas.",
+      "Mahasiswa aktif minimal Semester 3 dengan Indeks Prestasi Kumulatif (IPK) min. 3,25.",
+      "Mengikuti program magang di grup Lautan Luas selama min. 6 (enam) bulan.",
+      "Aktif perhimpunan intra kampus dan atau luar kampus.",
+      "Tidak sedang menerima beasiswa dari pihak lain.",
+      "Bersedia menjalankan ikatan dinas minimal 3 tahun."
+    ],
+    "benefit": [
+      "Bantuan biaya pendidikan/UKT selama masa studi",
+      "Kesempatan magang di Lautan Luas Group",
+      "Peluang kerja/ikatan dinas setelah lulus",
+      "Pengembangan karier"
+    ],
+    "linkDaftar": "https://docs.google.com/forms/d/e/1FAIpQLSdG_d678zHSn01j5Xxr17nDBqZGG6gi_IY59GHY2regPD1b4w/viewform?fbzx=2762217788124915577",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 26 Agustus 2026"
+  },
+  {
+    "id": 18,
+    "nama": "Beasiswa PARAGONCORP PSP ELEVATE SCHOLARSHIP PROGRAM 2026",
+    "status": "Tutup",
+    "kategori": "Berprestasi",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Terdaftar sebagai mahasiswa aktif semester 1 di PTN (S1/D4)",
+      "Rata-rata nilai rapor akhir SMA minimal 80, atau Skor SNBT minimal 550.",
+      "Penghasilan gabungan bulanan keluarga kurang dari Rp8.000.000 atau rata-rata pengeluaran sekitar < Rp1.000.000 per anggota keluarga.",
+      "Tidak sedang menerima beasiswa lain, kecuali : KIP Kuliah (KIPK)",
+      "WAJIB MELAKUKAN PENDAFTARAN MELALUI TAUTAN BERIKUT : http://linktr.ee/ParagonCorpScholarshipProgram"
+    ],
+    "benefit": [
+      "Personal Development Fund/BBH: Rp6.000.000 per semester",
+      "Personalized mentoring selama masa kuliah",
+      "Capacity building",
+      "Community project",
+      "Dukungan proyek sosial hingga Rp5.000.000/cycle",
+      "Career preparation bersama expert",
+      "Networking dengan mahasiswa penerima beasiswa dari berbagai daerah/kampus.",
+      "BKKBISA - Portal Karir Indonesia"
+    ],
+    "linkDaftar": "https://linktr.ee/ParagonCorpScholarshipProgram?utm_source=linktree_profile_share&ltsid=b743c665-6144-4352-b731-d9341825f3ae",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 10 September 2026"
+  },
+  {
+    "id": 19,
+    "nama": "Beasiswa TUNAS UNGGUL BANGSA 2026",
+    "status": "Buka",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Untuk pendaftar semester 2 ke atas : IPK minimal 2.8 (dibuktikan dengan transkrip IPK yang telah dilegalisasi oleh Bagian Akademik Kemahasiswaan Rektorat/Dekanat)",
+      "Untuk pendaftar semester 1 atau mahasiswa baru: Nilai raport minimal 7 untuk mata pelajaran Matematika, Kimia, Fisika, Bahasa Inggris, Biologi, Bahasa Indonesia dari kelas 1 sampai dengan kelas 3",
+      "Bukti pendukung berupa fotocopy piagam/sertifikat dalam bidang ekstrakurikuler atau lainnya",
+      "Scan Foto copy rekening listrik 3 bulan terakhir",
+      "Dari keluarga kurang mampu dengan dibuktikan oleh slip gaji orang tua (Karyawan) atau surat keterangan pekerjaan dan penghasilan orang tua dari Kepala Desa",
+      "Foto copy Kartu Keluarga",
+      "Foto copy KTP pemohon dan Kartu Tanda Mahasiswa",
+      "Membuat surat pernyataan kalau tidak akan merokok, tidak meminum minuman keras, tidak memakai narkoba, dan tidak terlibat dalam kegiatan melanggar hukum.",
+      "Fotocopy nomer rekening bank (jika sudah ada)",
+      "Surat pernyataan sedang menerima/tidak sedang menerima beasiswa di luar Yayasan Tunas Unggul Bangsa yang disahkan dengan stempel oleh pihak Rektorat/Dekanat/Kepala Jurusan(Pemberi Beasiswa, Besarnya Beasiswa, Jangka waktu beasiswa)",
+      "Foto rumah bagian depan, ruang tengah, kamar tidur, dapur, dan kamar mandi",
+      "Membuat CV (curriculum vitae yang berisi tentang diri sendiri dan orang tua)",
+      "Membuat surat pernyataan yang menyatakan bahwa apabila telah lulus kuliah dan mendapatkan pekerjaan, bersedia untuk berinfaq dan menjadi pengurus YTUB.",
+      "Pendaftaran melalui web berikut : https://tunasunggulbangsa.or.id/pendaftaran-beasiswa/"
+    ],
+    "benefit": [
+      "UKT + IKOMA MAX Rp 1.500.000",
+      "BIAYA HIDUP PER BULAN Rp 1000.000"
+    ],
+    "linkDaftar": "https://tunasunggulbangsa.or.id",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 12 September 2026"
+  },
+  {
+    "id": 20,
+    "nama": "Beasiswa Zakat Indonesia (BeZakat) 2026",
+    "status": "Buka",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "WNI Muslim/Muslimah",
+      "ijazah & rapor semester I–V rata-rata 80",
+      "LOA/bukti diterima PTN atau PTKIN mitra program semester gasal 2026/2027",
+      "invoice & bukti bayar UKT semester 1",
+      "pas foto 3x4 background merah; surat pernyataan komitmen & pakta integritas materai Rp10.000",
+      "surat rekomendasi (kepala sekolah/tokoh agama/BAZNAS/LAZ)",
+      "SKTM",
+      "slip gaji ortu/wali atau surat keterangan penghasilan (asnaf fakir miskin)",
+      "KIP sekolah (jika ada)",
+      "bukti cek desil dari cekbansos.kemensos.go.id",
+      "dokumen foto rumah, bukti kepemilikan & bukti bayar listrik",
+      "surat keterangan yatim (jika ada)",
+      "bukti prestasi akademik/non-akademik",
+      "esai Personal Statement (\"Perjalanan Hidupku dan Mimpiku untuk Memberi Manfaat\")",
+      "esai Proyek Perubahan"
+    ],
+    "benefit": [
+      "Beasiswa penuh (full funded scholarship) — dari poster: \"Beasiswa Penuh Selama 8 Semester\"",
+      "Durasi studi maksimal 4 tahun (48 bulan) untuk jenjang S1V"
+    ],
+    "linkDaftar": "https://bit.ly/DokumenSeleksiBeZakat2026",
+    "linkGuidebook": "https://pendaftaran-beasiswa.kemenag.go.id/login",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 14 September 2026"
+  },
+  {
+    "id": 21,
+    "nama": "Bayan Group Program Beasiswa Bayan Peduli 2026",
+    "status": "Buka",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-11-30",
+    "persyaratan": [
+      "Mahasiswa/i baru ITS angkatan 2026, usia maksimal 22 tahun",
+      "Rata-rata rapor kelas 12 (semester 1 & 2) minimal 7,50/10",
+      "Memiliki prestasi di bidang seni, agama, budaya, teknologi, atau olahraga",
+      "Memiliki sertifikat prestasi akademik/non-akademik sebagai bukti",
+      "Berasal dari keluarga ekonomi tidak mampu/pra-sejahtera",
+      "Memiliki SKTM dan surat keterangan penghasilan orang tua/wali",
+      "Tidak sedang menerima beasiswa pendidikan dari lembaga/instansi/yayasan lain",
+      "Wajib mempertahankan IPS minimal 2,80/4,00"
+    ],
+    "benefit": [
+      "Gratis biaya UKT selama 8 semester",
+      "Uang saku setiap bulan",
+      "Tunjangan transportasi dan kost/akomodasi setiap bulan",
+      "Dana ujian, penelitian, dan tugas akhir",
+      "Biaya IKOMA ITS"
+    ],
+    "linkDaftar": "https://www.instagram.com/p/DcaS99QkrIg/?igsh=bGthYWgxZG9tbHFk",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Pendaftaran: 21 Agustus - 25 September 2026 | Seleksi Administrasi: 25 - 30 September  | Seleksi Wawancara: 1 - 18 Oktober 2026 | Diskusi Hasil Seleksi: 20 - 31 Oktober 2026 | Penetapan Penerima Beasiswa: 03 - 14 November 2026"
+  },
+  {
+    "id": 22,
+    "nama": "Beasiswa Cendikia Baznas",
+    "status": "Buka",
+    "kategori": "Berprestasi",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Warga Negara Indonesia",
+      "Merupakan Warga Negara Indonesia (WNI) dengan menunjukan identitas",
+      "penduduk berupa Kartu Tanda Penduduk (KTP) dan Kartu Keluarga (KK)",
+      "Mahasiswa S1/D4 semester 5",
+      "Program khusus di 8 kampus mitra BAZNAS ditunjukan dengan Kartu",
+      "Rencana Studi (KHS) Semester 5 atau Kartu Hasil Studi Semester 4",
+      "IPK minimal 3,00",
+      "Memiliki IPK minimal 3.00 skala 4,00 di tunjukan dengan Kartu Hasil Studi",
+      "Semester 4 atau terakhir.",
+      "Kategori Jurusan",
+      "Prioritas bidang STEM (Sains, Teknologi, Engginering and Mathematich).",
+      "Prioritas SHARE (Social, Humanities, Art for People, Religious Studies,",
+      "Economics)",
+      "Memenuhi salah satu kategori khusus dibawah ini:",
+      "Kategori Prestasi: Memiliki prestasi nasional dan/atau internasional",
+      "(lebih direkomendasikan yang telah tercatat pada database Manajemen",
+      "Talenta Nasional (MTN), Bappenas RI dan Pusat Prestasi Nasional",
+      "(Puspresnas) Kemdikti) selama 2 tahun terakhir.",
+      "Kategori Aktivis: Aktif menjadi pengurus organisasi kemahasiswaan",
+      "minimal tingkat jurusan atau organisasi kepemudaan/masyarakat selama",
+      "2 tahun terakhir.",
+      "Kategori Khusus Disabilitas : ditujukan untuk mahasiswa penyandang",
+      "disabilitas Fisik, Intelektual, Mental, Sensorik, Ganda atau Multi."
+    ],
+    "benefit": [
+      "Beasiswa UKT (Uang Kuliah Tunggal), Biaya Riset, Pendampingan"
+    ],
+    "linkDaftar": "https://bazn.as/PanduanBCBDN2026",
+    "linkGuidebook": "https://bazn.as/PanduanBCBDN2026",
+    "linkDaftarLabel": "Guidebook",
+    "timelinePenting": "Deadline: 27 September 2026"
+  },
+  {
+    "id": 23,
+    "nama": "Beasiswa Pembangunan Jaya (untuk mahasiswa semester 5)",
+    "status": "Buka",
+    "kategori": "Kurang mampu",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Mahasiswa/i masih aktif kuliah di semester 5 dan tidak sedang cuti kuliah.",
+      "Mahasiswa/i masih aktif kuliah di semester 7 yang pernah menerima Beasiswa Pembangunan Jaya sebelumnya di semester 5 dan tidak sedang cuti kuliah.",
+      "Tidak sedang menerima beasiswa dari sumber lain.",
+      "Memiliki IPK minimal 3,5 dengan melampirkan transkrip nilai yang sah.",
+      "Bagi mahasiswa/i yang tidak mampu secara finansial namun berprestasi, dengan IPK minimal 3,0, dapat mengikuti program beasiswa dengan melengkapi surat keterangan penghasilan orang tua/wali pemohon yang disahkan melalui surat keterangan resmi oleh Perguruan Tinggi.",
+      "Membuat rencana studi/pekerjaan di bidang yang diminati oleh mahasiswa/i setelah lulus S1.",
+      "Melampirkan fotokopi KTM, KTP, dan Kartu Keluarga (KK)."
+    ],
+    "benefit": [
+      "💰 Bantuan dana beasiswa/biaya pendidikan",
+      "📚 Mendukung kebutuhan akademik dan perkuliahan",
+      "🎓 Kesempatan menjadi Awardee Beasiswa Pembangunan Jaya",
+      "🤝 Memperluas networking dengan Yayasan Marga Pembangunan Jaya dan Jaya Group",
+      "🌟 Menambah pengalaman dan nilai prestasi untuk CV",
+      "🏢 Kesempatan mengenal lingkungan dan jaringan perusahaan di bawah Jaya Group"
+    ],
+    "linkDaftar": "https://connect.its.ac.id/",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Buka myITS",
+    "timelinePenting": "Deadline: 30 September 2026"
+  },
+  {
+    "id": 24,
+    "nama": "Beasiswa Bakti BCA 2026",
+    "status": "Buka",
+    "kategori": "Berprestasi",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "WNI; belum menikah; maksimal 21 tahun (per 31 Desember 2026); mahasiswa aktif S1 Non Vokasi semester 3; tidak sedang menerima beasiswa lain; berkomitmen mengikuti program pengembangan selama 1 tahun; memenuhi kriteria salah satu kategori; aktif berorganisasi, memiliki kepedulian sosial, dan tidak bekerja full-time"
+    ],
+    "benefit": [
+      "Bantuan dana pendidikan (uang saku bulanan & bantuan uang kuliah), program pengembangan diri selama 1 tahun (Bakti Champions), serta menjadi bagian dari komunitas Bakti Champions"
+    ],
+    "linkDaftar": "https://bca.id/beasiswabaktibca",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Daftar",
+    "timelinePenting": "Deadline: 30 September 2026"
+  },
+  {
+    "id": 25,
+    "nama": "Beasiswa Program Bantuan Penelitian Kebanksentralan (Banlit) Bank Indonesia 2026",
     "status": "Buka",
     "kategori": "Berprestasi",
     "deadline": "2026-10-31",
     "persyaratan": [
-      "Mahasiswa aktif S1 semester 4 (pada saat mendaftar)",
-      "IPK minimal 3.20",
-      "Aktif berorganisasi dan memiliki jiwa kepemimpinan",
-      "Tidak sedang menerima beasiswa dari pihak lain",
-      "Sehat jasmani dan rohani"
+      "Mahasiswa aktif, WNI dari PT mitra program Bantuan Penelitian Kebanksentralan",
+      "– IPK ≥ 3,25, belum seminar hasil/sidang TA",
+      "– Bukan pegawai BI",
+      "– Topik riset sesuai Katalog Tema Riset BI (Moneter, Makroprudensial, Sistem Pembayaran, SSK, Sektor Riil, Ekonomi-Keuangan Hijau/Syariah, Sosial)"
     ],
     "benefit": [
-      "Dana beasiswa Rp1.000.000/bulan selama 1 tahun",
-      "Pelatihan Nation Building (softskill & leadership)",
-      "Beswan Connect networking",
-      "Sertifikat dan pengembangan diri"
+      "Nilai Bantuan:",
+      "– S1 Rp10 Juta",
+      "– S2 Rp15 Juta",
+      "– S3 Rp20 Juta",
+      ") termasuk pajak"
     ],
-    "linkDaftar": "https://djarumfoundation.org/beasiswa",
-    "linkGuidebook": "https://djarumfoundation.org/beasiswa/guidebook",
-    "timelinePenting": "Pendaftaran online: Agustus – Oktober 2026 | Seleksi: November 2026 | Pengumuman: Desember 2026"
+    "linkDaftar": "https://tinyurl.com/DokumenBanlit",
+    "linkGuidebook": "https://tinyurl.com/DokumenBanlit",
+    "linkDaftarLabel": "Guidebook",
+    "timelinePenting": "Deadline: Periode Pendaftaran :\nMaret – Oktober 2026"
+  },
+  {
+    "id": 26,
+    "nama": "Beasiswa TALENTA Mahasiswa Baru (Beta Maru) ITS",
+    "status": "Buka",
+    "kategori": "Berprestasi",
+    "deadline": "2026-09-30",
+    "persyaratan": [
+      "Calon mahasiswa baru ITS yang berprestasi dan diterima melalui jalur SNBP, SNBT, atau SMITS Flat Prestasi"
+    ],
+    "benefit": [
+      "Beasiswa UKT (Uang Kuliah Tunggal)"
+    ],
+    "linkDaftar": "https://connect.its.ac.id/",
+    "linkGuidebook": "",
+    "linkDaftarLabel": "Buka myITS",
+    "timelinePenting": "Deadline: 30 September 2026"
   }
 ]
