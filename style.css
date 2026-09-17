@@ -1183,6 +1183,7 @@ img {
     display: flex;
     align-items: center;
     gap: var(--space-md);
+    cursor: default;
 }
 
 .footer-logo {
@@ -1191,6 +1192,13 @@ img {
     border-radius: var(--radius-sm);
     object-fit: cover;
     border: 2px solid rgba(16, 185, 129, 0.3);
+    transition: all var(--transition-base);
+}
+
+.footer-brand:hover .footer-logo {
+    transform: scale(1.05) rotate(-2deg);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
 }
 
 .footer-title {
@@ -1211,11 +1219,165 @@ img {
     margin-top: 2px;
 }
 
+/* Status Badge with Live Pulse */
+.footer-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--color-accent-light);
+    width: fit-content;
+    cursor: default;
+    transition: all var(--transition-base);
+}
+
+.footer-status-badge:hover {
+    background: rgba(16, 185, 129, 0.16);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);
+    transform: translateY(-1px);
+}
+
+.pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: pulseGlow 1.8s infinite ease-out;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
 .footer-desc {
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.45);
-    line-height: 1.6;
-    max-width: 300px;
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.65;
+    max-width: 360px;
+}
+
+.footer-highlight {
+    color: var(--color-accent-light);
+    font-weight: 600;
+    text-decoration: underline dotted rgba(16, 185, 129, 0.45);
+    text-underline-offset: 3px;
+    cursor: help;
+    transition: all var(--transition-fast);
+}
+
+.footer-highlight:hover {
+    color: #ffffff;
+    text-decoration-color: var(--color-accent);
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+/* Interactive Mini Card / CTA */
+.footer-interactive-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-md);
+    max-width: 360px;
+    transition: all var(--transition-base);
+}
+
+.footer-interactive-card:hover {
+    background: rgba(16, 185, 129, 0.07);
+    border-color: var(--color-accent);
+    border-style: solid;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.footer-card-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-card-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    animation: bounceSoft 2.5s infinite;
+}
+
+@keyframes bounceSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.footer-card-text strong {
+    display: block;
+    font-size: 0.78rem;
+    color: #f1f5f9;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.footer-card-text p {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 2px 0 0;
+    line-height: 1.3;
+}
+
+.footer-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent-light);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 6px 11px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.footer-cta-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+    transform: translateX(2px);
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35);
+}
+
+.footer-cta-btn svg {
+    transition: transform var(--transition-fast);
+}
+
+.footer-cta-btn:hover svg {
+    transform: translateX(2px);
 }
 
 /* Social Icon Buttons */
@@ -1246,9 +1408,17 @@ img {
     box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
 }
 
-.footer-social-btn i {
+.footer-social-btn i,
+.footer-social-btn svg {
     width: 17px;
     height: 17px;
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+}
+
+.footer-social-btn:hover svg,
+.footer-social-btn:hover i {
+    transform: scale(1.12);
 }
 
 /* Footer Links */
@@ -1303,11 +1473,18 @@ img {
     padding-left: var(--space-sm) !important;
 }
 
-.footer-contact-link i {
+.footer-contact-link i,
+.footer-contact-link svg {
     width: 15px;
     height: 15px;
     flex-shrink: 0;
     color: var(--color-accent);
+    transition: transform var(--transition-fast);
+}
+
+.footer-contact-link:hover svg,
+.footer-contact-link:hover i {
+    transform: scale(1.12);
 }
 
 .footer-contact-link span {
@@ -1355,7 +1532,8 @@ img {
         grid-template-columns: 1fr;
         gap: var(--space-xl);
     }
-    .footer-desc {
+    .footer-desc,
+    .footer-interactive-card {
         max-width: 100%;
     }
     .footer-bottom {
