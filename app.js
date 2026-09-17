@@ -861,16 +861,16 @@ function createCardHTML(item, type) {
                     </button>
                 </div>
             </div>
-            <h3 class="card-title">${item.nama}</h3>
+            <h3 class="card-title" title="${cleanUnicodeText(item.nama)}">${cleanUnicodeText(item.nama)}</h3>
             <div class="card-info">
                 <div class="card-info-item ${isUrgent ? 'deadline-urgent' : ''}">
                     <i data-lucide="calendar"></i>
                     <span>Deadline: ${item.deadline !== '2099-12-31' ? formatDate(item.deadline) : 'Lihat info'}</span>
                 </div>
                 ${type === 'lomba' && item.cabangLomba ? `
-                <div class="card-info-item">
+                <div class="card-info-item" title="${cleanUnicodeText(item.cabangLomba)}">
                     <i data-lucide="layers"></i>
-                    <span>${item.cabangLomba}</span>
+                    <span>${cleanUnicodeText(item.cabangLomba)}</span>
                 </div>` : ''}
             </div>
             <div class="card-countdown ${isExpired ? 'expired' : ''}">

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -14,14 +15,24 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🌐 Deploy to Netlify
-        uses: nwtgck/actions-netlify@v3
-        with:
-          publish-dir: '.'
-          production-branch: master
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions - ${{ github.event.head_commit.message }}"
+      - name: 🌐 Deploy and Publish to Netlify
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          echo "Deploying files to Netlify..."
+          DEPLOY_OUTPUT=$(npx --yes netlify-cli deploy --dir="." --json --auth="$NETLIFY_AUTH_TOKEN" --site="$NETLIFY_SITE_ID")
+          DEPLOY_ID=$(echo "$DEPLOY_OUTPUT" | jq -r '.deploy_id')
+          echo "Deployed with ID: $DEPLOY_ID"
+          
+          echo "Promoting deploy to production..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+            "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys/$DEPLOY_ID/restore")
+          echo "Promotion status code: $STATUS"
+          
+          if [ "$STATUS" -ne 200 ]; then
+            echo "❌ Failed to promote deploy to production"
+            exit 1
+          fi
+          echo "✅ Successfully deployed and published to Netlify production!"

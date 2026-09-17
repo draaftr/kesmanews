@@ -925,7 +925,8 @@ img {
     -webkit-box-orient: vertical;
     overflow: hidden;
     /* Tetap 2 baris agar tinggi judul seragam antar kartu */
-    min-height: calc(1.05rem * 1.4 * 2);
+    min-height: 2.95rem;
+    height: 2.95rem;
 }
 
 .card-info {
@@ -933,10 +934,9 @@ img {
     flex-direction: column;
     gap: var(--space-sm);
     margin-bottom: var(--space-md);
-    /* Fixed height = 2 info-item rows: setiap item ~20px + gap 8px = 48px */
+    /* Tinggi seragam = 2 baris info (deadline + cabang) */
     min-height: 52px;
-    /* Pastikan tidak lebih dari 2 baris agar semua kartu sejajar */
-    max-height: 52px;
+    height: 52px;
     overflow: hidden;
 }
 
@@ -947,6 +947,14 @@ img {
     font-family: var(--font-body);
     font-size: 0.85rem;
     color: var(--color-text-secondary);
+    min-width: 0;
+}
+
+.card-info-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .card-info-item i {
