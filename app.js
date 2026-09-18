@@ -15,8 +15,25 @@ let currentModalData = null;
 let currentModalType = null; // 'beasiswa' atau 'lomba' — eksplisit, tidak ditebak dari ID
 let countdownIntervals = [];
 
-// Watchlist state (persisted in localStorage)
-let watchlist = JSON.parse(localStorage.getItem('kesmanews-watchlist') || '[]');
+// Category Hub & Active filter state
+let activeBeasiswaCategory = 'all';
+let activeLombaCategory = 'all';
+let onlyActiveBeasiswa = true;
+let onlyActiveLomba = true;
+
+// Custom Bookmark Folders / Collections state (TikTok-style)
+const DEFAULT_COLLECTIONS = ['Semua Tersimpan', 'Target Beasiswa', 'Lomba Tim'];
+let collections = JSON.parse(localStorage.getItem('kesmanews-collections') || JSON.stringify(DEFAULT_COLLECTIONS));
+let activeCollection = 'Semua Tersimpan';
+let pendingFolderTarget = null; // { id, type, item, tempFolders: [] }
+
+// Watchlist state (persisted in localStorage, backward compatible with folder groups)
+let watchlist = (JSON.parse(localStorage.getItem('kesmanews-watchlist') || '[]')).map(item => {
+    if (!item.folders || !Array.isArray(item.folders) || item.folders.length === 0) {
+        item.folders = ['Semua Tersimpan'];
+    }
+    return item;
+});
 
 // Sort state per section
 let sortBeasiswa = 'default';
@@ -35,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initEmailCopy();
     initAboutSection();
     initBookmarkToolbar();
+    initFolderModal();
+    initActiveFilterToggles();
     updateBookmarkBadge();
     loadData();
 });
@@ -580,6 +599,125 @@ function parseLombaSheet(rows) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// CATEGORY HUBS DEFINITION & LOGIC
+// ═══════════════════════════════════════════════════════════════
+const BEASISWA_CATEGORIES = [
+    { id: 'all', name: 'Semua Beasiswa', desc: 'Koleksi lengkap', icon: 'graduation-cap' },
+    { id: 'Berprestasi', name: 'Prestasi', desc: 'Akademik & Bakat', icon: 'award' },
+    { id: 'Kurang mampu', name: 'Bantuan Finansial', desc: 'Ekonomi & KIP', icon: 'wallet' },
+    { id: 'urgent', name: 'Segera Tutup', desc: 'Deadline ≤ 7 hari', icon: 'zap' },
+    { id: 'Umum', name: 'Umum & Riset', desc: 'Terbuka luas', icon: 'compass' }
+];
+
+const LOMBA_CATEGORIES = [
+    { id: 'all', name: 'Semua Lomba', desc: 'Koleksi lengkap', icon: 'trophy' },
+    { id: 'lkti', name: 'KTI & Essay', desc: 'Karya tulis ilmiah', icon: 'file-text' },
+    { id: 'poster', name: 'Poster & Desain', desc: 'Infografis & Video', icon: 'palette' },
+    { id: 'olympiad', name: 'Olimpiade & Medis', desc: 'Sains & Kesehatan', icon: 'activity' },
+    { id: 'gratis', name: 'Gratis Regis', desc: 'Bebas biaya daftar', icon: 'gift' },
+    { id: 'urgent', name: 'Segera Tutup', desc: 'Deadline ≤ 7 hari', icon: 'zap' }
+];
+
+function renderCategoryHub(type) {
+    const hubContainer = document.getElementById(`${type}CategoryHub`);
+    if (!hubContainer) return;
+
+    const categories = type === 'beasiswa' ? BEASISWA_CATEGORIES : LOMBA_CATEGORIES;
+    const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
+    const activeCat = type === 'beasiswa' ? activeBeasiswaCategory : activeLombaCategory;
+    const onlyActive = type === 'beasiswa' ? onlyActiveBeasiswa : onlyActiveLomba;
+
+    const baseData = onlyActive
+        ? sourceData.filter(item => item.status === 'Buka' && getDaysLeft(item.deadline) >= 0)
+        : sourceData;
+
+    hubContainer.innerHTML = categories.map(cat => {
+        let count = 0;
+        if (cat.id === 'all') {
+            count = baseData.length;
+        } else if (cat.id === 'urgent') {
+            count = sourceData.filter(item => item.status === 'Buka' && getDaysLeft(item.deadline) >= 0 && getDaysLeft(item.deadline) <= 7).length;
+        } else if (type === 'beasiswa') {
+            if (cat.id === 'Berprestasi') {
+                count = baseData.filter(item => item.kategori.toLowerCase().includes('prestasi')).length;
+            } else if (cat.id === 'Kurang mampu') {
+                count = baseData.filter(item => item.kategori.toLowerCase().includes('kurang mampu') || item.kategori.toLowerCase().includes('finansial')).length;
+            } else if (cat.id === 'Umum') {
+                count = baseData.filter(item => item.kategori.toLowerCase().includes('umum') || item.kategori.toLowerCase().includes('riset')).length;
+            }
+        } else if (type === 'lomba') {
+            if (cat.id === 'lkti') {
+                count = baseData.filter(item => (item.cabangLomba && /kti|essay|paper|karya tulis/i.test(item.cabangLomba)) || /kti|essay|paper|karya tulis/i.test(item.nama)).length;
+            } else if (cat.id === 'poster') {
+                count = baseData.filter(item => (item.cabangLomba && /poster|infografis|desain|video/i.test(item.cabangLomba)) || /poster|infografis|desain|video/i.test(item.nama)).length;
+            } else if (cat.id === 'olympiad') {
+                count = baseData.filter(item => (item.cabangLomba && /olimpiade|olympiad|biomed|meddips|medsco|kedokteran|cedec/i.test(item.cabangLomba)) || /olimpiade|olympiad|biomed|meddips|medsco|kedokteran|cedec/i.test(item.nama)).length;
+            } else if (cat.id === 'gratis') {
+                count = baseData.filter(item => item.biaya === 'Gratis' || (item.benefit && item.benefit.some(b => /gratis/i.test(b)))).length;
+            }
+        }
+
+        const isActive = activeCat === cat.id;
+
+        return `
+            <div class="category-card ${isActive ? 'active' : ''}" data-type="${type}" data-category="${cat.id}">
+                <div class="category-card-icon">
+                    <i data-lucide="${cat.icon}"></i>
+                </div>
+                <div class="category-card-body">
+                    <div class="category-card-title">${cat.name}</div>
+                    <div class="category-card-desc">
+                        <span>${cat.desc}</span>
+                        <span class="category-card-count">${count}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    hubContainer.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const catId = card.dataset.category;
+            const currentCat = type === 'beasiswa' ? activeBeasiswaCategory : activeLombaCategory;
+            const nextCat = (currentCat === catId && catId !== 'all') ? 'all' : catId;
+
+            if (type === 'beasiswa') activeBeasiswaCategory = nextCat;
+            else activeLombaCategory = nextCat;
+
+            renderCategoryHub(type);
+            filterData(type);
+            lucide.createIcons();
+        });
+    });
+}
+
+function initActiveFilterToggles() {
+    const toggleBeasiswaBtn = document.getElementById('toggleActiveBeasiswaBtn');
+    if (toggleBeasiswaBtn) {
+        toggleBeasiswaBtn.classList.toggle('active', onlyActiveBeasiswa);
+        toggleBeasiswaBtn.addEventListener('click', () => {
+            onlyActiveBeasiswa = !onlyActiveBeasiswa;
+            toggleBeasiswaBtn.classList.toggle('active', onlyActiveBeasiswa);
+            renderCategoryHub('beasiswa');
+            filterData('beasiswa');
+            lucide.createIcons();
+        });
+    }
+
+    const toggleLombaBtn = document.getElementById('toggleActiveLombaBtn');
+    if (toggleLombaBtn) {
+        toggleLombaBtn.classList.toggle('active', onlyActiveLomba);
+        toggleLombaBtn.addEventListener('click', () => {
+            onlyActiveLomba = !onlyActiveLomba;
+            toggleLombaBtn.classList.toggle('active', onlyActiveLomba);
+            renderCategoryHub('lomba');
+            filterData('lomba');
+            lucide.createIcons();
+        });
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
 // DATA LOADING — Sheets dulu, fallback ke JSON lokal
 // ═══════════════════════════════════════════════════════════════
 async function loadData() {
@@ -626,9 +764,13 @@ async function loadData() {
     document.getElementById('skeletonBeasiswa').classList.add('hidden');
     document.getElementById('skeletonLomba').classList.add('hidden');
 
-    // Render cards
-    renderCards('beasiswa', beasiswaData);
-    renderCards('lomba', lombaData);
+    // Render Category Hubs
+    renderCategoryHub('beasiswa');
+    renderCategoryHub('lomba');
+
+    // Render cards with initial filter
+    filterData('beasiswa');
+    filterData('lomba');
 
     // Update hero stats
     updateHeroStats();
@@ -659,7 +801,7 @@ function showDataError() {
 function updateHeroStats() {
     const totalBeasiswa = beasiswaData.length;
     const totalLomba = lombaData.length;
-    const totalBuka = [...beasiswaData, ...lombaData].filter(item => item.status === 'Buka').length;
+    const totalBuka = [...beasiswaData, ...lombaData].filter(item => item.status === 'Buka' && getDaysLeft(item.deadline) >= 0).length;
 
     animateCounter('statBeasiswa', totalBeasiswa);
     animateCounter('statLomba', totalLomba);
@@ -668,6 +810,7 @@ function updateHeroStats() {
 
 function animateCounter(elementId, target) {
     const el = document.getElementById(elementId);
+    if (!el) return;
     let current = 0;
     const increment = Math.max(1, Math.ceil(target / 30));
     const interval = setInterval(() => {
@@ -703,7 +846,15 @@ function renderCards(type, data) {
     // Sort based on current sort state
     const currentSort = type === 'beasiswa' ? sortBeasiswa : sortLomba;
     const sorted = [...data].sort((a, b) => {
+        const daysA = getDaysLeft(a.deadline);
+        const daysB = getDaysLeft(b.deadline);
+        const isExpiredA = daysA < 0 || a.status !== 'Buka';
+        const isExpiredB = daysB < 0 || b.status !== 'Buka';
+
         if (currentSort === 'deadline') {
+            // Expired items should ALWAYS go to the very bottom when sorting by deadline
+            if (isExpiredA && !isExpiredB) return 1;
+            if (!isExpiredA && isExpiredB) return -1;
             return new Date(a.deadline) - new Date(b.deadline);
         } else if (currentSort === 'nama') {
             return a.nama.localeCompare(b.nama, 'id');
@@ -712,9 +863,9 @@ function renderCards(type, data) {
             if (a.status !== 'Buka' && b.status === 'Buka') return 1;
             return 0;
         } else {
-            // Default: open first, then nearest deadline
-            if (a.status === 'Buka' && b.status !== 'Buka') return -1;
-            if (a.status !== 'Buka' && b.status === 'Buka') return 1;
+            // Default: open first (nearest deadline), expired last
+            if (!isExpiredA && isExpiredB) return -1;
+            if (isExpiredA && !isExpiredB) return 1;
             return new Date(a.deadline) - new Date(b.deadline);
         }
     });
@@ -732,26 +883,17 @@ function renderCards(type, data) {
         });
     });
 
-    // Attach watchlist toggle handlers
+    // Attach watchlist folder modal trigger handlers
     grid.querySelectorAll('.btn-bookmark').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const id = parseInt(btn.dataset.id);
             const itemType = btn.dataset.type;
-            toggleWatchlist(id, itemType);
             const sourceData = itemType === 'beasiswa' ? beasiswaData : lombaData;
-            const searchValue = document.getElementById(`search${capitalize(itemType)}`).value.toLowerCase().trim();
-            const kategoriValue = document.getElementById(`filterKategori${capitalize(itemType)}`).value;
-            const statusValue = document.getElementById(`filterStatus${capitalize(itemType)}`).value;
-            const filtered = sourceData.filter(item => {
-                const matchSearch = !searchValue || item.nama.toLowerCase().includes(searchValue);
-                const matchKategori = kategoriValue === 'semua' || item.kategori === kategoriValue;
-                const matchStatus = statusValue === 'semua' || item.status === statusValue;
-                return matchSearch && matchKategori && matchStatus;
-            });
-            renderCards(itemType, filtered);
-            lucide.createIcons();
-            renderWatchlist();
+            const item = sourceData.find(d => d.id === id);
+            if (item) {
+                openFolderModal(item, itemType);
+            }
         });
     });
 
@@ -851,7 +993,7 @@ function createCardHTML(item, type) {
                 <div class="card-top-actions">
                     <button class="btn-bookmark ${isBookmarked ? 'bookmarked' : ''}" 
                             data-id="${item.id}" data-type="${type}"
-                            title="${isBookmarked ? 'Hapus dari bookmark' : 'Simpan ke bookmark'}">
+                            title="${isBookmarked ? 'Kelola bookmark / folder' : 'Simpan ke bookmark'}">
                         <i data-lucide="${isBookmarked ? 'bookmark-check' : 'bookmark'}"></i>
                     </button>
                     <button class="btn-share-wa" data-id="${item.id}" data-type="${type}" title="Bagikan ke WhatsApp">
@@ -939,9 +1081,15 @@ function resetFilters(type) {
     if (filterStatus) filterStatus.value = 'semua';
     if (sortSelect) sortSelect.value = 'default';
 
-    if (type === 'beasiswa') sortBeasiswa = 'default';
-    else sortLomba = 'default';
+    if (type === 'beasiswa') {
+        sortBeasiswa = 'default';
+        activeBeasiswaCategory = 'all';
+    } else {
+        sortLomba = 'default';
+        activeLombaCategory = 'all';
+    }
 
+    renderCategoryHub(type);
     filterData(type);
     showToast(`Filter ${type === 'beasiswa' ? 'beasiswa' : 'lomba'} berhasil direset`);
 }
@@ -954,23 +1102,27 @@ function updateResultsInfo(type, count, total) {
     const katVal = document.getElementById(`filterKategori${capitalize(type)}`)?.value || 'semua';
     const statusVal = document.getElementById(`filterStatus${capitalize(type)}`)?.value || 'semua';
     const sortVal = document.getElementById(`sort${capitalize(type)}`)?.value || 'default';
+    const activeCat = type === 'beasiswa' ? activeBeasiswaCategory : activeLombaCategory;
+    const onlyActive = type === 'beasiswa' ? onlyActiveBeasiswa : onlyActiveLomba;
 
-    const isFiltered = Boolean(searchVal || katVal !== 'semua' || statusVal !== 'semua' || sortVal !== 'default');
+    const isFiltered = Boolean(searchVal || katVal !== 'semua' || statusVal !== 'semua' || sortVal !== 'default' || activeCat !== 'all' || !onlyActive);
     const typeNoun = type === 'beasiswa' ? 'beasiswa' : 'lomba';
 
     if (!isFiltered) {
         infoEl.innerHTML = `
             <div class="results-count">
-                <span>Total <strong>${total}</strong> ${typeNoun} terdaftar</span>
+                <span>Menampilkan <strong>${count}</strong> ${typeNoun} aktif</span>
             </div>
         `;
         return;
     }
 
     let tagsHtml = '';
+    if (activeCat !== 'all') tagsHtml += `<span class="filter-tag">🏷️ Kategori: ${activeCat}</span>`;
     if (searchVal) tagsHtml += `<span class="filter-tag">🔍 "${searchVal}"</span>`;
     if (katVal !== 'semua') tagsHtml += `<span class="filter-tag">📂 ${katVal}</span>`;
     if (statusVal !== 'semua') tagsHtml += `<span class="filter-tag">🔘 ${statusVal}</span>`;
+    if (!onlyActive) tagsHtml += `<span class="filter-tag">🕒 Termasuk Ditutup</span>`;
 
     infoEl.innerHTML = `
         <div class="results-count">
@@ -984,19 +1136,60 @@ function updateResultsInfo(type, count, total) {
 }
 
 function filterData(type) {
-    const searchValue = document.getElementById(`search${capitalize(type)}`).value.toLowerCase().trim();
-    const kategoriValue = document.getElementById(`filterKategori${capitalize(type)}`).value;
-    const statusValue = document.getElementById(`filterStatus${capitalize(type)}`).value;
+    const searchValue = document.getElementById(`search${capitalize(type)}`)?.value.toLowerCase().trim() || '';
+    const kategoriValue = document.getElementById(`filterKategori${capitalize(type)}`)?.value || 'semua';
+    const statusValue = document.getElementById(`filterStatus${capitalize(type)}`)?.value || 'semua';
     
     const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
+    const activeCat = type === 'beasiswa' ? activeBeasiswaCategory : activeLombaCategory;
+    const onlyActive = type === 'beasiswa' ? onlyActiveBeasiswa : onlyActiveLomba;
 
     const filtered = sourceData.filter(item => {
+        const daysLeft = getDaysLeft(item.deadline);
+        const isOpen = item.status === 'Buka';
+
+        // 1. Only active filter ("Hanya yang Buka")
+        if (onlyActive) {
+            if (!isOpen || daysLeft < 0) return false;
+        }
+
+        // 2. Category Hub selection filter
+        if (activeCat !== 'all') {
+            if (activeCat === 'urgent') {
+                if (!isOpen || daysLeft < 0 || daysLeft > 7) return false;
+            } else if (type === 'beasiswa') {
+                if (activeCat === 'Berprestasi' && !item.kategori.toLowerCase().includes('prestasi')) return false;
+                if (activeCat === 'Kurang mampu' && (!item.kategori.toLowerCase().includes('kurang mampu') && !item.kategori.toLowerCase().includes('finansial'))) return false;
+                if (activeCat === 'Umum' && (!item.kategori.toLowerCase().includes('umum') && !item.kategori.toLowerCase().includes('riset'))) return false;
+            } else if (type === 'lomba') {
+                if (activeCat === 'lkti') {
+                    const matchLKTI = (item.cabangLomba && /kti|essay|paper|karya tulis/i.test(item.cabangLomba)) || /kti|essay|paper|karya tulis/i.test(item.nama);
+                    if (!matchLKTI) return false;
+                } else if (activeCat === 'poster') {
+                    const matchPoster = (item.cabangLomba && /poster|infografis|desain|video/i.test(item.cabangLomba)) || /poster|infografis|desain|video/i.test(item.nama);
+                    if (!matchPoster) return false;
+                } else if (activeCat === 'olympiad') {
+                    const matchOly = (item.cabangLomba && /olimpiade|olympiad|biomed|meddips|medsco|kedokteran|cedec/i.test(item.cabangLomba)) || /olimpiade|olympiad|biomed|meddips|medsco|kedokteran|cedec/i.test(item.nama);
+                    if (!matchOly) return false;
+                } else if (activeCat === 'gratis') {
+                    const matchFree = item.biaya === 'Gratis' || (item.benefit && item.benefit.some(b => /gratis/i.test(b)));
+                    if (!matchFree) return false;
+                }
+            }
+        }
+
+        // 3. Search query
         const matchSearch = !searchValue || item.nama.toLowerCase().includes(searchValue)
             || (item.penyelenggara && item.penyelenggara.toLowerCase().includes(searchValue))
             || (item.cabangLomba && item.cabangLomba.toLowerCase().includes(searchValue));
+
+        // 4. Dropdown Kategori
         const matchKategori = kategoriValue === 'semua' || item.kategori === kategoriValue
             || (item.skala && item.skala === kategoriValue);
+
+        // 5. Dropdown Status
         const matchStatus = statusValue === 'semua' || item.status === statusValue;
+
         return matchSearch && matchKategori && matchStatus;
     });
 
@@ -1138,14 +1331,10 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
 });
 
-// Modal Bookmark button
+// Modal Bookmark button → Buka Folder Modal ala TikTok
 document.getElementById('modalBookmarkBtn').addEventListener('click', () => {
     if (!currentModalData) return;
-    toggleWatchlist(currentModalData.id, currentModalType);
-    renderWatchlist();
-    renderCards('beasiswa', beasiswaData);
-    renderCards('lomba', lombaData);
-    lucide.createIcons();
+    openFolderModal(currentModalData, currentModalType);
 });
 
 // Modal Share WA button
@@ -1215,29 +1404,14 @@ setInterval(() => {
 }, 1000);
 
 // ═══════════════════════════════════════════════════════════════
-// WATCHLIST
+// WATCHLIST & TIKTOK-STYLE BOOKMARK COLLECTIONS
 // ═══════════════════════════════════════════════════════════════
 function isInWatchlist(id, type) {
     return watchlist.some(w => w.id === id && w.type === type);
 }
 
-function toggleWatchlist(id, type) {
-    const existing = watchlist.findIndex(w => w.id === id && w.type === type);
-    if (existing >= 0) {
-        watchlist.splice(existing, 1);
-        showToast('Dihapus dari bookmark');
-    } else {
-        const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
-        const item = sourceData.find(d => d.id === id);
-        if (item) {
-            watchlist.push({ id, type, nama: item.nama, deadline: item.deadline, status: item.status });
-            showToast('✅ Disimpan ke bookmark!');
-        }
-    }
-    localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
-    updateBookmarkBadge();
-    if (currentModalData) updateModalBookmarkBtn(currentModalData);
-    renderWatchlist();
+function getWatchlistItem(id, type) {
+    return watchlist.find(w => w.id === id && w.type === type);
 }
 
 function updateModalBookmarkBtn(item) {
@@ -1246,7 +1420,7 @@ function updateModalBookmarkBtn(item) {
     const type = currentModalType;
     const isBookmarked = type ? isInWatchlist(item.id, type) : false;
     btn.classList.toggle('bookmarked', isBookmarked);
-    btn.title = isBookmarked ? 'Hapus dari bookmark' : 'Simpan ke bookmark';
+    btn.title = isBookmarked ? 'Kelola folder bookmark' : 'Simpan ke bookmark';
     btn.innerHTML = `<i data-lucide="${isBookmarked ? 'bookmark-check' : 'bookmark'}"></i> ${isBookmarked ? 'Tersimpan' : 'Bookmark'}`;
     lucide.createIcons();
 }
@@ -1263,6 +1437,260 @@ function updateBookmarkBadge() {
         badge.classList.add('zero');
         badge.classList.remove('has-items');
     }
+}
+
+// ── Folder Selection Modal Logic ──
+function initFolderModal() {
+    const overlay = document.getElementById('folderModalOverlay');
+    const closeBtn = document.getElementById('folderModalClose');
+    const saveBtn = document.getElementById('btnSaveToFolders');
+    const createBtn = document.getElementById('btnCreateNewFolder');
+    const nameInput = document.getElementById('newFolderNameInput');
+    const openNewFolderBtn = document.getElementById('btnOpenNewFolderModal');
+
+    if (closeBtn) closeBtn.addEventListener('click', closeFolderModal);
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeFolderModal();
+        });
+    }
+
+    if (saveBtn) saveBtn.addEventListener('click', saveFoldersSelection);
+
+    const handleCreateFolder = () => {
+        if (!nameInput) return;
+        const name = nameInput.value.trim();
+        if (!name) return;
+        createNewFolder(name);
+        nameInput.value = '';
+    };
+
+    if (createBtn) createBtn.addEventListener('click', handleCreateFolder);
+    if (nameInput) {
+        nameInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleCreateFolder();
+            }
+        });
+    }
+
+    // Button "+ Folder Baru" di bagian bookmark section
+    if (openNewFolderBtn) {
+        openNewFolderBtn.addEventListener('click', () => {
+            const folderName = prompt('Masukkan nama folder koleksi baru (cth: Target Riset 2026):');
+            if (folderName && folderName.trim()) {
+                createNewFolder(folderName.trim());
+                showToast(`📁 Folder "${folderName.trim()}" berhasil dibuat!`);
+            }
+        });
+    }
+}
+
+function openFolderModal(item, type) {
+    const overlay = document.getElementById('folderModalOverlay');
+    const nameEl = document.getElementById('folderModalItemName');
+    if (!overlay || !item) return;
+
+    const existing = getWatchlistItem(item.id, type);
+    let tempFolders = [];
+    if (existing && existing.folders && existing.folders.length > 0) {
+        tempFolders = [...existing.folders];
+    } else {
+        // Default: tambahkan ke 'Semua Tersimpan' dan folder yang sedang aktif (jika ada)
+        tempFolders = ['Semua Tersimpan'];
+        if (activeCollection && activeCollection !== 'Semua Tersimpan' && !tempFolders.includes(activeCollection)) {
+            tempFolders.push(activeCollection);
+        }
+    }
+
+    pendingFolderTarget = {
+        id: item.id,
+        type: type,
+        item: item,
+        tempFolders: tempFolders
+    };
+
+    if (nameEl) {
+        nameEl.textContent = `${type === 'beasiswa' ? '🎓' : '🏆'} ${item.nama}`;
+    }
+
+    renderFolderList();
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
+}
+
+function closeFolderModal() {
+    const overlay = document.getElementById('folderModalOverlay');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    pendingFolderTarget = null;
+    const nameInput = document.getElementById('newFolderNameInput');
+    if (nameInput) nameInput.value = '';
+}
+
+function renderFolderList() {
+    const listEl = document.getElementById('folderList');
+    if (!listEl || !pendingFolderTarget) return;
+
+    listEl.innerHTML = collections.map(folder => {
+        const isChecked = pendingFolderTarget.tempFolders.includes(folder);
+        return `
+            <div class="folder-item ${isChecked ? 'selected' : ''}" data-folder="${folder}">
+                <div class="folder-item-left">
+                    <i data-lucide="${folder === 'Semua Tersimpan' ? 'bookmark' : 'folder'}"></i>
+                    <span>${folder}</span>
+                </div>
+                <input type="checkbox" class="folder-checkbox" ${isChecked ? 'checked' : ''} data-folder="${folder}">
+            </div>
+        `;
+    }).join('');
+
+    listEl.querySelectorAll('.folder-item').forEach(itemEl => {
+        itemEl.addEventListener('click', (e) => {
+            const folder = itemEl.dataset.folder;
+            const checkbox = itemEl.querySelector('.folder-checkbox');
+            if (e.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+            if (checkbox.checked) {
+                if (!pendingFolderTarget.tempFolders.includes(folder)) {
+                    pendingFolderTarget.tempFolders.push(folder);
+                }
+                itemEl.classList.add('selected');
+            } else {
+                pendingFolderTarget.tempFolders = pendingFolderTarget.tempFolders.filter(f => f !== folder);
+                itemEl.classList.remove('selected');
+            }
+        });
+    });
+
+    lucide.createIcons();
+}
+
+function createNewFolder(name) {
+    if (!name) return;
+    if (!collections.includes(name)) {
+        collections.push(name);
+        localStorage.setItem('kesmanews-collections', JSON.stringify(collections));
+    }
+    if (pendingFolderTarget && !pendingFolderTarget.tempFolders.includes(name)) {
+        pendingFolderTarget.tempFolders.push(name);
+    }
+    renderFolderList();
+    renderCollectionsTabs();
+    showToast(`📁 Folder "${name}" ditambahkan!`);
+}
+
+function deleteFolder(folderName) {
+    if (folderName === 'Semua Tersimpan') return;
+    if (!confirm(`Hapus folder "${folderName}"? (Item di dalamnya tidak terhapus dan tetap ada di folder lain)`)) return;
+
+    collections = collections.filter(f => f !== folderName);
+    localStorage.setItem('kesmanews-collections', JSON.stringify(collections));
+
+    // Bersihkan nama folder dari watchlist
+    watchlist.forEach(w => {
+        if (w.folders) {
+            w.folders = w.folders.filter(f => f !== folderName);
+            if (w.folders.length === 0) w.folders = ['Semua Tersimpan'];
+        }
+    });
+    localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
+
+    if (activeCollection === folderName) {
+        activeCollection = 'Semua Tersimpan';
+    }
+
+    renderCollectionsTabs();
+    renderWatchlist();
+    showToast(`Folder "${folderName}" dihapus`);
+}
+
+function saveFoldersSelection() {
+    if (!pendingFolderTarget) return;
+
+    const { id, type, item, tempFolders } = pendingFolderTarget;
+    const existingIndex = watchlist.findIndex(w => w.id === id && w.type === type);
+
+    if (tempFolders.length === 0) {
+        // Jika semua folder di-uncheck, hapus dari watchlist
+        if (existingIndex >= 0) {
+            watchlist.splice(existingIndex, 1);
+            showToast('Dihapus dari bookmark');
+        }
+    } else {
+        if (existingIndex >= 0) {
+            watchlist[existingIndex].folders = [...tempFolders];
+        } else {
+            watchlist.push({
+                id,
+                type,
+                nama: item.nama,
+                deadline: item.deadline,
+                status: item.status,
+                folders: [...tempFolders]
+            });
+        }
+        showToast(`✅ Disimpan ke ${tempFolders.length} folder!`);
+    }
+
+    localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
+    updateBookmarkBadge();
+    if (currentModalData && currentModalData.id === id) {
+        updateModalBookmarkBtn(currentModalData);
+    }
+
+    renderWatchlist();
+    renderCards('beasiswa', beasiswaData);
+    renderCards('lomba', lombaData);
+    closeFolderModal();
+    lucide.createIcons();
+}
+
+function renderCollectionsTabs() {
+    const tabsBar = document.getElementById('collectionsTabsBar');
+    if (!tabsBar) return;
+
+    tabsBar.innerHTML = collections.map(folder => {
+        const count = folder === 'Semua Tersimpan'
+            ? watchlist.length
+            : watchlist.filter(w => w.folders && w.folders.includes(folder)).length;
+        const isActive = activeCollection === folder;
+        const isDeletable = folder !== 'Semua Tersimpan';
+
+        return `
+            <div class="collection-tab ${isActive ? 'active' : ''}" data-folder="${folder}">
+                <i data-lucide="${folder === 'Semua Tersimpan' ? 'bookmark' : 'folder'}"></i>
+                <span>${folder}</span>
+                <span class="collection-tab-count">${count}</span>
+                ${isDeletable ? `
+                    <button type="button" class="btn-delete-folder" data-folder="${folder}" title="Hapus folder">
+                        <i data-lucide="trash-2"></i>
+                    </button>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+
+    tabsBar.querySelectorAll('.collection-tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            if (e.target.closest('.btn-delete-folder')) return;
+            activeCollection = tab.dataset.folder;
+            renderCollectionsTabs();
+            renderWatchlist();
+            lucide.createIcons();
+        });
+    });
+
+    tabsBar.querySelectorAll('.btn-delete-folder').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteFolder(btn.dataset.folder);
+        });
+    });
 }
 
 function initBookmarkToolbar() {
@@ -1298,6 +1726,7 @@ function renderWatchlist() {
     const grid = document.getElementById('watchlistGrid');
     const empty = document.getElementById('watchlistEmpty');
     const toolbar = document.getElementById('watchlistToolbar');
+    const collectionsSection = document.getElementById('bookmarkCollectionsSection');
     if (!grid || !empty) return;
 
     // Update counts
@@ -1314,14 +1743,25 @@ function renderWatchlist() {
 
     if (watchlist.length === 0) {
         if (toolbar) toolbar.classList.add('hidden');
+        if (collectionsSection) collectionsSection.classList.add('hidden');
         grid.classList.add('hidden');
         empty.classList.remove('hidden');
     } else {
         if (toolbar) toolbar.classList.remove('hidden');
+        if (collectionsSection) collectionsSection.classList.remove('hidden');
         grid.classList.remove('hidden');
         empty.classList.add('hidden');
 
-        const filtered = watchlist.filter(w => {
+        renderCollectionsTabs();
+
+        // 1. Filter berdasarkan Folder Aktif
+        let folderFiltered = watchlist;
+        if (activeCollection && activeCollection !== 'Semua Tersimpan') {
+            folderFiltered = watchlist.filter(w => w.folders && w.folders.includes(activeCollection));
+        }
+
+        // 2. Filter berdasarkan Tipe (Semua / Beasiswa / Lomba)
+        const filtered = folderFiltered.filter(w => {
             if (currentBookmarkFilter === 'beasiswa') return w.type === 'beasiswa';
             if (currentBookmarkFilter === 'lomba') return w.type === 'lomba';
             return true;
@@ -1329,25 +1769,35 @@ function renderWatchlist() {
 
         if (filtered.length === 0) {
             grid.innerHTML = `
-                <div style="text-align:center; padding: 32px 20px; color: var(--color-text-secondary); background: var(--color-surface); border-radius: var(--radius-md); border: 1px dashed var(--color-border);">
-                    <p style="margin:0; font-size:0.9rem;">Tidak ada bookmark tersimpan untuk kategori <strong>${currentBookmarkFilter === 'beasiswa' ? 'Beasiswa' : 'Lomba'}</strong>.</p>
+                <div style="text-align:center; padding: 32px 20px; color: var(--color-text-secondary); background: var(--color-surface); border-radius: var(--radius-md); border: 1px dashed var(--color-border); width: 100%;">
+                    <p style="margin:0; font-size:0.9rem;">Tidak ada item tersimpan di folder <strong>"${activeCollection}"</strong> untuk filter <strong>${currentBookmarkFilter === 'beasiswa' ? 'Beasiswa' : currentBookmarkFilter === 'lomba' ? 'Lomba' : 'Semua'}</strong>.</p>
                 </div>
             `;
         } else {
             grid.innerHTML = filtered.map(w => {
                 const daysLeft = getDaysLeft(w.deadline);
                 const isExpired = daysLeft < 0;
+                const folderBadges = (w.folders || [])
+                    .filter(f => f !== 'Semua Tersimpan')
+                    .map(f => `<span style="font-size:0.7rem;padding:2px 6px;border-radius:4px;background:rgba(46,196,182,0.12);color:var(--color-accent-dark);margin-right:4px;">📁 ${f}</span>`)
+                    .join('');
+
                 return `
                     <div class="watchlist-item ${isExpired ? 'expired' : ''}" data-id="${w.id}" data-type="${w.type}" style="cursor:pointer;">
                         <div class="watchlist-info">
-                            <span class="watchlist-type-badge">${w.type === 'beasiswa' ? '🎓 Beasiswa' : '🏆 Lomba'}</span>
+                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
+                                <span class="watchlist-type-badge">${w.type === 'beasiswa' ? '🎓 Beasiswa' : '🏆 Lomba'}</span>
+                                ${folderBadges}
+                            </div>
                             <p class="watchlist-nama">${w.nama}</p>
                             <span class="watchlist-deadline ${isExpired ? 'expired-text' : ''}">
                                 📅 ${w.deadline !== '2099-12-31' ? formatDate(w.deadline) : 'Lihat info'} — ${w.deadline !== '2099-12-31' ? getCountdownText(w.deadline) : '–'}
                             </span>
                         </div>
                         <div class="watchlist-actions">
-                            <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--color-text-secondary);flex-shrink:0;"></i>
+                            <button class="btn-watchlist-folder" data-id="${w.id}" data-type="${w.type}" title="Kelola folder" style="background:none;border:none;color:var(--color-accent);cursor:pointer;padding:6px;display:inline-flex;align-items:center;">
+                                <i data-lucide="folder-cog"></i>
+                            </button>
                             <button class="btn-watchlist-remove" data-id="${w.id}" data-type="${w.type}" title="Hapus dari bookmark">
                                 <i data-lucide="trash-2"></i>
                             </button>
@@ -1360,7 +1810,7 @@ function renderWatchlist() {
         // Click on item → open modal
         grid.querySelectorAll('.watchlist-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                if (e.target.closest('.btn-watchlist-remove')) return;
+                if (e.target.closest('.btn-watchlist-remove') || e.target.closest('.btn-watchlist-folder')) return;
                 const id = parseInt(item.dataset.id);
                 const type = item.dataset.type;
                 const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
@@ -1369,15 +1819,35 @@ function renderWatchlist() {
             });
         });
 
+        // Folder manage handlers
+        grid.querySelectorAll('.btn-watchlist-folder').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.dataset.id);
+                const type = btn.dataset.type;
+                const sourceData = type === 'beasiswa' ? beasiswaData : lombaData;
+                const found = sourceData.find(d => d.id === id);
+                if (found) openFolderModal(found, type);
+            });
+        });
+
         // Remove handlers
         grid.querySelectorAll('.btn-watchlist-remove').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                toggleWatchlist(parseInt(btn.dataset.id), btn.dataset.type);
-                renderWatchlist();
-                renderCards('beasiswa', beasiswaData);
-                renderCards('lomba', lombaData);
-                lucide.createIcons();
+                const id = parseInt(btn.dataset.id);
+                const type = btn.dataset.type;
+                const existing = watchlist.findIndex(w => w.id === id && w.type === type);
+                if (existing >= 0) {
+                    watchlist.splice(existing, 1);
+                    localStorage.setItem('kesmanews-watchlist', JSON.stringify(watchlist));
+                    updateBookmarkBadge();
+                    renderWatchlist();
+                    renderCards('beasiswa', beasiswaData);
+                    renderCards('lomba', lombaData);
+                    showToast('Dihapus dari bookmark');
+                    lucide.createIcons();
+                }
             });
         });
     }

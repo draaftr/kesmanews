@@ -22,7 +22,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.3.0">
+    <link rel="stylesheet" href="style.css?v=2.4.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -125,6 +125,11 @@
                 <p class="section-desc">Kumpulan informasi beasiswa terbaru yang telah dikurasi untuk mahasiswa</p>
             </div>
 
+            <!-- Category Cards Hub for Beasiswa -->
+            <div class="category-hub reveal" id="beasiswaCategoryHub">
+                <!-- Dynamically rendered category cards -->
+            </div>
+
             <!-- Search & Filter -->
             <div class="filter-bar reveal">
                 <div class="search-wrapper">
@@ -132,6 +137,10 @@
                     <input type="text" class="search-input" id="searchBeasiswa" placeholder="Cari beasiswa...">
                 </div>
                 <div class="filter-group">
+                    <button type="button" class="filter-toggle-pill active" id="toggleActiveBeasiswaBtn" title="Tampilkan hanya beasiswa yang masih aktif dan buka">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>Hanya yang Buka</span>
+                    </button>
                     <div class="filter-select-wrapper">
                         <i data-lucide="filter" class="filter-icon"></i>
                         <select class="filter-select" id="filterKategoriBeasiswa">
@@ -202,6 +211,11 @@
                 <p class="section-desc">Kumpulan informasi kompetisi dan lomba terbaru untuk mengasah kemampuanmu</p>
             </div>
 
+            <!-- Category Cards Hub for Lomba -->
+            <div class="category-hub reveal" id="lombaCategoryHub">
+                <!-- Dynamically rendered category cards -->
+            </div>
+
             <!-- Search & Filter -->
             <div class="filter-bar reveal">
                 <div class="search-wrapper">
@@ -209,6 +223,10 @@
                     <input type="text" class="search-input" id="searchLomba" placeholder="Cari lomba...">
                 </div>
                 <div class="filter-group">
+                    <button type="button" class="filter-toggle-pill active" id="toggleActiveLombaBtn" title="Tampilkan hanya lomba yang masih aktif dan buka">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>Hanya yang Buka</span>
+                    </button>
                     <div class="filter-select-wrapper">
                         <i data-lucide="filter" class="filter-icon"></i>
                         <select class="filter-select" id="filterKategoriLomba">
@@ -277,6 +295,20 @@
                 </div>
                 <h2 class="section-title">Bookmark Saya</h2>
                 <p class="section-desc">Simpan beasiswa &amp; lomba incaranmu untuk memantau deadline dengan mudah</p>
+            </div>
+
+            <!-- Bookmark Collections / Folder Hub (TikTok-style) -->
+            <div class="bookmark-collections-section hidden" id="bookmarkCollectionsSection">
+                <div class="collections-header">
+                    <span class="collections-title"><i data-lucide="folders"></i> Folder Koleksi</span>
+                    <button type="button" class="btn-create-folder" id="btnOpenNewFolderModal">
+                        <i data-lucide="folder-plus"></i>
+                        <span>+ Folder Baru</span>
+                    </button>
+                </div>
+                <div class="collections-tabs-bar" id="collectionsTabsBar">
+                    <!-- Dynamic collection folder tabs -->
+                </div>
             </div>
 
             <!-- Bookmark Toolbar (Filter Tabs + Clear All) -->
@@ -737,6 +769,43 @@
     </div>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- FOLDER MODAL FOR BOOKMARK (TikTok / IG Style) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="folderModalOverlay">
+        <div class="modal modal-folder" id="folderModal">
+            <button class="modal-close" id="folderModalClose" aria-label="Close folder modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title" style="font-size:1.15rem;display:flex;align-items:center;gap:8px;">
+                    <i data-lucide="folder-heart" style="color:var(--color-accent);"></i> Simpan ke Folder
+                </h2>
+                <p class="modal-folder-item-title" id="folderModalItemName"></p>
+            </div>
+            <div class="modal-body">
+                <div class="folder-selection-instruction">Pilih satu atau beberapa folder untuk menyimpan:</div>
+                <div class="folder-list" id="folderList">
+                    <!-- Dynamic folder checkboxes -->
+                </div>
+                <div class="folder-create-box">
+                    <div class="folder-input-wrapper">
+                        <i data-lucide="folder-plus"></i>
+                        <input type="text" id="newFolderNameInput" placeholder="Nama folder baru (cth: Lomba Tim 2026)..." maxlength="30">
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" id="btnCreateNewFolder">
+                        <span>+ Tambah</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg" id="btnSaveToFolders" style="width:100%;justify-content:center;">
+                    <i data-lucide="check"></i> <span>Simpan Pilihan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- BACK TO TOP                                 -->
     <!-- ═══════════════════════════════════════════ -->
     <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
@@ -744,6 +813,6 @@
     </button>
 
     <!-- Scripts -->
-    <script src="app.js?v=2.3.0"></script>
+    <script src="app.js?v=2.4.0"></script>
 </body>
 </html>
