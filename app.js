@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 // ─── Google Sheets Config ──────────────────────────────────────
-const SHEET_ID = '1PnW8SKd8X0cdC8oK2DRMkU7gNA4nEX7aG--7fmYZ0uo';
+const SHEET_ID = '1wcSSGnKdnI5-hqB4WjZjabwCUbP2_BCtHZl33h1m99Q';
 const SHEET_BEASISWA_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
 const SHEET_LOMBA_URL    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=157846337`;
 
