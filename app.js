@@ -287,6 +287,17 @@ function extractLinks(infoText, nama = '') {
         };
     }
 
+    // Deteksi INHESCOM: link di spreadsheet berupa hyperlink tersembunyi (tidak terbaca via CSV)
+    // Link resmi: https://drive.google.com/drive/folders/1M9WR3CONff4SVuTljWUQ1XRVTSnFUOsM
+    if (/inhescom/i.test(nama) || /inhescom/i.test(infoText)) {
+        return {
+            linkDaftar: 'https://drive.google.com/drive/folders/1M9WR3CONff4SVuTljWUQ1XRVTSnFUOsM',
+            linkGuidebook: '',
+            linkDaftarLabel: 'Daftar'
+        };
+    }
+
+
     // Deteksi akun Instagram seperti @gneuronics2026 atau @dscric
     const igMatch = infoText.match(/@([a-zA-Z0-9._]+)/);
     const urlRegex = /(?:https?:\/\/)[^\s)\]>"'<>]+|(?:www\.)[^\s)\]>"'<>]+|(?:[a-zA-Z0-9-]+\.)+(?:com|org|net|id|ac\.id|co\.id|io|app|ly|as|gl|me|ee|bio|site|tech|ai|dev)(?:\/[^\s)\]>"'<>]*)?/gi;
