@@ -281,7 +281,7 @@ function extractLinks(infoText, nama = '') {
     // Deteksi portal kampus ITS (myITS Student Connect)
     if (/myits|student\s*connect/i.test(infoText)) {
         return {
-            linkDaftar: 'https://kemahasiswaan.its.ac.id/beasiswa/tawaran',
+            linkDaftar: 'https://kemahasiswaan.its.ac.id/beasiswa/informasi',
             linkGuidebook: '',
             linkDaftarLabel: 'Buka myITS'
         };
