@@ -1,4 +1,4 @@
-# KESMA NEWS — Portal Info Beasiswa & Lomba
+# MyAdkesmaPortal — Portal Info Beasiswa & Lomba
 
 Website informatif dari **Departemen Advokasi & Kesejahteraan Mahasiswa (Adkesma)**, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
 
@@ -80,7 +80,7 @@ Setelah mengubah data JSON, upload ulang folder ke Netlify:
 ## 📁 Struktur File
 
 ```
-KESMANEWS/
+MyAdkesmaPortal/
 ├── index.html          → Halaman utama website
 ├── style.css           → Semua styling & desain
 ├── app.js              → Logic: render data, filter, search, dll

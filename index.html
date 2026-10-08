@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KESMA NEWS — Info Beasiswa & Lomba | HMTK</title>
-    <meta name="description" content="Pusat informasi beasiswa dan lomba terkini untuk mahasiswa. Dikelola oleh Departemen Adkesma, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).">
-    <meta name="keywords" content="beasiswa, lomba, mahasiswa, HMTK, teknologi kedokteran, adkesma, kesma news">
+    <title>MyAdkesmaPortal — Suarakan. Temukan. Raih. | Adkesma HMTK</title>
+    <meta name="description" content="MyAdkesmaPortal: portal resmi Departemen Adkesma HMTK untuk menyampaikan aspirasi lewat Advoice serta menemukan info beasiswa dan lomba terkini.">
+    <meta name="keywords" content="myadkesmaportal, advoice, pengaduan mahasiswa, beasiswa, lomba, HMTK, teknologi kedokteran, adkesma">
     <meta name="author" content="Departemen Adkesma HMTK">
+    <meta name="theme-color" content="#0C1CFF">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="KESMA NEWS — Info Beasiswa & Lomba | HMTK">
-    <meta property="og:description" content="Pusat informasi beasiswa dan lomba terkini untuk mahasiswa Teknologi Kedokteran.">
+    <meta property="og:title" content="MyAdkesmaPortal — Suarakan. Temukan. Raih.">
+    <meta property="og:description" content="Portal Adkesma HMTK: Advoice (pengaduan akademik & non-akademik), info beasiswa, dan lomba.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/adkesma-hero.jpg">
     
     <!-- Fonts (Plus Jakarta Sans - Unified Modern Typography) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +24,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.4.0">
+    <link rel="stylesheet" href="style.css?v=3.0.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -32,12 +34,13 @@
         <div class="nav-container">
             <a href="#beranda" class="nav-brand">
                 <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
-                <span class="nav-title">KESMA<span class="nav-title-accent">NEWS</span></span>
+                <span class="nav-title">My<span class="nav-title-accent">Adkesma</span>Portal</span>
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="#beranda" class="nav-link active" data-section="beranda">Beranda</a>
                 <a href="#beasiswa" class="nav-link" data-section="beasiswa">Beasiswa</a>
                 <a href="#lomba" class="nav-link" data-section="lomba">Lomba</a>
+                <a href="#advoice" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
                 <a href="#bookmark" class="nav-link" data-section="bookmark">
                     Bookmark
                     <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
@@ -61,6 +64,8 @@
     <!-- HERO SECTION                                -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="hero" id="beranda">
+        <div class="hero-photo" role="img" aria-label="Foto bersama Departemen Adkesma HMTK"></div>
+        <div class="hero-photo-overlay"></div>
         <div class="hero-bg-shapes">
             <div class="hero-shape hero-shape-1"></div>
             <div class="hero-shape hero-shape-2"></div>
@@ -72,20 +77,26 @@
                 <span>Departemen Adkesma HMTK</span>
             </div>
             <h1 class="hero-title">
-                KESMA<span class="hero-title-accent">NEWS</span>
+                My<span class="hero-title-accent">Adkesma</span>Portal
             </h1>
-            <p class="hero-subtitle">
-                Pusat Informasi <span class="hero-highlight">Beasiswa</span> & <span class="hero-highlight">Lomba</span> untuk Mahasiswa
+            <p class="hero-subtitle hero-tagline">
+                <span class="tagline-word">Suarakan.</span>
+                <span class="tagline-word">Temukan.</span>
+                <span class="tagline-word tagline-word-accent">Raih.</span>
             </p>
             <p class="hero-desc">
-                Temukan peluang beasiswa dan kompetisi terbaru yang telah dikurasi khusus untuk mahasiswa. Diperbarui secara berkala oleh Departemen Advokasi & Kesejahteraan Mahasiswa HMTK.
+                Satu portal untuk mahasiswa Teknologi Kedokteran: sampaikan keluhan lewat <strong>Advoice</strong>, temukan peluang <strong>Beasiswa</strong> &amp; <strong>Lomba</strong> terbaru. Dikelola Departemen Advokasi &amp; Kesejahteraan Mahasiswa HMTK.
             </p>
             <div class="hero-cta">
-                <a href="#beasiswa" class="btn btn-primary">
+                <a href="#advoice" class="btn btn-primary btn-lg btn-hero-advoice">
+                    <i data-lucide="megaphone"></i>
+                    Sampaikan Advoice
+                </a>
+                <a href="#beasiswa" class="btn btn-secondary btn-lg">
                     <i data-lucide="graduation-cap"></i>
                     Lihat Beasiswa
                 </a>
-                <a href="#lomba" class="btn btn-secondary">
+                <a href="#lomba" class="btn btn-secondary btn-lg">
                     <i data-lucide="trophy"></i>
                     Lihat Lomba
                 </a>
@@ -285,12 +296,86 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- ADVOICE SECTION                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section advoice-section" id="advoice">
+        <div class="section-container">
+            <div class="advoice-hero reveal">
+                <div class="advoice-hero-content">
+                    <div class="advoice-eyebrow">
+                        <i data-lucide="megaphone"></i>
+                        <span>Proker Departemen Adkesma</span>
+                    </div>
+                    <h2 class="advoice-title">AD<span>VOICE</span></h2>
+                    <p class="advoice-lead">
+                        Wadah resmi bagi mahasiswa untuk menyampaikan <strong>keluhan akademik maupun non-akademik</strong>. Suaramu kami dengar, kami kawal, dan kami tindak lanjuti bersama pihak terkait.
+                    </p>
+                    <div class="advoice-cta">
+                        <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-advoice-main" id="btnAdvoiceForm">
+                            <i data-lucide="send"></i>
+                            Isi Form Advoice
+                        </a>
+                        <button type="button" class="btn btn-ghost-light btn-lg" id="btnCopyAdvoice">
+                            <i data-lucide="link"></i>
+                            Salin Link
+                        </button>
+                    </div>
+                </div>
+                <div class="advoice-hero-visual" aria-hidden="true">
+                    <div class="advoice-bubble advoice-bubble-1"><i data-lucide="graduation-cap"></i> Akademik</div>
+                    <div class="advoice-bubble advoice-bubble-2"><i data-lucide="heart-handshake"></i> Non-Akademik</div>
+                    <div class="advoice-bubble-main"><i data-lucide="megaphone"></i></div>
+                </div>
+            </div>
+
+            <div class="advoice-categories reveal">
+                <div class="advoice-cat-card">
+                    <div class="advoice-cat-icon"><i data-lucide="book-open-check"></i></div>
+                    <h3>Keluhan Akademik</h3>
+                    <p>Kendala perkuliahan seperti jadwal, penilaian, kurikulum, dosen, praktikum, hingga fasilitas pembelajaran.</p>
+                </div>
+                <div class="advoice-cat-card">
+                    <div class="advoice-cat-icon"><i data-lucide="users-round"></i></div>
+                    <h3>Keluhan Non-Akademik</h3>
+                    <p>Hal di luar perkuliahan seperti fasilitas kampus, organisasi, kesejahteraan, dan kehidupan kemahasiswaan.</p>
+                </div>
+            </div>
+
+            <div class="advoice-steps reveal">
+                <h3 class="advoice-steps-title">Bagaimana Advoice Bekerja?</h3>
+                <div class="advoice-steps-grid">
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">01</span>
+                        <h4>Tulis Keluhanmu</h4>
+                        <p>Isi Form Advoice dengan jelas: kategori, kronologi, dan harapanmu.</p>
+                    </div>
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">02</span>
+                        <h4>Kami Tinjau</h4>
+                        <p>Tim Adkesma HMTK membaca, memilah, dan memverifikasi laporan yang masuk.</p>
+                    </div>
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">03</span>
+                        <h4>Kami Kawal</h4>
+                        <p>Aspirasi disampaikan dan diperjuangkan ke pihak terkait yang berwenang.</p>
+                    </div>
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">04</span>
+                        <h4>Tindak Lanjut</h4>
+                        <p>Perkembangan dikabarkan lewat media resmi Adkesma HMTK.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- BOOKMARK SECTION                            -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="section" id="bookmark">
         <div class="section-container">
             <div class="section-header reveal">
-                <div class="section-icon-wrapper" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <div class="section-icon-wrapper" style="background: linear-gradient(135deg, #F2EB2A, #E0D27A); color: #222222;">
                     <i data-lucide="bookmark"></i>
                 </div>
                 <h2 class="section-title">Bookmark Saya</h2>
@@ -398,7 +483,7 @@
                         </div>
 
                         <!-- Quick Share Button -->
-                        <button type="button" class="btn-about-share" id="btnAboutShare" title="Salin link portal KESMA NEWS">
+                        <button type="button" class="btn-about-share" id="btnAboutShare" title="Salin link portal MyAdkesmaPortal">
                             <i data-lucide="share-2"></i>
                             <span>Bagikan Portal</span>
                         </button>
@@ -413,11 +498,11 @@
                     </div>
 
                     <h2 class="about-heading">
-                        Jembatan Peluang &amp; Prestasi <span class="about-accent">Mahasiswa HMTK</span>
+                        Suara, Peluang &amp; Prestasi <span class="about-accent">Mahasiswa HMTK</span>
                     </h2>
 
                     <p class="about-lead">
-                        <strong>KESMA NEWS</strong> adalah platform resmi persembahan <strong>Departemen Advokasi dan Kesejahteraan Mahasiswa (Adkesma)</strong>, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
+                        <strong>MyAdkesmaPortal</strong> adalah platform resmi persembahan <strong>Departemen Advokasi dan Kesejahteraan Mahasiswa (Adkesma)</strong>, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
                     </p>
 
                     <!-- Interactive Tab Navigation Buttons -->
@@ -519,7 +604,7 @@
                                             <i data-lucide="send"></i>
                                             <h4>Publikasi &amp; Pendampingan</h4>
                                         </div>
-                                        <p>Informasi dirilis rapi di portal KESMA NEWS dan media Adkesma. Mahasiswa yang butuh asistensi atau konsultasi advokasi siap didampingi.</p>
+                                        <p>Informasi dirilis rapi di portal MyAdkesmaPortal dan media Adkesma. Mahasiswa yang butuh asistensi atau konsultasi advokasi siap didampingi.</p>
                                     </div>
                                 </div>
                             </div>
@@ -534,13 +619,13 @@
                                         <i data-lucide="chevron-down" class="faq-icon"></i>
                                     </button>
                                     <div class="faq-answer">
-                                        <p>Seluruh mahasiswa Teknologi Kedokteran dan mahasiswa umum dapat mengakses KESMA NEWS secara gratis. Pastikan memeriksa syarat spesifik di setiap kartu beasiswa/lomba sebelum mendaftar.</p>
+                                        <p>Seluruh mahasiswa Teknologi Kedokteran dan mahasiswa umum dapat mengakses MyAdkesmaPortal secara gratis. Pastikan memeriksa syarat spesifik di setiap kartu beasiswa/lomba sebelum mendaftar.</p>
                                     </div>
                                 </div>
 
                                 <div class="about-faq-item" tabindex="0">
                                     <button type="button" class="faq-question" aria-expanded="false">
-                                        <span class="faq-title">Seberapa sering database KESMA NEWS diperbarui?</span>
+                                        <span class="faq-title">Seberapa sering database MyAdkesmaPortal diperbarui?</span>
                                         <i data-lucide="chevron-down" class="faq-icon"></i>
                                     </button>
                                     <div class="faq-answer">
@@ -560,7 +645,7 @@
 
                                 <div class="about-faq-item" tabindex="0">
                                     <button type="button" class="faq-question" aria-expanded="false">
-                                        <span class="faq-title">Apakah panitia lomba luar dapat mengajukan publikasi di KESMA NEWS?</span>
+                                        <span class="faq-title">Apakah panitia lomba luar dapat mengajukan publikasi di MyAdkesmaPortal?</span>
                                         <i data-lucide="chevron-down" class="faq-icon"></i>
                                     </button>
                                     <div class="faq-answer">
@@ -612,8 +697,8 @@
                     <div class="footer-brand">
                         <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
                         <div>
-                            <h3 class="footer-title">KESMA<span class="footer-title-accent">NEWS</span></h3>
-                            <p class="footer-tagline">Pusat Informasi Beasiswa &amp; Lomba</p>
+                            <h3 class="footer-title">My<span class="footer-title-accent">Adkesma</span>Portal</h3>
+                            <p class="footer-tagline">Suarakan. Temukan. Raih.</p>
                         </div>
                     </div>
 
@@ -623,7 +708,7 @@
                     </div>
 
                     <p class="footer-desc">
-                        Wadah kurasi beasiswa &amp; kompetisi persembahan <span class="footer-highlight" title="Departemen Advokasi &amp; Kesejahteraan Mahasiswa HMTK">Adkesma HMTK</span>. Siap nemenin langkahmu raih peluang &amp; prestasi terbaik! 🚀
+                        Wadah aspirasi (Advoice), kurasi beasiswa &amp; kompetisi persembahan <span class="footer-highlight" title="Departemen Advokasi &amp; Kesejahteraan Mahasiswa HMTK">Adkesma HMTK</span>. Siap nemenin langkahmu raih peluang &amp; prestasi terbaik! 🚀
                     </p>
 
                     <div class="footer-interactive-card">
@@ -663,6 +748,7 @@
                     <a href="#beranda">Beranda</a>
                     <a href="#beasiswa">Beasiswa</a>
                     <a href="#lomba">Lomba</a>
+                    <a href="#advoice">Advoice</a>
                     <a href="#bookmark">Bookmark Saya</a>
                     <a href="#tentang">Tentang Kami</a>
                 </div>
@@ -702,7 +788,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2026 <strong>KESMA NEWS</strong> — Departemen Adkesma HMTK.</p>
+                <p>&copy; 2026 <strong>MyAdkesmaPortal</strong> — Departemen Adkesma HMTK.</p>
                 <p class="footer-bottom-sub">Dibuat dengan <span class="footer-heart">♥</span> untuk mahasiswa HMTK</p>
             </div>
         </div>

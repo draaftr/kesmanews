@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   KESMA NEWS — App Logic
+   MyAdkesmaPortal — App Logic
    Departemen Adkesma HMTK
    ═══════════════════════════════════════════════════════════════ */
 
@@ -1904,7 +1904,7 @@ function shareToWhatsApp(item) {
 ⏳ *Sisa Waktu:* ${countdownStr}
 🟢 *Status:* ${item.status}${linksText}
 
-🌐 *Portal Lengkap KESMA NEWS:*
+🌐 *Portal Lengkap MyAdkesmaPortal:*
 https://kesmanews.netlify.app/
 ━━━━━━━━━━━━━━━━━━━━
 _Disampaikan oleh Departemen Adkesma HMTK_`;
@@ -2074,7 +2074,7 @@ function initAboutSection() {
         shareBtn.addEventListener('click', () => {
             const shareUrl = window.location.href.split('#')[0];
             const copySuccess = () => {
-                showToast('🔗 Tautan KESMA NEWS berhasil disalin!');
+                showToast('🔗 Tautan MyAdkesmaPortal berhasil disalin!');
                 const icon = shareBtn.querySelector('i');
                 if (icon) {
                     shareBtn.innerHTML = '<i data-lucide="check"></i><span>Tautan Tersalin!</span>';
@@ -2188,3 +2188,21 @@ function updateCardCountdown(el, deadline) {
         parent.classList.remove('expired');
     }
 }
+
+
+// ═══ ADVOICE: salin link form ═══
+document.addEventListener('DOMContentLoaded', () => {
+    const copyBtn = document.getElementById('btnCopyAdvoice');
+    if (!copyBtn) return;
+    copyBtn.addEventListener('click', async () => {
+        const url = 'https://its.id/m/ADVOICE';
+        try {
+            await navigator.clipboard.writeText(url);
+        } catch (e) {
+            const ta = document.createElement('textarea');
+            ta.value = url; document.body.appendChild(ta); ta.select();
+            document.execCommand('copy'); document.body.removeChild(ta);
+        }
+        if (typeof showToast === 'function') showToast('Link Advoice berhasil disalin!');
+    });
+});
