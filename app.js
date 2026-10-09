@@ -675,7 +675,7 @@ function renderCategoryHub(type) {
                 <div class="category-card-icon">
                     <i data-lucide="${cat.icon}"></i>
                 </div>
-                <div class="category-card-body">
+                <div class="category-card-content">
                     <div class="category-card-title">${cat.name}</div>
                     <div class="category-card-desc">
                         <span>${cat.desc}</span>
