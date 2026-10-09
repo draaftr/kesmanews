@@ -2072,7 +2072,7 @@ function initAboutSection() {
     const shareBtn = document.getElementById('btnAboutShare');
     if (shareBtn) {
         shareBtn.addEventListener('click', () => {
-            const shareUrl = window.location.href.split('#')[0];
+            const shareUrl = 'https://its.id/m/MyADKESMA';
             const copySuccess = () => {
                 showToast('🔗 Tautan MyAdkesmaPortal berhasil disalin!');
                 const icon = shareBtn.querySelector('i');
@@ -2195,7 +2195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('btnCopyAdvoice');
     if (!copyBtn) return;
     copyBtn.addEventListener('click', async () => {
-        const url = 'https://its.id/m/MyADKESMA';
+        const url = 'https://its.id/m/ADVOICE';
         try {
             await navigator.clipboard.writeText(url);
         } catch (e) {
