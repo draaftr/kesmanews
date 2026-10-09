@@ -157,13 +157,15 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--navbar-height);
     font-family: var(--font-body);
+    font-size: 106.25%; /* Scale up default 16px to 17px to make Stinger Fit Trial more legible */
 }
 
 body {
     font-family: var(--font-body);
     background-color: var(--color-bg);
     color: var(--color-text);
-    line-height: 1.6;
+    line-height: 1.65;
+    letter-spacing: 0.015em;
     transition: background-color var(--transition-base), color var(--transition-base);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
