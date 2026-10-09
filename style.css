@@ -1634,6 +1634,8 @@ img {
 .about-content {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    width: 100%;
 }
 
 .about-eyebrow {
@@ -3238,20 +3240,23 @@ button.footer-social-btn {
     }
 
     .about-tabs-nav {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
+        display: flex;
+        flex-wrap: nowrap;
         width: 100%;
-        overflow-x: visible;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 6px;
+        padding: 6px;
         margin-bottom: var(--space-md);
     }
 
     .about-tab-btn {
         justify-content: center;
-        padding: 8px 4px;
+        padding: 8px 12px;
         font-size: 0.78rem;
         text-align: center;
-        width: 100%;
+        width: auto;
+        flex-shrink: 0;
     }
 
     .about-action-bar {
