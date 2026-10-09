@@ -4,6 +4,31 @@
    Colors: Ultramarine Core, Lemon Burst, Arctic Mist, Pale Saffron, Obsidian (Kabinet HMTK)
    ═══════════════════════════════════════════════════════════════ */
 
+/* ─── Custom Fonts ──────────────────────────────────────────── */
+@font-face {
+    font-family: 'Integral CF';
+    src: url('./assets/fonts/IntegralCFBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tempting';
+    src: url('./assets/fonts/Tempting.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stinger Fit Trial';
+    src: url('./assets/fonts/StingerFitTrialRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ─── CSS Variables / Design Tokens ─────────────────────────── */
 :root {
     /* Primary Colors - HMTK Identity */
@@ -58,10 +83,12 @@
     --shadow-xl: 0 20px 60px rgba(12, 28, 255, 0.16), 0 8px 20px rgba(12, 28, 255, 0.08);
     --shadow-glow: 0 0 30px rgba(12, 28, 255, 0.2);
 
-    /* Typography — Unified Modern Plus Jakarta Sans */
-    --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'Plus Jakarta Sans', ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+    /* Typography */
+    --font-heading: 'Clash Display', 'Plus Jakarta Sans', sans-serif;
+    --font-heading-main: 'Integral CF', 'Plus Jakarta Sans', sans-serif;
+    --font-script: 'Tempting', cursive, 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Stinger Fit Trial', 'Plus Jakarta Sans', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
 
     /* Spacing */
     --space-xs: 4px;
@@ -439,7 +466,7 @@ img {
 }
 
 .hero-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading-main);
     font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 800;
     color: white;
@@ -461,6 +488,16 @@ img {
     font-weight: 500;
     color: rgba(255, 255, 255, 0.85);
     margin-bottom: var(--space-md);
+}
+
+.hero-subtitle .tagline-word-accent {
+    font-family: var(--font-script);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    background: linear-gradient(135deg, var(--color-accent-light), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-left: 5px;
 }
 
 .hero-highlight {
