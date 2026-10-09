@@ -2195,7 +2195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('btnCopyAdvoice');
     if (!copyBtn) return;
     copyBtn.addEventListener('click', async () => {
-        const url = 'https://its.id/m/ADVOICE';
+        const url = 'https://its.id/m/MyADKESMA';
         try {
             await navigator.clipboard.writeText(url);
         } catch (e) {
