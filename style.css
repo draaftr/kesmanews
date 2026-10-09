@@ -483,21 +483,19 @@ img {
 }
 
 .hero-subtitle {
-    font-family: var(--font-heading);
-    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-script);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
     margin-bottom: var(--space-md);
+    letter-spacing: 2px;
 }
 
 .hero-subtitle .tagline-word-accent {
-    font-family: var(--font-script);
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
     background: linear-gradient(135deg, var(--color-accent-light), #fff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    padding-left: 5px;
 }
 
 .hero-highlight {
