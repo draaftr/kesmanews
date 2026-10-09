@@ -920,9 +920,9 @@ img {
 }
 
 .filter-toggle-pill.active {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: var(--color-open);
-    color: var(--color-open);
+    background: rgba(12, 28, 255, 0.08);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
     font-weight: 700;
 }
 
