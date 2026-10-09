@@ -573,9 +573,6 @@ function parseLombaSheet(rows) {
             } else {
                 // Entri baru
                 const benefit = [];
-                if (biaya === 'Gratis') benefit.push('Pendaftaran Gratis');
-                if (partisipasi) benefit.push(`Kategori: ${partisipasi}`);
-                if (penyelenggara) benefit.push(`Penyelenggara: ${penyelenggara}`);
                 
                 let timelinePenting = deadlineRaw ? `Deadline: ${deadlineRaw}` : '';
                 if (cabangLomba) timelinePenting += timelinePenting ? ` | Cabang: ${cabangLomba}` : `Cabang: ${cabangLomba}`;
@@ -1905,7 +1902,7 @@ function shareToWhatsApp(item) {
 🟢 *Status:* ${item.status}${linksText}
 
 🌐 *Portal Lengkap MyAdkesmaPortal:*
-https://kesmanews.netlify.app/
+https://its.id/m/MyADKESMA
 ━━━━━━━━━━━━━━━━━━━━
 _Disampaikan oleh Departemen Adkesma HMTK_`;
 
