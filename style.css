@@ -27,6 +27,8 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+    /* Mengecualikan angka (U+0030 - U+0039) agar fallback ke Plus Jakarta Sans */
+    unicode-range: U+0000-002F, U+003A-10FFFF;
 }
 
 /* ─── CSS Variables / Design Tokens ─────────────────────────── */
