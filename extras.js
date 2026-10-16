@@ -175,57 +175,10 @@ function applyPostersToCards() {
     if (updatedLomba && typeof filterData === 'function') filterData('lomba');
 }
 
-function collectPosters(tipe) {
-    const fromData = [];
-    try {
-        const src = tipe === 'lomba' ? lombaData : beasiswaData;
-        if (Array.isArray(src)) {
-            src.forEach(it => {
-                if (it && it.poster) fromData.push({ judul: it.nama, tipe, gambar: it.poster });
-            });
-        }
-    } catch (e) { /* data belum siap */ }
-
-    const manual = (posterManual || [])
-        .filter(p => p.tipe === tipe)
-        .map(p => ({ ...p, gambar: typeof resolvePosterUrl === 'function' ? resolvePosterUrl(p.gambar) : p.gambar }));
-    const seen = new Set();
-    return [...manual, ...fromData].filter(p => p.gambar && !seen.has(p.gambar) && seen.add(p.gambar));
-}
-
-function renderPostersFor(tipe) {
-    const key = tipe === 'lomba' ? 'Lomba' : 'Beasiswa';
-    const strip = document.getElementById('posterStrip' + key);
-    const grid = document.getElementById('posterGrid' + key);
-    if (!strip || !grid) return;
-    const list = collectPosters(tipe);
-
-    strip.classList.toggle('hidden', list.length === 0);
-    if (list.length === 0) return;
-
-    grid.innerHTML = list.map((p, i) => `
-        <figure class="poster-item" data-index="${i}" tabindex="0">
-            <div class="poster-frame"><img src="${escHTML(p.gambar)}" alt="Poster ${escHTML(p.judul)}" loading="lazy"></div>
-            <figcaption><strong>${escHTML(p.judul)}</strong></figcaption>
-        </figure>`).join('');
-
-    grid.querySelectorAll('.poster-item').forEach(el => {
-        const open = () => openLightbox(list[parseInt(el.dataset.index)]);
-        el.addEventListener('click', open);
-        el.addEventListener('keydown', (e) => { if (e.key === 'Enter') open(); });
-        el.querySelector('img').addEventListener('error', () => {
-            el.remove();
-            if (!grid.children.length) strip.classList.add('hidden');
-        });
-    });
-    refreshIcons();
-}
-
 function renderPosters() {
     applyPostersToCards();
-    renderPostersFor('beasiswa');
-    renderPostersFor('lomba');
 }
+window.applyPostersToCards = applyPostersToCards;
 
 function initPosterGallery() {
     let tries = 0;

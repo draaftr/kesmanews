@@ -1,13 +1,20 @@
 [
   {
     "id": 1,
+    "tipe": "beasiswa",
+    "namaKeyword": "banlit",
+    "judul": "Beasiswa Program Bantuan Penelitian Kebanksentralan (Banlit) Bank Indonesia 2026",
+    "gambar": "assets/poster/poster-banlit-bi.jpg"
+  },
+  {
+    "id": 2,
     "tipe": "lomba",
     "namaKeyword": "bioinformatics",
     "judul": "The 7th Bioinformatics and Biodiversity Conference (BBC 2026)",
     "gambar": "assets/poster/poster-bbc-2026.jpg"
   },
   {
-    "id": 2,
+    "id": 3,
     "tipe": "beasiswa",
     "namaKeyword": "petrokimia",
     "judul": "Beasiswa BESTRO 2026 dari PT Petrokimia Gresik",

@@ -455,10 +455,24 @@ function parseToArray(teks) {
     return lines;
 }
 
-// Poster: terima URL penuh atau nama file di assets/poster/
+// Poster: terima URL Google Drive, URL penuh, atau nama file di assets/poster/
 function resolvePosterUrl(val) {
-    const v = (val || '').trim();
+    let v = (val || '').trim();
     if (!v) return '';
+    v = v.replace(/^["']+|["']+$/g, '').trim();
+
+    // Deteksi Google Drive file ID agar langsung bisa tampil sebagai gambar (tanpa blokir CORS)
+    const driveMatch = v.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || v.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (driveMatch && driveMatch[1]) {
+        return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1200`;
+    }
+
+    if (/googleusercontent\.com/i.test(v)) return v;
+
+    if (v.includes('dropbox.com')) {
+        return v.replace('www.dropbox.com', 'dl.dropboxusercontent.com').replace(/[?&]dl=0/, '');
+    }
+
     if (/^(https?:)?\/\//i.test(v) || v.startsWith('assets/') || v.startsWith('/')) return v;
     return 'assets/poster/' + v;
 }
@@ -466,10 +480,16 @@ function resolvePosterUrl(val) {
 // ═══════════════════════════════════════════════════════════════
 // PARSE SHEET BEASISWA → Array of objects
 // Kolom: Nama Beasiswa, Status Pendaftaran, Kategori, Deadline,
-//        Persyaratan, Cakupan Benefit, Informasi Selengkapnya
+//        Persyaratan, Cakupan Benefit, Informasi Selengkapnya, POSTER
 // ═══════════════════════════════════════════════════════════════
 function parseBeasiswaSheet(rows) {
-    // rows[0] adalah header, mulai dari rows[1]
+    if (!rows || rows.length < 2) return [];
+
+    // Deteksi letak kolom POSTER secara otomatis dari nama header di rows[0]
+    const headerRow = (rows[0] || []).map(h => (h || '').trim().toLowerCase());
+    let posterColIdx = headerRow.findIndex(h => /poster|gambar|pamflet|brosur/i.test(h));
+    if (posterColIdx === -1) posterColIdx = 7; // Fallback jika header tidak terdeteksi
+
     return rows.slice(1)
         .filter(row => row[0] && row[0].trim()) // skip baris kosong
         .map((row, idx) => {
@@ -480,7 +500,19 @@ function parseBeasiswaSheet(rows) {
             const persyaratan = parseToArray(row[4] || '').map(cleanUnicodeText);
             const benefit     = parseToArray(row[5] || '').map(cleanUnicodeText);
             const infoText    = cleanUnicodeText(row[6] || '');
-            const poster      = resolvePosterUrl(row[7] || ''); // kolom opsional: nama file / URL poster
+            
+            // Ambil poster dari kolom POSTER di Google Sheets
+            let poster = resolvePosterUrl(row[posterColIdx] || '');
+            
+            // Fallback otomatis jika sel spreadsheet belum terisi link poster
+            if (!poster) {
+                const lowerNama = nama.toLowerCase();
+                if (lowerNama.includes('banlit')) {
+                    poster = 'assets/poster/poster-banlit-bi.jpg';
+                } else if (lowerNama.includes('bestro') || lowerNama.includes('petrokimia')) {
+                    poster = 'assets/poster/poster-beasiswa-prestasi.jpg';
+                }
+            }
             
             const deadline = parseDeadline(deadlineRaw) || parseDeadline(nama);
             const { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
@@ -513,10 +545,17 @@ function parseBeasiswaSheet(rows) {
 // ═══════════════════════════════════════════════════════════════
 // PARSE SHEET LOMBA → Array of objects (dengan Smart Deduplikasi)
 // Kolom: Nama Lomba, Penyelenggara, Status Lomba, Skala, Deadline,
-//        Cabang Lomba, Partisipasi, Biaya, Informasi Selengkapnya
+//        Cabang Lomba, Partisipasi, Biaya, Informasi Selengkapnya, POSTER
 // ═══════════════════════════════════════════════════════════════
 function parseLombaSheet(rows) {
+    if (!rows || rows.length < 2) return [];
+
     const lombaMap = new Map();
+
+    // Deteksi letak kolom POSTER secara otomatis dari nama header di rows[0]
+    const headerRow = (rows[0] || []).map(h => (h || '').trim().toLowerCase());
+    let posterColIdx = headerRow.findIndex(h => /poster|gambar|pamflet|brosur/i.test(h));
+    if (posterColIdx === -1) posterColIdx = 9; // Fallback jika header tidak terdeteksi
 
     rows.slice(1)
         .filter(row => row[0] && row[0].trim())
@@ -530,7 +569,15 @@ function parseLombaSheet(rows) {
             const partisipasi   = cleanUnicodeText(row[6] || '');
             const biaya         = cleanUnicodeText(row[7] || '');
             const infoText      = cleanUnicodeText(row[8] || '');
-            const poster        = resolvePosterUrl(row[9] || ''); // kolom opsional: nama file / URL poster
+            
+            // Ambil poster dari kolom POSTER di Google Sheets
+            let poster = resolvePosterUrl(row[posterColIdx] || '');
+            if (!poster) {
+                const lowerNama = nama.toLowerCase();
+                if (lowerNama.includes('bioinformatics') || lowerNama.includes('bbc')) {
+                    poster = 'assets/poster/poster-bbc-2026.jpg';
+                }
+            }
             
             const deadline = parseDeadline(deadlineRaw) || '';
             let { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
@@ -783,6 +830,11 @@ async function loadData() {
     // Hide skeletons
     document.getElementById('skeletonBeasiswa').classList.add('hidden');
     document.getElementById('skeletonLomba').classList.add('hidden');
+
+    // Terapkan poster tambahan dari posters.json jika ada
+    if (typeof window.applyPostersToCards === 'function') {
+        window.applyPostersToCards();
+    }
 
     // Render Category Hubs
     renderCategoryHub('beasiswa');
