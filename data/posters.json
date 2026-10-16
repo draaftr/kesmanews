@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": 1,
+    "tipe": "lomba",
+    "namaKeyword": "bioinformatics",
+    "judul": "The 7th Bioinformatics and Biodiversity Conference (BBC 2026)",
+    "gambar": "assets/poster/poster-bbc-2026.jpg"
+  },
+  {
+    "id": 2,
+    "tipe": "beasiswa",
+    "namaKeyword": "petrokimia",
+    "judul": "Beasiswa BESTRO 2026 dari PT Petrokimia Gresik",
+    "gambar": "assets/poster/poster-beasiswa-prestasi.jpg"
+  }
+]

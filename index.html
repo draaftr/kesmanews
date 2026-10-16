@@ -36,7 +36,7 @@
         <div class="nav-container">
             <a href="#beranda" class="nav-brand">
                 <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
-                <img src="assets/logo-adkesma.svg" alt="Logo Adkesma" class="nav-logo nav-logo-adkesma">
+                <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="nav-logo nav-logo-adkesma">
                 <span class="nav-title">My<span class="nav-title-accent">Adkesma</span>Portal</span>
             </a>
             <div class="nav-links" id="navLinks">
@@ -44,7 +44,7 @@
                 <a href="#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
                 <a href="#beasiswa" class="nav-link" data-section="beasiswa">Beasiswa</a>
                 <a href="#lomba" class="nav-link" data-section="lomba">Lomba</a>
-                <a href="#poster" class="nav-link" data-section="poster">Poster</a>
+                
                 <a href="#tkpedia" class="nav-link" data-section="tkpedia">TKpedia</a>
                 <a href="#advoice" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
                 <a href="#bookmark" class="nav-link" data-section="bookmark">
@@ -222,6 +222,12 @@
                 <!-- Cards rendered by JS -->
             </div>
 
+            <!-- Poster Beasiswa -->
+            <div class="poster-strip hidden" id="posterStripBeasiswa">
+                <h3 class="poster-strip-title"><i data-lucide="image"></i> Poster Beasiswa</h3>
+                <div class="poster-grid" id="posterGridBeasiswa"></div>
+            </div>
+
             <!-- Empty State -->
             <div class="empty-state hidden" id="emptyBeasiswa">
                 <i data-lucide="search-x"></i>
@@ -247,13 +253,13 @@
                     <div class="pendampingan-eyebrow"><i data-lucide="heart-handshake"></i><span>Subpage Pendampingan</span></div>
                     <h3 class="pendampingan-title" id="pendampinganTitle">Pendampingan Beasiswa</h3>
                     <p class="pendampingan-desc" id="pendampinganDesc"></p>
+                    <div class="pendampingan-cp-label"><i data-lucide="phone-call"></i> Contact Person (CP) Pendampingan</div>
+                    <div class="pendampingan-cp-grid pendampingan-cp-inhero" id="pendampinganCP"></div>
                 </div>
                 <h4 class="pendampingan-subhead"><i data-lucide="layers"></i> Yang Kami Bantu</h4>
                 <div class="pendampingan-services" id="pendampinganLayanan"></div>
                 <h4 class="pendampingan-subhead"><i data-lucide="route"></i> Alur Pendampingan</h4>
                 <div class="pendampingan-steps" id="pendampinganAlur"></div>
-                <h4 class="pendampingan-subhead"><i data-lucide="phone-call"></i> Contact Person (CP) Pendampingan</h4>
-                <div class="pendampingan-cp-grid" id="pendampinganCP"></div>
             </div>
         </div>
     </section>
@@ -335,6 +341,12 @@
                 </button>
             </div>
 
+            <!-- Poster Lomba -->
+            <div class="poster-strip hidden" id="posterStripLomba">
+                <h3 class="poster-strip-title"><i data-lucide="image"></i> Poster Lomba</h3>
+                <div class="poster-grid" id="posterGridLomba"></div>
+            </div>
+
             <!-- Loading Skeleton -->
             <div class="skeleton-grid" id="skeletonLomba">
                 <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
@@ -344,28 +356,6 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- POSTER SECTION                              -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section poster-section" id="poster">
-        <div class="section-container">
-            <div class="section-header reveal">
-                <div class="section-icon-wrapper poster-icon">
-                    <i data-lucide="image"></i>
-                </div>
-                <h2 class="section-title">Poster Beasiswa &amp; Lomba</h2>
-                <p class="section-desc">Galeri poster resmi beasiswa dan lomba. Klik poster untuk memperbesar</p>
-            </div>
-            <div class="poster-filter reveal" id="posterFilter">
-                <button type="button" class="poster-filter-btn active" data-filter="all">Semua</button>
-                <button type="button" class="poster-filter-btn" data-filter="beasiswa">Beasiswa</button>
-                <button type="button" class="poster-filter-btn" data-filter="lomba">Lomba</button>
-            </div>
-            <div class="poster-grid" id="posterGrid"></div>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
     <!-- TKPEDIA SECTION                             -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="section section-alt tkpedia-section" id="tkpedia">
@@ -386,16 +376,16 @@
                         <li><i data-lucide="check-circle-2"></i> Edisi kedua dengan konten yang diperbarui</li>
                     </ul>
                     <div class="tkpedia-cta">
-                        <a href="https://its.id/m/TKpedia2ndEdition" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" id="btnTkpediaOpen">
+                        <a href="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" id="btnTkpediaOpen">
                             <i data-lucide="book-open"></i> Baca TKpedia
                         </a>
-                        <button type="button" class="btn btn-outline btn-lg" id="btnTkpediaCopy" data-link="https://its.id/m/TKpedia2ndEdition">
+                        <button type="button" class="btn btn-outline btn-lg" id="btnTkpediaCopy" data-link="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing">
                             <i data-lucide="link"></i> Salin Link
                         </button>
                     </div>
                 </div>
                 <div class="tkpedia-viewer">
-                    <iframe src="https://drive.google.com/file/d/1MVylcx7XBTGQUL-vID1Q0xwHlN4lOLFp/preview" title="TKpedia 2nd Edition - Adkesma HMTK" loading="lazy" allow="autoplay"></iframe>
+                    <iframe src="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/preview" title="TKpedia 2nd Edition - Adkesma HMTK" loading="lazy" allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
@@ -563,7 +553,7 @@
                         </div>
                         <div class="about-logo-frame">
                             <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="about-logo">
-                            <img src="assets/logo-adkesma.svg" alt="Logo Adkesma" class="about-logo about-logo-adkesma">
+                            <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="about-logo about-logo-adkesma">
                             <div class="about-logo-shine"></div>
                         </div>
                         <div class="about-card-footer">
@@ -803,7 +793,7 @@
                 <div class="footer-brand-col">
                     <div class="footer-brand">
                         <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
-                        <img src="assets/logo-adkesma.svg" alt="Logo Adkesma" class="footer-logo footer-logo-adkesma">
+                        <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="footer-logo footer-logo-adkesma">
                         <div>
                             <h3 class="footer-title">My<span class="footer-title-accent">Adkesma</span>Portal</h3>
                             <p class="footer-tagline">Suarakan. Temukan. Raih.</p>
@@ -852,7 +842,7 @@
                     <a href="#hotnews">Hot News</a>
                     <a href="#beasiswa">Beasiswa</a>
                     <a href="#lomba">Lomba</a>
-                    <a href="#poster">Poster</a>
+                    
                     <a href="#tkpedia">TKpedia</a>
                     <a href="#advoice">Advoice</a>
                     <a href="#bookmark">Bookmark Saya</a>

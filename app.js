@@ -999,10 +999,14 @@ function createCardHTML(item, type) {
             </button>
         `;
     }
-
     return `
         <div class="card ${isUrgent ? 'card-urgent' : ''}" data-id="${item.id}">
-            ${item.poster ? `<div class="card-poster"><img src="${item.poster}" alt="Poster ${cleanUnicodeText(item.nama)}" loading="lazy" onerror="this.parentElement.remove()"></div>` : ''}
+            ${item.poster ? `
+                <div class="card-poster" onclick="event.stopPropagation(); if(typeof openLightbox==='function') openLightbox({ gambar: '${item.poster}', judul: '${cleanUnicodeText(item.nama).replace(/'/g, "\\'")}' })" title="Klik untuk memperbesar poster">
+                    <img src="${item.poster}" alt="Poster ${cleanUnicodeText(item.nama)}" loading="lazy" onerror="this.parentElement.remove()">
+                    <span class="card-poster-badge"><i data-lucide="zoom-in"></i> Poster</span>
+                </div>
+            ` : ''}
             <div class="card-top">
                 <div class="card-badges">
                     <span class="badge ${isOpen ? 'badge-open' : 'badge-closed'}">

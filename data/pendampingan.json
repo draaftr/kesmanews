@@ -2,24 +2,56 @@
   "judul": "Pendampingan Beasiswa Adkesma HMTK",
   "deskripsi": "Pendampingan beasiswa adalah layanan dari Departemen Adkesma HMTK untuk membantu mahasiswa Teknologi Kedokteran yang ingin mendaftar beasiswa, mulai dari memahami persyaratan, menyiapkan berkas, hingga latihan wawancara. Layanan ini gratis dan terbuka untuk seluruh mahasiswa HMTK.",
   "layanan": [
-    { "icon": "search-check", "judul": "Konsultasi Pemilihan Beasiswa", "deskripsi": "Bantu menemukan beasiswa yang paling cocok dengan profil, IPK, dan kebutuhanmu." },
-    { "icon": "file-check-2", "judul": "Review Berkas & Persyaratan", "deskripsi": "Pengecekan kelengkapan dokumen, CV, transkrip, dan surat-surat sebelum disubmit." },
-    { "icon": "pen-line", "judul": "Pendampingan Essay & Motivation Letter", "deskripsi": "Masukan dan koreksi untuk esai atau motivation letter agar lebih kuat." },
-    { "icon": "mic", "judul": "Persiapan Wawancara", "deskripsi": "Simulasi dan tips menghadapi tahap wawancara beasiswa." },
-    { "icon": "bell-ring", "judul": "Pengingat Deadline", "deskripsi": "Kami bantu mengingatkan timeline penting supaya tidak terlewat." }
+    {
+      "icon": "search-check",
+      "judul": "Konsultasi Pemilihan Beasiswa",
+      "deskripsi": "Bantu menemukan beasiswa yang paling cocok dengan profil, IPK, dan kebutuhanmu."
+    },
+    {
+      "icon": "file-check-2",
+      "judul": "Review Berkas & Persyaratan",
+      "deskripsi": "Pengecekan kelengkapan dokumen, CV, transkrip, dan surat-surat sebelum disubmit."
+    },
+    {
+      "icon": "pen-line",
+      "judul": "Pendampingan Essay & Motivation Letter",
+      "deskripsi": "Masukan dan koreksi untuk esai atau motivation letter agar lebih kuat."
+    },
+    {
+      "icon": "mic",
+      "judul": "Persiapan Wawancara",
+      "deskripsi": "Simulasi dan tips menghadapi tahap wawancara beasiswa."
+    },
+    {
+      "icon": "bell-ring",
+      "judul": "Pengingat Deadline",
+      "deskripsi": "Kami bantu mengingatkan timeline penting supaya tidak terlewat."
+    }
   ],
   "alur": [
-    { "judul": "Hubungi CP", "deskripsi": "Pilih salah satu contact person di bawah dan sebutkan beasiswa yang dituju." },
-    { "judul": "Konsultasi Awal", "deskripsi": "Kami cek syarat, timeline, dan kesiapan berkasmu." },
-    { "judul": "Pendampingan Berkas", "deskripsi": "Review dokumen, essay, dan persiapan seleksi bersama tim." },
-    { "judul": "Submit & Tindak Lanjut", "deskripsi": "Kamu submit pendaftaran, kami tetap siap mendampingi hingga pengumuman." }
+    {
+      "judul": "Hubungi CP",
+      "deskripsi": "Pilih salah satu contact person di bawah dan sebutkan beasiswa yang dituju."
+    },
+    {
+      "judul": "Konsultasi Awal",
+      "deskripsi": "Kami cek syarat, timeline, dan kesiapan berkasmu."
+    },
+    {
+      "judul": "Pendampingan Berkas",
+      "deskripsi": "Review dokumen, essay, dan persiapan seleksi bersama tim."
+    },
+    {
+      "judul": "Submit & Tindak Lanjut",
+      "deskripsi": "Kamu submit pendaftaran, kami tetap siap mendampingi hingga pengumuman."
+    }
   ],
   "cp": [
     {
       "nama": "Tim Adkesma HMTK",
       "peran": "Contact Person Pendampingan Beasiswa",
       "instagram": "adkezzmoy",
-      "whatsapp": "",
+      "whatsapp": "6288996063733",
       "email": "adkesmahmtk@gmail.com"
     }
   ]

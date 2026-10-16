@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    MyAdkesmaPortal — Extras
-   Hot News, Subpage Pendampingan, Galeri Poster, TKpedia
+   Hot News, Subpage Pendampingan, Poster dalam Kotak, TKpedia
    Data: data/hotnews.json, data/pendampingan.json, data/posters.json
    ═══════════════════════════════════════════════════════════════ */
 
@@ -11,9 +11,9 @@ const EXTRA_DEFAULTS = {
     ],
     pendampingan: {
         judul: 'Pendampingan Beasiswa Adkesma HMTK',
-        deskripsi: 'Layanan pendampingan beasiswa dari Departemen Adkesma HMTK.',
+        deskripsi: 'Pendampingan beasiswa adalah layanan dari Departemen Adkesma HMTK untuk membantu mahasiswa Teknologi Kedokteran yang ingin mendaftar beasiswa, mulai dari memahami persyaratan, menyiapkan berkas, hingga latihan wawancara. Layanan ini gratis dan terbuka untuk seluruh mahasiswa HMTK.',
         layanan: [], alur: [],
-        cp: [{ nama: 'Tim Adkesma HMTK', peran: 'Contact Person Pendampingan Beasiswa', instagram: 'adkezzmoy', whatsapp: '', email: 'adkesmahmtk@gmail.com' }]
+        cp: [{ nama: 'Tim Adkesma HMTK', peran: 'Contact Person Pendampingan Beasiswa', instagram: 'adkezzmoy', whatsapp: '6288996063733', email: 'adkesmahmtk@gmail.com' }]
     },
     posters: []
 };
@@ -99,132 +99,174 @@ function renderPendampingan(d) {
     document.getElementById('pendampinganTitle').textContent = d.judul || 'Pendampingan Beasiswa';
     document.getElementById('pendampinganDesc').textContent = d.deskripsi || '';
 
-    document.getElementById('pendampinganLayanan').innerHTML = (d.layanan || []).map(l => `
-        <div class="pendampingan-service">
-            <div class="pendampingan-service-icon"><i data-lucide="${escHTML(l.icon || 'check')}"></i></div>
-            <h5>${escHTML(l.judul)}</h5>
-            <p>${escHTML(l.deskripsi)}</p>
-        </div>`).join('');
+    const layananEl = document.getElementById('pendampinganLayanan');
+    if (layananEl) {
+        layananEl.innerHTML = (d.layanan || []).map(l => `
+            <div class="pendampingan-service">
+                <div class="pendampingan-service-icon"><i data-lucide="${escHTML(l.icon || 'check')}"></i></div>
+                <h5>${escHTML(l.judul)}</h5>
+                <p>${escHTML(l.deskripsi)}</p>
+            </div>`).join('');
+    }
 
-    document.getElementById('pendampinganAlur').innerHTML = (d.alur || []).map((s, i) => `
-        <div class="pendampingan-step">
-            <span class="pendampingan-step-num">${String(i + 1).padStart(2, '0')}</span>
-            <div><h5>${escHTML(s.judul)}</h5><p>${escHTML(s.deskripsi)}</p></div>
-        </div>`).join('');
+    const alurEl = document.getElementById('pendampinganAlur');
+    if (alurEl) {
+        alurEl.innerHTML = (d.alur || []).map((s, i) => `
+            <div class="pendampingan-step">
+                <span class="pendampingan-step-num">${String(i + 1).padStart(2, '0')}</span>
+                <div><h5>${escHTML(s.judul)}</h5><p>${escHTML(s.deskripsi)}</p></div>
+            </div>`).join('');
+    }
 
-    document.getElementById('pendampinganCP').innerHTML = (d.cp || []).map(c => {
-        const initials = (c.nama || '?').split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-        const wa = cleanWA(c.whatsapp);
-        return `
-        <div class="pendampingan-cp">
-            <div class="pendampingan-cp-avatar">${escHTML(initials)}</div>
-            <div class="pendampingan-cp-body">
-                <h5>${escHTML(c.nama)}</h5>
-                <span>${escHTML(c.peran || '')}</span>
-                <div class="pendampingan-cp-actions">
-                    ${wa ? `<a class="cp-btn cp-btn-wa" href="https://wa.me/${wa}" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle"></i> WhatsApp</a>` : ''}
-                    ${c.instagram ? `<a class="cp-btn cp-btn-ig" href="https://www.instagram.com/${escHTML(c.instagram)}" target="_blank" rel="noopener noreferrer"><i data-lucide="at-sign"></i> ${escHTML(c.instagram)}</a>` : ''}
-                    ${c.email ? `<a class="cp-btn cp-btn-mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=${escHTML(c.email)}" target="_blank" rel="noopener noreferrer"><i data-lucide="mail"></i> Email</a>` : ''}
+    const cpEl = document.getElementById('pendampinganCP');
+    if (cpEl) {
+        cpEl.innerHTML = (d.cp || []).map(c => {
+            const initials = (c.nama || '?').split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+            const wa = cleanWA(c.whatsapp);
+            return `
+            <div class="pendampingan-cp">
+                <div class="pendampingan-cp-avatar">${escHTML(initials)}</div>
+                <div class="pendampingan-cp-body">
+                    <h5>${escHTML(c.nama)}</h5>
+                    <span>${escHTML(c.peran || '')}</span>
+                    <div class="pendampingan-cp-actions">
+                        ${wa ? `<a class="cp-btn cp-btn-wa" href="https://wa.me/${wa}" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle"></i> Chat WhatsApp (0889-9606-3733)</a>` : ''}
+                        ${c.instagram ? `<a class="cp-btn cp-btn-ig" href="https://www.instagram.com/${escHTML(c.instagram)}" target="_blank" rel="noopener noreferrer"><i data-lucide="at-sign"></i> @${escHTML(c.instagram)}</a>` : ''}
+                        ${c.email ? `<a class="cp-btn cp-btn-mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=${escHTML(c.email)}" target="_blank" rel="noopener noreferrer"><i data-lucide="mail"></i> Email</a>` : ''}
+                    </div>
                 </div>
-            </div>
-        </div>`;
-    }).join('');
+            </div>`;
+        }).join('');
+    }
     refreshIcons();
 }
 
-// ─── POSTER GALLERY ────────────────────────────────────────────
+// ─── POSTER (di dalam kotak Beasiswa & Lomba) ──────────────────
 let posterManual = [];
-let posterFilter = 'all';
 
-function collectPosters() {
-    const fromData = [];
-    const add = (arr, tipe) => (arr || []).forEach(it => {
-        if (it && it.poster) fromData.push({ judul: it.nama, tipe, gambar: it.poster, link: it.linkDaftar || '' });
+function applyPostersToCards() {
+    if (!Array.isArray(posterManual) || posterManual.length === 0) return;
+    let updatedBeasiswa = false;
+    let updatedLomba = false;
+
+    posterManual.forEach(p => {
+        const path = typeof resolvePosterUrl === 'function' ? resolvePosterUrl(p.gambar) : p.gambar;
+        const kw = (p.namaKeyword || p.judul || '').toLowerCase();
+        if (!kw) return;
+
+        if (p.tipe === 'beasiswa' && typeof beasiswaData !== 'undefined' && Array.isArray(beasiswaData)) {
+            beasiswaData.forEach(item => {
+                if (!item.poster && item.nama.toLowerCase().includes(kw)) {
+                    item.poster = path;
+                    updatedBeasiswa = true;
+                }
+            });
+        } else if (p.tipe === 'lomba' && typeof lombaData !== 'undefined' && Array.isArray(lombaData)) {
+            lombaData.forEach(item => {
+                if (!item.poster && item.nama.toLowerCase().includes(kw)) {
+                    item.poster = path;
+                    updatedLomba = true;
+                }
+            });
+        }
     });
-    try { add(beasiswaData, 'beasiswa'); } catch (e) {}
-    try { add(lombaData, 'lomba'); } catch (e) {}
-    const all = [...posterManual.map(p => ({ ...p, gambar: typeof resolvePosterUrl === 'function' ? resolvePosterUrl(p.gambar) : p.gambar })), ...fromData];
-    const seen = new Set();
-    return all.filter(p => p.gambar && !seen.has(p.gambar) && seen.add(p.gambar));
+
+    if (updatedBeasiswa && typeof filterData === 'function') filterData('beasiswa');
+    if (updatedLomba && typeof filterData === 'function') filterData('lomba');
 }
 
-function renderPosters() {
-    const grid = document.getElementById('posterGrid');
-    if (!grid) return;
-    const list = collectPosters().filter(p => posterFilter === 'all' || p.tipe === posterFilter);
+function collectPosters(tipe) {
+    const fromData = [];
+    try {
+        const src = tipe === 'lomba' ? lombaData : beasiswaData;
+        if (Array.isArray(src)) {
+            src.forEach(it => {
+                if (it && it.poster) fromData.push({ judul: it.nama, tipe, gambar: it.poster });
+            });
+        }
+    } catch (e) { /* data belum siap */ }
 
-    if (list.length === 0) {
-        grid.innerHTML = `
-            <div class="poster-empty">
-                <i data-lucide="image-plus"></i>
-                <h3>Poster segera hadir</h3>
-                <p>Poster beasiswa dan lomba terbaru akan ditampilkan di sini.</p>
-            </div>`;
-        refreshIcons();
-        return;
-    }
+    const manual = (posterManual || [])
+        .filter(p => p.tipe === tipe)
+        .map(p => ({ ...p, gambar: typeof resolvePosterUrl === 'function' ? resolvePosterUrl(p.gambar) : p.gambar }));
+    const seen = new Set();
+    return [...manual, ...fromData].filter(p => p.gambar && !seen.has(p.gambar) && seen.add(p.gambar));
+}
+
+function renderPostersFor(tipe) {
+    const key = tipe === 'lomba' ? 'Lomba' : 'Beasiswa';
+    const strip = document.getElementById('posterStrip' + key);
+    const grid = document.getElementById('posterGrid' + key);
+    if (!strip || !grid) return;
+    const list = collectPosters(tipe);
+
+    strip.classList.toggle('hidden', list.length === 0);
+    if (list.length === 0) return;
 
     grid.innerHTML = list.map((p, i) => `
         <figure class="poster-item" data-index="${i}" tabindex="0">
             <div class="poster-frame"><img src="${escHTML(p.gambar)}" alt="Poster ${escHTML(p.judul)}" loading="lazy"></div>
-            <figcaption>
-                <span class="poster-type poster-type-${escHTML(p.tipe)}">${p.tipe === 'lomba' ? 'Lomba' : 'Beasiswa'}</span>
-                <strong>${escHTML(p.judul)}</strong>
-            </figcaption>
+            <figcaption><strong>${escHTML(p.judul)}</strong></figcaption>
         </figure>`).join('');
 
     grid.querySelectorAll('.poster-item').forEach(el => {
         const open = () => openLightbox(list[parseInt(el.dataset.index)]);
         el.addEventListener('click', open);
         el.addEventListener('keydown', (e) => { if (e.key === 'Enter') open(); });
-        el.querySelector('img').addEventListener('error', () => el.remove());
+        el.querySelector('img').addEventListener('error', () => {
+            el.remove();
+            if (!grid.children.length) strip.classList.add('hidden');
+        });
     });
     refreshIcons();
 }
 
-function initPosterGallery() {
-    document.querySelectorAll('.poster-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.poster-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            posterFilter = btn.dataset.filter;
-            renderPosters();
-        });
-    });
+function renderPosters() {
+    applyPostersToCards();
+    renderPostersFor('beasiswa');
+    renderPostersFor('lomba');
+}
 
-    // Poster dari data beasiswa/lomba tersedia setelah loadData() selesai
+function initPosterGallery() {
     let tries = 0;
     const timer = setInterval(() => {
         tries++;
         let ready = false;
-        try { ready = beasiswaData.length > 0 || lombaData.length > 0; } catch (e) {}
+        try { ready = (typeof beasiswaData !== 'undefined' && beasiswaData.length > 0) || (typeof lombaData !== 'undefined' && lombaData.length > 0); } catch (e) {}
         if (ready || tries > 40) {
             clearInterval(timer);
             renderPosters();
         }
-    }, 500);
+    }, 400);
 }
 
 // ─── LIGHTBOX ──────────────────────────────────────────────────
 function openLightbox(p) {
     const lb = document.getElementById('posterLightbox');
-    document.getElementById('lightboxImg').src = p.gambar;
-    document.getElementById('lightboxCaption').textContent = p.judul || '';
+    if (!lb || !p || !p.gambar) return;
+    const img = document.getElementById('lightboxImg');
+    const cap = document.getElementById('lightboxCaption');
+    if (img) img.src = p.gambar;
+    if (cap) cap.textContent = p.judul || '';
     lb.classList.add('open');
     lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 }
+window.openLightbox = openLightbox;
 
 function closeLightbox() {
     const lb = document.getElementById('posterLightbox');
+    if (!lb) return;
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
 }
+window.closeLightbox = closeLightbox;
 
 function initLightbox() {
     const lb = document.getElementById('posterLightbox');
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    if (!lb) return;
+    document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
     lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
@@ -242,8 +284,15 @@ function initTkpedia() {
     if (!btn) return;
     btn.addEventListener('click', async () => {
         const link = btn.dataset.link;
-        try { await navigator.clipboard.writeText(link); } catch (e) {
-            const t = document.createElement('textarea'); t.value = link; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
+        try {
+            await navigator.clipboard.writeText(link);
+        } catch (e) {
+            const t = document.createElement('textarea');
+            t.value = link;
+            document.body.appendChild(t);
+            t.select();
+            document.execCommand('copy');
+            t.remove();
         }
         if (typeof showToast === 'function') showToast('Link TKpedia berhasil disalin!');
     });
