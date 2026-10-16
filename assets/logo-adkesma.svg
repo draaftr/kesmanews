@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Logo Adkesma HMTK">
+  <!-- Logo sementara Adkesma. Ganti file ini dengan logo resmi (assets/logo-adkesma.svg / .png). -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3340FF"/>
+      <stop offset="1" stop-color="#0914C4"/>
+    </linearGradient>
+  </defs>
+  <path d="M60 6 106 22v36c0 29-19 49-46 58C33 107 14 87 14 58V22z" fill="url(#g)"/>
+  <path d="M60 14 98 27v31c0 24-15 41-38 49-23-8-38-25-38-49V27z" fill="none" stroke="#F2EB2A" stroke-width="2.5"/>
+  <path d="M38 62 76 44v36z" fill="#F2EB2A"/>
+  <rect x="31" y="56" width="10" height="12" rx="3" fill="#F2EB2A"/>
+  <path d="M44 70h9l3 14h-8z" fill="#F2EB2A"/>
+  <path d="M84 52q8 8 0 16M90 46q13 14 0 28" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <text x="60" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="11" letter-spacing="1.5" fill="#fff">ADKESMA</text>
+</svg>

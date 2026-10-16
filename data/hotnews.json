@@ -1,0 +1,42 @@
+[
+  {
+    "tag": "Proker Adkesma",
+    "judul": "ADVOICE: Suarakan keluhan akademik & non-akademik",
+    "deskripsi": "Wadah resmi Adkesma HMTK untuk menampung keluhanmu, mengawal, dan menindaklanjutinya bersama pihak terkait.",
+    "tanggal": "",
+    "link": "https://its.id/m/ADVOICE",
+    "linkLabel": "Isi Form Advoice",
+    "icon": "megaphone",
+    "hot": true
+  },
+  {
+    "tag": "Terbaru",
+    "judul": "TKpedia 2nd Edition sudah terbit",
+    "deskripsi": "Buku panduan seputar dunia Teknologi Kedokteran dari Adkesma HMTK. Baca langsung atau unduh gratis.",
+    "tanggal": "",
+    "link": "#tkpedia",
+    "linkLabel": "Baca TKpedia",
+    "icon": "book-open-check",
+    "hot": true
+  },
+  {
+    "tag": "Pendampingan",
+    "judul": "Pendampingan beasiswa bersama Adkesma",
+    "deskripsi": "Bingung menyiapkan berkas, essay, atau wawancara beasiswa? Hubungi CP pendampingan dan kami dampingi sampai submit.",
+    "tanggal": "",
+    "link": "#beasiswa-pendampingan",
+    "linkLabel": "Lihat CP Pendampingan",
+    "icon": "heart-handshake",
+    "hot": false
+  },
+  {
+    "tag": "Info Terkini",
+    "judul": "Beasiswa & lomba terbaru diperbarui rutin",
+    "deskripsi": "Pantau deadline terdekat dan simpan ke bookmark agar tidak ada peluang yang terlewat.",
+    "tanggal": "",
+    "link": "#beasiswa",
+    "linkLabel": "Jelajahi Info",
+    "icon": "newspaper",
+    "hot": false
+  }
+]

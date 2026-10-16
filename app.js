@@ -455,6 +455,14 @@ function parseToArray(teks) {
     return lines;
 }
 
+// Poster: terima URL penuh atau nama file di assets/poster/
+function resolvePosterUrl(val) {
+    const v = (val || '').trim();
+    if (!v) return '';
+    if (/^(https?:)?\/\//i.test(v) || v.startsWith('assets/') || v.startsWith('/')) return v;
+    return 'assets/poster/' + v;
+}
+
 // ═══════════════════════════════════════════════════════════════
 // PARSE SHEET BEASISWA → Array of objects
 // Kolom: Nama Beasiswa, Status Pendaftaran, Kategori, Deadline,
@@ -472,6 +480,7 @@ function parseBeasiswaSheet(rows) {
             const persyaratan = parseToArray(row[4] || '').map(cleanUnicodeText);
             const benefit     = parseToArray(row[5] || '').map(cleanUnicodeText);
             const infoText    = cleanUnicodeText(row[6] || '');
+            const poster      = resolvePosterUrl(row[7] || ''); // kolom opsional: nama file / URL poster
             
             const deadline = parseDeadline(deadlineRaw) || parseDeadline(nama);
             const { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
@@ -496,6 +505,7 @@ function parseBeasiswaSheet(rows) {
                 linkGuidebook,
                 linkDaftarLabel,
                 timelinePenting,
+                poster,
             };
         });
 }
@@ -520,6 +530,7 @@ function parseLombaSheet(rows) {
             const partisipasi   = cleanUnicodeText(row[6] || '');
             const biaya         = cleanUnicodeText(row[7] || '');
             const infoText      = cleanUnicodeText(row[8] || '');
+            const poster        = resolvePosterUrl(row[9] || ''); // kolom opsional: nama file / URL poster
             
             const deadline = parseDeadline(deadlineRaw) || '';
             let { linkDaftar, linkGuidebook, linkDaftarLabel } = extractLinks(infoText, nama);
@@ -595,6 +606,7 @@ function parseLombaSheet(rows) {
                     linkGuidebook,
                     linkDaftarLabel,
                     timelinePenting,
+                    poster,
                 });
             }
         });
@@ -990,6 +1002,7 @@ function createCardHTML(item, type) {
 
     return `
         <div class="card ${isUrgent ? 'card-urgent' : ''}" data-id="${item.id}">
+            ${item.poster ? `<div class="card-poster"><img src="${item.poster}" alt="Poster ${cleanUnicodeText(item.nama)}" loading="lazy" onerror="this.parentElement.remove()"></div>` : ''}
             <div class="card-top">
                 <div class="card-badges">
                     <span class="badge ${isOpen ? 'badge-open' : 'badge-closed'}">
@@ -1229,6 +1242,17 @@ function openModal(item, type) {
 
     // Countdown
     renderModalCountdown(item.deadline);
+
+    // Poster
+    const posterWrap = document.getElementById('modalPoster');
+    if (posterWrap) {
+        if (item.poster) {
+            document.getElementById('modalPosterImg').src = item.poster;
+            posterWrap.classList.remove('hidden');
+        } else {
+            posterWrap.classList.add('hidden');
+        }
+    }
 
     // ── Persyaratan ──
     const persyaratanSection = document.getElementById('modalPersyaratan').closest('.modal-section');

@@ -26,6 +26,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
+    <link rel="stylesheet" href="extras.css?v=1.0.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -35,12 +36,16 @@
         <div class="nav-container">
             <a href="#beranda" class="nav-brand">
                 <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
+                <img src="assets/logo-adkesma.svg" alt="Logo Adkesma" class="nav-logo nav-logo-adkesma">
                 <span class="nav-title">My<span class="nav-title-accent">Adkesma</span>Portal</span>
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="#beranda" class="nav-link active" data-section="beranda">Beranda</a>
+                <a href="#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
                 <a href="#beasiswa" class="nav-link" data-section="beasiswa">Beasiswa</a>
                 <a href="#lomba" class="nav-link" data-section="lomba">Lomba</a>
+                <a href="#poster" class="nav-link" data-section="poster">Poster</a>
+                <a href="#tkpedia" class="nav-link" data-section="tkpedia">TKpedia</a>
                 <a href="#advoice" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
                 <a href="#bookmark" class="nav-link" data-section="bookmark">
                     Bookmark
@@ -125,9 +130,25 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- HOT NEWS SECTION                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section hotnews-section" id="hotnews">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper hotnews-icon">
+                    <i data-lucide="flame"></i>
+                </div>
+                <h2 class="section-title">Hot News Adkesma</h2>
+                <p class="section-desc">Kabar terbaru seputar Departemen Adkesma dan program kerjanya</p>
+            </div>
+            <div class="hotnews-grid" id="hotnewsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- BEASISWA SECTION                            -->
     <!-- ═══════════════════════════════════════════ -->
-    <section class="section" id="beasiswa">
+    <section class="section section-bg section-bg-beasiswa" id="beasiswa">
         <div class="section-container">
             <div class="section-header reveal">
                 <div class="section-icon-wrapper beasiswa-icon">
@@ -137,6 +158,17 @@
                 <p class="section-desc">Kumpulan informasi beasiswa pilihan dan terbaru untuk mendukung perkuliahanmu</p>
             </div>
 
+            <!-- Subpage Tabs -->
+            <div class="subpage-tabs reveal" role="tablist" aria-label="Subpage Beasiswa">
+                <button type="button" class="subpage-tab active" role="tab" aria-selected="true" data-subpage="list" id="tabBeasiswaList">
+                    <i data-lucide="graduation-cap"></i><span>Info Beasiswa</span>
+                </button>
+                <button type="button" class="subpage-tab" role="tab" aria-selected="false" data-subpage="pendampingan" id="tabBeasiswaPendampingan">
+                    <i data-lucide="heart-handshake"></i><span>Pendampingan Beasiswa</span>
+                </button>
+            </div>
+
+            <div class="subpage-panel active" id="beasiswaPanelList">
             <!-- Category Cards Hub for Beasiswa -->
             <div class="category-hub reveal" id="beasiswaCategoryHub">
                 <!-- Dynamically rendered category cards -->
@@ -207,13 +239,29 @@
                 <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
                 <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
             </div>
+            </div><!-- /beasiswaPanelList -->
+
+            <!-- Subpage: Pendampingan Beasiswa -->
+            <div class="subpage-panel" id="beasiswaPanelPendampingan" role="tabpanel">
+                <div class="pendampingan-hero">
+                    <div class="pendampingan-eyebrow"><i data-lucide="heart-handshake"></i><span>Subpage Pendampingan</span></div>
+                    <h3 class="pendampingan-title" id="pendampinganTitle">Pendampingan Beasiswa</h3>
+                    <p class="pendampingan-desc" id="pendampinganDesc"></p>
+                </div>
+                <h4 class="pendampingan-subhead"><i data-lucide="layers"></i> Yang Kami Bantu</h4>
+                <div class="pendampingan-services" id="pendampinganLayanan"></div>
+                <h4 class="pendampingan-subhead"><i data-lucide="route"></i> Alur Pendampingan</h4>
+                <div class="pendampingan-steps" id="pendampinganAlur"></div>
+                <h4 class="pendampingan-subhead"><i data-lucide="phone-call"></i> Contact Person (CP) Pendampingan</h4>
+                <div class="pendampingan-cp-grid" id="pendampinganCP"></div>
+            </div>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
     <!-- LOMBA SECTION                               -->
     <!-- ═══════════════════════════════════════════ -->
-    <section class="section section-alt" id="lomba">
+    <section class="section section-bg section-bg-lomba" id="lomba">
         <div class="section-container">
             <div class="section-header reveal">
                 <div class="section-icon-wrapper lomba-icon">
@@ -292,6 +340,63 @@
                 <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
                 <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
                 <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- POSTER SECTION                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section poster-section" id="poster">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper poster-icon">
+                    <i data-lucide="image"></i>
+                </div>
+                <h2 class="section-title">Poster Beasiswa &amp; Lomba</h2>
+                <p class="section-desc">Galeri poster resmi beasiswa dan lomba. Klik poster untuk memperbesar</p>
+            </div>
+            <div class="poster-filter reveal" id="posterFilter">
+                <button type="button" class="poster-filter-btn active" data-filter="all">Semua</button>
+                <button type="button" class="poster-filter-btn" data-filter="beasiswa">Beasiswa</button>
+                <button type="button" class="poster-filter-btn" data-filter="lomba">Lomba</button>
+            </div>
+            <div class="poster-grid" id="posterGrid"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TKPEDIA SECTION                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section section-alt tkpedia-section" id="tkpedia">
+        <div class="section-container">
+            <div class="tkpedia-wrapper reveal">
+                <div class="tkpedia-info">
+                    <div class="advoice-eyebrow tkpedia-eyebrow">
+                        <i data-lucide="book-open-check"></i>
+                        <span>Proker Departemen Adkesma</span>
+                    </div>
+                    <h2 class="tkpedia-title">TK<span>pedia</span> <small>2nd Edition</small></h2>
+                    <p class="tkpedia-lead">
+                        <strong>TKpedia</strong> adalah buku panduan digital dari Adkesma HMTK yang merangkum informasi penting seputar kehidupan akademik dan peluang bagi mahasiswa Teknologi Kedokteran, disusun agar mudah dibaca kapan saja.
+                    </p>
+                    <ul class="tkpedia-points">
+                        <li><i data-lucide="check-circle-2"></i> Gratis dan bisa diakses semua mahasiswa</li>
+                        <li><i data-lucide="check-circle-2"></i> Dikelola langsung oleh Departemen Adkesma HMTK</li>
+                        <li><i data-lucide="check-circle-2"></i> Edisi kedua dengan konten yang diperbarui</li>
+                    </ul>
+                    <div class="tkpedia-cta">
+                        <a href="https://its.id/m/TKpedia2ndEdition" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" id="btnTkpediaOpen">
+                            <i data-lucide="book-open"></i> Baca TKpedia
+                        </a>
+                        <button type="button" class="btn btn-outline btn-lg" id="btnTkpediaCopy" data-link="https://its.id/m/TKpedia2ndEdition">
+                            <i data-lucide="link"></i> Salin Link
+                        </button>
+                    </div>
+                </div>
+                <div class="tkpedia-viewer">
+                    <iframe src="https://drive.google.com/file/d/1MVylcx7XBTGQUL-vID1Q0xwHlN4lOLFp/preview" title="TKpedia 2nd Edition - Adkesma HMTK" loading="lazy" allow="autoplay"></iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -458,6 +563,7 @@
                         </div>
                         <div class="about-logo-frame">
                             <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="about-logo">
+                            <img src="assets/logo-adkesma.svg" alt="Logo Adkesma" class="about-logo about-logo-adkesma">
                             <div class="about-logo-shine"></div>
                         </div>
                         <div class="about-card-footer">
@@ -697,6 +803,7 @@
                 <div class="footer-brand-col">
                     <div class="footer-brand">
                         <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
+                        <img src="assets/logo-adkesma.svg" alt="Logo Adkesma" class="footer-logo footer-logo-adkesma">
                         <div>
                             <h3 class="footer-title">My<span class="footer-title-accent">Adkesma</span>Portal</h3>
                             <p class="footer-tagline">Suarakan. Temukan. Raih.</p>
@@ -742,8 +849,11 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <a href="#beranda">Beranda</a>
+                    <a href="#hotnews">Hot News</a>
                     <a href="#beasiswa">Beasiswa</a>
                     <a href="#lomba">Lomba</a>
+                    <a href="#poster">Poster</a>
+                    <a href="#tkpedia">TKpedia</a>
                     <a href="#advoice">Advoice</a>
                     <a href="#bookmark">Bookmark Saya</a>
                     <a href="#tentang">Tentang Kami</a>
@@ -807,6 +917,7 @@
                 </div>
             </div>
             <div class="modal-body">
+                <div class="modal-poster hidden" id="modalPoster"><img src="" alt="Poster" id="modalPosterImg"></div>
                 <div class="modal-section">
                     <h3><i data-lucide="clock"></i> Countdown</h3>
                     <div class="modal-countdown" id="modalCountdown"></div>
@@ -895,6 +1006,14 @@
     </button>
 
     <!-- Scripts -->
-    <script src="app.js?v=2.4.0"></script>
+    <!-- Poster Lightbox -->
+    <div class="lightbox" id="posterLightbox" aria-hidden="true">
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Tutup poster"><i data-lucide="x"></i></button>
+        <img src="" alt="Poster" id="lightboxImg">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+
+    <script src="app.js?v=2.5.0"></script>
+    <script src="extras.js?v=1.0.0"></script>
 </body>
 </html>
