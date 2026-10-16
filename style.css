@@ -239,13 +239,14 @@ img {
 .nav-brand {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: 8px;
     z-index: 10;
+    white-space: nowrap;
 }
 
 .nav-logo {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-sm);
     object-fit: cover;
     transition: transform var(--transition-base);
@@ -258,9 +259,10 @@ img {
 .nav-title {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     color: var(--color-primary);
     letter-spacing: -0.5px;
+    white-space: nowrap;
 }
 
 [data-theme="dark"] .nav-title {
@@ -274,17 +276,23 @@ img {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
+    gap: 4px;
 }
 
 .nav-link {
     position: relative;
-    padding: var(--space-sm) var(--space-md);
-    font-size: 0.9rem;
+    padding: 7px 11px;
+    font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-text-secondary);
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 1.2;
+    text-decoration: none;
 }
 
 .nav-link:hover {
@@ -304,10 +312,10 @@ img {
 .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 20px;
+    width: 18px;
     height: 3px;
     background: var(--color-accent);
     border-radius: 10px;
@@ -4349,17 +4357,9 @@ button.footer-social-btn {
 
 .hero-stat-number { color: var(--color-lemon); }
 
-/* ─── Nav: Advoice highlight ─────────────────────────────────── */
+/* ─── Nav: Advoice highlight (tanda kuning dihilangkan) ─────── */
 .nav-link-advoice::before {
-    content: '';
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 6px;
-    border-radius: 50%;
-    background: var(--color-lemon);
-    box-shadow: 0 0 0 2px var(--color-obsidian);
-    vertical-align: middle;
+    display: none !important;
 }
 
 /* ─── Advoice Section ────────────────────────────────────────── */
