@@ -11,6 +11,9 @@
     --ap-blue: #0c1cff;
 }
 html { scroll-behavior: smooth; }
+.ap-white { background: #fff !important; color: #1d1d1f; }
+[data-theme="dark"] .ap-white { background: #0b0b0d !important; color: #f5f5f7; }
+.hero-stats[hidden] { display: none !important; }
 
 /* ─── Navbar tipis, gelap, blur (seperti apple.com) ──────────── */
 .navbar {
@@ -127,6 +130,118 @@ html { scroll-behavior: smooth; }
     transition-delay: calc(var(--i, 0) * 90ms);
 }
 .ap-stagger.visible > * { opacity: 1; transform: none; }
+
+/* ─── Grid Proker (ala apple.com) ────────────────────────────── */
+.proker-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 1180px;
+    margin: clamp(32px, 6vh, 64px) auto 0;
+}
+.proker-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(36px, 5vw, 56px) 28px 0;
+    min-height: clamp(480px, 62vw, 620px);
+    border-radius: 28px;
+    overflow: hidden;
+    isolation: isolate;
+}
+.proker-tile--wide { grid-column: 1 / -1; min-height: clamp(460px, 48vw, 560px); }
+.proker-tile--dark { background: #000; color: #f5f5f7; }
+.proker-tile--light { background: #ededf0; color: #1d1d1f; }
+.proker-tile--blue { background: linear-gradient(180deg, #0a1fa8 0%, #060b80 100%); color: #fff; }
+.proker-name {
+    font-size: clamp(2rem, 4.2vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 10px;
+    color: inherit;
+}
+.proker-tag {
+    max-width: 460px;
+    margin: 0 0 20px;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.4;
+    color: inherit;
+    opacity: 0.8;
+}
+.proker-actions { display: flex; align-items: center; gap: 18px; position: relative; z-index: 2; }
+.proker-link { color: #2997ff; font-weight: 600; text-decoration: none; }
+.proker-link:hover { text-decoration: underline; }
+.proker-tile--light .proker-link { color: #0066cc; }
+.proker-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; position: relative; z-index: 2; }
+.proker-chip {
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font: 600 0.85rem var(--font-body, inherit);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s var(--ap-ease);
+}
+.proker-chip:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+.proker-visual {
+    margin-top: auto;
+    width: min(100%, 620px);
+    max-height: 340px;
+    object-fit: contain;
+    object-position: center bottom;
+    z-index: 1;
+    transition: transform 0.9s var(--ap-ease);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+}
+.proker-tile:hover .proker-visual { transform: scale(1.05); }
+.proker-tile--wide .proker-visual { max-height: 300px; }
+@media (max-width: 760px) {
+    .proker-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Panel KesmaNews (muncul saat kotak diklik) ─────────────── */
+.kesmanews-wrap[hidden] { display: none !important; }
+.kesmanews-wrap { animation: knIn 0.7s var(--ap-ease); scroll-margin-top: var(--navbar-height, 64px); }
+@keyframes knIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.kn-bar {
+    position: sticky;
+    top: var(--navbar-height, 64px);
+    z-index: 90;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+[data-theme="dark"] .kn-bar { background: rgba(20, 20, 24, 0.85); border-bottom-color: rgba(255, 255, 255, 0.1); }
+.kn-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 1180px; margin: 0 auto; padding: 10px 20px; }
+.kn-brand { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--color-text); }
+.kn-tabs { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(120, 120, 128, 0.14); }
+.kn-tab {
+    padding: 7px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    font: 600 0.9rem var(--font-body, inherit);
+    cursor: pointer;
+    transition: background 0.3s var(--ap-ease), color 0.3s;
+}
+.kn-tab.active { background: #0071e3; color: #fff; }
+.kn-close {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border: 0; border-radius: 999px;
+    background: transparent; color: var(--color-text-secondary);
+    font: 600 0.88rem var(--font-body, inherit); cursor: pointer;
+}
+.kn-close:hover { color: var(--color-text); background: rgba(120, 120, 128, 0.14); }
+.kn-close svg { width: 16px; height: 16px; }
+.kn-off { display: none !important; }
+@media (max-width: 560px) { .kn-brand { display: none; } .kn-bar-inner { justify-content: space-between; } .kn-tab { padding: 7px 12px; font-size: 0.82rem; } }
 
 /* ─── Panel Advoice: judul tengah + visual besar ─────────────── */
 .advoice-section { background: #000 !important; }

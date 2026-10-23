@@ -128,6 +128,7 @@ function updateActiveNavLink() {
     
     let current = '';
     sections.forEach(section => {
+        if (!section.offsetParent) return; // lewati section yang tersembunyi (mis. panel KesmaNews)
         const sectionTop = section.offsetTop - 100;
         if (window.scrollY >= sectionTop) {
             current = section.getAttribute('id');

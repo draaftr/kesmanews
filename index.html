@@ -27,7 +27,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
     <link rel="stylesheet" href="extras.css?v=1.0.0">
-    <link rel="stylesheet" href="apple.css?v=1.0.0">
+    <link rel="stylesheet" href="apple.css?v=1.1.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -92,23 +92,16 @@
                 <span class="tagline-word tagline-word-accent">Raih.</span>
             </p>
             <p class="hero-desc">
-                Satu portal praktis untuk mahasiswa Teknologi Kedokteran. Sampaikan keluhanmu melalui <strong>Advoice</strong>, atau cari peluang <strong>Beasiswa</strong> &amp; <strong>Lomba</strong> terbaru. Dikelola langsung oleh Departemen Advokasi &amp; Kesejahteraan Mahasiswa HMTK.
+                Portal resmi Departemen Advokasi &amp; Kesejahteraan Mahasiswa HMTK untuk mendengar, mendampingi, dan membantu mahasiswa Teknologi Kedokteran.
             </p>
             <div class="hero-cta">
-                <a href="#advoice" class="btn btn-primary btn-lg btn-hero-advoice">
-                    <i data-lucide="megaphone"></i>
-                    Sampaikan Advoice
-                </a>
-                <a href="#beasiswa" class="btn btn-secondary btn-lg">
-                    <i data-lucide="graduation-cap"></i>
-                    Lihat Beasiswa
-                </a>
-                <a href="#lomba" class="btn btn-secondary btn-lg">
-                    <i data-lucide="trophy"></i>
-                    Lihat Lomba
+                <a href="#proker" class="btn btn-primary btn-lg" id="btnExploreProker">
+                    Jelajahi Proker
+                    <i data-lucide="arrow-down"></i>
                 </a>
             </div>
-            <div class="hero-stats">
+            <!-- Statistik disembunyikan, tetap ada di DOM agar app.js tidak error -->
+            <div class="hero-stats" hidden aria-hidden="true">
                 <div class="hero-stat">
                     <span class="hero-stat-number" id="statBeasiswa">0</span>
                     <span class="hero-stat-label">Beasiswa</span>
@@ -147,8 +140,66 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- PROKER ADKESMA (grid ala Apple)             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section proker-section" id="proker">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Proker Adkesma</h2>
+                <p class="section-desc">Program kerja kami untuk suara, informasi, dan kesejahteraan mahasiswa.</p>
+            </div>
+            <div class="proker-grid">
+                <article class="proker-tile proker-tile--dark">
+                    <h3 class="proker-name">ADVOICE</h3>
+                    <p class="proker-tag">Suarakan keluhan akademik &amp; non-akademik. Kami dengar, kawal, dan tindak lanjuti.</p>
+                    <div class="proker-actions">
+                        <a href="#advoice" class="btn btn-primary">Selengkapnya</a>
+                        <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="proker-link">Isi Form</a>
+                    </div>
+                    <img src="assets/advoice-visual.jpg" alt="Ilustrasi Advoice" class="proker-visual" loading="lazy">
+                </article>
+                <article class="proker-tile proker-tile--light">
+                    <h3 class="proker-name">TKpedia</h3>
+                    <p class="proker-tag">Buku panduan digital Teknologi Kedokteran, kini edisi kedua.</p>
+                    <div class="proker-actions">
+                        <a href="#tkpedia" class="btn btn-primary">Selengkapnya</a>
+                    </div>
+                    <img src="assets/tkpedia-visual.jpg" alt="Ilustrasi TKpedia" class="proker-visual" loading="lazy">
+                </article>
+                <article class="proker-tile proker-tile--blue proker-tile--wide">
+                    <h3 class="proker-name">KesmaNews</h3>
+                    <p class="proker-tag">Info beasiswa, lomba, dan pendampingan beasiswa. Semua peluangmu dalam satu tempat.</p>
+                    <div class="proker-actions">
+                        <button type="button" class="btn btn-primary" data-kn-open="beasiswa">Selengkapnya</button>
+                    </div>
+                    <div class="proker-chips">
+                        <button type="button" class="proker-chip" data-kn-open="beasiswa">Beasiswa</button>
+                        <button type="button" class="proker-chip" data-kn-open="lomba">Lomba</button>
+                        <button type="button" class="proker-chip" data-kn-open="beasiswa" data-kn-sub="pendampingan">Pendampingan</button>
+                    </div>
+                    <img src="assets/kesmanews-visual.jpg" alt="Ilustrasi KesmaNews" class="proker-visual" loading="lazy">
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- BEASISWA SECTION                            -->
     <!-- ═══════════════════════════════════════════ -->
+    <!-- Panel KesmaNews: tersembunyi sampai kotak KesmaNews diklik -->
+    <div class="kesmanews-wrap" id="kesmanews" hidden>
+        <div class="kn-bar">
+            <div class="kn-bar-inner">
+                <span class="kn-brand">KesmaNews</span>
+                <div class="kn-tabs" role="tablist" aria-label="KesmaNews">
+                    <button type="button" class="kn-tab active" data-kn="beasiswa" role="tab">Info Beasiswa</button>
+                    <button type="button" class="kn-tab" data-kn="lomba" role="tab">Info Lomba</button>
+                </div>
+                <button type="button" class="kn-close" id="knClose" aria-label="Tutup KesmaNews">
+                    <span>Tutup</span><i data-lucide="x"></i>
+                </button>
+            </div>
+        </div>
     <section class="section section-bg section-bg-beasiswa" id="beasiswa">
         <div class="section-container">
             <div class="section-header reveal">
@@ -348,6 +399,8 @@
             </div>
         </div>
     </section>
+
+    </div><!-- /kesmanews -->
 
     <!-- TKPEDIA SECTION                             -->
     <!-- ═══════════════════════════════════════════ -->
@@ -996,8 +1049,8 @@
         <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
 
-    <script src="app.js?v=2.5.0"></script>
+    <script src="app.js?v=2.5.1"></script>
     <script src="extras.js?v=1.0.0"></script>
-    <script src="apple.js?v=1.0.0"></script>
+    <script src="apple.js?v=1.1.0"></script>
 </body>
 </html>

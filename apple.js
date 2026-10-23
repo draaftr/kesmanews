@@ -7,7 +7,8 @@
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // 1) Panel selang-seling terang / gelap
-    const panels = { hotnews: 'ap-light', beasiswa: 'ap-light', lomba: 'ap-light', tkpedia: 'ap-dark', bookmark: 'ap-light', tentang: 'ap-light' };
+    // Beasiswa & Lomba sengaja tidak diberi kelas panel agar background fotonya tetap tampil
+    const panels = { hotnews: 'ap-white', proker: 'ap-light', tkpedia: 'ap-dark', bookmark: 'ap-light', tentang: 'ap-light' };
     Object.entries(panels).forEach(([id, cls]) => {
         const el = document.getElementById(id);
         if (el) el.classList.add(cls);
@@ -20,7 +21,7 @@
     document.querySelectorAll('.advoice-hero, .advoice-steps').forEach(el => el.classList.add('ap-scale'));
 
     // 3) Stagger untuk grid; anak diberi index (--i)
-    const staggerSel = '.hotnews-grid, .advoice-categories, .advoice-steps-grid, .about-pillars, .category-hub, .pendampingan-services';
+    const staggerSel = '.hotnews-grid, .proker-grid, .advoice-categories, .advoice-steps-grid, .about-pillars, .category-hub, .pendampingan-services';
     function markStagger(root) {
         (root || document).querySelectorAll(staggerSel).forEach(grid => {
             if (grid.dataset.apStagger) return;
@@ -80,6 +81,55 @@
     if (!reduce) {
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
+    }
+
+    // 5b) KesmaNews: panel Beasiswa/Lomba tersembunyi sampai kotaknya diklik
+    const kn = document.getElementById('kesmanews');
+    function setKnTab(tab) {
+        ['beasiswa', 'lomba'].forEach(id => {
+            const sec = document.getElementById(id);
+            if (sec) sec.classList.toggle('kn-off', id !== tab);
+        });
+        document.querySelectorAll('.kn-tab').forEach(b => b.classList.toggle('active', b.dataset.kn === tab));
+    }
+    function openKN(tab, sub) {
+        if (!kn) return;
+        const wasHidden = kn.hidden;
+        kn.hidden = false;
+        setKnTab(tab);
+        if (sub === 'pendampingan') document.getElementById('tabBeasiswaPendampingan')?.click();
+        else if (tab === 'beasiswa') document.getElementById('tabBeasiswaList')?.click();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        requestAnimationFrame(() => kn.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+        return wasHidden;
+    }
+    function closeKN() {
+        if (!kn) return;
+        kn.hidden = true;
+        document.getElementById('proker')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+    if (kn) {
+        setKnTab('beasiswa');
+        document.querySelectorAll('[data-kn-open]').forEach(el =>
+            el.addEventListener('click', () => openKN(el.dataset.knOpen, el.dataset.knSub)));
+        document.querySelectorAll('.kn-tab').forEach(b =>
+            b.addEventListener('click', () => { setKnTab(b.dataset.kn); kn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+        document.getElementById('knClose')?.addEventListener('click', closeKN);
+        // Link navbar/footer/bookmark ke #beasiswa atau #lomba -> buka panel dulu
+        document.addEventListener('click', (e) => {
+            const a = e.target.closest('a[href="#beasiswa"], a[href="#lomba"]');
+            if (!a) return;
+            e.preventDefault();
+            openKN(a.getAttribute('href').slice(1));
+        });
+        // Buka langsung jika URL berisi hash terkait
+        const openFromHash = () => {
+            const h = location.hash;
+            if (h === '#beasiswa' || h === '#lomba') openKN(h.slice(1));
+            else if (h === '#beasiswa-pendampingan') openKN('beasiswa', 'pendampingan');
+        };
+        openFromHash();
+        window.addEventListener('hashchange', openFromHash);
     }
 
     // 6) Count-up statistik hero (nilai diisi app.js secara async)
