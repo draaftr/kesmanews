@@ -123,12 +123,31 @@ function initNavbar() {
 }
 
 function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
+    // Jika di halaman khusus (bukan index.html)
+    if (currentPath === 'kesmanews.html') {
+        navLinks.forEach(link => {
+            const sec = link.getAttribute('data-section');
+            link.classList.toggle('active', sec === 'kesmanews' || sec === 'beasiswa' || sec === 'lomba');
+        });
+        return;
+    }
+    if (currentPath === 'advoice.html') {
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-section') === 'advoice'));
+        return;
+    }
+    if (currentPath === 'tkpedia.html') {
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-section') === 'tkpedia'));
+        return;
+    }
+
+    // Default untuk index.html (scroll-spy)
+    const sections = document.querySelectorAll('section[id]');
     let current = '';
     sections.forEach(section => {
-        if (!section.offsetParent) return; // lewati section yang tersembunyi (mis. panel KesmaNews)
+        if (!section.offsetParent) return;
         const sectionTop = section.offsetTop - 100;
         if (window.scrollY >= sectionTop) {
             current = section.getAttribute('id');

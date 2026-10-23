@@ -83,53 +83,22 @@
         onScroll();
     }
 
-    // 5b) KesmaNews: panel Beasiswa/Lomba tersembunyi sampai kotaknya diklik
-    const kn = document.getElementById('kesmanews');
-    function setKnTab(tab) {
-        ['beasiswa', 'lomba'].forEach(id => {
-            const sec = document.getElementById(id);
-            if (sec) sec.classList.toggle('kn-off', id !== tab);
-        });
-        document.querySelectorAll('.kn-tab').forEach(b => b.classList.toggle('active', b.dataset.kn === tab));
-    }
-    function openKN(tab, sub) {
-        if (!kn) return;
-        const wasHidden = kn.hidden;
-        kn.hidden = false;
-        setKnTab(tab);
-        if (sub === 'pendampingan') document.getElementById('tabBeasiswaPendampingan')?.click();
-        else if (tab === 'beasiswa') document.getElementById('tabBeasiswaList')?.click();
-        if (typeof lucide !== 'undefined') lucide.createIcons();
-        requestAnimationFrame(() => kn.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
-        return wasHidden;
-    }
-    function closeKN() {
-        if (!kn) return;
-        kn.hidden = true;
-        document.getElementById('proker')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    }
-    if (kn) {
-        setKnTab('beasiswa');
-        document.querySelectorAll('[data-kn-open]').forEach(el =>
-            el.addEventListener('click', () => openKN(el.dataset.knOpen, el.dataset.knSub)));
-        document.querySelectorAll('.kn-tab').forEach(b =>
-            b.addEventListener('click', () => { setKnTab(b.dataset.kn); kn.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
-        document.getElementById('knClose')?.addEventListener('click', closeKN);
-        // Link navbar/footer/bookmark ke #beasiswa atau #lomba -> buka panel dulu
-        document.addEventListener('click', (e) => {
-            const a = e.target.closest('a[href="#beasiswa"], a[href="#lomba"]');
-            if (!a) return;
-            e.preventDefault();
-            openKN(a.getAttribute('href').slice(1));
-        });
-        // Buka langsung jika URL berisi hash terkait
-        const openFromHash = () => {
-            const h = location.hash;
-            if (h === '#beasiswa' || h === '#lomba') openKN(h.slice(1));
-            else if (h === '#beasiswa-pendampingan') openKN('beasiswa', 'pendampingan');
-        };
-        openFromHash();
-        window.addEventListener('hashchange', openFromHash);
+    // 5b) Product Subnav Scrollspy (pada halaman khusus seperti kesmanews.html)
+    const subnavLinks = document.querySelectorAll('.product-subnav-link');
+    if (subnavLinks.length > 0) {
+        window.addEventListener('scroll', () => {
+            let currentSec = '';
+            document.querySelectorAll('section[id]').forEach(sec => {
+                const top = sec.offsetTop - 140;
+                if (window.scrollY >= top) {
+                    currentSec = sec.getAttribute('id');
+                }
+            });
+            subnavLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                link.classList.toggle('active', href === `#${currentSec}`);
+            });
+        }, { passive: true });
     }
 
     // 6) Count-up statistik hero (nilai diisi app.js secara async)

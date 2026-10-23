@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADVOICE — Suarakan Keluhan Akademik &amp; Non-Akademik | Adkesma HMTK</title>
+    <meta name="description" content="ADVOICE: Wadah resmi Departemen Adkesma HMTK untuk menyampaikan aspirasi dan keluhan akademik maupun non-akademik.">
+    <meta name="theme-color" content="#0C1CFF">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ADVOICE — Suarakan Keluhan Akademik &amp; Non-Akademik | Adkesma HMTK">
+    <meta property="og:description" content="Suaramu akan kami dengar, kawal, dan bantu tindak lanjuti bersama pihak terkait.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/advoice-visual.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=3.0.0">
+    <link rel="stylesheet" href="extras.css?v=1.0.0">
+    <link rel="stylesheet" href="apple.css?v=1.2.0">
+</head>
+<body class="page-advoice">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MAIN NAVBAR                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html#beranda" class="nav-brand">
+                <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
+                <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="nav-logo nav-logo-adkesma">
+                <span class="nav-title">My<span class="nav-title-accent">Adkesma</span>Portal</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#beranda" class="nav-link" data-section="beranda">Beranda</a>
+                <a href="index.html#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
+                <a href="kesmanews.html" class="nav-link" data-section="kesmanews">KesmaNews</a>
+                <a href="tkpedia.html" class="nav-link" data-section="tkpedia">TKpedia</a>
+                <a href="advoice.html" class="nav-link nav-link-advoice active" data-section="advoice">Advoice</a>
+                <a href="index.html#bookmark" class="nav-link" data-section="bookmark">
+                    Bookmark
+                    <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
+                </a>
+                <a href="index.html#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
+            </div>
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i data-lucide="sun" class="icon-sun"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- STICKY SUB-NAVBAR (Apple-style Product Bar) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="product-subnav">
+        <div class="product-subnav-container">
+            <div class="product-subnav-title">
+                <a href="advoice.html">ADVOICE</a>
+            </div>
+            <div class="product-subnav-menu">
+                <a href="#kategori" class="product-subnav-link">Kategori</a>
+                <a href="#alur" class="product-subnav-link">Alur Kawal</a>
+                <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="product-subnav-btn">
+                    <i data-lucide="send"></i>
+                    <span>Isi Form</span>
+                </a>
+                <a href="index.html#proker" class="product-subnav-btn product-subnav-btn-secondary">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Semua Proker</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO HEADER: ADVOICE (Apple-style dark)     -->
+    <!-- ═══════════════════════════════════════════ -->
+    <header class="page-hero-apple page-hero-dark">
+        <div class="page-hero-container">
+            <span class="page-hero-badge">
+                <i data-lucide="megaphone"></i>
+                Proker Departemen Adkesma
+            </span>
+            <h1 class="page-hero-title">AD<span>VOICE</span></h1>
+            <p class="page-hero-tagline">Suarakan. Kami dengar, kawal, dan perjuangkan.</p>
+            <p class="page-hero-subtitle">
+                Wadah resmi bagi seluruh mahasiswa Teknologi Kedokteran untuk menyampaikan keluhan seputar akademik maupun non-akademik secara aman dan terpercaya.
+            </p>
+            <div class="page-hero-cta">
+                <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                    <i data-lucide="send"></i>
+                    <span>Isi Form Advoice</span>
+                </a>
+                <button type="button" class="btn btn-secondary btn-lg" id="btnCopyAdvoice">
+                    <i data-lucide="link"></i>
+                    <span>Salin Link Form</span>
+                </button>
+            </div>
+            <img src="assets/advoice-visual.jpg" alt="Visual Megafon Advoice" class="page-hero-visual" loading="lazy">
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- KATEGORI KELUHAN                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section ap-dark" id="kategori">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Dua Ranah Aspirasi</h2>
+                <p class="section-desc">Pilih kategori yang paling sesuai dengan kendala yang kamu hadapi.</p>
+            </div>
+
+            <div class="advoice-categories reveal">
+                <div class="advoice-cat-card">
+                    <div class="advoice-cat-icon"><i data-lucide="book-open-check"></i></div>
+                    <h3>Keluhan Akademik</h3>
+                    <p>Kendala seputar perkuliahan seperti jadwal kelas, transparansi nilai, kurikulum, dosen, praktikum laboratorium, hingga sarana belajar mengajar.</p>
+                </div>
+                <div class="advoice-cat-card">
+                    <div class="advoice-cat-icon"><i data-lucide="users-round"></i></div>
+                    <h3>Keluhan Non-Akademik</h3>
+                    <p>Hal-hal penunjang di luar kelas seperti fasilitas kampus, administrasi jurusan, organisasi kemahasiswaan, isu kesejahteraan, dan kehidupan mahasiswa umum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ALUR ADVOICE                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section ap-dark" id="alur">
+        <div class="section-container">
+            <div class="advoice-steps reveal">
+                <h3 class="advoice-steps-title">Bagaimana Advoice Bekerja?</h3>
+                <div class="advoice-steps-grid">
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">01</span>
+                        <h4>Tulis Keluhanmu</h4>
+                        <p>Isi Form Advoice secara lengkap: pilih kategori, ceritakan kronologinya, dan sampaikan harapanmu.</p>
+                    </div>
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">02</span>
+                        <h4>Kami Tinjau</h4>
+                        <p>Tim Adkesma HMTK akan membaca, memilah, dan memverifikasi laporan yang kamu kirim secara teliti.</p>
+                    </div>
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">03</span>
+                        <h4>Kami Kawal</h4>
+                        <p>Keluhanmu akan kami bawa dan perjuangkan ke pihak kampus, dosen, atau pihak yang berwenang.</p>
+                    </div>
+                    <div class="advoice-step">
+                        <span class="advoice-step-num">04</span>
+                        <h4>Tindak Lanjut</h4>
+                        <p>Kamu bisa memantau perkembangannya melalui media sosial atau informasi berkala resmi Adkesma HMTK.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-gradient-top"></div>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand-col">
+                    <div class="footer-brand">
+                        <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
+                        <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="footer-logo footer-logo-adkesma">
+                        <div>
+                            <h3 class="footer-title">My<span class="footer-title-accent">Adkesma</span>Portal</h3>
+                            <p class="footer-tagline">Suarakan. Temukan. Raih.</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">
+                        ADVOICE: Wadah advokasi dan penyaluran aspirasi mahasiswa Teknologi Kedokteran oleh Departemen Adkesma HMTK.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Navigasi</h4>
+                    <a href="index.html#beranda">Beranda</a>
+                    <a href="index.html#proker">Semua Proker</a>
+                    <a href="kesmanews.html">KesmaNews</a>
+                    <a href="tkpedia.html">TKpedia</a>
+                    <a href="advoice.html">Advoice</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Kontak Kami</h4>
+                    <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="footer-contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                        <span>@adkezzmoy</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>MyAdkesmaPortal</strong> — Departemen Adkesma HMTK.</p>
+                <p class="footer-bottom-sub">Dibuat dengan <span class="footer-heart">♥</span> untuk mahasiswa HMTK</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <script src="app.js?v=2.5.2"></script>
+    <script src="extras.js?v=1.0.1"></script>
+    <script src="apple.js?v=1.2.0"></script>
+</body>
+</html>

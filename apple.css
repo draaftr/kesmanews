@@ -204,46 +204,257 @@ html { scroll-behavior: smooth; }
     .proker-grid { grid-template-columns: 1fr; }
 }
 
-/* ─── Panel KesmaNews (muncul saat kotak diklik) ─────────────── */
-.kesmanews-wrap[hidden] { display: none !important; }
-.kesmanews-wrap { animation: knIn 0.7s var(--ap-ease); scroll-margin-top: var(--navbar-height, 64px); }
-@keyframes knIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-.kn-bar {
+/* ─── Apple-style Product Subnav Bar (Sticky) ────────────────── */
+.product-subnav {
     position: sticky;
-    top: var(--navbar-height, 64px);
-    z-index: 90;
-    background: rgba(255, 255, 255, 0.85);
+    top: var(--navbar-height, 60px);
+    z-index: 95;
+    background: rgba(255, 255, 255, 0.82);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
-[data-theme="dark"] .kn-bar { background: rgba(20, 20, 24, 0.85); border-bottom-color: rgba(255, 255, 255, 0.1); }
-.kn-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 1180px; margin: 0 auto; padding: 10px 20px; }
-.kn-brand { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--color-text); }
-.kn-tabs { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(120, 120, 128, 0.14); }
-.kn-tab {
-    padding: 7px 18px;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
+[data-theme="dark"] .product-subnav {
+    background: rgba(20, 20, 24, 0.85);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+.product-subnav-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.product-subnav-title a {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    text-decoration: none;
+}
+.product-subnav-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.product-subnav-link {
     color: var(--color-text-secondary);
-    font: 600 0.9rem var(--font-body, inherit);
-    cursor: pointer;
-    transition: background 0.3s var(--ap-ease), color 0.3s;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 999px;
+    transition: color 0.2s, background 0.2s;
 }
-.kn-tab.active { background: #0071e3; color: #fff; }
-.kn-close {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 7px 14px; border: 0; border-radius: 999px;
-    background: transparent; color: var(--color-text-secondary);
-    font: 600 0.88rem var(--font-body, inherit); cursor: pointer;
+.product-subnav-link:hover,
+.product-subnav-link.active {
+    color: var(--color-text);
+    background: rgba(120, 120, 128, 0.12);
 }
-.kn-close:hover { color: var(--color-text); background: rgba(120, 120, 128, 0.14); }
-.kn-close svg { width: 16px; height: 16px; }
-.kn-off { display: none !important; }
-@media (max-width: 560px) { .kn-brand { display: none; } .kn-bar-inner { justify-content: space-between; } .kn-tab { padding: 7px 12px; font-size: 0.82rem; } }
+.product-subnav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #0071e3;
+    color: #fff !important;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+}
+.product-subnav-btn:hover {
+    background: #0077ed;
+    transform: scale(1.03);
+}
+.product-subnav-btn-secondary {
+    background: rgba(120, 120, 128, 0.16);
+    color: var(--color-text) !important;
+}
+.product-subnav-btn-secondary:hover {
+    background: rgba(120, 120, 128, 0.26);
+}
+.product-subnav-btn svg { width: 14px; height: 14px; }
+@media (max-width: 640px) {
+    .product-subnav-link { display: none; }
+}
 
-/* ─── Panel Advoice: judul tengah + visual besar ─────────────── */
+/* ─── Apple-style Dedicated Page Hero ────────────────────────── */
+.page-hero-apple {
+    padding: clamp(70px, 12vh, 120px) 20px clamp(40px, 6vh, 60px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.page-hero-container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.page-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    background: rgba(0, 113, 227, 0.1);
+    color: #0071e3;
+}
+.page-hero-badge svg { width: 15px; height: 15px; }
+.page-hero-title {
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+.page-hero-title span { color: #0071e3; }
+.page-hero-tagline {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 14px;
+}
+.page-hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin-bottom: 30px;
+}
+.page-hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 40px;
+}
+.page-hero-visual {
+    width: min(100%, 780px);
+    max-height: 440px;
+    object-fit: contain;
+    border-radius: 24px;
+    margin-top: 10px;
+    animation: apRise 1.2s var(--ap-ease) forwards;
+}
+.page-hero-dark {
+    background: #000;
+    color: #f5f5f7;
+}
+.page-hero-dark .page-hero-badge {
+    background: rgba(77, 124, 255, 0.18);
+    color: #6ea8ff;
+}
+.page-hero-dark .page-hero-title,
+.page-hero-dark .page-hero-tagline {
+    color: #f5f5f7;
+}
+.page-hero-dark .page-hero-subtitle {
+    color: #a1a1a6;
+}
+.page-hero-dark .page-hero-title span {
+    color: #4d7cff;
+}
+.page-hero-kesmanews {
+    background: linear-gradient(180deg, rgba(12, 28, 255, 0.06) 0%, transparent 100%);
+}
+.page-hero-quickpills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.hero-quickpill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.hero-quickpill:hover {
+    transform: translateY(-3px);
+    border-color: #0071e3;
+    box-shadow: var(--shadow-md);
+    color: #0071e3;
+}
+.hero-quickpill svg { width: 16px; height: 16px; color: #0071e3; }
+
+/* ─── TKpedia Dedicated Page Enhancements ────────────────────── */
+.tkpedia-full-viewer {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto clamp(32px, 6vh, 50px);
+    aspect-ratio: 16 / 10;
+    border-radius: 28px;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-xl);
+}
+.tkpedia-full-viewer iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.tkpedia-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.tkpedia-feat-card {
+    padding: 28px;
+    border-radius: 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    text-align: left;
+    transition: transform 0.4s var(--ap-ease), box-shadow 0.4s;
+}
+.tkpedia-feat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+.tkpedia-feat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(0, 113, 227, 0.1);
+    color: #0071e3;
+    display: grid;
+    place-items: center;
+    margin-bottom: 16px;
+}
+.tkpedia-feat-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: var(--color-text);
+}
+.tkpedia-feat-card p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
 .advoice-section { background: #000 !important; }
 .advoice-hero { text-align: center; display: block !important; }
 .advoice-hero-content { max-width: 760px; margin-inline: auto; }

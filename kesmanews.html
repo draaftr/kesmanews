@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KesmaNews — Info Beasiswa, Lomba &amp; Pendampingan | Adkesma HMTK</title>
+    <meta name="description" content="Pusat informasi beasiswa, kompetisi/lomba, dan program pendampingan beasiswa untuk mahasiswa Teknologi Kedokteran.">
+    <meta name="theme-color" content="#0C1CFF">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KesmaNews — Info Beasiswa, Lomba &amp; Pendampingan | Adkesma HMTK">
+    <meta property="og:description" content="Temukan peluang beasiswa dan lomba terkini serta dapatkan pendampingan pendaftaran dari Departemen Adkesma HMTK.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/kesmanews-visual.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=3.0.0">
+    <link rel="stylesheet" href="extras.css?v=1.0.0">
+    <link rel="stylesheet" href="apple.css?v=1.2.0">
+</head>
+<body class="page-kesmanews">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MAIN NAVBAR                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html#beranda" class="nav-brand">
+                <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
+                <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="nav-logo nav-logo-adkesma">
+                <span class="nav-title">My<span class="nav-title-accent">Adkesma</span>Portal</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#beranda" class="nav-link" data-section="beranda">Beranda</a>
+                <a href="index.html#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
+                <a href="kesmanews.html" class="nav-link active" data-section="kesmanews">KesmaNews</a>
+                <a href="tkpedia.html" class="nav-link" data-section="tkpedia">TKpedia</a>
+                <a href="advoice.html" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
+                <a href="index.html#bookmark" class="nav-link" data-section="bookmark">
+                    Bookmark
+                    <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
+                </a>
+                <a href="index.html#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
+            </div>
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i data-lucide="sun" class="icon-sun"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- STICKY SUB-NAVBAR (Apple-style Product Bar) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="product-subnav">
+        <div class="product-subnav-container">
+            <div class="product-subnav-title">
+                <a href="kesmanews.html">KesmaNews</a>
+            </div>
+            <div class="product-subnav-menu">
+                <a href="#beasiswa" class="product-subnav-link active" id="subnavBeasiswa">Beasiswa</a>
+                <a href="#lomba" class="product-subnav-link" id="subnavLomba">Lomba</a>
+                <a href="#beasiswa-pendampingan" class="product-subnav-link" id="subnavPendampingan">Pendampingan</a>
+                <a href="index.html#proker" class="product-subnav-btn">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Semua Proker</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO HEADER: KESMANEWS                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <header class="page-hero-apple page-hero-kesmanews">
+        <div class="page-hero-container">
+            <span class="page-hero-badge">
+                <i data-lucide="sparkles"></i>
+                Departemen Adkesma HMTK
+            </span>
+            <h1 class="page-hero-title">KesmaNews</h1>
+            <p class="page-hero-subtitle">Satu pintu untuk menemukan peluang beasiswa, kompetisi prestasi, dan bimbingan langsung.</p>
+            <div class="page-hero-quickpills">
+                <a href="#beasiswa" class="hero-quickpill"><i data-lucide="graduation-cap"></i> Info Beasiswa</a>
+                <a href="#lomba" class="hero-quickpill"><i data-lucide="trophy"></i> Info Lomba</a>
+                <a href="#beasiswa-pendampingan" class="hero-quickpill"><i data-lucide="heart-handshake"></i> Pendampingan</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- BEASISWA SECTION                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section section-bg section-bg-beasiswa" id="beasiswa">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper beasiswa-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <h2 class="section-title">Info Beasiswa</h2>
+                <p class="section-desc">Kumpulan informasi beasiswa pilihan dan terbaru untuk mendukung perkuliahanmu</p>
+            </div>
+
+            <!-- Subpage Tabs -->
+            <div class="subpage-tabs reveal" role="tablist" aria-label="Subpage Beasiswa">
+                <button type="button" class="subpage-tab active" role="tab" aria-selected="true" data-subpage="list" id="tabBeasiswaList">
+                    <i data-lucide="graduation-cap"></i><span>Info Beasiswa</span>
+                </button>
+                <button type="button" class="subpage-tab" role="tab" aria-selected="false" data-subpage="pendampingan" id="tabBeasiswaPendampingan">
+                    <i data-lucide="heart-handshake"></i><span>Pendampingan Beasiswa</span>
+                </button>
+            </div>
+
+            <div class="subpage-panel active" id="beasiswaPanelList">
+                <!-- Category Cards Hub for Beasiswa -->
+                <div class="category-hub reveal" id="beasiswaCategoryHub">
+                    <!-- Dynamically rendered category cards -->
+                </div>
+
+                <!-- Search & Filter -->
+                <div class="filter-bar reveal">
+                    <div class="search-wrapper">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" class="search-input" id="searchBeasiswa" placeholder="Cari beasiswa...">
+                    </div>
+                    <div class="filter-group">
+                        <button type="button" class="filter-toggle-pill active" id="toggleActiveBeasiswaBtn" title="Tampilkan hanya beasiswa yang masih aktif dan buka">
+                            <i data-lucide="check-circle-2"></i>
+                            <span>Hanya yang Buka</span>
+                        </button>
+                        <div class="filter-select-wrapper">
+                            <i data-lucide="filter" class="filter-icon"></i>
+                            <select class="filter-select" id="filterKategoriBeasiswa">
+                                <option value="semua">Semua Kategori</option>
+                                <option value="Berprestasi">Berprestasi</option>
+                                <option value="Kurang mampu">Kurang Mampu</option>
+                                <option value="Umum">Umum</option>
+                            </select>
+                        </div>
+                        <div class="filter-select-wrapper">
+                            <i data-lucide="circle-dot" class="filter-icon"></i>
+                            <select class="filter-select" id="filterStatusBeasiswa">
+                                <option value="semua">Semua Status</option>
+                                <option value="Buka">Buka</option>
+                                <option value="Tutup">Tutup</option>
+                            </select>
+                        </div>
+                        <div class="filter-select-wrapper">
+                            <i data-lucide="arrow-up-down" class="filter-icon"></i>
+                            <select class="filter-select" id="sortBeasiswa">
+                                <option value="default">Urutkan</option>
+                                <option value="deadline">Deadline Terdekat</option>
+                                <option value="status">Status Buka Dulu</option>
+                                <option value="nama">A–Z</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Results Info -->
+                <div class="filter-results-info" id="resultsInfoBeasiswa"></div>
+
+                <!-- Cards Grid -->
+                <div class="cards-grid" id="beasiswaGrid">
+                    <!-- Cards rendered by JS -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state hidden" id="emptyBeasiswa">
+                    <i data-lucide="search-x"></i>
+                    <h3>Tidak ada beasiswa yang cocok</h3>
+                    <p>Coba sesuaikan kata kunci pencarian atau ubah filter kamu</p>
+                    <button type="button" class="btn btn-outline btn-sm btn-reset-filter" id="btnResetBeasiswa">
+                        <i data-lucide="rotate-ccw"></i>
+                        <span>Reset Filter</span>
+                    </button>
+                </div>
+
+                <!-- Loading Skeleton -->
+                <div class="skeleton-grid" id="skeletonBeasiswa">
+                    <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                    <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                    <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                </div>
+            </div><!-- /beasiswaPanelList -->
+
+            <!-- Subpage: Pendampingan Beasiswa -->
+            <div class="subpage-panel" id="beasiswaPanelPendampingan" role="tabpanel">
+                <div class="pendampingan-hero">
+                    <div class="pendampingan-eyebrow"><i data-lucide="heart-handshake"></i><span>Subpage Pendampingan</span></div>
+                    <h3 class="pendampingan-title" id="pendampinganTitle">Pendampingan Beasiswa</h3>
+                    <p class="pendampingan-desc" id="pendampinganDesc"></p>
+                    <div class="pendampingan-cp-label"><i data-lucide="phone-call"></i> Contact Person (CP) Pendampingan</div>
+                    <div class="pendampingan-cp-grid pendampingan-cp-inhero" id="pendampinganCP"></div>
+                </div>
+                <h4 class="pendampingan-subhead"><i data-lucide="layers"></i> Yang Kami Bantu</h4>
+                <div class="pendampingan-services" id="pendampinganLayanan"></div>
+                <h4 class="pendampingan-subhead"><i data-lucide="route"></i> Alur Pendampingan</h4>
+                <div class="pendampingan-steps" id="pendampinganAlur"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- LOMBA SECTION                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section section-bg section-bg-lomba" id="lomba">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper lomba-icon">
+                    <i data-lucide="trophy"></i>
+                </div>
+                <h2 class="section-title">Info Lomba</h2>
+                <p class="section-desc">Kumpulan informasi lomba dan kompetisi terbaru untuk mengasah potensimu</p>
+            </div>
+
+            <!-- Category Cards Hub for Lomba -->
+            <div class="category-hub reveal" id="lombaCategoryHub">
+                <!-- Dynamically rendered category cards -->
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="filter-bar reveal">
+                <div class="search-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" class="search-input" id="searchLomba" placeholder="Cari lomba...">
+                </div>
+                <div class="filter-group">
+                    <button type="button" class="filter-toggle-pill active" id="toggleActiveLombaBtn" title="Tampilkan hanya lomba yang masih aktif dan buka">
+                        <i data-lucide="check-circle-2"></i>
+                        <span>Hanya yang Buka</span>
+                    </button>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="filter" class="filter-icon"></i>
+                        <select class="filter-select" id="filterKategoriLomba">
+                            <option value="semua">Semua Skala</option>
+                            <option value="Nasional">Nasional</option>
+                            <option value="Internasional">Internasional</option>
+                            <option value="Internasional, Nasional">Nasional &amp; Internasional</option>
+                        </select>
+                    </div>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="circle-dot" class="filter-icon"></i>
+                        <select class="filter-select" id="filterStatusLomba">
+                            <option value="semua">Semua Status</option>
+                            <option value="Buka">Buka</option>
+                            <option value="Tutup">Tutup</option>
+                        </select>
+                    </div>
+                    <div class="filter-select-wrapper">
+                        <i data-lucide="arrow-up-down" class="filter-icon"></i>
+                        <select class="filter-select" id="sortLomba">
+                            <option value="default">Urutkan</option>
+                            <option value="deadline">Deadline Terdekat</option>
+                            <option value="status">Status Buka Dulu</option>
+                            <option value="nama">A–Z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Results Info -->
+            <div class="filter-results-info" id="resultsInfoLomba"></div>
+
+            <!-- Cards Grid -->
+            <div class="cards-grid" id="lombaGrid">
+                <!-- Cards rendered by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyLomba">
+                <i data-lucide="search-x"></i>
+                <h3>Tidak ada lomba yang cocok</h3>
+                <p>Coba sesuaikan kata kunci pencarian atau ubah filter kamu</p>
+                <button type="button" class="btn btn-outline btn-sm btn-reset-filter" id="btnResetLomba">
+                    <i data-lucide="rotate-ccw"></i>
+                    <span>Reset Filter</span>
+                </button>
+            </div>
+
+            <!-- Loading Skeleton -->
+            <div class="skeleton-grid" id="skeletonLomba">
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-gradient-top"></div>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand-col">
+                    <div class="footer-brand">
+                        <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
+                        <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="footer-logo footer-logo-adkesma">
+                        <div>
+                            <h3 class="footer-title">My<span class="footer-title-accent">Adkesma</span>Portal</h3>
+                            <p class="footer-tagline">Suarakan. Temukan. Raih.</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">
+                        Informasi beasiswa, kompetisi, dan program pendampingan dari Departemen Adkesma HMTK untuk mahasiswa Teknologi Kedokteran.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram Adkesma" title="Instagram @adkezzmoy">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <button type="button" class="footer-social-btn footer-copy-email-btn" aria-label="Salin Email Adkesma" title="Klik untuk salin email (adkesmahmtk@gmail.com)">
+                            <i data-lucide="mail"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Navigasi</h4>
+                    <a href="index.html#beranda">Beranda</a>
+                    <a href="index.html#proker">Semua Proker</a>
+                    <a href="kesmanews.html">KesmaNews</a>
+                    <a href="tkpedia.html">TKpedia</a>
+                    <a href="advoice.html">Advoice</a>
+                    <a href="index.html#bookmark">Bookmark Saya</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Kontak Kami</h4>
+                    <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="footer-contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                        <span>@adkezzmoy</span>
+                    </a>
+                    <div class="footer-contact-email-wrapper">
+                        <button type="button" class="footer-contact-link footer-copy-email-btn" title="Klik untuk salin email: adkesmahmtk@gmail.com">
+                            <i data-lucide="mail"></i>
+                            <span class="email-address-text">adkesmahmtk@gmail.com</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>MyAdkesmaPortal</strong> — Departemen Adkesma HMTK.</p>
+                <p class="footer-bottom-sub">Dibuat dengan <span class="footer-heart">♥</span> untuk mahasiswa HMTK</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DETAIL MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="detailModal">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-status" id="modalStatus"></div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-meta">
+                    <span class="modal-kategori" id="modalKategori"></span>
+                    <span class="modal-deadline" id="modalDeadline"></span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-poster hidden" id="modalPoster"><img src="" alt="Poster" id="modalPosterImg"></div>
+                <div class="modal-section">
+                    <h3><i data-lucide="clock"></i> Countdown</h3>
+                    <div class="modal-countdown" id="modalCountdown"></div>
+                </div>
+                <div class="modal-section">
+                    <h3><i data-lucide="clipboard-list"></i> Persyaratan</h3>
+                    <ul class="modal-list" id="modalPersyaratan"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3><i data-lucide="gift"></i> Benefit / Hadiah</h3>
+                    <ul class="modal-list modal-list-benefit" id="modalBenefit"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3><i data-lucide="calendar-days"></i> Timeline Penting</h3>
+                    <p class="modal-timeline" id="modalTimeline"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-footer-primary">
+                    <a href="#" class="btn btn-primary btn-lg" id="modalDaftar" target="_blank" rel="noopener noreferrer">
+                        <i data-lucide="external-link"></i>
+                        <span>Daftar Sekarang</span>
+                    </a>
+                    <a href="#" class="btn btn-outline btn-lg hidden" id="modalGuidebook" target="_blank" rel="noopener noreferrer">
+                        <i data-lucide="book-open"></i>
+                        <span>Buku Panduan</span>
+                    </a>
+                </div>
+                <div class="modal-footer-secondary">
+                    <button class="btn btn-outline btn-lg btn-bookmark-modal" id="modalBookmarkBtn">
+                        <i data-lucide="bookmark"></i> Simpan
+                    </button>
+                    <button class="btn btn-wa btn-lg" id="modalShareWA">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Share WA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOLDER MODAL FOR BOOKMARK -->
+    <div class="modal-overlay" id="folderModalOverlay">
+        <div class="modal modal-folder" id="folderModal">
+            <button class="modal-close" id="folderModalClose" aria-label="Close folder modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <h2 class="modal-title" style="font-size:1.15rem;display:flex;align-items:center;gap:8px;">
+                    <i data-lucide="folder-heart" style="color:var(--color-accent);"></i> Simpan ke Folder
+                </h2>
+                <p class="modal-folder-item-title" id="folderModalItemName"></p>
+            </div>
+            <div class="modal-body">
+                <div class="folder-selection-instruction">Pilih satu atau beberapa folder untuk menyimpan:</div>
+                <div class="folder-list" id="folderList"></div>
+                <div class="folder-create-box">
+                    <div class="folder-input-wrapper">
+                        <i data-lucide="folder-plus"></i>
+                        <input type="text" id="newFolderNameInput" placeholder="Nama folder baru..." maxlength="30">
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" id="btnCreateNewFolder">
+                        <span>+ Tambah</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg" id="btnSaveToFolders" style="width:100%;justify-content:center;">
+                    <i data-lucide="check"></i> <span>Simpan Pilihan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <!-- Poster Lightbox -->
+    <div class="lightbox" id="posterLightbox" aria-hidden="true">
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Tutup poster"><i data-lucide="x"></i></button>
+        <img src="" alt="Poster" id="lightboxImg">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+
+    <script src="app.js?v=2.5.2"></script>
+    <script src="extras.js?v=1.0.1"></script>
+    <script src="apple.js?v=1.2.0"></script>
+</body>
+</html>

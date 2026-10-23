@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKpedia 2nd Edition — Buku Panduan Mahasiswa | Adkesma HMTK</title>
+    <meta name="description" content="TKpedia 2nd Edition: Buku panduan digital resmi dari Adkesma HMTK yang merangkum info akademik dan prospek mahasiswa Teknologi Kedokteran.">
+    <meta name="theme-color" content="#0C1CFF">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="TKpedia 2nd Edition — Buku Panduan Mahasiswa | Adkesma HMTK">
+    <meta property="og:description" content="Buku panduan digital praktis untuk mahasiswa Teknologi Kedokteran, gratis dan dapat diakses kapan saja.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/tkpedia-visual.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=3.0.0">
+    <link rel="stylesheet" href="extras.css?v=1.0.0">
+    <link rel="stylesheet" href="apple.css?v=1.2.0">
+</head>
+<body class="page-tkpedia">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MAIN NAVBAR                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html#beranda" class="nav-brand">
+                <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="nav-logo">
+                <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="nav-logo nav-logo-adkesma">
+                <span class="nav-title">My<span class="nav-title-accent">Adkesma</span>Portal</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#beranda" class="nav-link" data-section="beranda">Beranda</a>
+                <a href="index.html#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
+                <a href="kesmanews.html" class="nav-link" data-section="kesmanews">KesmaNews</a>
+                <a href="tkpedia.html" class="nav-link active" data-section="tkpedia">TKpedia</a>
+                <a href="advoice.html" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
+                <a href="index.html#bookmark" class="nav-link" data-section="bookmark">
+                    Bookmark
+                    <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
+                </a>
+                <a href="index.html#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
+            </div>
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <i data-lucide="moon" class="icon-moon"></i>
+                    <i data-lucide="sun" class="icon-sun"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- STICKY SUB-NAVBAR (Apple-style Product Bar) -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="product-subnav">
+        <div class="product-subnav-container">
+            <div class="product-subnav-title">
+                <a href="tkpedia.html">TKpedia 2nd Edition</a>
+            </div>
+            <div class="product-subnav-menu">
+                <a href="#viewer" class="product-subnav-link">Baca Dokumen</a>
+                <a href="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="product-subnav-btn">
+                    <i data-lucide="external-link"></i>
+                    <span>Buka di Google Drive</span>
+                </a>
+                <a href="index.html#proker" class="product-subnav-btn product-subnav-btn-secondary">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Semua Proker</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO HEADER: TKPEDIA                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <header class="page-hero-apple page-hero-tkpedia">
+        <div class="page-hero-container">
+            <span class="page-hero-badge">
+                <i data-lucide="book-open-check"></i>
+                Buku Panduan Mahasiswa
+            </span>
+            <h1 class="page-hero-title">TK<span>pedia</span></h1>
+            <p class="page-hero-tagline">Panduan lengkap kehidupan kampus &amp; karier masa depan.</p>
+            <p class="page-hero-subtitle">
+                Edisi kedua disusun khusus untuk mahasiswa Departemen Teknik Biomedik / Teknologi Kedokteran HMTK, merangkum kiat studi, roadmap akademik, hingga bekal profesional.
+            </p>
+            <div class="page-hero-cta">
+                <a href="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" id="btnTkpediaOpen">
+                    <i data-lucide="book-open"></i>
+                    <span>Baca di Tab Baru</span>
+                </a>
+                <button type="button" class="btn btn-outline btn-lg" id="btnTkpediaCopy" data-link="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing">
+                    <i data-lucide="link"></i>
+                    <span>Salin Link</span>
+                </button>
+            </div>
+            <img src="assets/tkpedia-visual.jpg" alt="Visual TKpedia Handbook" class="page-hero-visual" loading="lazy">
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- VIEWER SECTION                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section ap-light" id="viewer">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Jelajahi Langsung</h2>
+                <p class="section-desc">Gunakan pembaca dokumen interaktif berikut untuk membaca halaman demi halaman.</p>
+            </div>
+
+            <div class="tkpedia-full-viewer reveal">
+                <iframe src="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/preview" title="TKpedia 2nd Edition - Adkesma HMTK" loading="lazy" allow="autoplay"></iframe>
+            </div>
+
+            <div class="tkpedia-features-grid reveal">
+                <div class="tkpedia-feat-card">
+                    <div class="tkpedia-feat-icon"><i data-lucide="sparkles"></i></div>
+                    <h3>Gratis &amp; Terbuka</h3>
+                    <p>Dapat diakses kapan pun tanpa batasan akun oleh seluruh mahasiswa aktif dan alumni.</p>
+                </div>
+                <div class="tkpedia-feat-card">
+                    <div class="tkpedia-feat-icon"><i data-lucide="check-check"></i></div>
+                    <h3>Materi Terverifikasi</h3>
+                    <p>Dikurasi dan diselaraskan bersama kurikulum serta informasi resmi Departemen.</p>
+                </div>
+                <div class="tkpedia-feat-card">
+                    <div class="tkpedia-feat-icon"><i data-lucide="refresh-cw"></i></div>
+                    <h3>Edisi Kedua Terkini</h3>
+                    <p>Penyempurnaan dari edisi perdana dengan topik-topik baru yang relevan dengan kebutuhan mahasiswa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FOOTER                                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-gradient-top"></div>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand-col">
+                    <div class="footer-brand">
+                        <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="footer-logo">
+                        <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="footer-logo footer-logo-adkesma">
+                        <div>
+                            <h3 class="footer-title">My<span class="footer-title-accent">Adkesma</span>Portal</h3>
+                            <p class="footer-tagline">Suarakan. Temukan. Raih.</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">
+                        TKpedia 2nd Edition: Buku panduan digital resmi mahasiswa Teknologi Kedokteran dari Departemen Adkesma HMTK.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Navigasi</h4>
+                    <a href="index.html#beranda">Beranda</a>
+                    <a href="index.html#proker">Semua Proker</a>
+                    <a href="kesmanews.html">KesmaNews</a>
+                    <a href="tkpedia.html">TKpedia</a>
+                    <a href="advoice.html">Advoice</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Kontak Kami</h4>
+                    <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="footer-contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                        <span>@adkezzmoy</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>MyAdkesmaPortal</strong> — Departemen Adkesma HMTK.</p>
+                <p class="footer-bottom-sub">Dibuat dengan <span class="footer-heart">♥</span> untuk mahasiswa HMTK</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <script src="app.js?v=2.5.2"></script>
+    <script src="extras.js?v=1.0.1"></script>
+    <script src="apple.js?v=1.2.0"></script>
+</body>
+</html>

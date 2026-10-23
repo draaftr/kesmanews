@@ -43,11 +43,10 @@
             <div class="nav-links" id="navLinks">
                 <a href="#beranda" class="nav-link active" data-section="beranda">Beranda</a>
                 <a href="#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
-                <a href="#beasiswa" class="nav-link" data-section="beasiswa">Beasiswa</a>
-                <a href="#lomba" class="nav-link" data-section="lomba">Lomba</a>
-                
-                <a href="#tkpedia" class="nav-link" data-section="tkpedia">TKpedia</a>
-                <a href="#advoice" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
+                <a href="#proker" class="nav-link" data-section="proker">Proker</a>
+                <a href="kesmanews.html" class="nav-link" data-section="kesmanews">KesmaNews</a>
+                <a href="tkpedia.html" class="nav-link" data-section="tkpedia">TKpedia</a>
+                <a href="advoice.html" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
                 <a href="#bookmark" class="nav-link" data-section="bookmark">
                     Bookmark
                     <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
@@ -153,7 +152,7 @@
                     <h3 class="proker-name">ADVOICE</h3>
                     <p class="proker-tag">Suarakan keluhan akademik &amp; non-akademik. Kami dengar, kawal, dan tindak lanjuti.</p>
                     <div class="proker-actions">
-                        <a href="#advoice" class="btn btn-primary">Selengkapnya</a>
+                        <a href="advoice.html" class="btn btn-primary">Selengkapnya</a>
                         <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="proker-link">Isi Form</a>
                     </div>
                     <img src="assets/advoice-visual.jpg" alt="Ilustrasi Advoice" class="proker-visual" loading="lazy">
@@ -162,7 +161,7 @@
                     <h3 class="proker-name">TKpedia</h3>
                     <p class="proker-tag">Buku panduan digital Teknologi Kedokteran, kini edisi kedua.</p>
                     <div class="proker-actions">
-                        <a href="#tkpedia" class="btn btn-primary">Selengkapnya</a>
+                        <a href="tkpedia.html" class="btn btn-primary">Selengkapnya</a>
                     </div>
                     <img src="assets/tkpedia-visual.jpg" alt="Ilustrasi TKpedia" class="proker-visual" loading="lazy">
                 </article>
@@ -170,12 +169,12 @@
                     <h3 class="proker-name">KesmaNews</h3>
                     <p class="proker-tag">Info beasiswa, lomba, dan pendampingan beasiswa. Semua peluangmu dalam satu tempat.</p>
                     <div class="proker-actions">
-                        <button type="button" class="btn btn-primary" data-kn-open="beasiswa">Selengkapnya</button>
+                        <a href="kesmanews.html" class="btn btn-primary">Selengkapnya</a>
                     </div>
                     <div class="proker-chips">
-                        <button type="button" class="proker-chip" data-kn-open="beasiswa">Beasiswa</button>
-                        <button type="button" class="proker-chip" data-kn-open="lomba">Lomba</button>
-                        <button type="button" class="proker-chip" data-kn-open="beasiswa" data-kn-sub="pendampingan">Pendampingan</button>
+                        <a href="kesmanews.html#beasiswa" class="proker-chip">Beasiswa</a>
+                        <a href="kesmanews.html#lomba" class="proker-chip">Lomba</a>
+                        <a href="kesmanews.html#beasiswa-pendampingan" class="proker-chip">Pendampingan</a>
                     </div>
                     <img src="assets/kesmanews-visual.jpg" alt="Ilustrasi KesmaNews" class="proker-visual" loading="lazy">
                 </article>
@@ -183,333 +182,7 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- BEASISWA SECTION                            -->
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- Panel KesmaNews: tersembunyi sampai kotak KesmaNews diklik -->
-    <div class="kesmanews-wrap" id="kesmanews" hidden>
-        <div class="kn-bar">
-            <div class="kn-bar-inner">
-                <span class="kn-brand">KesmaNews</span>
-                <div class="kn-tabs" role="tablist" aria-label="KesmaNews">
-                    <button type="button" class="kn-tab active" data-kn="beasiswa" role="tab">Info Beasiswa</button>
-                    <button type="button" class="kn-tab" data-kn="lomba" role="tab">Info Lomba</button>
-                </div>
-                <button type="button" class="kn-close" id="knClose" aria-label="Tutup KesmaNews">
-                    <span>Tutup</span><i data-lucide="x"></i>
-                </button>
-            </div>
-        </div>
-    <section class="section section-bg section-bg-beasiswa" id="beasiswa">
-        <div class="section-container">
-            <div class="section-header reveal">
-                <div class="section-icon-wrapper beasiswa-icon">
-                    <i data-lucide="graduation-cap"></i>
-                </div>
-                <h2 class="section-title">Info Beasiswa</h2>
-                <p class="section-desc">Kumpulan informasi beasiswa pilihan dan terbaru untuk mendukung perkuliahanmu</p>
-            </div>
 
-            <!-- Subpage Tabs -->
-            <div class="subpage-tabs reveal" role="tablist" aria-label="Subpage Beasiswa">
-                <button type="button" class="subpage-tab active" role="tab" aria-selected="true" data-subpage="list" id="tabBeasiswaList">
-                    <i data-lucide="graduation-cap"></i><span>Info Beasiswa</span>
-                </button>
-                <button type="button" class="subpage-tab" role="tab" aria-selected="false" data-subpage="pendampingan" id="tabBeasiswaPendampingan">
-                    <i data-lucide="heart-handshake"></i><span>Pendampingan Beasiswa</span>
-                </button>
-            </div>
-
-            <div class="subpage-panel active" id="beasiswaPanelList">
-            <!-- Category Cards Hub for Beasiswa -->
-            <div class="category-hub reveal" id="beasiswaCategoryHub">
-                <!-- Dynamically rendered category cards -->
-            </div>
-
-            <!-- Search & Filter -->
-            <div class="filter-bar reveal">
-                <div class="search-wrapper">
-                    <i data-lucide="search" class="search-icon"></i>
-                    <input type="text" class="search-input" id="searchBeasiswa" placeholder="Cari beasiswa...">
-                </div>
-                <div class="filter-group">
-                    <button type="button" class="filter-toggle-pill active" id="toggleActiveBeasiswaBtn" title="Tampilkan hanya beasiswa yang masih aktif dan buka">
-                        <i data-lucide="check-circle-2"></i>
-                        <span>Hanya yang Buka</span>
-                    </button>
-                    <div class="filter-select-wrapper">
-                        <i data-lucide="filter" class="filter-icon"></i>
-                        <select class="filter-select" id="filterKategoriBeasiswa">
-                            <option value="semua">Semua Kategori</option>
-                            <option value="Berprestasi">Berprestasi</option>
-                            <option value="Kurang mampu">Kurang Mampu</option>
-                            <option value="Umum">Umum</option>
-                        </select>
-                    </div>
-                    <div class="filter-select-wrapper">
-                        <i data-lucide="circle-dot" class="filter-icon"></i>
-                        <select class="filter-select" id="filterStatusBeasiswa">
-                            <option value="semua">Semua Status</option>
-                            <option value="Buka">Buka</option>
-                            <option value="Tutup">Tutup</option>
-                        </select>
-                    </div>
-                    <div class="filter-select-wrapper">
-                        <i data-lucide="arrow-up-down" class="filter-icon"></i>
-                        <select class="filter-select" id="sortBeasiswa">
-                            <option value="default">Urutkan</option>
-                            <option value="deadline">Deadline Terdekat</option>
-                            <option value="status">Status Buka Dulu</option>
-                            <option value="nama">A–Z</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filter Results Info -->
-            <div class="filter-results-info" id="resultsInfoBeasiswa"></div>
-
-            <!-- Cards Grid -->
-            <div class="cards-grid" id="beasiswaGrid">
-                <!-- Cards rendered by JS -->
-            </div>
-
-
-
-            <!-- Empty State -->
-            <div class="empty-state hidden" id="emptyBeasiswa">
-                <i data-lucide="search-x"></i>
-                <h3>Tidak ada beasiswa yang cocok</h3>
-                <p>Coba sesuaikan kata kunci pencarian atau ubah filter kamu</p>
-                <button type="button" class="btn btn-outline btn-sm btn-reset-filter" id="btnResetBeasiswa">
-                    <i data-lucide="rotate-ccw"></i>
-                    <span>Reset Filter</span>
-                </button>
-            </div>
-
-            <!-- Loading Skeleton -->
-            <div class="skeleton-grid" id="skeletonBeasiswa">
-                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
-                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
-                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
-            </div>
-            </div><!-- /beasiswaPanelList -->
-
-            <!-- Subpage: Pendampingan Beasiswa -->
-            <div class="subpage-panel" id="beasiswaPanelPendampingan" role="tabpanel">
-                <div class="pendampingan-hero">
-                    <div class="pendampingan-eyebrow"><i data-lucide="heart-handshake"></i><span>Subpage Pendampingan</span></div>
-                    <h3 class="pendampingan-title" id="pendampinganTitle">Pendampingan Beasiswa</h3>
-                    <p class="pendampingan-desc" id="pendampinganDesc"></p>
-                    <div class="pendampingan-cp-label"><i data-lucide="phone-call"></i> Contact Person (CP) Pendampingan</div>
-                    <div class="pendampingan-cp-grid pendampingan-cp-inhero" id="pendampinganCP"></div>
-                </div>
-                <h4 class="pendampingan-subhead"><i data-lucide="layers"></i> Yang Kami Bantu</h4>
-                <div class="pendampingan-services" id="pendampinganLayanan"></div>
-                <h4 class="pendampingan-subhead"><i data-lucide="route"></i> Alur Pendampingan</h4>
-                <div class="pendampingan-steps" id="pendampinganAlur"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- LOMBA SECTION                               -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section section-bg section-bg-lomba" id="lomba">
-        <div class="section-container">
-            <div class="section-header reveal">
-                <div class="section-icon-wrapper lomba-icon">
-                    <i data-lucide="trophy"></i>
-                </div>
-                <h2 class="section-title">Info Lomba</h2>
-                <p class="section-desc">Kumpulan informasi lomba dan kompetisi terbaru untuk mengasah potensimu</p>
-            </div>
-
-            <!-- Category Cards Hub for Lomba -->
-            <div class="category-hub reveal" id="lombaCategoryHub">
-                <!-- Dynamically rendered category cards -->
-            </div>
-
-            <!-- Search & Filter -->
-            <div class="filter-bar reveal">
-                <div class="search-wrapper">
-                    <i data-lucide="search" class="search-icon"></i>
-                    <input type="text" class="search-input" id="searchLomba" placeholder="Cari lomba...">
-                </div>
-                <div class="filter-group">
-                    <button type="button" class="filter-toggle-pill active" id="toggleActiveLombaBtn" title="Tampilkan hanya lomba yang masih aktif dan buka">
-                        <i data-lucide="check-circle-2"></i>
-                        <span>Hanya yang Buka</span>
-                    </button>
-                    <div class="filter-select-wrapper">
-                        <i data-lucide="filter" class="filter-icon"></i>
-                        <select class="filter-select" id="filterKategoriLomba">
-                            <option value="semua">Semua Skala</option>
-                            <option value="Nasional">Nasional</option>
-                            <option value="Internasional">Internasional</option>
-                            <option value="Internasional, Nasional">Nasional &amp; Internasional</option>
-                        </select>
-                    </div>
-                    <div class="filter-select-wrapper">
-                        <i data-lucide="circle-dot" class="filter-icon"></i>
-                        <select class="filter-select" id="filterStatusLomba">
-                            <option value="semua">Semua Status</option>
-                            <option value="Buka">Buka</option>
-                            <option value="Tutup">Tutup</option>
-                        </select>
-                    </div>
-                    <div class="filter-select-wrapper">
-                        <i data-lucide="arrow-up-down" class="filter-icon"></i>
-                        <select class="filter-select" id="sortLomba">
-                            <option value="default">Urutkan</option>
-                            <option value="deadline">Deadline Terdekat</option>
-                            <option value="status">Status Buka Dulu</option>
-                            <option value="nama">A–Z</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filter Results Info -->
-            <div class="filter-results-info" id="resultsInfoLomba"></div>
-
-            <!-- Cards Grid -->
-            <div class="cards-grid" id="lombaGrid">
-                <!-- Cards rendered by JS -->
-            </div>
-
-            <!-- Empty State -->
-            <div class="empty-state hidden" id="emptyLomba">
-                <i data-lucide="search-x"></i>
-                <h3>Tidak ada lomba yang cocok</h3>
-                <p>Coba sesuaikan kata kunci pencarian atau ubah filter kamu</p>
-                <button type="button" class="btn btn-outline btn-sm btn-reset-filter" id="btnResetLomba">
-                    <i data-lucide="rotate-ccw"></i>
-                    <span>Reset Filter</span>
-                </button>
-            </div>
-
-
-
-            <!-- Loading Skeleton -->
-            <div class="skeleton-grid" id="skeletonLomba">
-                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
-                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
-                <div class="skeleton-card"><div class="skeleton-badge"></div><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div><div class="skeleton-buttons"></div></div>
-            </div>
-        </div>
-    </section>
-
-    </div><!-- /kesmanews -->
-
-    <!-- TKPEDIA SECTION                             -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section section-alt tkpedia-section" id="tkpedia">
-        <div class="section-container">
-            <div class="tkpedia-wrapper reveal">
-                <div class="tkpedia-info">
-                    <div class="advoice-eyebrow tkpedia-eyebrow">
-                        <i data-lucide="book-open-check"></i>
-                        <span>Proker Departemen Adkesma</span>
-                    </div>
-                    <h2 class="tkpedia-title">TK<span>pedia</span> <small>2nd Edition</small></h2>
-                    <p class="tkpedia-lead">
-                        <strong>TKpedia</strong> adalah buku panduan digital dari Adkesma HMTK yang merangkum informasi penting seputar kehidupan akademik dan peluang bagi mahasiswa Teknologi Kedokteran, disusun agar mudah dibaca kapan saja.
-                    </p>
-                    <ul class="tkpedia-points">
-                        <li><i data-lucide="check-circle-2"></i> Gratis dan bisa diakses semua mahasiswa</li>
-                        <li><i data-lucide="check-circle-2"></i> Dikelola langsung oleh Departemen Adkesma HMTK</li>
-                        <li><i data-lucide="check-circle-2"></i> Edisi kedua dengan konten yang diperbarui</li>
-                    </ul>
-                    <div class="tkpedia-cta">
-                        <a href="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" id="btnTkpediaOpen">
-                            <i data-lucide="book-open"></i> Baca TKpedia
-                        </a>
-                        <button type="button" class="btn btn-outline btn-lg" id="btnTkpediaCopy" data-link="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing">
-                            <i data-lucide="link"></i> Salin Link
-                        </button>
-                    </div>
-                </div>
-                <div class="tkpedia-viewer">
-                    <iframe src="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/preview" title="TKpedia 2nd Edition - Adkesma HMTK" loading="lazy" allow="autoplay"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- ADVOICE SECTION                             -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section advoice-section" id="advoice">
-        <div class="section-container">
-            <div class="advoice-hero reveal">
-                <div class="advoice-hero-content">
-                    <div class="advoice-eyebrow">
-                        <i data-lucide="megaphone"></i>
-                        <span>Proker Departemen Adkesma</span>
-                    </div>
-                    <h2 class="advoice-title">AD<span>VOICE</span></h2>
-                    <p class="advoice-lead">
-                        Wadah untuk menyampaikan <strong>keluhan seputar akademik maupun non-akademik</strong>. Suaramu akan kami dengar, kawal, dan bantu tindak lanjuti bersama pihak terkait.
-                    </p>
-                    <div class="advoice-cta">
-                        <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-advoice-main" id="btnAdvoiceForm">
-                            <i data-lucide="send"></i>
-                            Isi Form Advoice
-                        </a>
-                        <button type="button" class="btn btn-ghost-light btn-lg" id="btnCopyAdvoice">
-                            <i data-lucide="link"></i>
-                            Salin Link
-                        </button>
-                    </div>
-                </div>
-                <div class="advoice-hero-visual" aria-hidden="true">
-                    <div class="advoice-bubble advoice-bubble-1"><i data-lucide="graduation-cap"></i> Akademik</div>
-                    <div class="advoice-bubble advoice-bubble-2"><i data-lucide="heart-handshake"></i> Non-Akademik</div>
-                    <div class="advoice-bubble-main"><i data-lucide="megaphone"></i></div>
-                </div>
-            </div>
-
-            <div class="advoice-categories reveal">
-                <div class="advoice-cat-card">
-                    <div class="advoice-cat-icon"><i data-lucide="book-open-check"></i></div>
-                    <h3>Keluhan Akademik</h3>
-                    <p>Kendala seputar perkuliahan seperti jadwal, nilai, kurikulum, dosen, praktikum, hingga fasilitas belajar.</p>
-                </div>
-                <div class="advoice-cat-card">
-                    <div class="advoice-cat-icon"><i data-lucide="users-round"></i></div>
-                    <h3>Keluhan Non-Akademik</h3>
-                    <p>Hal-hal di luar kelas seperti fasilitas kampus, organisasi, kesejahteraan, dan kehidupan mahasiswa pada umumnya.</p>
-                </div>
-            </div>
-
-            <div class="advoice-steps reveal">
-                <h3 class="advoice-steps-title">Bagaimana Advoice Bekerja?</h3>
-                <div class="advoice-steps-grid">
-                    <div class="advoice-step">
-                        <span class="advoice-step-num">01</span>
-                        <h4>Tulis Keluhanmu</h4>
-                        <p>Isi Form Advoice secara lengkap: pilih kategori, ceritakan kronologinya, dan sampaikan harapanmu.</p>
-                    </div>
-                    <div class="advoice-step">
-                        <span class="advoice-step-num">02</span>
-                        <h4>Kami Tinjau</h4>
-                        <p>Tim Adkesma HMTK akan membaca, memilah, dan memverifikasi laporan yang kamu kirim.</p>
-                    </div>
-                    <div class="advoice-step">
-                        <span class="advoice-step-num">03</span>
-                        <h4>Kami Kawal</h4>
-                        <p>Keluhanmu akan kami bawa dan perjuangkan ke pihak kampus atau pihak yang berwenang.</p>
-                    </div>
-                    <div class="advoice-step">
-                        <span class="advoice-step-num">04</span>
-                        <h4>Tindak Lanjut</h4>
-                        <p>Kamu bisa memantau perkembangannya melalui media sosial atau informasi resmi Adkesma HMTK.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- ═══════════════════════════════════════════ -->
     <!-- BOOKMARK SECTION                            -->
@@ -569,11 +242,11 @@
                     <h3>Belum Ada Bookmark Tersimpan</h3>
                     <p>Tandai peluang atau kompetisi yang ingin kamu ikuti dengan mengklik ikon <strong>🔖 Simpan</strong> pada setiap kartunya.</p>
                     <div class="watchlist-empty-actions">
-                        <a href="#beasiswa" class="btn-empty-explore btn-explore-beasiswa">
+                        <a href="kesmanews.html#beasiswa" class="btn-empty-explore btn-explore-beasiswa">
                             <i data-lucide="graduation-cap"></i>
                             <span>Jelajahi Beasiswa</span>
                         </a>
-                        <a href="#lomba" class="btn-empty-explore btn-explore-lomba">
+                        <a href="kesmanews.html#lomba" class="btn-empty-explore btn-explore-lomba">
                             <i data-lucide="trophy"></i>
                             <span>Jelajahi Lomba</span>
                         </a>
@@ -884,15 +557,14 @@
                 <!-- Quick Links -->
                 <div class="footer-links">
                     <h4>Quick Links</h4>
-                    <a href="#beranda">Beranda</a>
-                    <a href="#hotnews">Hot News</a>
-                    <a href="#beasiswa">Beasiswa</a>
-                    <a href="#lomba">Lomba</a>
-                    
-                    <a href="#tkpedia">TKpedia</a>
-                    <a href="#advoice">Advoice</a>
-                    <a href="#bookmark">Bookmark Saya</a>
-                    <a href="#tentang">Tentang Kami</a>
+                    <a href="index.html#beranda">Beranda</a>
+                    <a href="index.html#hotnews">Hot News</a>
+                    <a href="index.html#proker">Proker</a>
+                    <a href="kesmanews.html">KesmaNews</a>
+                    <a href="tkpedia.html">TKpedia</a>
+                    <a href="advoice.html">Advoice</a>
+                    <a href="index.html#bookmark">Bookmark Saya</a>
+                    <a href="index.html#tentang">Tentang Kami</a>
                 </div>
 
                 <!-- Kontak -->
