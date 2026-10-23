@@ -1,0 +1,173 @@
+/* ═══════════════════════════════════════════════════════════════
+   MyAdkesmaPortal — Apple-style layer
+   Panel layar penuh, selang-seling terang/gelap, animasi scroll.
+   Dimuat paling akhir agar menimpa style.css & extras.css.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+    --ap-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ap-dark: #000;
+    --ap-light: #f5f5f7;
+    --ap-blue: #0c1cff;
+}
+html { scroll-behavior: smooth; }
+
+/* ─── Navbar tipis, gelap, blur (seperti apple.com) ──────────── */
+.navbar {
+    background: rgba(22, 22, 24, 0.8) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
+}
+.navbar .nav-title,
+.navbar .nav-link,
+.navbar .dark-mode-toggle,
+.navbar .mobile-menu-toggle { color: rgba(255, 255, 255, 0.85) !important; }
+.navbar .nav-title-accent { color: #6ea8ff !important; }
+.navbar .nav-link { font-weight: 500 !important; background: transparent !important; }
+.navbar .nav-link:hover,
+.navbar .nav-link.active { color: #fff !important; }
+
+/* ─── Panel generik ──────────────────────────────────────────── */
+.section {
+    padding-block: clamp(72px, 12vh, 140px) !important;
+}
+.ap-light { background: var(--ap-light) !important; color: #1d1d1f; }
+.ap-dark  { background: var(--ap-dark) !important; color: #f5f5f7; }
+[data-theme="dark"] .ap-light { background: #111113 !important; color: #f5f5f7; }
+
+.ap-dark .section-title,
+.ap-dark .section-desc,
+.ap-dark .tkpedia-title,
+.ap-dark .tkpedia-lead,
+.ap-dark .tkpedia-points li,
+.ap-dark .tkpedia-title small { color: #f5f5f7 !important; }
+.ap-dark .section-desc,
+.ap-dark .tkpedia-lead { color: #a1a1a6 !important; }
+
+.section-header { text-align: center; max-width: 820px; margin-inline: auto; }
+.section-title {
+    font-size: clamp(2.2rem, 6vw, 4rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+}
+.section-desc {
+    font-size: clamp(1.05rem, 2vw, 1.4rem) !important;
+    color: #6e6e73;
+}
+
+/* Tombol pil biru ala Apple */
+.btn-primary {
+    border-radius: 999px !important;
+    background: #0071e3 !important;
+    box-shadow: none !important;
+    transition: background 0.25s, transform 0.25s var(--ap-ease) !important;
+}
+.btn-primary:hover { background: #0077ed !important; transform: scale(1.04) !important; }
+.btn-secondary, .btn-outline { border-radius: 999px !important; }
+
+/* ─── Hero: gelap, tengah, tipografi besar ───────────────────── */
+.hero {
+    background: #000 !important;
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden;
+}
+.hero-photo { opacity: 0.45; will-change: transform; transform: scale(1.1); }
+.hero-photo-overlay { background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), #000 85%) !important; }
+.hero-bg-shapes { display: none !important; }
+.hero-container { align-items: center; text-align: center; margin-inline: auto; }
+.hero-title {
+    font-size: clamp(2.8rem, 9vw, 6.5rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: #f5f5f7 !important;
+}
+.hero-desc { margin-inline: auto; color: #a1a1a6 !important; max-width: 640px; }
+.hero-cta, .hero-stats { justify-content: center; }
+.hero-stat-number { color: #f5f5f7 !important; }
+
+/* Entrance hero berurutan */
+.hero-container > * {
+    opacity: 0;
+    transform: translateY(28px);
+    animation: apRise 1s var(--ap-ease) forwards;
+}
+.hero-container > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-container > *:nth-child(2) { animation-delay: 0.25s; }
+.hero-container > *:nth-child(3) { animation-delay: 0.4s; }
+.hero-container > *:nth-child(4) { animation-delay: 0.55s; }
+.hero-container > *:nth-child(5) { animation-delay: 0.7s; }
+.hero-container > *:nth-child(6) { animation-delay: 0.85s; }
+@keyframes apRise { to { opacity: 1; transform: none; } }
+
+/* ─── Reveal: lebih halus + varian ───────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 1s var(--ap-ease), transform 1s var(--ap-ease);
+    transition-delay: var(--ap-delay, 0s);
+    will-change: opacity, transform;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal.ap-scale { transform: scale(0.92) translateY(30px); }
+.reveal.ap-scale.visible { transform: none; }
+.reveal.ap-left { transform: translateX(-60px); }
+.reveal.ap-right { transform: translateX(60px); }
+.reveal.ap-left.visible, .reveal.ap-right.visible { transform: none; }
+
+/* Anak grid muncul berurutan (stagger) */
+.ap-stagger > * {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    transition: opacity 0.9s var(--ap-ease), transform 0.9s var(--ap-ease);
+    transition-delay: calc(var(--i, 0) * 90ms);
+}
+.ap-stagger.visible > * { opacity: 1; transform: none; }
+
+/* ─── Panel Advoice: judul tengah + visual besar ─────────────── */
+.advoice-section { background: #000 !important; }
+.advoice-hero { text-align: center; display: block !important; }
+.advoice-hero-content { max-width: 760px; margin-inline: auto; }
+.advoice-title { font-size: clamp(3rem, 10vw, 7rem) !important; letter-spacing: -0.04em; color: #f5f5f7 !important; }
+.advoice-title span { color: #4d7cff !important; }
+.advoice-lead { color: #a1a1a6 !important; font-size: clamp(1.05rem, 2vw, 1.35rem); }
+.advoice-cta { justify-content: center; }
+.advoice-hero-visual { display: none !important; }
+.ap-visual {
+    display: block;
+    width: min(100%, 980px);
+    margin: 48px auto 0;
+    border-radius: 28px;
+    transform: scale(0.88);
+    opacity: 0;
+    transition: transform 1.2s var(--ap-ease), opacity 1.2s var(--ap-ease);
+}
+.ap-visual.in-view { transform: scale(var(--ap-s, 1)); opacity: 1; }
+
+.advoice-step, .advoice-cat-card {
+    border-radius: 28px !important;
+}
+
+/* ─── TKpedia: panel terang ──────────────────────────────────── */
+.tkpedia-viewer { transition: transform 1s var(--ap-ease); }
+
+/* ─── Kartu hover lebih lembut ───────────────────────────────── */
+.hotnews-card, .card, .advoice-cat-card, .advoice-step, .pendampingan-service {
+    transition: transform 0.5s var(--ap-ease), box-shadow 0.5s var(--ap-ease) !important;
+}
+.hotnews-card:hover, .advoice-cat-card:hover, .advoice-step:hover { transform: scale(1.02) translateY(-4px); }
+
+/* ─── Aksesibilitas: hormati reduced motion ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal, .ap-stagger > *, .hero-container > *, .ap-visual {
+        opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important;
+    }
+}
+@media (max-width: 900px) {
+    .reveal.ap-left, .reveal.ap-right { transform: translateY(40px); }
+}
