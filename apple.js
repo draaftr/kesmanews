@@ -1,13 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════
-   MyAdkesmaPortal — Apple-style scroll behaviours
+   MyAdkesmaPortal — Apple-style scroll behaviours & Transitions
    Parallax hero, stagger grid, visual zoom, count-up statistik,
-   panel selang-seling terang/gelap.
+   panel selang-seling terang/gelap, dan transisi klik interaktif.
    ═══════════════════════════════════════════════════════════════ */
 (function () {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // 1) Panel selang-seling terang / gelap
-    // Beasiswa & Lomba sengaja tidak diberi kelas panel agar background fotonya tetap tampil
     const panels = { hotnews: 'ap-white', proker: 'ap-light', tkpedia: 'ap-dark', bookmark: 'ap-light', tentang: 'ap-light' };
     Object.entries(panels).forEach(([id, cls]) => {
         const el = document.getElementById(id);
@@ -67,7 +66,7 @@
         requestAnimationFrame(() => {
             const y = window.scrollY;
             if (heroPhoto && y < window.innerHeight * 1.2) {
-                heroPhoto.style.transform = `translateY(${y * 0.25}px) scale(${1.1 + y * 0.0002})`;
+                heroPhoto.style.transform = `translateY(${y * 0.22}px) scale(${1.08 + y * 0.00015})`;
             }
             const vis = document.querySelector('.ap-visual.in-view');
             if (vis) {
@@ -121,4 +120,62 @@
             })(start);
         }).observe(el, { childList: true, characterData: true, subtree: true });
     });
+
+    // 7) Animasi Klik "Selengkapnya" (Apple Keynote Dynamic Transition)
+    // Sesuai permintaan: ketika klik "Selengkapnya", ada animasi kinetic dulu sebelum halaman berpindah
+    function initProkerClickTransitions() {
+        let overlay = document.getElementById('apPageTransitionOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'apPageTransitionOverlay';
+            overlay.innerHTML = `
+                <div class="ap-transition-text" id="apTransitionTitle">ADVOICE</div>
+                <div class="ap-transition-sub" id="apTransitionSub">Departemen Adkesma HMTK</div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        const transitionTitle = document.getElementById('apTransitionTitle');
+        const transitionSub = document.getElementById('apTransitionSub');
+
+        // Sambungkan klik pada semua tombol & chip proker
+        document.querySelectorAll('.proker-tile a[href$=".html"], .proker-tile a[href*=".html#"], .proker-cta').forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Biarkan jika user ingin buka tab baru sendiri (Ctrl/Cmd)
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || (e.button && e.button !== 0)) {
+                    return;
+                }
+
+                const targetUrl = this.getAttribute('href');
+                if (!targetUrl || targetUrl.startsWith('http') || targetUrl.startsWith('#')) return;
+
+                e.preventDefault();
+
+                const tile = this.closest('.proker-tile');
+                const prokerName = this.dataset.prokerTarget ||
+                                   (tile ? tile.dataset.proker : null) ||
+                                   tile?.querySelector('.proker-name')?.textContent?.trim() ||
+                                   'Proker';
+
+                // 1. Animasi pada kartu
+                if (tile) tile.classList.add('is-activating');
+
+                // 2. Tampilkan overlay animasi Apple Keynote
+                if (transitionTitle) transitionTitle.textContent = prokerName;
+                if (transitionSub) transitionSub.textContent = `Menuju halaman resmi ${prokerName}...`;
+                overlay.classList.add('active');
+
+                // 3. Pindah halaman secara mulus
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 340);
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProkerClickTransitions);
+    } else {
+        initProkerClickTransitions();
+    }
 })();

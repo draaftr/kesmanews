@@ -1,207 +1,694 @@
 /* ═══════════════════════════════════════════════════════════════
-   MyAdkesmaPortal — Apple-style layer
-   Panel layar penuh, selang-seling terang/gelap, animasi scroll.
-   Dimuat paling akhir agar menimpa style.css & extras.css.
+   MyAdkesmaPortal — Apple-style UX & GSM Brand Aesthetics
+   Integrasi tipografi modern, micro-animation, transisi sinematik,
+   dan palet resmi GSM / Kabinet HMTK (Ultramarine, Lemon Burst, Saffron).
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
     --ap-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-    --ap-dark: #000;
-    --ap-light: #f5f5f7;
-    --ap-blue: #0c1cff;
+    --ap-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* GSM Brand Identity Tokens */
+    --gsm-navy-dark: #05072E;
+    --gsm-navy-mid: #060C8A;
+    --gsm-ultramarine: #0914C4;
+    --gsm-blue-bright: #0C1CFF;
+    --gsm-lemon: #F2EB2A;
+    --gsm-saffron: #E0D27A;
+    --gsm-mist: #F2F2F6;
+    --gsm-obsidian: #1A1A24;
+    
+    /* Apple panel layer tokens tuned to GSM */
+    --ap-dark: #05072E;
+    --ap-light: #F2F2F6;
+    --ap-blue: #0C1CFF;
 }
+
 html { scroll-behavior: smooth; }
-.ap-white { background: #fff !important; color: #1d1d1f; }
-[data-theme="dark"] .ap-white { background: #0b0b0d !important; color: #f5f5f7; }
+.ap-white { background: #ffffff !important; color: #1d1d1f; }
+[data-theme="dark"] .ap-white { background: #08091a !important; color: #f5f5f7; }
 .hero-stats[hidden] { display: none !important; }
 
-/* ─── Navbar tipis, gelap, blur (seperti apple.com) ──────────── */
+/* ─── Navbar: Glassmorphic GSM Midnight Blue Blur ───────────── */
 .navbar {
-    background: rgba(22, 22, 24, 0.8) !important;
+    background: rgba(5, 7, 46, 0.85) !important;
     backdrop-filter: saturate(180%) blur(20px) !important;
     -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: none !important;
+    border-bottom: 1px solid rgba(242, 235, 42, 0.15) !important;
+    box-shadow: 0 4px 30px rgba(5, 7, 46, 0.35) !important;
 }
 .navbar .nav-title,
 .navbar .nav-link,
 .navbar .dark-mode-toggle,
-.navbar .mobile-menu-toggle { color: rgba(255, 255, 255, 0.85) !important; }
-.navbar .nav-title-accent { color: #6ea8ff !important; }
-.navbar .nav-link { font-weight: 500 !important; background: transparent !important; }
+.navbar .mobile-menu-toggle { color: rgba(255, 255, 255, 0.92) !important; }
+.navbar .nav-title-accent { color: var(--gsm-lemon, #F2EB2A) !important; }
+.navbar .nav-link { font-weight: 600 !important; background: transparent !important; }
 .navbar .nav-link:hover,
-.navbar .nav-link.active { color: #fff !important; }
+.navbar .nav-link.active { color: var(--gsm-lemon, #F2EB2A) !important; }
 
-/* ─── Panel generik ──────────────────────────────────────────── */
+/* ─── Panel Generik (GSM Mist & GSM Midnight Navy) ──────────── */
 .section {
-    padding-block: clamp(72px, 12vh, 140px) !important;
+    padding-block: clamp(72px, 12vh, 130px) !important;
 }
-.ap-light { background: var(--ap-light) !important; color: #1d1d1f; }
-.ap-dark  { background: var(--ap-dark) !important; color: #f5f5f7; }
-[data-theme="dark"] .ap-light { background: #111113 !important; color: #f5f5f7; }
+.ap-light { background: var(--gsm-mist) !important; color: #1d1d1f; }
+.ap-dark  { background: var(--gsm-navy-dark) !important; color: #f5f5f7; }
+[data-theme="dark"] .ap-light { background: #0c0e24 !important; color: #f5f5f7; }
 
 .ap-dark .section-title,
-.ap-dark .section-desc,
 .ap-dark .tkpedia-title,
 .ap-dark .tkpedia-lead,
 .ap-dark .tkpedia-points li,
 .ap-dark .tkpedia-title small { color: #f5f5f7 !important; }
 .ap-dark .section-desc,
-.ap-dark .tkpedia-lead { color: #a1a1a6 !important; }
+.ap-dark .tkpedia-lead { color: #b6b9db !important; }
 
 .section-header { text-align: center; max-width: 820px; margin-inline: auto; }
 .section-title {
-    font-size: clamp(2.2rem, 6vw, 4rem) !important;
-    font-weight: 700 !important;
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem) !important;
+    font-weight: 800 !important;
     letter-spacing: -0.025em;
-    line-height: 1.05;
+    line-height: 1.08;
 }
 .section-desc {
-    font-size: clamp(1.05rem, 2vw, 1.4rem) !important;
-    color: #6e6e73;
+    font-size: clamp(1.02rem, 1.8vw, 1.35rem) !important;
+    color: #555b77;
 }
 
-/* Tombol pil biru ala Apple */
+/* Tombol Apple Pil diselaraskan dengan GSM Ultramarine & Lemon */
 .btn-primary {
     border-radius: 999px !important;
-    background: #0071e3 !important;
-    box-shadow: none !important;
-    transition: background 0.25s, transform 0.25s var(--ap-ease) !important;
+    background: linear-gradient(135deg, #0C1CFF 0%, #0914C4 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 18px rgba(12, 28, 255, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: background 0.25s, transform 0.25s var(--ap-ease), box-shadow 0.25s !important;
 }
-.btn-primary:hover { background: #0077ed !important; transform: scale(1.04) !important; }
+.btn-primary:hover {
+    background: linear-gradient(135deg, #3340FF 0%, #0C1CFF 100%) !important;
+    transform: scale(1.04) !important;
+    box-shadow: 0 8px 24px rgba(12, 28, 255, 0.5) !important;
+}
 .btn-secondary, .btn-outline { border-radius: 999px !important; }
 
-/* ─── Hero: gelap, tengah, tipografi besar ───────────────────── */
+/* ─── HERO SECTION: Kembalikan GSM Blue Gradient & Centering Presisi ─ */
 .hero {
-    background: #000 !important;
-    min-height: 100vh;
-    text-align: center;
-    overflow: hidden;
+    position: relative !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: calc(var(--navbar-height, 60px) + 32px) 24px 64px !important;
+    background: linear-gradient(160deg, #05072E 0%, #0914C4 45%, #0C1CFF 100%) !important;
+    overflow: hidden !important;
 }
-.hero-photo { opacity: 0.45; will-change: transform; transform: scale(1.1); }
-.hero-photo-overlay { background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), #000 85%) !important; }
-.hero-bg-shapes { display: none !important; }
-.hero-container { align-items: center; text-align: center; margin-inline: auto; }
+
+.hero-photo {
+    opacity: 0.55 !important;
+    will-change: transform;
+    transform: scale(1.08);
+}
+.hero-photo-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    background:
+        radial-gradient(ellipse at 50% 45%, rgba(5, 7, 46, 0.45) 0%, rgba(5, 7, 46, 0) 70%),
+        linear-gradient(180deg, rgba(5, 7, 46, 0.75) 0%, rgba(12, 28, 255, 0.35) 50%, rgba(5, 7, 46, 0.92) 100%) !important;
+}
+.hero-bg-shapes {
+    display: block !important;
+    z-index: 1 !important;
+}
+
+/* Hero Container: Lebar lega agar tidak overflow ke kanan */
+.hero-container {
+    position: relative !important;
+    z-index: 3 !important;
+    width: 100% !important;
+    max-width: min(94vw, 1180px) !important;
+    margin-inline: auto !important;
+    padding-inline: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+/* Badge Hero */
+.hero-badge {
+    margin-inline: auto !important;
+    border-color: rgba(242, 235, 42, 0.45) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+}
+.hero-badge i, .hero-badge svg { color: var(--gsm-lemon, #F2EB2A) !important; }
+
+/* FIX ISSUE 2: Tulisan MYAdkesmaPORTAL Center Presisi */
 .hero-title {
-    font-size: clamp(2.8rem, 9vw, 6.5rem) !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.035em;
-    line-height: 1;
-    color: #f5f5f7 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    font-family: var(--font-heading-main), 'Integral CF', 'Plus Jakarta Sans', sans-serif !important;
+    font-size: clamp(2.4rem, 6.4vw, 5rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.06 !important;
+    color: #ffffff !important;
+    text-shadow: 0 4px 30px rgba(5, 7, 46, 0.6) !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
 }
-.hero-desc { margin-inline: auto; color: #a1a1a6 !important; max-width: 640px; }
-.hero-cta, .hero-stats { justify-content: center; }
-.hero-stat-number { color: #f5f5f7 !important; }
+
+.hero-title-accent {
+    font-family: inherit !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: var(--gsm-lemon, #F2EB2A) !important;
+    color: var(--gsm-lemon, #F2EB2A) !important;
+    text-shadow: 0 0 30px rgba(242, 235, 42, 0.5) !important;
+    padding-inline: 0.05em !important;
+}
+
+/* Subtitle & Tagline Center */
+.hero-subtitle, .hero-tagline {
+    width: 100% !important;
+    max-width: 820px !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+}
+.tagline-word-accent {
+    color: var(--gsm-lemon, #F2EB2A) !important;
+    -webkit-text-fill-color: var(--gsm-lemon, #F2EB2A) !important;
+    text-shadow: 0 0 20px rgba(242, 235, 42, 0.4) !important;
+}
+
+.hero-desc {
+    width: 100% !important;
+    max-width: 680px !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    font-size: clamp(0.96rem, 1.6vw, 1.15rem) !important;
+}
+
+.hero-cta {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-inline: auto !important;
+}
 
 /* Entrance hero berurutan */
 .hero-container > * {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(26px);
     animation: apRise 1s var(--ap-ease) forwards;
 }
 .hero-container > *:nth-child(1) { animation-delay: 0.1s; }
-.hero-container > *:nth-child(2) { animation-delay: 0.25s; }
-.hero-container > *:nth-child(3) { animation-delay: 0.4s; }
-.hero-container > *:nth-child(4) { animation-delay: 0.55s; }
-.hero-container > *:nth-child(5) { animation-delay: 0.7s; }
-.hero-container > *:nth-child(6) { animation-delay: 0.85s; }
+.hero-container > *:nth-child(2) { animation-delay: 0.22s; }
+.hero-container > *:nth-child(3) { animation-delay: 0.38s; }
+.hero-container > *:nth-child(4) { animation-delay: 0.52s; }
+.hero-container > *:nth-child(5) { animation-delay: 0.68s; }
 @keyframes apRise { to { opacity: 1; transform: none; } }
 
-/* ─── Reveal: lebih halus + varian ───────────────────────────── */
+/* ─── Reveal Animations ──────────────────────────────────────── */
 .reveal {
     opacity: 0;
-    transform: translateY(48px);
-    transition: opacity 1s var(--ap-ease), transform 1s var(--ap-ease);
-    transition-delay: var(--ap-delay, 0s);
+    transform: translateY(44px);
+    transition: opacity 0.9s var(--ap-ease), transform 0.9s var(--ap-ease);
     will-change: opacity, transform;
 }
 .reveal.visible { opacity: 1; transform: none; }
-.reveal.ap-scale { transform: scale(0.92) translateY(30px); }
+.reveal.ap-scale { transform: scale(0.93) translateY(24px); }
 .reveal.ap-scale.visible { transform: none; }
-.reveal.ap-left { transform: translateX(-60px); }
-.reveal.ap-right { transform: translateX(60px); }
+.reveal.ap-left { transform: translateX(-50px); }
+.reveal.ap-right { transform: translateX(50px); }
 .reveal.ap-left.visible, .reveal.ap-right.visible { transform: none; }
 
-/* Anak grid muncul berurutan (stagger) */
 .ap-stagger > * {
     opacity: 0;
-    transform: translateY(40px) scale(0.97);
-    transition: opacity 0.9s var(--ap-ease), transform 0.9s var(--ap-ease);
-    transition-delay: calc(var(--i, 0) * 90ms);
+    transform: translateY(36px) scale(0.98);
+    transition: opacity 0.85s var(--ap-ease), transform 0.85s var(--ap-ease);
+    transition-delay: calc(var(--i, 0) * 80ms);
 }
 .ap-stagger.visible > * { opacity: 1; transform: none; }
 
-/* ─── Grid Proker (ala apple.com) ────────────────────────────── */
+/* ─── Grid Proker (Apple Layout + GSM Palette) ───────────────── */
 .proker-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 22px;
     max-width: 1180px;
-    margin: clamp(32px, 6vh, 64px) auto 0;
+    margin: clamp(32px, 5vh, 60px) auto 0;
 }
+
 .proker-tile {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: clamp(36px, 5vw, 56px) 28px 0;
-    min-height: clamp(480px, 62vw, 620px);
-    border-radius: 28px;
+    padding: clamp(36px, 4.5vw, 52px) clamp(24px, 3.5vw, 40px) 0;
+    min-height: clamp(480px, 58vw, 590px);
+    border-radius: 30px;
     overflow: hidden;
     isolation: isolate;
+    transition: transform 0.45s var(--ap-ease), box-shadow 0.45s var(--ap-ease), border-color 0.3s;
+    box-shadow: 0 10px 30px rgba(5, 7, 46, 0.08);
 }
-.proker-tile--wide { grid-column: 1 / -1; min-height: clamp(460px, 48vw, 560px); }
-.proker-tile--dark { background: #000; color: #f5f5f7; }
-.proker-tile--light { background: #ededf0; color: #1d1d1f; }
-.proker-tile--blue { background: linear-gradient(180deg, #0a1fa8 0%, #060b80 100%); color: #fff; }
-.proker-name {
-    font-size: clamp(2rem, 4.2vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    margin: 0 0 10px;
-    color: inherit;
+.proker-tile:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(5, 7, 46, 0.16);
 }
-.proker-tag {
-    max-width: 460px;
-    margin: 0 0 20px;
-    font-size: clamp(1rem, 1.6vw, 1.2rem);
-    line-height: 1.4;
-    color: inherit;
-    opacity: 0.8;
+
+/* Card 1: ADVOICE (GSM Deep Midnight Navy + Lemon Accent) */
+.proker-tile--dark {
+    background: linear-gradient(150deg, #05072E 0%, #060C8A 55%, #0914C4 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(242, 235, 42, 0.25) !important;
 }
-.proker-actions { display: flex; align-items: center; gap: 18px; position: relative; z-index: 2; }
-.proker-link { color: #2997ff; font-weight: 600; text-decoration: none; }
-.proker-link:hover { text-decoration: underline; }
-.proker-tile--light .proker-link { color: #0066cc; }
-.proker-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; position: relative; z-index: 2; }
-.proker-chip {
+.proker-tile--dark .proker-badge-top {
+    background: rgba(242, 235, 42, 0.15);
+    color: var(--gsm-lemon, #F2EB2A);
+    border: 1px solid rgba(242, 235, 42, 0.35);
+}
+.proker-tile--dark .proker-link {
+    color: var(--gsm-lemon, #F2EB2A);
+}
+
+/* Card 2: TKPEDIA (GSM Arctic Mist + Ultramarine Elements) */
+.proker-tile--light {
+    background: #FFFFFF !important;
+    color: #1A1A24 !important;
+    border: 1px solid rgba(12, 28, 255, 0.12) !important;
+    box-shadow: 0 8px 30px rgba(9, 20, 196, 0.06) !important;
+}
+.proker-tile--light .proker-badge-top {
+    background: rgba(12, 28, 255, 0.08);
+    color: var(--gsm-ultramarine, #0914C4);
+    border: 1px solid rgba(12, 28, 255, 0.2);
+}
+.proker-tile--light .proker-tag {
+    color: #555B77 !important;
+}
+
+/* Badge Top Tiap Card */
+.proker-badge-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     padding: 6px 16px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font: 600 0.85rem var(--font-body, inherit);
-    cursor: pointer;
-    transition: background 0.25s, transform 0.25s var(--ap-ease);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
 }
-.proker-chip:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+.proker-badge-top svg { width: 14px; height: 14px; }
+
+.proker-name {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 12px;
+    color: inherit;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.35s var(--ap-spring), filter 0.35s;
+}
+.proker-tag {
+    max-width: 440px;
+    margin: 0 0 20px;
+    font-size: clamp(0.98rem, 1.5vw, 1.15rem);
+    line-height: 1.5;
+    color: inherit;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+}
+.proker-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 3;
+}
+.proker-link {
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.proker-link:hover { text-decoration: underline; }
+
 .proker-visual {
     margin-top: auto;
-    width: min(100%, 620px);
-    max-height: 340px;
+    width: min(100%, 540px);
+    max-height: 320px;
     object-fit: contain;
     object-position: center bottom;
     z-index: 1;
-    transition: transform 0.9s var(--ap-ease);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+    transition: transform 0.8s var(--ap-ease);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 20%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 20%);
 }
 .proker-tile:hover .proker-visual { transform: scale(1.05); }
-.proker-tile--wide .proker-visual { max-height: 300px; }
-@media (max-width: 760px) {
-    .proker-grid { grid-template-columns: 1fr; }
+
+/* ─── FIX ISSUE 3: KOTAK KESMANEWS DILEBARKAN (Tidak Patah / Kosong) ── */
+.proker-tile--wide {
+    grid-column: 1 / -1;
+    min-height: auto;
+    padding: 0 !important;
+    background: linear-gradient(135deg, #05072E 0%, #060C8A 35%, #0914C4 75%, #0C1CFF 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    display: grid !important;
+    grid-template-columns: 1.15fr 1fr;
+    align-items: stretch !important;
+    text-align: left !important;
+    position: relative;
+}
+
+.proker-wide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: clamp(36px, 5vw, 56px) clamp(30px, 4.5vw, 56px);
+    position: relative;
+    z-index: 3;
+}
+
+.proker-tile--wide .proker-badge-top {
+    background: rgba(242, 235, 42, 0.16);
+    color: var(--gsm-lemon, #F2EB2A);
+    border: 1px solid rgba(242, 235, 42, 0.4);
+    margin-bottom: 16px;
+}
+
+.proker-tile--wide .proker-name {
+    font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    margin-bottom: 14px;
+}
+
+.proker-tile--wide .proker-tag {
+    max-width: 540px;
+    margin: 0 0 24px;
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.55;
+    opacity: 0.95;
+}
+
+.proker-tile--wide .proker-actions {
+    margin-bottom: 20px;
+}
+
+.proker-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+}
+
+.proker-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 3;
+}
+.proker-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    font: 600 0.88rem var(--font-body, inherit);
+    text-decoration: none;
+    transition: background 0.25s, transform 0.25s var(--ap-ease), border-color 0.25s;
+}
+.proker-chip svg { width: 14px; height: 14px; color: var(--gsm-lemon, #F2EB2A); }
+.proker-chip:hover {
+    background: rgba(255, 255, 255, 0.26);
+    border-color: var(--gsm-lemon, #F2EB2A);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* Feature pills baris bawah kartu lebar */
+.proker-wide-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    width: 100%;
+}
+.proker-feat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+}
+.proker-feat-pill svg { width: 14px; height: 14px; color: var(--gsm-lemon, #F2EB2A); }
+
+/* Kolom Visual Kanan Kartu Lebar (Mengisi sisi kanan sampai pinggir) */
+.proker-wide-visual-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 420px;
+    background: radial-gradient(circle at 60% 60%, rgba(12, 28, 255, 0.45), transparent 70%);
+}
+.proker-visual--wide {
+    width: 100% !important;
+    max-width: 480px !important;
+    max-height: 380px !important;
+    object-fit: contain;
+    margin: auto auto 0 !important;
+    z-index: 1;
+    transform-origin: center bottom;
+    transition: transform 0.8s var(--ap-ease);
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
+.proker-tile--wide:hover .proker-visual--wide {
+    transform: scale(1.06) translateY(-4px);
+}
+
+/* Floating Glass Badges di atas Visual */
+.proker-floating-chip {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(5, 7, 46, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(242, 235, 42, 0.35);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    pointer-events: none;
+    animation: apFloat 4s ease-in-out infinite alternate;
+}
+.proker-floating-chip svg { width: 14px; height: 14px; color: var(--gsm-lemon, #F2EB2A); }
+.proker-floating-chip.chip-top {
+    top: 36px;
+    right: 36px;
+}
+.proker-floating-chip.chip-bottom {
+    bottom: 36px;
+    left: 24px;
+    animation-delay: 2s;
+}
+@keyframes apFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+@media (max-width: 900px) {
+    .proker-tile--wide {
+        grid-template-columns: 1fr;
+    }
+    .proker-wide-content {
+        align-items: center;
+        text-align: center;
+        padding: 36px 24px 20px;
+    }
+    .proker-tile--wide .proker-tag {
+        margin-inline: auto;
+    }
+    .proker-wide-pills {
+        justify-content: center;
+    }
+    .proker-wide-visual-wrap {
+        min-height: 280px;
+    }
+    .proker-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ─── FIX ISSUE 1: KINETIC CLICK TRANSITION & APPLE TITLE MORPH ANIMATION ─ */
+
+/* 1) Animasi Reveal Judul di Halaman Khusus (Apple Keynote Fluid Morph) */
+.page-hero-title {
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: inline-block;
+    animation: appleTitleEntrance 1.1s var(--ap-spring) forwards;
+    transform-origin: center center;
+    will-change: transform, letter-spacing, filter, opacity;
+}
+
+@keyframes appleTitleEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.68) translateY(32px);
+        filter: blur(14px);
+        letter-spacing: 0.18em;
+    }
+    55% {
+        transform: scale(1.08) translateY(-4px);
+        filter: blur(0px);
+        letter-spacing: -0.05em;
+    }
+    75% {
+        transform: scale(0.97) translateY(1px);
+        letter-spacing: -0.035em;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        letter-spacing: -0.04em;
+    }
+}
+
+/* Morph Accent Text Pop (misal: "VOICE" di ADVOICE, "pedia" di TKpedia) */
+.page-hero-title span {
+    display: inline-block;
+    color: var(--gsm-lemon, #F2EB2A) !important;
+    animation: appleAccentMorph 1.2s var(--ap-spring) forwards;
+    animation-delay: 0.15s;
+    transform-origin: center bottom;
+    text-shadow: 0 0 35px rgba(242, 235, 42, 0.45);
+}
+
+@keyframes appleAccentMorph {
+    0% {
+        opacity: 0;
+        transform: scale(0.4) rotate(-8deg);
+        filter: blur(8px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.18) rotate(3deg);
+        filter: blur(0);
+    }
+    85% {
+        transform: scale(0.95) rotate(-1deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* 2) Card Click Transition Active Effect */
+.proker-tile.is-activating {
+    transform: scale(0.98) !important;
+    transition: transform 0.25s var(--ap-ease) !important;
+}
+.proker-tile.is-activating .proker-name {
+    transform: scale(1.15) translateY(-4px);
+    color: var(--gsm-lemon, #F2EB2A) !important;
+    text-shadow: 0 0 30px rgba(242, 235, 42, 0.7);
+}
+
+/* Fullscreen Page Transition Backdrop (Apple-style morph wipe) */
+#apPageTransitionOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(12, 28, 255, 0.95), #05072E 85%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s var(--ap-ease);
+}
+#apPageTransitionOverlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.ap-transition-text {
+    font-family: var(--font-heading-main), 'Integral CF', sans-serif;
+    font-size: clamp(3rem, 11vw, 7.5rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    transform: scale(0.72) translateY(20px);
+    filter: blur(12px);
+    opacity: 0;
+    transition: transform 0.4s var(--ap-spring), filter 0.35s, opacity 0.35s;
+}
+#apPageTransitionOverlay.active .ap-transition-text {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    opacity: 1;
+}
+.ap-transition-sub {
+    font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+    color: var(--gsm-lemon, #F2EB2A);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 14px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+}
+#apPageTransitionOverlay.active .ap-transition-sub {
+    opacity: 1;
+    transform: none;
 }
 
 /* ─── Apple-style Product Subnav Bar (Sticky) ────────────────── */
@@ -209,14 +696,10 @@ html { scroll-behavior: smooth; }
     position: sticky;
     top: var(--navbar-height, 60px);
     z-index: 95;
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(5, 7, 46, 0.88) !important;
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-[data-theme="dark"] .product-subnav {
-    background: rgba(20, 20, 24, 0.85);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(242, 235, 42, 0.18) !important;
 }
 .product-subnav-container {
     max-width: 1180px;
@@ -228,10 +711,10 @@ html { scroll-behavior: smooth; }
     gap: 16px;
 }
 .product-subnav-title a {
-    font-weight: 700;
-    font-size: 1.2rem;
+    font-weight: 800;
+    font-size: 1.25rem;
     letter-spacing: -0.02em;
-    color: var(--color-text);
+    color: #ffffff !important;
     text-decoration: none;
 }
 .product-subnav-menu {
@@ -240,18 +723,18 @@ html { scroll-behavior: smooth; }
     gap: 10px;
 }
 .product-subnav-link {
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.75) !important;
     text-decoration: none;
     font-size: 0.88rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 6px 14px;
     border-radius: 999px;
     transition: color 0.2s, background 0.2s;
 }
 .product-subnav-link:hover,
 .product-subnav-link.active {
-    color: var(--color-text);
-    background: rgba(120, 120, 128, 0.12);
+    color: var(--gsm-lemon, #F2EB2A) !important;
+    background: rgba(255, 255, 255, 0.12);
 }
 .product-subnav-btn {
     display: inline-flex;
@@ -259,7 +742,7 @@ html { scroll-behavior: smooth; }
     gap: 6px;
     padding: 6px 14px;
     border-radius: 999px;
-    background: #0071e3;
+    background: linear-gradient(135deg, #0C1CFF 0%, #0914C4 100%) !important;
     color: #fff !important;
     font-size: 0.82rem;
     font-weight: 600;
@@ -267,30 +750,29 @@ html { scroll-behavior: smooth; }
     transition: transform 0.2s, background 0.2s;
 }
 .product-subnav-btn:hover {
-    background: #0077ed;
+    background: linear-gradient(135deg, #3340FF 0%, #0C1CFF 100%) !important;
     transform: scale(1.03);
 }
 .product-subnav-btn-secondary {
-    background: rgba(120, 120, 128, 0.16);
-    color: var(--color-text) !important;
+    background: rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .product-subnav-btn-secondary:hover {
-    background: rgba(120, 120, 128, 0.26);
-}
-.product-subnav-btn svg { width: 14px; height: 14px; }
-@media (max-width: 640px) {
-    .product-subnav-link { display: none; }
+    background: rgba(255, 255, 255, 0.24) !important;
 }
 
-/* ─── Apple-style Dedicated Page Hero ────────────────────────── */
+/* ─── Dedicated Page Heroes diselaraskan dengan GSM ──────────── */
 .page-hero-apple {
     padding: clamp(70px, 12vh, 120px) 20px clamp(40px, 6vh, 60px);
     text-align: center;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(160deg, #05072E 0%, #060C8A 45%, #0914C4 100%) !important;
+    color: #ffffff !important;
 }
 .page-hero-container {
-    max-width: 860px;
+    max-width: 880px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -299,38 +781,32 @@ html { scroll-behavior: smooth; }
 .page-hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     padding: 6px 16px;
     border-radius: 999px;
     font-size: 0.82rem;
     font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 20px;
-    background: rgba(0, 113, 227, 0.1);
-    color: #0071e3;
+    background: rgba(242, 235, 42, 0.16) !important;
+    color: var(--gsm-lemon, #F2EB2A) !important;
+    border: 1px solid rgba(242, 235, 42, 0.4) !important;
 }
 .page-hero-badge svg { width: 15px; height: 15px; }
-.page-hero-title {
-    font-size: clamp(3rem, 9vw, 6rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin-bottom: 12px;
-}
-.page-hero-title span { color: #0071e3; }
+
 .page-hero-tagline {
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--color-text);
+    color: #ffffff !important;
     margin-bottom: 14px;
 }
 .page-hero-subtitle {
     font-size: clamp(1rem, 1.8vw, 1.25rem);
     line-height: 1.6;
-    color: var(--color-text-secondary);
-    max-width: 640px;
+    color: rgba(255, 255, 255, 0.85) !important;
+    max-width: 660px;
     margin-bottom: 30px;
 }
 .page-hero-cta {
@@ -348,56 +824,19 @@ html { scroll-behavior: smooth; }
     margin-top: 10px;
     animation: apRise 1.2s var(--ap-ease) forwards;
 }
+
 .page-hero-dark {
-    background: #000;
-    color: #f5f5f7;
+    background: linear-gradient(160deg, #05072E 0%, #060C8A 50%, #0914C4 100%) !important;
+    color: #ffffff !important;
 }
-.page-hero-dark .page-hero-badge {
-    background: rgba(77, 124, 255, 0.18);
-    color: #6ea8ff;
-}
-.page-hero-dark .page-hero-title,
-.page-hero-dark .page-hero-tagline {
-    color: #f5f5f7;
-}
-.page-hero-dark .page-hero-subtitle {
-    color: #a1a1a6;
-}
-.page-hero-dark .page-hero-title span {
-    color: #4d7cff;
-}
+
 .page-hero-kesmanews {
-    background: linear-gradient(180deg, rgba(12, 28, 255, 0.06) 0%, transparent 100%);
+    background: linear-gradient(160deg, #05072E 0%, #060C8A 45%, #0914C4 85%, #0C1CFF 100%) !important;
+    color: #ffffff !important;
 }
-.page-hero-quickpills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+.page-hero-kesmanews .page-hero-title span {
+    color: var(--gsm-lemon, #F2EB2A) !important;
 }
-.hero-quickpill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 999px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 0.92rem;
-    font-weight: 600;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-}
-.hero-quickpill:hover {
-    transform: translateY(-3px);
-    border-color: #0071e3;
-    box-shadow: var(--shadow-md);
-    color: #0071e3;
-}
-.hero-quickpill svg { width: 16px; height: 16px; color: #0071e3; }
 
 /* ─── TKpedia Dedicated Page Enhancements ────────────────────── */
 .tkpedia-full-viewer {
@@ -439,8 +878,8 @@ html { scroll-behavior: smooth; }
     width: 48px;
     height: 48px;
     border-radius: 14px;
-    background: rgba(0, 113, 227, 0.1);
-    color: #0071e3;
+    background: rgba(12, 28, 255, 0.1);
+    color: var(--gsm-ultramarine, #0914C4);
     display: grid;
     place-items: center;
     margin-bottom: 16px;
@@ -455,12 +894,13 @@ html { scroll-behavior: smooth; }
     line-height: 1.6;
     color: var(--color-text-secondary);
 }
-.advoice-section { background: #000 !important; }
+
+.advoice-section { background: var(--gsm-navy-dark) !important; }
 .advoice-hero { text-align: center; display: block !important; }
 .advoice-hero-content { max-width: 760px; margin-inline: auto; }
-.advoice-title { font-size: clamp(3rem, 10vw, 7rem) !important; letter-spacing: -0.04em; color: #f5f5f7 !important; }
-.advoice-title span { color: #4d7cff !important; }
-.advoice-lead { color: #a1a1a6 !important; font-size: clamp(1.05rem, 2vw, 1.35rem); }
+.advoice-title { font-size: clamp(3rem, 10vw, 7rem) !important; letter-spacing: -0.04em; color: #ffffff !important; }
+.advoice-title span { color: var(--gsm-lemon, #F2EB2A) !important; }
+.advoice-lead { color: #b6b9db !important; font-size: clamp(1.05rem, 2vw, 1.35rem); }
 .advoice-cta { justify-content: center; }
 .advoice-hero-visual { display: none !important; }
 .ap-visual {
@@ -478,22 +918,16 @@ html { scroll-behavior: smooth; }
     border-radius: 28px !important;
 }
 
-/* ─── TKpedia: panel terang ──────────────────────────────────── */
-.tkpedia-viewer { transition: transform 1s var(--ap-ease); }
-
-/* ─── Kartu hover lebih lembut ───────────────────────────────── */
+/* Hover Kartu Halus */
 .hotnews-card, .card, .advoice-cat-card, .advoice-step, .pendampingan-service {
     transition: transform 0.5s var(--ap-ease), box-shadow 0.5s var(--ap-ease) !important;
 }
 .hotnews-card:hover, .advoice-cat-card:hover, .advoice-step:hover { transform: scale(1.02) translateY(-4px); }
 
-/* ─── Aksesibilitas: hormati reduced motion ──────────────────── */
+/* Aksesibilitas: hormati prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .reveal, .ap-stagger > *, .hero-container > *, .ap-visual {
+    .reveal, .ap-stagger > *, .hero-container > *, .ap-visual, .page-hero-title, .page-hero-title span {
         opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important;
     }
-}
-@media (max-width: 900px) {
-    .reveal.ap-left, .reveal.ap-right { transform: translateY(40px); }
 }

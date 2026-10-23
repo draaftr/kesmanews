@@ -27,7 +27,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
     <link rel="stylesheet" href="extras.css?v=1.0.0">
-    <link rel="stylesheet" href="apple.css?v=1.1.0">
+    <link rel="stylesheet" href="apple.css?v=2.0.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -148,35 +148,58 @@
                 <p class="section-desc">Program kerja kami untuk suara, informasi, dan kesejahteraan mahasiswa.</p>
             </div>
             <div class="proker-grid">
-                <article class="proker-tile proker-tile--dark">
+                <article class="proker-tile proker-tile--dark" data-proker="ADVOICE">
+                    <span class="proker-badge-top"><i data-lucide="megaphone"></i> Advokasi &amp; Aspirasi</span>
                     <h3 class="proker-name">ADVOICE</h3>
-                    <p class="proker-tag">Suarakan keluhan akademik &amp; non-akademik. Kami dengar, kawal, dan tindak lanjuti.</p>
+                    <p class="proker-tag">Suarakan keluhan akademik &amp; non-akademik. Kami dengar, kawal, dan tindak lanjuti secara aman.</p>
                     <div class="proker-actions">
-                        <a href="advoice.html" class="btn btn-primary">Selengkapnya</a>
+                        <a href="advoice.html" class="btn btn-primary proker-cta" data-proker-target="ADVOICE">Selengkapnya</a>
                         <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="proker-link">Isi Form</a>
                     </div>
                     <img src="assets/advoice-visual.jpg" alt="Ilustrasi Advoice" class="proker-visual" loading="lazy">
                 </article>
-                <article class="proker-tile proker-tile--light">
+                <article class="proker-tile proker-tile--light" data-proker="TKpedia">
+                    <span class="proker-badge-top"><i data-lucide="book-open"></i> Handbook Mahasiswa</span>
                     <h3 class="proker-name">TKpedia</h3>
-                    <p class="proker-tag">Buku panduan digital Teknologi Kedokteran, kini edisi kedua.</p>
+                    <p class="proker-tag">Buku panduan digital Teknologi Kedokteran edisi kedua: kurikulum, karier, dan kiat studi.</p>
                     <div class="proker-actions">
-                        <a href="tkpedia.html" class="btn btn-primary">Selengkapnya</a>
+                        <a href="tkpedia.html" class="btn btn-primary proker-cta" data-proker-target="TKpedia">Selengkapnya</a>
                     </div>
                     <img src="assets/tkpedia-visual.jpg" alt="Ilustrasi TKpedia" class="proker-visual" loading="lazy">
                 </article>
-                <article class="proker-tile proker-tile--blue proker-tile--wide">
-                    <h3 class="proker-name">KesmaNews</h3>
-                    <p class="proker-tag">Info beasiswa, lomba, dan pendampingan beasiswa. Semua peluangmu dalam satu tempat.</p>
-                    <div class="proker-actions">
-                        <a href="kesmanews.html" class="btn btn-primary">Selengkapnya</a>
+                <article class="proker-tile proker-tile--blue proker-tile--wide" data-proker="KesmaNews">
+                    <div class="proker-wide-content">
+                        <span class="proker-badge-top"><i data-lucide="sparkles"></i> Pusat Informasi &amp; Beasiswa</span>
+                        <h3 class="proker-name">KesmaNews</h3>
+                        <p class="proker-tag">Info beasiswa terkurasi, kompetisi akademik &amp; non-akademik, serta pendampingan beasiswa intensif. Semua peluangmu dalam satu wadah terpadu.</p>
+                        <div class="proker-actions">
+                            <a href="kesmanews.html" class="btn btn-primary proker-cta" data-proker-target="KesmaNews">
+                                <span>Selengkapnya</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="proker-chips">
+                            <a href="kesmanews.html#beasiswa" class="proker-chip"><i data-lucide="graduation-cap"></i> Beasiswa</a>
+                            <a href="kesmanews.html#lomba" class="proker-chip"><i data-lucide="trophy"></i> Lomba</a>
+                            <a href="kesmanews.html#beasiswa-pendampingan" class="proker-chip"><i data-lucide="users"></i> Pendampingan</a>
+                        </div>
+                        <div class="proker-wide-pills">
+                            <span class="proker-feat-pill"><i data-lucide="check-circle-2"></i> Terverifikasi</span>
+                            <span class="proker-feat-pill"><i data-lucide="zap"></i> Update Rutin</span>
+                            <span class="proker-feat-pill"><i data-lucide="shield-check"></i> Pendampingan 1-on-1</span>
+                        </div>
                     </div>
-                    <div class="proker-chips">
-                        <a href="kesmanews.html#beasiswa" class="proker-chip">Beasiswa</a>
-                        <a href="kesmanews.html#lomba" class="proker-chip">Lomba</a>
-                        <a href="kesmanews.html#beasiswa-pendampingan" class="proker-chip">Pendampingan</a>
+                    <div class="proker-wide-visual-wrap">
+                        <div class="proker-floating-chip chip-top">
+                            <i data-lucide="award"></i>
+                            <span>Beasiswa &amp; Prestasi</span>
+                        </div>
+                        <img src="assets/kesmanews-visual.jpg" alt="Ilustrasi KesmaNews" class="proker-visual proker-visual--wide" loading="lazy">
+                        <div class="proker-floating-chip chip-bottom">
+                            <i data-lucide="trophy"></i>
+                            <span>Kompetisi Nasional</span>
+                        </div>
                     </div>
-                    <img src="assets/kesmanews-visual.jpg" alt="Ilustrasi KesmaNews" class="proker-visual" loading="lazy">
                 </article>
             </div>
         </div>
@@ -723,6 +746,6 @@
 
     <script src="app.js?v=2.5.1"></script>
     <script src="extras.js?v=1.0.0"></script>
-    <script src="apple.js?v=1.1.0"></script>
+    <script src="apple.js?v=2.0.0"></script>
 </body>
 </html>
