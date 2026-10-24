@@ -431,12 +431,15 @@ html { scroll-behavior: smooth; }
 /* ─── KARTU 3: KESMANEWS WIDE BANNER (Background: assets/kesmanews.jpeg) ─ */
 .proker-tile--kesmanews {
     grid-column: 1 / -1;
-    min-height: clamp(460px, 46vw, 540px);
+    min-height: clamp(480px, 48vw, 560px);
     border: 1px solid rgba(255, 255, 255, 0.28) !important;
     background: #05072E;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 .proker-tile--kesmanews .proker-bg-layer {
     background-position: center center !important;
@@ -448,17 +451,20 @@ html { scroll-behavior: smooth; }
     filter: contrast(120%) brightness(0.92);
 }
 .proker-tile--kesmanews .proker-gradient-overlay {
-    background: linear-gradient(90deg, rgba(5, 7, 46, 0.88) 0%, rgba(5, 7, 46, 0.74) 42%, rgba(9, 20, 196, 0.48) 75%, rgba(5, 7, 46, 0.80) 100%) !important;
+    background: radial-gradient(ellipse at center, rgba(9, 20, 196, 0.38) 0%, rgba(5, 7, 46, 0.78) 58%, rgba(5, 7, 46, 0.92) 100%),
+                linear-gradient(180deg, rgba(5, 7, 46, 0.75) 0%, transparent 40%, rgba(5, 7, 46, 0.85) 100%) !important;
 }
 .proker-tile--kesmanews .proker-wide-content {
     position: relative;
     z-index: 2;
-    max-width: 680px;
-    padding: clamp(38px, 5vw, 56px) clamp(30px, 4.5vw, 56px);
+    max-width: 780px;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(44px, 5.5vw, 64px) clamp(24px, 4vw, 48px);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     color: #ffffff;
 }
 .proker-tile--kesmanews .proker-badge-top {
@@ -471,15 +477,22 @@ html { scroll-behavior: smooth; }
     font-size: clamp(2.4rem, 4.5vw, 3.6rem);
     margin-bottom: 14px;
     color: #ffffff !important;
+    text-shadow: 0 4px 24px rgba(5, 7, 46, 0.85);
 }
 .proker-tile--kesmanews .proker-tag {
-    max-width: 580px;
-    margin: 0 0 24px;
+    max-width: 620px;
+    margin: 0 auto 24px;
     font-size: clamp(1rem, 1.4vw, 1.18rem);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 2px 14px rgba(5, 7, 46, 0.7);
 }
 .proker-tile--kesmanews .proker-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
     margin-bottom: 22px;
 }
 
@@ -495,6 +508,7 @@ html { scroll-behavior: smooth; }
 .proker-chips {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 22px;
     position: relative;
@@ -527,10 +541,13 @@ html { scroll-behavior: smooth; }
 .proker-wide-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    justify-content: center;
+    gap: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
     width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
 }
 .proker-feat-pill {
     display: inline-flex;
