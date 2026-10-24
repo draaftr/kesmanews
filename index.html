@@ -26,9 +26,9 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
-    <link rel="stylesheet" href="extras.css?v=1.0.0">
-    <link rel="stylesheet" href="apple.css?v=2.3.0">
-    <link rel="stylesheet" href="mobile.css?v=1.2.0">
+    <link rel="stylesheet" href="extras.css?v=1.1.0">
+    <link rel="stylesheet" href="apple.css?v=2.3.1">
+    <link rel="stylesheet" href="mobile.css?v=1.2.1">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -45,9 +45,18 @@
                 <a href="#beranda" class="nav-link active" data-section="beranda">Beranda</a>
                 <a href="#hotnews" class="nav-link" data-section="hotnews">Hot News</a>
                 <a href="#proker" class="nav-link" data-section="proker">Proker</a>
-                <a href="kesmanews.html" class="nav-link" data-section="kesmanews">KesmaNews</a>
-                <a href="tkpedia.html" class="nav-link" data-section="tkpedia">TKpedia</a>
-                <a href="advoice.html" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
+                <a href="kesmanews.html" class="nav-link nav-link--page" data-section="kesmanews">
+                    <span>KesmaNews</span>
+                    <i data-lucide="arrow-up-right" class="nav-page-icon"></i>
+                </a>
+                <a href="tkpedia.html" class="nav-link nav-link--page" data-section="tkpedia">
+                    <span>TKpedia</span>
+                    <i data-lucide="arrow-up-right" class="nav-page-icon"></i>
+                </a>
+                <a href="advoice.html" class="nav-link nav-link--page nav-link-advoice" data-section="advoice">
+                    <span>Advoice</span>
+                    <i data-lucide="arrow-up-right" class="nav-page-icon"></i>
+                </a>
                 <a href="#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
             </div>
             <div class="nav-actions">
@@ -584,7 +593,7 @@
     </div>
 
     <script src="app.js?v=2.5.1"></script>
-    <script src="extras.js?v=1.0.0"></script>
+    <script src="extras.js?v=1.1.0"></script>
     <script src="apple.js?v=2.1.0"></script>
 </body>
 </html>

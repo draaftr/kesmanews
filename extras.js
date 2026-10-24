@@ -49,7 +49,7 @@ function renderHotNews(items) {
             <div class="hotnews-card-icon"><i data-lucide="${escHTML(n.icon || 'newspaper')}"></i></div>
             <h3 class="hotnews-card-title">${escHTML(n.judul)}</h3>
             <p class="hotnews-card-desc">${escHTML(n.deskripsi)}</p>
-            ${n.link ? `<a class="hotnews-link" href="${escHTML(n.link)}" ${external ? 'target="_blank" rel="noopener noreferrer"' : ''} data-internal="${external ? '' : '1'}">${escHTML(n.linkLabel || 'Selengkapnya')} <i data-lucide="arrow-right"></i></a>` : ''}
+            ${n.link ? `<a class="hotnews-link ${external ? 'hotnews-link--external' : 'hotnews-link--page'}" href="${escHTML(n.link)}" ${external ? 'target="_blank" rel="noopener noreferrer"' : ''} data-internal="${external ? '' : '1'}"><span>${escHTML(n.linkLabel || 'Selengkapnya')}</span> <i data-lucide="${external ? 'external-link' : 'arrow-right'}"></i></a>` : ''}
         </article>`;
     }).join('');
 

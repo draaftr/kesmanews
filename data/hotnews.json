@@ -14,8 +14,8 @@
     "judul": "TKpedia 2nd Edition sudah terbit",
     "deskripsi": "Buku panduan seputar dunia Teknologi Kedokteran dari Adkesma HMTK. Baca langsung atau unduh gratis.",
     "tanggal": "",
-    "link": "#tkpedia",
-    "linkLabel": "Baca TKpedia",
+    "link": "tkpedia.html",
+    "linkLabel": "Buka TKpedia",
     "icon": "book-open-check",
     "hot": true
   },
@@ -24,8 +24,8 @@
     "judul": "Pendampingan beasiswa bersama Adkesma",
     "deskripsi": "Bingung menyiapkan berkas, essay, atau wawancara beasiswa? Hubungi CP pendampingan dan kami dampingi sampai submit.",
     "tanggal": "",
-    "link": "#beasiswa-pendampingan",
-    "linkLabel": "Lihat CP Pendampingan",
+    "link": "kesmanews.html#beasiswa-pendampingan",
+    "linkLabel": "Lihat Pendampingan",
     "icon": "heart-handshake",
     "hot": false
   },
@@ -34,8 +34,8 @@
     "judul": "Beasiswa & lomba terbaru diperbarui rutin",
     "deskripsi": "Pantau deadline terdekat dan simpan ke bookmark agar tidak ada peluang yang terlewat.",
     "tanggal": "",
-    "link": "#beasiswa",
-    "linkLabel": "Jelajahi Info",
+    "link": "kesmanews.html#beasiswa",
+    "linkLabel": "Jelajahi Beasiswa",
     "icon": "newspaper",
     "hot": false
   }

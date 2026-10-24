@@ -107,6 +107,28 @@
         background: rgba(242, 235, 42, 0.10) !important;
         border-color: rgba(242, 235, 42, 0.45) !important;
     }
+    .navbar .nav-link--page {
+        background: rgba(12, 28, 255, 0.25) !important;
+        border: 1px solid rgba(242, 235, 42, 0.35) !important;
+        color: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        border-radius: 12px !important;
+    }
+    .navbar .nav-link--page .nav-page-icon {
+        width: 17px !important;
+        height: 17px !important;
+        color: #F2EB2A !important;
+        stroke-width: 2.5 !important;
+    }
+    .navbar .nav-link--page:hover,
+    .navbar .nav-link--page.active {
+        background: var(--gradient-primary, linear-gradient(135deg, #0914C4 0%, #0C1CFF 100%)) !important;
+        border-color: #F2EB2A !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 16px rgba(12, 28, 255, 0.4) !important;
+    }
 }
 
 /* ─── MOBILE ≤ 768px ─────────────────────────────────────────── */
