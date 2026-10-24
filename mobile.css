@@ -200,6 +200,199 @@ html, body { max-width: 100%; overflow-x: clip; }
     .filter-select-wrapper { width: 100%; min-width: 0; }
     .filter-select { width: 100%; }
 
+    /* ─── BERANDA (HOME) HERO MOBILE REFINEMENT ──────────────── */
+    .hero {
+        min-height: calc(100svh - var(--navbar-height, 60px)) !important;
+        padding: calc(var(--navbar-height, 60px) + 20px) 16px 44px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    .hero-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-inline: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+    }
+    .hero-badge {
+        font-size: 0.74rem !important;
+        padding: 6px 14px !important;
+        margin-bottom: 14px !important;
+        letter-spacing: 0.3px !important;
+    }
+    .hero-title {
+        font-size: clamp(1.55rem, 7.2vw, 2.25rem) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.02em !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 12px !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        white-space: nowrap !important;
+        text-shadow: 0 4px 20px rgba(5, 7, 46, 0.7) !important;
+    }
+    .hero-subtitle, .hero-tagline {
+        font-size: clamp(1.15rem, 4.6vw, 1.45rem) !important;
+        line-height: 1.35 !important;
+        letter-spacing: 0.5px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px 10px !important;
+        margin: 0 auto 14px !important;
+    }
+    .hero-desc {
+        font-size: clamp(0.88rem, 3.6vw, 0.98rem) !important;
+        line-height: 1.6 !important;
+        max-width: 350px !important;
+        margin: 0 auto 22px !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    .hero-cta {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+    .hero-cta .btn {
+        width: min(100%, 260px) !important;
+        justify-content: center !important;
+        padding: 13px 26px !important;
+        font-size: 0.96rem !important;
+    }
+
+    /* ─── PROKER ADKESMA (BERANDA) MOBILE ────────────────────── */
+    .proker-grid {
+        gap: 18px !important;
+        margin-top: 24px !important;
+    }
+    .proker-tile {
+        min-height: auto !important;
+        border-radius: 22px !important;
+    }
+    .proker-content-layer {
+        padding: 32px 18px 28px !important;
+    }
+    .proker-name {
+        font-size: clamp(1.9rem, 7vw, 2.35rem) !important;
+        margin-bottom: 10px !important;
+    }
+    .proker-tag {
+        font-size: 0.92rem !important;
+        line-height: 1.52 !important;
+        margin-bottom: 18px !important;
+        max-width: 100% !important;
+    }
+    .proker-actions {
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+    }
+    .proker-actions .btn {
+        width: min(100%, 220px) !important;
+        justify-content: center !important;
+    }
+
+    /* Kartu KesmaNews di Beranda Mobile */
+    .proker-tile--kesmanews {
+        min-height: auto !important;
+    }
+    .proker-tile--kesmanews .proker-wide-content {
+        padding: 34px 18px 28px !important;
+        align-items: center !important;
+        text-align: center !important;
+        max-width: 100% !important;
+    }
+    .proker-tile--kesmanews .proker-name {
+        font-size: clamp(2rem, 7.5vw, 2.55rem) !important;
+    }
+    .proker-tile--kesmanews .proker-tag {
+        font-size: 0.92rem !important;
+        line-height: 1.52 !important;
+        margin-bottom: 20px !important;
+    }
+    .proker-tile--kesmanews .proker-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-bottom: 18px !important;
+    }
+    .proker-tile--kesmanews .proker-actions .btn {
+        width: min(100%, 260px) !important;
+        justify-content: center !important;
+    }
+    .proker-chips {
+        gap: 8px !important;
+        margin-bottom: 18px !important;
+    }
+    .proker-chip {
+        padding: 6px 14px !important;
+        font-size: 0.8rem !important;
+    }
+    .proker-wide-pills {
+        gap: 10px !important;
+        padding-top: 14px !important;
+    }
+    .proker-feat-pill {
+        font-size: 0.75rem !important;
+    }
+
+    /* ─── HOT NEWS & TENTANG KAMI MOBILE ─────────────────────── */
+    .hotnews-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    .about-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+    }
+    .about-visual {
+        max-width: 100% !important;
+    }
+    .about-card {
+        border-radius: 20px !important;
+        padding: 24px 18px !important;
+    }
+    .about-heading {
+        font-size: clamp(1.45rem, 5.5vw, 1.85rem) !important;
+        line-height: 1.25 !important;
+        text-align: center !important;
+    }
+    .about-eyebrow {
+        justify-content: center !important;
+    }
+    .about-lead {
+        text-align: center !important;
+        font-size: 0.94rem !important;
+    }
+    .about-tabs-nav {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 6px !important;
+        padding: 4px !important;
+        margin-bottom: 16px !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+    }
+    .about-tabs-nav::-webkit-scrollbar { display: none; }
+    .about-tab-btn {
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+        padding: 8px 14px !important;
+        font-size: 0.8rem !important;
+    }
+
     /* Footer */
     .footer-top { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 28px 20px !important; }
     .footer-brand-col { grid-column: 1 / -1; }
@@ -208,5 +401,8 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 @media (max-width: 380px) {
+    .hero-title {
+        font-size: clamp(1.35rem, 6.8vw, 1.6rem) !important;
+    }
     .page-hero-quickpills { grid-template-columns: 1fr; }
 }
