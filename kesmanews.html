@@ -25,7 +25,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
     <link rel="stylesheet" href="extras.css?v=1.0.0">
-    <link rel="stylesheet" href="apple.css?v=2.0.0">
+    <link rel="stylesheet" href="apple.css?v=2.1.0">
 </head>
 <body class="page-kesmanews">
     <!-- ═══════════════════════════════════════════ -->
@@ -75,6 +75,10 @@
                 <a href="#beasiswa" class="product-subnav-link active" id="subnavBeasiswa">Beasiswa</a>
                 <a href="#lomba" class="product-subnav-link" id="subnavLomba">Lomba</a>
                 <a href="#beasiswa-pendampingan" class="product-subnav-link" id="subnavPendampingan">Pendampingan</a>
+                <a href="#bookmark" class="product-subnav-link" id="subnavBookmark">
+                    <span>Bookmark</span>
+                    <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
+                </a>
                 <a href="index.html#proker" class="product-subnav-btn">
                     <i data-lucide="arrow-left"></i>
                     <span>Semua Proker</span>
@@ -98,6 +102,7 @@
                 <a href="#beasiswa" class="hero-quickpill"><i data-lucide="graduation-cap"></i> Info Beasiswa</a>
                 <a href="#lomba" class="hero-quickpill"><i data-lucide="trophy"></i> Info Lomba</a>
                 <a href="#beasiswa-pendampingan" class="hero-quickpill"><i data-lucide="heart-handshake"></i> Pendampingan</a>
+                <a href="#bookmark" class="hero-quickpill"><i data-lucide="bookmark"></i> Bookmark Saya</a>
             </div>
         </div>
     </header>
@@ -302,6 +307,78 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- BOOKMARK SECTION                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section" id="bookmark">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper" style="background: linear-gradient(135deg, #F2EB2A, #E0D27A); color: #222222;">
+                    <i data-lucide="bookmark"></i>
+                </div>
+                <h2 class="section-title">Bookmark Saya</h2>
+                <p class="section-desc">Simpan info beasiswa &amp; lomba incaranmu agar batas waktu pendaftarannya tidak terlewat</p>
+            </div>
+
+            <!-- Bookmark Collections / Folder Hub (TikTok-style) -->
+            <div class="bookmark-collections-section hidden" id="bookmarkCollectionsSection">
+                <div class="collections-header">
+                    <span class="collections-title"><i data-lucide="folders"></i> Folder Koleksi</span>
+                    <button type="button" class="btn-create-folder" id="btnOpenNewFolderModal">
+                        <i data-lucide="folder-plus"></i>
+                        <span>+ Folder Baru</span>
+                    </button>
+                </div>
+                <div class="collections-tabs-bar" id="collectionsTabsBar">
+                    <!-- Dynamic collection folder tabs -->
+                </div>
+            </div>
+
+            <!-- Bookmark Toolbar (Filter Tabs + Clear All) -->
+            <div class="watchlist-toolbar hidden" id="watchlistToolbar">
+                <div class="watchlist-filter-tabs">
+                    <button type="button" class="watchlist-filter-btn active" data-filter="all" id="filterBtnAll">
+                        Semua <span class="filter-count" id="countAll">0</span>
+                    </button>
+                    <button type="button" class="watchlist-filter-btn" data-filter="beasiswa" id="filterBtnBeasiswa">
+                        🎓 Beasiswa <span class="filter-count" id="countBeasiswa">0</span>
+                    </button>
+                    <button type="button" class="watchlist-filter-btn" data-filter="lomba" id="filterBtnLomba">
+                        🏆 Lomba <span class="filter-count" id="countLomba">0</span>
+                    </button>
+                </div>
+                <button type="button" class="btn-clear-watchlist" id="btnClearWatchlist" title="Hapus semua bookmark tersimpan">
+                    <i data-lucide="trash-2"></i>
+                    <span>Hapus Semua</span>
+                </button>
+            </div>
+
+            <!-- Watchlist grid -->
+            <div class="watchlist-grid" id="watchlistGrid"></div>
+
+            <!-- Enhanced Empty state -->
+            <div class="watchlist-empty" id="watchlistEmpty">
+                <div class="watchlist-empty-card">
+                    <div class="watchlist-empty-icon-wrap">
+                        <i data-lucide="bookmark-plus"></i>
+                    </div>
+                    <h3>Belum Ada Bookmark Tersimpan</h3>
+                    <p>Tandai peluang atau kompetisi yang ingin kamu ikuti dengan mengklik ikon <strong>🔖 Simpan</strong> pada setiap kartunya.</p>
+                    <div class="watchlist-empty-actions">
+                        <a href="#beasiswa" class="btn-empty-explore btn-explore-beasiswa">
+                            <i data-lucide="graduation-cap"></i>
+                            <span>Jelajahi Beasiswa</span>
+                        </a>
+                        <a href="#lomba" class="btn-empty-explore btn-explore-lomba">
+                            <i data-lucide="trophy"></i>
+                            <span>Jelajahi Lomba</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- FOOTER                                      -->
     <!-- ═══════════════════════════════════════════ -->
     <footer class="footer">
@@ -341,7 +418,7 @@
                     <a href="kesmanews.html">KesmaNews</a>
                     <a href="tkpedia.html">TKpedia</a>
                     <a href="advoice.html">Advoice</a>
-                    <a href="index.html#bookmark">Bookmark Saya</a>
+                    <a href="#bookmark">Bookmark Saya</a>
                 </div>
 
                 <div class="footer-links">
@@ -476,6 +553,6 @@
 
     <script src="app.js?v=2.5.2"></script>
     <script src="extras.js?v=1.0.1"></script>
-    <script src="apple.js?v=2.0.0"></script>
+    <script src="apple.js?v=2.1.0"></script>
 </body>
 </html>

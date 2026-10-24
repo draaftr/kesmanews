@@ -27,7 +27,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
     <link rel="stylesheet" href="extras.css?v=1.0.0">
-    <link rel="stylesheet" href="apple.css?v=2.0.0">
+    <link rel="stylesheet" href="apple.css?v=2.1.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -47,10 +47,6 @@
                 <a href="kesmanews.html" class="nav-link" data-section="kesmanews">KesmaNews</a>
                 <a href="tkpedia.html" class="nav-link" data-section="tkpedia">TKpedia</a>
                 <a href="advoice.html" class="nav-link nav-link-advoice" data-section="advoice">Advoice</a>
-                <a href="#bookmark" class="nav-link" data-section="bookmark">
-                    Bookmark
-                    <span class="nav-bookmark-badge" id="navBookmarkBadge">0</span>
-                </a>
                 <a href="#tentang" class="nav-link" data-section="tentang">Tentang Kami</a>
             </div>
             <div class="nav-actions">
@@ -148,34 +144,52 @@
                 <p class="section-desc">Program kerja kami untuk suara, informasi, dan kesejahteraan mahasiswa.</p>
             </div>
             <div class="proker-grid">
-                <article class="proker-tile proker-tile--dark" data-proker="ADVOICE">
-                    <span class="proker-badge-top"><i data-lucide="megaphone"></i> Advokasi &amp; Aspirasi</span>
-                    <h3 class="proker-name">ADVOICE</h3>
-                    <p class="proker-tag">Suarakan keluhan akademik &amp; non-akademik. Kami dengar, kawal, dan tindak lanjuti secara aman.</p>
-                    <div class="proker-actions">
-                        <a href="advoice.html" class="btn btn-primary proker-cta" data-proker-target="ADVOICE">Selengkapnya</a>
-                        <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="proker-link">Isi Form</a>
+                <!-- Proker 1: ADVOICE (Background: assets/advoice.jpeg) -->
+                <article class="proker-tile proker-tile--advoice" data-proker="ADVOICE">
+                    <div class="proker-bg-layer" style="background-image: url('assets/advoice.jpeg');"></div>
+                    <div class="proker-gradient-overlay"></div>
+                    <div class="proker-content-layer">
+                        <span class="proker-badge-top"><i data-lucide="megaphone"></i> Advokasi &amp; Aspirasi</span>
+                        <h3 class="proker-name">ADVOICE</h3>
+                        <p class="proker-tag">Suarakan keluhan akademik &amp; non-akademik. Kami dengar, kawal, dan perjuangkan aspirasimu secara terpercaya.</p>
+                        <div class="proker-actions">
+                            <a href="advoice.html" class="btn btn-primary proker-cta" data-proker-target="ADVOICE">Selengkapnya</a>
+                            <a href="https://its.id/m/ADVOICE" target="_blank" rel="noopener noreferrer" class="proker-link">Isi Form</a>
+                        </div>
                     </div>
-                    <img src="assets/advoice-visual.jpg" alt="Ilustrasi Advoice" class="proker-visual" loading="lazy">
                 </article>
-                <article class="proker-tile proker-tile--light" data-proker="TKpedia">
-                    <span class="proker-badge-top"><i data-lucide="book-open"></i> Handbook Mahasiswa</span>
-                    <h3 class="proker-name">TKpedia</h3>
-                    <p class="proker-tag">Buku panduan digital Teknologi Kedokteran edisi kedua: kurikulum, karier, dan kiat studi.</p>
-                    <div class="proker-actions">
-                        <a href="tkpedia.html" class="btn btn-primary proker-cta" data-proker-target="TKpedia">Selengkapnya</a>
+
+                <!-- Proker 2: TKpedia (Background: assets/TKPedia.jpeg) -->
+                <article class="proker-tile proker-tile--tkpedia" data-proker="TKpedia">
+                    <div class="proker-bg-layer" style="background-image: url('assets/TKPedia.jpeg');"></div>
+                    <div class="proker-gradient-overlay"></div>
+                    <div class="proker-content-layer">
+                        <span class="proker-badge-top"><i data-lucide="book-open"></i> Handbook Mahasiswa</span>
+                        <h3 class="proker-name">TKpedia</h3>
+                        <p class="proker-tag">Buku panduan digital resmi Teknologi Kedokteran edisi kedua: kurikulum, karier, dan kiat studi.</p>
+                        <div class="proker-actions">
+                            <a href="tkpedia.html" class="btn btn-primary proker-cta" data-proker-target="TKpedia">Selengkapnya</a>
+                            <a href="https://drive.google.com/file/d/12N-C6ZmKAg2xVXj3gVrHFyXaAJfZPGd8/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="proker-link">Buka Drive</a>
+                        </div>
                     </div>
-                    <img src="assets/tkpedia-visual.jpg" alt="Ilustrasi TKpedia" class="proker-visual" loading="lazy">
                 </article>
-                <article class="proker-tile proker-tile--blue proker-tile--wide" data-proker="KesmaNews">
+
+                <!-- Proker 3: KesmaNews (Background: assets/kesmanews.jpeg) -->
+                <article class="proker-tile proker-tile--wide proker-tile--kesmanews" data-proker="KesmaNews">
+                    <div class="proker-bg-layer" style="background-image: url('assets/kesmanews.jpeg');"></div>
+                    <div class="proker-gradient-overlay"></div>
                     <div class="proker-wide-content">
                         <span class="proker-badge-top"><i data-lucide="sparkles"></i> Pusat Informasi &amp; Beasiswa</span>
                         <h3 class="proker-name">KesmaNews</h3>
                         <p class="proker-tag">Info beasiswa terkurasi, kompetisi akademik &amp; non-akademik, serta pendampingan beasiswa intensif. Semua peluangmu dalam satu wadah terpadu.</p>
                         <div class="proker-actions">
-                            <a href="kesmanews.html" class="btn btn-primary proker-cta" data-proker-target="KesmaNews">
+                            <a href="kesmanews.html" class="btn btn-primary proker-cta proker-cta-btn" data-proker-target="KesmaNews">
                                 <span>Selengkapnya</span>
                                 <i data-lucide="arrow-right"></i>
+                            </a>
+                            <a href="kesmanews.html#bookmark" class="btn btn-secondary proker-cta-btn">
+                                <i data-lucide="bookmark"></i>
+                                <span>Lihat Bookmark</span>
                             </a>
                         </div>
                         <div class="proker-chips">
@@ -189,95 +203,19 @@
                             <span class="proker-feat-pill"><i data-lucide="shield-check"></i> Pendampingan 1-on-1</span>
                         </div>
                     </div>
-                    <div class="proker-wide-visual-wrap">
-                        <div class="proker-floating-chip chip-top">
-                            <i data-lucide="award"></i>
-                            <span>Beasiswa &amp; Prestasi</span>
-                        </div>
-                        <img src="assets/kesmanews-visual.jpg" alt="Ilustrasi KesmaNews" class="proker-visual proker-visual--wide" loading="lazy">
-                        <div class="proker-floating-chip chip-bottom">
-                            <i data-lucide="trophy"></i>
-                            <span>Kompetisi Nasional</span>
-                        </div>
-                    </div>
                 </article>
             </div>
         </div>
     </section>
 
-
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- BOOKMARK SECTION                            -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section" id="bookmark">
-        <div class="section-container">
-            <div class="section-header reveal">
-                <div class="section-icon-wrapper" style="background: linear-gradient(135deg, #F2EB2A, #E0D27A); color: #222222;">
-                    <i data-lucide="bookmark"></i>
-                </div>
-                <h2 class="section-title">Bookmark Saya</h2>
-                <p class="section-desc">Simpan info beasiswa &amp; lomba incaranmu agar batas waktu pendaftarannya tidak terlewat</p>
-            </div>
-
-            <!-- Bookmark Collections / Folder Hub (TikTok-style) -->
-            <div class="bookmark-collections-section hidden" id="bookmarkCollectionsSection">
-                <div class="collections-header">
-                    <span class="collections-title"><i data-lucide="folders"></i> Folder Koleksi</span>
-                    <button type="button" class="btn-create-folder" id="btnOpenNewFolderModal">
-                        <i data-lucide="folder-plus"></i>
-                        <span>+ Folder Baru</span>
-                    </button>
-                </div>
-                <div class="collections-tabs-bar" id="collectionsTabsBar">
-                    <!-- Dynamic collection folder tabs -->
-                </div>
-            </div>
-
-            <!-- Bookmark Toolbar (Filter Tabs + Clear All) -->
-            <div class="watchlist-toolbar hidden" id="watchlistToolbar">
-                <div class="watchlist-filter-tabs">
-                    <button type="button" class="watchlist-filter-btn active" data-filter="all" id="filterBtnAll">
-                        Semua <span class="filter-count" id="countAll">0</span>
-                    </button>
-                    <button type="button" class="watchlist-filter-btn" data-filter="beasiswa" id="filterBtnBeasiswa">
-                        🎓 Beasiswa <span class="filter-count" id="countBeasiswa">0</span>
-                    </button>
-                    <button type="button" class="watchlist-filter-btn" data-filter="lomba" id="filterBtnLomba">
-                        🏆 Lomba <span class="filter-count" id="countLomba">0</span>
-                    </button>
-                </div>
-                <button type="button" class="btn-clear-watchlist" id="btnClearWatchlist" title="Hapus semua bookmark tersimpan">
-                    <i data-lucide="trash-2"></i>
-                    <span>Hapus Semua</span>
-                </button>
-            </div>
-
-            <!-- Watchlist grid -->
-            <div class="watchlist-grid" id="watchlistGrid"></div>
-
-            <!-- Enhanced Empty state -->
-            <div class="watchlist-empty" id="watchlistEmpty">
-                <div class="watchlist-empty-card">
-                    <div class="watchlist-empty-icon-wrap">
-                        <i data-lucide="bookmark-plus"></i>
-                    </div>
-                    <h3>Belum Ada Bookmark Tersimpan</h3>
-                    <p>Tandai peluang atau kompetisi yang ingin kamu ikuti dengan mengklik ikon <strong>🔖 Simpan</strong> pada setiap kartunya.</p>
-                    <div class="watchlist-empty-actions">
-                        <a href="kesmanews.html#beasiswa" class="btn-empty-explore btn-explore-beasiswa">
-                            <i data-lucide="graduation-cap"></i>
-                            <span>Jelajahi Beasiswa</span>
-                        </a>
-                        <a href="kesmanews.html#lomba" class="btn-empty-explore btn-explore-lomba">
-                            <i data-lucide="trophy"></i>
-                            <span>Jelajahi Lomba</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Hidden element placeholder agar script app.js tidak error bila dijalankan di index.html -->
+    <div id="bookmark" hidden aria-hidden="true">
+        <div id="bookmarkCollectionsSection" class="hidden"></div>
+        <div id="collectionsTabsBar" class="hidden"></div>
+        <div id="watchlistToolbar" class="hidden"></div>
+        <div id="watchlistGrid" class="hidden"></div>
+        <div id="watchlistEmpty" class="hidden"></div>
+    </div>
 
     <!-- ═══════════════════════════════════════════ -->
     <!-- TENTANG KAMI SECTION                        -->
@@ -586,7 +524,7 @@
                     <a href="kesmanews.html">KesmaNews</a>
                     <a href="tkpedia.html">TKpedia</a>
                     <a href="advoice.html">Advoice</a>
-                    <a href="index.html#bookmark">Bookmark Saya</a>
+                    <a href="kesmanews.html#bookmark">Bookmark Saya</a>
                     <a href="index.html#tentang">Tentang Kami</a>
                 </div>
 
@@ -746,6 +684,6 @@
 
     <script src="app.js?v=2.5.1"></script>
     <script src="extras.js?v=1.0.0"></script>
-    <script src="apple.js?v=2.0.0"></script>
+    <script src="apple.js?v=2.1.0"></script>
 </body>
 </html>

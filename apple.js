@@ -138,6 +138,24 @@
         const transitionTitle = document.getElementById('apTransitionTitle');
         const transitionSub = document.getElementById('apTransitionSub');
 
+        // Fungsi reset overlay (agar saat tombol Back ditekan, layar tidak nyangkut)
+        function hideTransitionOverlay() {
+            if (overlay) overlay.classList.remove('active');
+            document.querySelectorAll('.proker-tile.is-activating').forEach(tile => {
+                tile.classList.remove('is-activating');
+            });
+        }
+
+        // BFCache (Back-Forward Cache) recovery: pemicu utama saat user klik "Back" di browser
+        window.addEventListener('pageshow', hideTransitionOverlay);
+        window.addEventListener('popstate', hideTransitionOverlay);
+
+        // Jika overlay diklik atau user tekan ESC, tutup seketika
+        overlay.addEventListener('click', hideTransitionOverlay);
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hideTransitionOverlay();
+        });
+
         // Sambungkan klik pada semua tombol & chip proker
         document.querySelectorAll('.proker-tile a[href$=".html"], .proker-tile a[href*=".html#"], .proker-cta').forEach(link => {
             link.addEventListener('click', function (e) {
@@ -165,10 +183,13 @@
                 if (transitionSub) transitionSub.textContent = `Menuju halaman resmi ${prokerName}...`;
                 overlay.classList.add('active');
 
-                // 3. Pindah halaman secara mulus
+                // 3. Pindah halaman setelah animasi
                 setTimeout(() => {
                     window.location.href = targetUrl;
                 }, 340);
+
+                // 4. Safety auto-reset jika navigasi dibatalkan atau user kembali via BFCache
+                setTimeout(hideTransitionOverlay, 1000);
             });
         });
     }
