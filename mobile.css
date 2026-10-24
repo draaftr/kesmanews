@@ -352,45 +352,85 @@ html, body { max-width: 100%; overflow-x: clip; }
         grid-template-columns: 1fr !important;
         gap: 16px !important;
     }
-    .about-wrapper {
+    /* ─── TENTANG KAMI (BENTO GRID) MOBILE ───────────────────── */
+    .about-bento-grid {
         grid-template-columns: 1fr !important;
-        gap: 28px !important;
+        gap: 16px !important;
     }
-    .about-visual {
-        max-width: 100% !important;
-    }
-    .about-card {
-        border-radius: 20px !important;
+    .bento-card {
+        grid-column: 1 / -1 !important;
         padding: 24px 18px !important;
+        border-radius: 22px !important;
     }
-    .about-heading {
-        font-size: clamp(1.45rem, 5.5vw, 1.85rem) !important;
+    .bento-hero-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+    .bento-hero-title {
+        font-size: clamp(1.4rem, 6vw, 1.8rem) !important;
         line-height: 1.25 !important;
-        text-align: center !important;
     }
-    .about-eyebrow {
-        justify-content: center !important;
+    .bento-hero-tagline {
+        font-size: 0.95rem !important;
     }
-    .about-lead {
-        text-align: center !important;
-        font-size: 0.94rem !important;
+    .bento-hero-desc {
+        font-size: 0.88rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 20px !important;
     }
-    .about-tabs-nav {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        gap: 6px !important;
-        padding: 4px !important;
-        margin-bottom: 16px !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
+    .bento-hero-tags {
+        gap: 8px !important;
+        padding-top: 14px !important;
     }
-    .about-tabs-nav::-webkit-scrollbar { display: none; }
-    .about-tab-btn {
-        flex: 0 0 auto !important;
-        white-space: nowrap !important;
-        padding: 8px 14px !important;
+    .bento-pill-tag {
+        font-size: 0.75rem !important;
+        padding: 5px 12px !important;
+    }
+    .bento-card-title {
+        font-size: 1.35rem !important;
+        margin-bottom: 18px !important;
+    }
+    .bento-values-list {
+        gap: 14px !important;
+    }
+    .bento-values-list li {
+        gap: 12px !important;
+    }
+    .bento-value-icon {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    .bento-value-text strong {
+        font-size: 0.9rem !important;
+    }
+    .bento-value-text span {
         font-size: 0.8rem !important;
+    }
+    .bento-pillar-title {
+        font-size: 1.5rem !important;
+    }
+    .bento-pillar-desc {
+        font-size: 0.86rem !important;
+        margin-bottom: 16px !important;
+    }
+    .bento-action-content {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    .bento-action-buttons {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    .bento-btn-ig,
+    .bento-btn-email,
+    .bento-btn-share {
+        width: 100% !important;
+        justify-content: center !important;
     }
 
     /* Footer */

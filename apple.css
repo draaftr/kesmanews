@@ -1103,6 +1103,483 @@ html { scroll-behavior: smooth; }
 }
 .hotnews-card:hover, .advoice-cat-card:hover, .advoice-step:hover { transform: scale(1.02) translateY(-4px); }
 
+/* ═══════════════════════════════════════════════════════════════
+   BENTO GRID MODERN — TENTANG ADKESMA HMTK
+   ═══════════════════════════════════════════════════════════════ */
+.about-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 22px;
+    margin-top: clamp(32px, 5vh, 48px);
+}
+
+.bento-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 28px;
+    padding: clamp(28px, 4vw, 38px);
+    transition: transform 0.45s var(--ap-ease), box-shadow 0.45s var(--ap-ease), border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(5, 7, 46, 0.14);
+    border-color: rgba(12, 28, 255, 0.35);
+}
+
+[data-theme="dark"] .bento-card:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    border-color: rgba(92, 104, 255, 0.45);
+}
+
+/* 1. Bento Card Hero (Main Profile - Span 7) */
+.bento-card--hero {
+    grid-column: span 7;
+    background: linear-gradient(145deg, #05072E 0%, #060C8A 55%, #0914C4 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 0 16px 44px rgba(5, 7, 46, 0.25) !important;
+    justify-content: space-between;
+}
+
+.bento-hero-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.bento-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(242, 235, 42, 0.16);
+    border: 1px solid rgba(242, 235, 42, 0.45);
+    color: var(--gsm-lemon, #F2EB2A);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.bento-logos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bento-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #ffffff;
+    padding: 3px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.bento-hero-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.bento-hero-tagline {
+    font-family: var(--font-heading, inherit);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gsm-lemon, #F2EB2A);
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.bento-hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.90);
+    margin-bottom: 26px;
+}
+
+.bento-hero-desc strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.bento-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.bento-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.bento-pill-tag svg {
+    width: 14px;
+    height: 14px;
+    color: var(--gsm-lemon, #F2EB2A);
+}
+
+/* 2. Bento Card Values (Span 5) */
+.bento-card--values {
+    grid-column: span 5;
+    justify-content: space-between;
+}
+
+.bento-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gsm-ultramarine, #0C1CFF);
+    margin-bottom: 8px;
+}
+
+[data-theme="dark"] .bento-card-badge {
+    color: var(--gsm-lemon, #F2EB2A);
+}
+
+.bento-card-badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+.bento-card-title {
+    font-size: clamp(1.4rem, 2.2vw, 1.7rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 22px;
+}
+
+.bento-values-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.bento-values-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.bento-value-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: rgba(12, 28, 255, 0.1);
+    color: var(--gsm-ultramarine, #0C1CFF);
+    transition: transform 0.3s;
+}
+
+.bento-values-list li:hover .bento-value-icon {
+    transform: scale(1.08);
+}
+
+[data-theme="dark"] .bento-value-icon {
+    background: rgba(92, 104, 255, 0.16);
+    color: var(--color-accent-light);
+}
+
+.bento-val-empathy {
+    background: rgba(12, 28, 255, 0.1);
+    color: #0C1CFF;
+}
+
+.bento-val-solutive {
+    background: rgba(242, 235, 42, 0.2);
+    color: #B59E00;
+}
+
+[data-theme="dark"] .bento-val-solutive {
+    background: rgba(242, 235, 42, 0.16);
+    color: #F2EB2A;
+}
+
+.bento-val-inclusive {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+}
+
+.bento-value-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.bento-value-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 3px;
+}
+
+.bento-value-text span {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+/* 3. Bento Card Pillars (3 Pillars - Span 4 each) */
+.bento-card--pillar {
+    grid-column: span 4;
+    justify-content: space-between;
+    min-height: 280px;
+}
+
+.bento-pillar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.bento-pillar-no {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    opacity: 0.25;
+    font-family: var(--font-heading, inherit);
+}
+
+.bento-pillar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(12, 28, 255, 0.08);
+    color: var(--gsm-ultramarine, #0C1CFF);
+    border: 1px solid rgba(12, 28, 255, 0.15);
+}
+
+[data-theme="dark"] .bento-pillar-badge {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.bento-pillar-badge svg {
+    width: 13px;
+    height: 13px;
+}
+
+.bento-pillar-title {
+    font-size: clamp(1.6rem, 2.4vw, 1.95rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin-bottom: 10px;
+}
+
+.bento-pillar-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 22px;
+    flex-grow: 1;
+}
+
+.bento-pillar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--gsm-ultramarine, #0C1CFF);
+    text-decoration: none;
+    transition: gap 0.25s, color 0.25s;
+    align-self: flex-start;
+}
+
+[data-theme="dark"] .bento-pillar-link {
+    color: var(--gsm-lemon, #F2EB2A);
+}
+
+.bento-pillar-link svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s;
+}
+
+.bento-pillar-link:hover {
+    gap: 12px;
+}
+
+.bento-pillar-link:hover svg {
+    transform: translate(2px, -2px);
+}
+
+/* Pilar Theme Highlights */
+.bento-pillar--advoice:hover {
+    border-color: rgba(242, 235, 42, 0.6);
+}
+.bento-pillar--tkpedia:hover {
+    border-color: rgba(12, 28, 255, 0.5);
+}
+.bento-pillar--kesmanews:hover {
+    border-color: rgba(5, 7, 46, 0.6);
+}
+
+/* 4. Bento Card Action Banner (Span 12) */
+.bento-card--action {
+    grid-column: span 12;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: clamp(26px, 3.5vw, 36px);
+    background: linear-gradient(135deg, rgba(12, 28, 255, 0.08) 0%, rgba(5, 7, 46, 0.04) 100%);
+    border: 1px dashed rgba(12, 28, 255, 0.35);
+}
+
+[data-theme="dark"] .bento-card--action {
+    background: linear-gradient(135deg, rgba(12, 28, 255, 0.16) 0%, rgba(5, 7, 46, 0.3) 100%);
+    border-color: rgba(242, 235, 42, 0.3);
+}
+
+.bento-action-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 600px;
+}
+
+.bento-action-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0C1CFF 0%, #0914C4 100%);
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 18px rgba(12, 28, 255, 0.3);
+}
+
+.bento-action-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.bento-action-text h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.bento-action-text p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.bento-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.bento-btn-ig {
+    background: linear-gradient(135deg, #0C1CFF 0%, #0914C4 100%) !important;
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    padding: 11px 20px !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    box-shadow: 0 4px 14px rgba(12, 28, 255, 0.25) !important;
+    transition: transform 0.25s, box-shadow 0.25s !important;
+}
+
+.bento-btn-ig:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(12, 28, 255, 0.35) !important;
+}
+
+.bento-btn-email,
+.bento-btn-share {
+    background: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 999px !important;
+    padding: 11px 18px !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    transition: background 0.2s, border-color 0.2s, transform 0.25s !important;
+}
+
+.bento-btn-email:hover,
+.bento-btn-share:hover {
+    background: var(--color-surface-hover) !important;
+    border-color: var(--gsm-ultramarine, #0C1CFF) !important;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+    .bento-card--hero { grid-column: span 12; }
+    .bento-card--values { grid-column: span 12; }
+    .bento-card--pillar { grid-column: span 4; }
+    .bento-card--action { grid-column: span 12; flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 820px) {
+    .bento-card--pillar { grid-column: span 12; min-height: auto; }
+    .about-bento-grid { gap: 16px; }
+    .bento-card { padding: 24px 20px; border-radius: 22px; }
+    .bento-action-content { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .bento-action-buttons { width: 100%; justify-content: flex-start; }
+    .bento-btn-ig, .bento-btn-email, .bento-btn-share { width: 100%; justify-content: center; }
+}
+
 /* Aksesibilitas: hormati prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

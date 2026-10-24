@@ -27,8 +27,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=3.0.0">
     <link rel="stylesheet" href="extras.css?v=1.0.0">
-    <link rel="stylesheet" href="apple.css?v=2.2.1">
-    <link rel="stylesheet" href="mobile.css?v=1.1.0">
+    <link rel="stylesheet" href="apple.css?v=2.3.0">
+    <link rel="stylesheet" href="mobile.css?v=1.2.0">
 </head>
 <body>
     <!-- ═══════════════════════════════════════════ -->
@@ -223,240 +223,141 @@
     <!-- ═══════════════════════════════════════════ -->
     <section class="section about-section" id="tentang">
         <div class="section-container">
-            <div class="about-wrapper reveal">
-                <!-- Left: Interactive Visual Hub Card with 3D Tilt Effect -->
-                <div class="about-visual">
-                    <div class="about-card-glow"></div>
-                    <div class="about-card" id="aboutCardTilt">
-                        <div class="about-card-top-tag">
+            <div class="section-header reveal">
+                <div class="section-icon-wrapper about-section-icon">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <h2 class="section-title">Tentang Adkesma HMTK</h2>
+                <p class="section-desc">Rumah terpadu untuk mendengar aspirasi, memandu studi, dan mendampingi kesejahteraan mahasiswa Teknologi Kedokteran.</p>
+            </div>
+
+            <!-- Bento Grid Modern -->
+            <div class="about-bento-grid reveal">
+                <!-- Bento Card 1: Main Department Profile (Hero Card) -->
+                <div class="bento-card bento-card--hero" id="aboutCardTilt">
+                    <div class="bento-hero-header">
+                        <div class="bento-badge">
                             <span class="pulse-dot"></span>
-                            <span>Official Hub Adkesma</span>
+                            <span>Official Department Hub • Kabinet Restorasi Makna</span>
                         </div>
-                        <div class="about-logo-frame">
-                            <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="about-logo">
-                            <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="about-logo about-logo-adkesma">
-                            <div class="about-logo-shine"></div>
+                        <div class="bento-logos">
+                            <img src="assets/logo-hmtk.jpeg" alt="Logo HMTK" class="bento-logo">
+                            <img src="assets/logo-adkesma.png" alt="Logo Adkesma" class="bento-logo bento-logo-adkesma">
                         </div>
-                        <div class="about-card-footer">
-                            <span class="about-card-name">HMTK</span>
-                            <span class="about-card-sub">Teknologi Kedokteran</span>
-                        </div>
-
-                        <!-- Micro Stat Strip -->
-                        <div class="about-quick-stats">
-                            <div class="about-quick-stat" title="Informasi diverifikasi langsung dari sumber resmi">
-                                <span class="quick-stat-val"><i data-lucide="shield-check"></i> Valid</span>
-                                <span class="quick-stat-lbl">Terpercaya</span>
-                            </div>
-                            <div class="quick-stat-sep"></div>
-                            <div class="about-quick-stat" title="Pembaruan langsung ketika ada informasi terbaru">
-                                <span class="quick-stat-val"><i data-lucide="zap"></i> Langsung</span>
-                                <span class="quick-stat-lbl">Update Real-time</span>
-                            </div>
-                            <div class="quick-stat-sep"></div>
-                            <div class="about-quick-stat" title="Didedikasikan untuk mahasiswa">
-                                <span class="quick-stat-val"><i data-lucide="users"></i> Publik</span>
-                                <span class="quick-stat-lbl">Mahasiswa</span>
-                            </div>
-                        </div>
-
-                        <!-- Quick Share Button -->
-                        <button type="button" class="btn-about-share" id="btnAboutShare" title="Salin link portal MyAdkesmaPortal">
-                            <i data-lucide="share-2"></i>
-                            <span>Bagikan Portal</span>
-                        </button>
+                    </div>
+                    <div class="bento-hero-body">
+                        <h3 class="bento-hero-title">Departemen Advokasi &amp; Kesejahteraan Mahasiswa</h3>
+                        <p class="bento-hero-tagline">"Suarakan keluhanmu, temukan panduanmu, raih prestasimu."</p>
+                        <p class="bento-hero-desc">
+                            Departemen Adkesma HMTK adalah unit garda depan Himpunan Mahasiswa Teknologi Kedokteran yang berdedikasi menjaga hak, kesejahteraan, serta kelancaran studi mahasiswa. Melalui <strong>MyAdkesmaPortal</strong>, seluruh layanan aspirasi, panduan kurikulum, hingga informasi beasiswa dan kompetisi terintegrasi secara terbuka, cepat, dan terpercaya.
+                        </p>
+                    </div>
+                    <div class="bento-hero-tags">
+                        <span class="bento-pill-tag"><i data-lucide="shield-check"></i> Ruang Aman &amp; Advokasi</span>
+                        <span class="bento-pill-tag"><i data-lucide="book-open"></i> Handbook Digital Resmi</span>
+                        <span class="bento-pill-tag"><i data-lucide="award"></i> Beasiswa &amp; Prestasi</span>
                     </div>
                 </div>
 
-                <!-- Right: Content with Interactive Tabs -->
-                <div class="about-content">
-                    <div class="about-eyebrow">
-                        <i data-lucide="sparkles"></i>
-                        <span>Dedikasi &amp; Komitmen Mahasiswa</span>
+                <!-- Bento Card 2: Core Values (Nilai Departemen) -->
+                <div class="bento-card bento-card--values">
+                    <div class="bento-card-badge"><i data-lucide="compass"></i> Nilai Departemen</div>
+                    <h3 class="bento-card-title">Prinsip Kerja Kami</h3>
+                    <ul class="bento-values-list">
+                        <li>
+                            <div class="bento-value-icon bento-val-empathy"><i data-lucide="heart-handshake"></i></div>
+                            <div class="bento-value-text">
+                                <strong>Empatik &amp; Konfidensial</strong>
+                                <span>Mendengar dengan hati tanpa penghakiman. Kerahasiaan data dan identitas advokasi selalu terjaga aman.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bento-value-icon bento-val-solutive"><i data-lucide="zap"></i></div>
+                            <div class="bento-value-text">
+                                <strong>Solutif &amp; Berkelanjutan</strong>
+                                <span>Mengawal setiap kendala akademik, finansial, dan fasilitas kampus hingga menemukan solusi nyata bersama pihak terkait.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="bento-value-icon bento-val-inclusive"><i data-lucide="users"></i></div>
+                            <div class="bento-value-text">
+                                <strong>Inklusif &amp; Kolaboratif</strong>
+                                <span>Merangkul seluruh angkatan mahasiswa Teknologi Kedokteran tanpa sekat, tumbuh dan berprestasi bersama.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Bento Card 3: Pilar ADVOICE -->
+                <div class="bento-card bento-card--pillar bento-pillar--advoice">
+                    <div class="bento-pillar-header">
+                        <span class="bento-pillar-no">01</span>
+                        <span class="bento-pillar-badge"><i data-lucide="megaphone"></i> Advokasi</span>
                     </div>
-
-                    <h2 class="about-heading">
-                        Suara, Peluang &amp; Prestasi <span class="about-accent">Mahasiswa HMTK</span>
-                    </h2>
-
-                    <p class="about-lead">
-                        <strong>MyAdkesmaPortal</strong> adalah platform resmi dari <strong>Departemen Advokasi dan Kesejahteraan Mahasiswa (Adkesma)</strong>, Himpunan Mahasiswa Teknologi Kedokteran (HMTK).
+                    <h3 class="bento-pillar-title">ADVOICE</h3>
+                    <p class="bento-pillar-desc">
+                        Kanal resmi penyerapan dan tindak lanjut keluhan akademik (dosen, nilai, KRS), fasilitas perkuliahan, hingga advokasi finansial/UKT secara transparan dan solutif.
                     </p>
+                    <a href="advoice.html" class="bento-pillar-link">
+                        <span>Buka Layanan ADVOICE</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </a>
+                </div>
 
-                    <!-- Interactive Tab Navigation Buttons -->
-                    <div class="about-tabs-nav" role="tablist" aria-label="Informasi Tentang Kami">
-                        <button type="button" class="about-tab-btn active" data-tab="tab-misi" role="tab" aria-selected="true" id="tabBtnMisi">
-                            <i data-lucide="target"></i>
-                            <span>Misi &amp; Nilai</span>
-                        </button>
-                        <button type="button" class="about-tab-btn" data-tab="tab-alur" role="tab" aria-selected="false" id="tabBtnAlur">
-                            <i data-lucide="git-branch"></i>
-                            <span>Alur Pengumpulan Info</span>
-                        </button>
-                        <button type="button" class="about-tab-btn" data-tab="tab-faq" role="tab" aria-selected="false" id="tabBtnFaq">
-                            <i data-lucide="help-circle"></i>
-                            <span>FAQ Mahasiswa</span>
-                        </button>
+                <!-- Bento Card 4: Pilar TKpedia -->
+                <div class="bento-card bento-card--pillar bento-pillar--tkpedia">
+                    <div class="bento-pillar-header">
+                        <span class="bento-pillar-no">02</span>
+                        <span class="bento-pillar-badge"><i data-lucide="book-open"></i> Handbook Digital</span>
                     </div>
+                    <h3 class="bento-pillar-title">TKpedia</h3>
+                    <p class="bento-pillar-desc">
+                        Buku panduan digital resmi edisi kedua mahasiswa Teknologi Kedokteran: kurikulum lengkap, kiat studi dari kakak tingkat, pengenalan laboratorium, dan roadmap karier.
+                    </p>
+                    <a href="tkpedia.html" class="bento-pillar-link">
+                        <span>Jelajahi Buku TKpedia</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </a>
+                </div>
 
-                    <!-- Tab Panels Container -->
-                    <div class="about-tabs-content">
-                        <!-- Panel 1: Misi & 3 Pilar Nilai (Default Active) -->
-                        <div class="about-tab-panel active" id="tab-misi" role="tabpanel" aria-labelledby="tabBtnMisi">
-                            <div class="about-pillars">
-                                <div class="about-pillar-card" tabindex="0">
-                                    <div class="pillar-icon pillar-icon-verify">
-                                        <i data-lucide="shield-check"></i>
-                                    </div>
-                                    <div class="pillar-body">
-                                        <h4>Info Terverifikasi &amp; Valid</h4>
-                                        <p>Semua informasi beasiswa dan lomba dihimpun dari sumber resmi, sehingga syarat dan tautan pendaftarannya terjamin kebenarannya.</p>
-                                    </div>
-                                </div>
+                <!-- Bento Card 5: Pilar KesmaNews -->
+                <div class="bento-card bento-card--pillar bento-pillar--kesmanews">
+                    <div class="bento-pillar-header">
+                        <span class="bento-pillar-no">03</span>
+                        <span class="bento-pillar-badge"><i data-lucide="sparkles"></i> Beasiswa &amp; Lomba</span>
+                    </div>
+                    <h3 class="bento-pillar-title">KesmaNews</h3>
+                    <p class="bento-pillar-desc">
+                        Pusat kurasi informasi beasiswa terverifikasi, kompetisi akademik dan non-akademik, serta program pendampingan beasiswa 1-on-1 intensif untuk mendongkrak prestasimu.
+                    </p>
+                    <a href="kesmanews.html" class="bento-pillar-link">
+                        <span>Akses Portal KesmaNews</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </a>
+                </div>
 
-                                <div class="about-pillar-card" tabindex="0">
-                                    <div class="pillar-icon pillar-icon-update">
-                                        <i data-lucide="refresh-cw"></i>
-                                    </div>
-                                    <div class="pillar-body">
-                                        <h4>Selalu Diperbarui</h4>
-                                        <p>Informasi akan langsung diperbarui setiap kali ada kabar dari penyelenggara, sehingga kamu tidak akan melewatkan batas waktu pendaftaran.</p>
-                                    </div>
-                                </div>
-
-                                <div class="about-pillar-card" tabindex="0">
-                                    <div class="pillar-icon pillar-icon-open">
-                                        <i data-lucide="heart-handshake"></i>
-                                    </div>
-                                    <div class="pillar-body">
-                                        <h4>Terbuka &amp; Gratis</h4>
-                                        <p>Bebas diakses oleh seluruh mahasiswa tanpa dipungut biaya apapun untuk mendukung potensi akademik dan prestasimu.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Panel 2: Alur Pengumpulan Info -->
-                        <div class="about-tab-panel" id="tab-alur" role="tabpanel" aria-labelledby="tabBtnAlur">
-                            <div class="about-workflow">
-                                <div class="workflow-step" tabindex="0">
-                                    <div class="step-badge">
-                                        <span class="step-num">01</span>
-                                    </div>
-                                    <div class="step-content">
-                                        <div class="step-header">
-                                            <i data-lucide="search"></i>
-                                            <h4>Pencarian Informasi</h4>
-                                        </div>
-                                        <p>Tim Adkesma memantau berbagai informasi resmi seputar beasiswa, pertukaran pelajar, hingga kompetisi medis, teknologi, dan umum.</p>
-                                    </div>
-                                </div>
-
-                                <div class="workflow-divider">
-                                    <div class="workflow-line"></div>
-                                </div>
-
-                                <div class="workflow-step" tabindex="0">
-                                    <div class="step-badge">
-                                        <span class="step-num">02</span>
-                                    </div>
-                                    <div class="step-content">
-                                        <div class="step-header">
-                                            <i data-lucide="file-check"></i>
-                                            <h4>Pengecekan Syarat</h4>
-                                        </div>
-                                        <p>Kami memastikan kompetisi diselenggarakan secara resmi, tautan pendaftaran dapat diakses, buku panduan lengkap, dan batas waktunya tepat.</p>
-                                    </div>
-                                </div>
-
-                                <div class="workflow-divider">
-                                    <div class="workflow-line"></div>
-                                </div>
-
-                                <div class="workflow-step" tabindex="0">
-                                    <div class="step-badge">
-                                        <span class="step-num">03</span>
-                                    </div>
-                                    <div class="step-content">
-                                        <div class="step-header">
-                                            <i data-lucide="send"></i>
-                                            <h4>Publikasi &amp; Pendampingan</h4>
-                                        </div>
-                                        <p>Informasi akan ditayangkan di portal ini. Jika kamu butuh bantuan atau ingin berkonsultasi seputar pendaftaran, tim kami siap mendampingi.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Panel 3: FAQ Interaktif (Accordion) -->
-                        <div class="about-tab-panel" id="tab-faq" role="tabpanel" aria-labelledby="tabBtnFaq">
-                            <div class="about-faq-list">
-                                <div class="about-faq-item" tabindex="0">
-                                    <button type="button" class="faq-question" aria-expanded="false">
-                                        <span class="faq-title">Siapa saja yang boleh mengakses dan mendaftar informasi di sini?</span>
-                                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                                    </button>
-                                    <div class="faq-answer">
-                                        <p>Semua mahasiswa Teknologi Kedokteran dan mahasiswa umum bebas mengakses portal ini tanpa biaya. Namun, pastikan untuk selalu mengecek syarat khusus di setiap informasi ya.</p>
-                                    </div>
-                                </div>
-
-                                <div class="about-faq-item" tabindex="0">
-                                    <button type="button" class="faq-question" aria-expanded="false">
-                                        <span class="faq-title">Seberapa sering isi MyAdkesmaPortal diperbarui?</span>
-                                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                                    </button>
-                                    <div class="faq-answer">
-                                        <p>Informasi akan langsung kami perbarui ketika ada kabar atau perubahan terbaru dari pihak penyelenggara, sehingga kamu akan selalu mendapat informasi terkini.</p>
-                                    </div>
-                                </div>
-
-                                <div class="about-faq-item" tabindex="0">
-                                    <button type="button" class="faq-question" aria-expanded="false">
-                                        <span class="faq-title">Bagaimana jika tautan pendaftaran atau panduannya bermasalah?</span>
-                                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                                    </button>
-                                    <div class="faq-answer">
-                                        <p>Kamu bisa langsung mengabari kami melalui DM Instagram <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer">@adkezzmoy</a> atau melalui email agar segera diperbaiki.</p>
-                                    </div>
-                                </div>
-
-                                <div class="about-faq-item" tabindex="0">
-                                    <button type="button" class="faq-question" aria-expanded="false">
-                                        <span class="faq-title">Apakah bisa menitipkan promosi informasi lomba atau beasiswa dari luar?</span>
-                                        <i data-lucide="chevron-down" class="faq-icon"></i>
-                                    </button>
-                                    <div class="faq-answer">
-                                        <p>Tentu bisa! Kami terbuka untuk kolaborasi publikasi. Silakan hubungi kami melalui DM Instagram dan sertakan proposal atau posternya.</p>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Bento Card 6: Direct Help & Action Banner -->
+                <div class="bento-card bento-card--action">
+                    <div class="bento-action-content">
+                        <div class="bento-action-icon"><i data-lucide="messages-square"></i></div>
+                        <div class="bento-action-text">
+                            <h4>Punya Pertanyaan atau Butuh Bantuan Adkesma?</h4>
+                            <p>Tim Departemen Adkesma HMTK selalu terbuka untuk mendengar, berdiskusi, dan mendampingimu setiap saat.</p>
                         </div>
                     </div>
-
-                    <!-- Bottom Action Callout -->
-                    <div class="about-action-bar">
-                        <div class="about-action-info">
-                            <span class="action-emoji">💬</span>
-                            <div class="action-text">
-                                <strong>Punya pertanyaan atau butuh pendampingan advokasi?</strong>
-                                <span>Tim Adkesma HMTK selalu siap mendengarkan dan membantu rekan-rekan mahasiswa.</span>
-                            </div>
-                        </div>
-                        <div class="about-action-links">
-                            <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="btn-about-action btn-about-ig" title="Hubungi kami via Instagram DM">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                                </svg>
-                                <span>DM Adkesma</span>
-                            </a>
-                            <button type="button" class="btn-about-action btn-about-email" id="btnAboutCopyEmail" title="Salin email Adkesma HMTK">
-                                <i data-lucide="mail"></i>
-                                <span>Salin Email</span>
-                            </button>
-                        </div>
+                    <div class="bento-action-buttons">
+                        <a href="https://www.instagram.com/adkezzmoy" target="_blank" rel="noopener noreferrer" class="btn bento-btn-ig" title="Hubungi kami via DM Instagram">
+                            <i data-lucide="instagram"></i>
+                            <span>DM @adkezzmoy</span>
+                        </a>
+                        <button type="button" class="btn bento-btn-email" id="btnAboutCopyEmail" title="Salin email resmi Adkesma">
+                            <i data-lucide="mail"></i>
+                            <span>Salin Email</span>
+                        </button>
+                        <button type="button" class="btn bento-btn-share" id="btnAboutShare" title="Salin tautan MyAdkesmaPortal">
+                            <i data-lucide="share-2"></i>
+                            <span>Bagikan Portal</span>
+                        </button>
                     </div>
                 </div>
             </div>
