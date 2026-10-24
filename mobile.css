@@ -1,0 +1,212 @@
+/* ═══════════════════════════════════════════════════════════════
+   mobile.css — Perapian mobile, kategori kompak, kontras mode terang
+   Dimuat setelah apple.css
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── KATEGORI BEASISWA & LOMBA: chip kompak (hemat ruang) ────── */
+.category-hub {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px !important;
+    margin-bottom: var(--space-lg) !important;
+}
+.category-card {
+    flex: 0 0 auto;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px !important;
+    padding: 7px 14px 7px 8px !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    transform: none !important;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+.category-card::before { display: none !important; }
+.category-card:hover {
+    transform: translateY(-1px) !important;
+    border-color: #0C1CFF !important;
+    box-shadow: 0 4px 14px rgba(12, 28, 255, 0.14) !important;
+}
+.category-card.active {
+    background: linear-gradient(135deg, #0C1CFF 0%, #0914C4 100%) !important;
+    border-color: transparent !important;
+    box-shadow: 0 6px 18px rgba(12, 28, 255, 0.30) !important;
+}
+.category-card-icon {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+}
+.category-card-icon svg { width: 15px !important; height: 15px !important; }
+.category-card.active .category-card-icon {
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+}
+.category-card-content {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto !important;
+}
+.category-card-title {
+    font-size: 0.86rem !important;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.category-card.active .category-card-title { color: #ffffff !important; }
+/* Deskripsi panjang disembunyikan; hanya jumlah yang tampil */
+.category-card-desc { margin: 0 !important; }
+.category-card-desc > span:not(.category-card-count) { display: none; }
+.category-card-count {
+    min-width: 22px;
+    justify-content: center;
+    padding: 1px 7px;
+}
+.category-card.active .category-card-count {
+    background: #F2EB2A !important;
+    color: #05072E !important;
+}
+
+/* ─── KONTRAS: tombol outline/sekunder pada hero gelap ───────── */
+.page-hero-apple .btn-outline,
+.page-hero-apple .btn-secondary {
+    color: #ffffff !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.55) !important;
+    background: rgba(255, 255, 255, 0.10) !important;
+}
+.page-hero-apple .btn-outline:hover,
+.page-hero-apple .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-color: #F2EB2A !important;
+    color: #F2EB2A !important;
+}
+
+/* ─── DRAWER MENU: selalu navy agar teks putih terbaca ───────── */
+@media (max-width: 960px) {
+    .navbar .nav-links {
+        background: #05072E !important;
+        border-top: 1px solid rgba(242, 235, 42, 0.18) !important;
+        padding: 18px 16px 28px !important;
+        gap: 8px !important;
+    }
+    .navbar .nav-link {
+        color: rgba(255, 255, 255, 0.92) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(255, 255, 255, 0.10) !important;
+        padding: 14px 18px !important;
+        justify-content: space-between !important;
+    }
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+        color: #F2EB2A !important;
+        background: rgba(242, 235, 42, 0.10) !important;
+        border-color: rgba(242, 235, 42, 0.45) !important;
+    }
+}
+
+/* ─── MOBILE ≤ 768px ─────────────────────────────────────────── */
+html, body { max-width: 100%; overflow-x: clip; }
+
+@media (max-width: 768px) {
+    .section { padding-block: 56px !important; }
+    .section-title { font-size: clamp(1.9rem, 8vw, 2.4rem) !important; }
+    .section-desc { font-size: 0.95rem; }
+
+    .nav-title { font-size: 1.1rem !important; }
+    .nav-brand { gap: 8px !important; min-width: 0; }
+
+    /* Sub-navbar: judul di atas, menu geser horizontal rapi */
+    .product-subnav-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 10px 16px;
+    }
+    .product-subnav-title a { font-size: 1.05rem; }
+    .product-subnav-menu {
+        gap: 6px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        margin-inline: -16px;
+        padding-inline: 16px;
+        -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
+        mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
+    }
+    .product-subnav-menu::-webkit-scrollbar { display: none; }
+    .product-subnav-link,
+    .product-subnav-btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        font-size: 0.82rem;
+        padding: 6px 12px;
+    }
+    .product-subnav-btn svg { width: 14px; height: 14px; }
+
+    /* Hero halaman */
+    .page-hero-apple { padding: 48px 16px 40px; }
+    .page-hero-badge { font-size: 0.72rem; padding: 6px 12px; text-align: center; }
+    .page-hero-tagline { font-size: 1.15rem; }
+    .page-hero-subtitle { font-size: 0.95rem; margin-bottom: 22px; }
+    .page-hero-quickpills {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+    }
+    .hero-quickpill {
+        justify-content: center;
+        padding: 11px 10px;
+        font-size: 0.84rem;
+        white-space: nowrap;
+    }
+    .page-hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 26px;
+    }
+    .page-hero-cta .btn { justify-content: center; width: 100%; }
+
+    /* Tab subpage */
+    .subpage-tabs { width: 100%; }
+    .subpage-tab { flex: 1; justify-content: center; padding: 10px 8px; font-size: 0.8rem; }
+
+    /* Kategori: satu baris geser samping */
+    .category-hub {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px !important;
+        margin-inline: -16px;
+        padding: 4px 16px 10px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+        mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+    }
+    .category-hub::-webkit-scrollbar { display: none; }
+
+    /* Filter bar */
+    .filter-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
+    .filter-group .filter-toggle-pill { grid-column: 1 / -1; justify-content: center; }
+    .filter-select-wrapper { width: 100%; min-width: 0; }
+    .filter-select { width: 100%; }
+
+    /* Footer */
+    .footer-top { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 28px 20px !important; }
+    .footer-brand-col { grid-column: 1 / -1; }
+    .footer-top > .footer-links:last-child { grid-column: 1 / -1; }
+    .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+}
+
+@media (max-width: 380px) {
+    .page-hero-quickpills { grid-template-columns: 1fr; }
+}
